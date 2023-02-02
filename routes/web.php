@@ -28,14 +28,25 @@ Route::get('/dashboard', function() {
     return "Dashboard";
 });
 
-//Manajemen Data
+//Karyawan
 Route::get('/data/karyawan', [KaryawanController::class, 'index']);
+Route::get('/tambah/karyawan', [KaryawanController::class, 'create']);
+Route::post('/tambah/karyawan', [KaryawanController::class, 'store']);
+Route::get('/ubah/karyawan/{id}', [KaryawanController::class, 'edit']);
+Route::post('/ubah/karyawan', [KaryawanController::class, 'update']);
+Route::post('/hapus/karyawan', [KaryawanController::class, 'destroy']);
 
-Route::get('/data/produksi', [ProduksiController::class, 'data']);
+//Persediaan
+Route::get('/data/persediaan', [PersediaanController::class, 'index']);
+Route::get('/tambah/persediaan', [PersediaanController::class, 'create']);
+Route::post('/tambah/persediaan', [PersediaanController::class, 'store']);
+Route::get('/ubah/persediaan/{id}', [PersediaanController::class, 'edit']);
+Route::post('/ubah/persediaan', [PersediaanController::class, 'update']);
+Route::post('/hapus/persediaan', [PersediaanController::class, 'destroy']);
 
-Route::get('/data/persediaan', [PersediaanController::class, 'data']);
+Route::get('/data/produksi', [ProduksiController::class, 'index']);
 
-Route::get('/data/pembelian', [PembelianController::class, 'data']);
+Route::get('/data/pembelian', [PembelianController::class, 'ind']);
 
 Route::get('/data/penjualan', [PenjualanController::class, 'data']);
 

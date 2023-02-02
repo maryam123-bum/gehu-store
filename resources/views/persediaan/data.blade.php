@@ -1,61 +1,61 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Data Karyawan</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css">
-</head>
-<body>
-    <div class="container py-5">
-        <div class="row">
-            <div class="col-10">
-                <h1>Data <?php echo $judul; ?></h1>
-            </div>
-            <div class="col-2">
-                <button class="btn btn-success">
-                    Tambah <?php echo $judul; ?>
+@extends('layouts/main')
+@section('title')
+    <h2>Data {{ $judul }}</h2> 
+@endsection
+@section('container')
+    <div class="row">
+        <div class="col-2 mb-2">
+            <a href="/tambah/persediaan">
+                <button class="btn btn-success shadow">
+                    Tambah
                 </button>
-            </div>
+            </a>
         </div>
-        <div class="row">
-            <div class="col">
-                <table class="table table-bordered">
-                    <thead>
-                      <tr class="bg-dark text-white">
-                        <th scope="col">No</th>
-                        <th scope="col">Kode Barang</th>
-                        <th scope="col">Nama Barang</th>
-                        <th scope="col">Harga Satuan</th>
-                        <th scope="col">Jumlah Barang</th>
-                        <th scope="col">Satuan</th>
-                        <th scope="col">Option</th>
-                      </tr>
-                    </thead>
-                    <tbody>
+    </div>
+    <div class="row">
+        <div class="col">
+            <table class="table table-bordered">
+                <thead>
+                <tr class="bg-dark text-white">
+                    <th scope="col">No</th>
+                    <th scope="col">Kode Barang</th>
+                    <th scope="col">Nama Barang</th>
+                    <th scope="col">Jenis Barang</th>
+                    <th scope="col">Stok</th>
+                    <th scope="col">Harga Pokok</th>
+                    <th scope="col">Option</th>
+                </tr>
+                </thead>
+                <tbody>
+                    @if (!$data->isEmpty())
                         <?php $no = 1; ?>
                         <?php foreach ($data as $key) { ?>
                             <tr>
                                 <th scope="row"><?php echo $no++ ?></th>
-                                <td><?php echo $key['kode']; ?></td>
-                                <td><?php echo $key['nama']; ?></td>
-                                <td><?php echo $key['harga']; ?></td>
-                                <td><?php echo $key['jumlah']; ?></td>
-                                <td><?php echo $key['satuan']; ?></td>
+                                <td>BRG-0<?php echo $key['id']; ?></td>
+                                <td><?php echo $key['nama_barang']; ?></td>
+                                <td><?php echo $key['nama_jenis']; ?></td>
+                                <td><?php echo $key['stok'].' '.$key['nama_satuan'];; ?></td>
+                                <td>Rp. <?php echo $key['harga_pokok']; ?></td>
                                 <td>
-                                    <button class="btn btn-primary">UBAH</button>
-                                    <button class="btn btn-danger">HAPUS</button>
+                                    <a href="/ubah/persediaan/{{ $key['id'] }}" class="btn btn-primary">Ubah</a>
+                                    <form action="/hapus/persediaan" method="post" style="display:inline-block">
+                                        @csrf
+                                        <input type="hidden" name="id" value="{{ $key['id'] }}" readonly>
+                                        <button type="submit" class="btn btn-danger">Hapus</button>
+                                </form>
                                 </td>
-                              </tr>
+                            </tr>
                         <?php
                         } ?>
-                      
-                    </tbody>
-                  </table>
-            </div>
+                    @else
+                        <tr class="text-center">
+                            <td colspan="7">No Data Found.</td>
+                        </tr>
+                    @endif
+                    
+                </tbody>
+            </table>
         </div>
     </div>
-</body>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-</html>
+@endsection

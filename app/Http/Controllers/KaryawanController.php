@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Karyawan;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class KaryawanController extends Controller
 {
@@ -14,23 +15,12 @@ class KaryawanController extends Controller
      */
     public function index()
     {
-        $data_karyawan = [
-            [
-                "nama" => "Maryam",
-                "nim" => 777001,
-                "jekel" => "Perempuan",
-                "alamat" => "Indramayu"
-            ],
-            [
-                "nama" => "Iqbal",
-                "nim" => 777002,
-                "jekel" => "Laki-laki",
-                "alamat" => "Kuningan"
-            ]
-        ];
 
-        return view('karyawan', [
-            'data' => $data_karyawan
+        $karyawan = Karyawan::all();
+
+        return view('karyawan/data', [
+            'judul' => 'Karyawan',
+            'data' => $karyawan
         ]);
     }
 
@@ -41,7 +31,7 @@ class KaryawanController extends Controller
      */
     public function create()
     {
-        //
+        return view('karyawan.tambah', []);
     }
 
     /**
@@ -52,7 +42,20 @@ class KaryawanController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $firstName = $request->firstName;
+        $lastName = $request->lastName;
+        $proffesion = $request->proffesion;
+        $address = $request->textAddress;
+        $gender = $request->jekel;
+
+        Karyawan::create([
+            'nama' => $firstName.' '.$lastName,
+            'jabatan' => $proffesion,
+            'alamat' => $address,
+            'jenis_kelamin' => $gender
+        ]);
+
+        return redirect('data/karyawan');
     }
 
     /**
@@ -72,9 +75,12 @@ class KaryawanController extends Controller
      * @param  \App\Models\Karyawan  $karyawan
      * @return \Illuminate\Http\Response
      */
-    public function edit(Karyawan $karyawan)
+    public function edit($id)
     {
-        //
+        $karyawan = Karyawan::where('id', $id)->first();
+        return view('karyawan/ubah', [
+            'data' => $karyawan
+        ]);
     }
 
     /**
@@ -84,9 +90,17 @@ class KaryawanController extends Controller
      * @param  \App\Models\Karyawan  $karyawan
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Karyawan $karyawan)
+    public function update(Request $request)
     {
-        //
+        Karyawan::where('id', $request->id)
+            -> update([
+                'nama' => $request->nama,
+                'jabatan' => $request->proffesion,
+                'alamat' => $request->textAddress,
+                'jenis_kelamin' => $request->jekel
+            ]);
+
+        return redirect('data/karyawan');
     }
 
     /**
@@ -95,8 +109,9 @@ class KaryawanController extends Controller
      * @param  \App\Models\Karyawan  $karyawan
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Karyawan $karyawan)
+    public function destroy(Request $request)
     {
-        //
+        Karyawan::where('id', $request->id)->delete();
+        return redirect('data/karyawan');
     }
 }
