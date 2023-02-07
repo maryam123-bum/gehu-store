@@ -25,7 +25,7 @@ Route::get('/', function () {
 
 //Dashboard
 Route::get('/dashboard', function() {
-    return "Dashboard";
+    return view('/dashboard/dashboard');
 });
 
 //Karyawan
@@ -44,34 +44,9 @@ Route::get('/ubah/persediaan/{id}', [PersediaanController::class, 'edit']);
 Route::post('/ubah/persediaan', [PersediaanController::class, 'update']);
 Route::post('/hapus/persediaan', [PersediaanController::class, 'destroy']);
 
-Route::get('/data/produksi', [ProduksiController::class, 'index']);
+Route::get('/produksi', [ProduksiController::class, 'data']);
 
-Route::get('/data/pembelian', [PembelianController::class, 'ind']);
+Route::get('/pembelian', [PembelianController::class, 'data']);
 
-Route::get('/data/penjualan', [PenjualanController::class, 'data']);
-
-//Manajemen Produksi
-Route::get('/produksi/produksi-barang', function() {
-    return "Produksi Barang";
-});
-
-Route::get('/produksi/harga-jual', function() {
-    return "Harga Jual";
-});
-
-Route::get('/pembelian', function() {
-    return "Manajemen Permbelian";
-});
-
-Route::get('/pembelian/pembelian-produk', function() {
-    return "Permbelian Produk";
-});
-
-Route::get('/penjualan', function() {
-    return "Manajemen Penjualan";
-});
-
-Route::get('/penjualan/penjualan-produk', function() {
-    return "Penjualan Produk";
-});
+Route::get('/penjualan', [PenjualanController::class, 'data']);
 
