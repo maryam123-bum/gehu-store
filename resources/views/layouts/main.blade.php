@@ -52,9 +52,9 @@
       <body>
         <div>
           <div class="sidebar active-sidebar p-4 bg-primary" id="sidebar">
-            <h4 class="mb-5 text-white">SuperVideo</h4>
+            <h4 class="mb-5 text-white">Gehu Store</h4>
             <li>
-              <a class="text-white" href="#">
+              <a class="text-white" href="/dashboard">
                 <i class="bi bi-house mr-2"></i>
                 Dashboard
               </a>
@@ -62,43 +62,37 @@
             <li>
               <a class="text-white" href="/data/karyawan">
                 <i class="bi bi-fire mr-2"></i>
-                Manajemen Karyawan
+                Karyawan
               </a>
             </li>
             <li>
               <a class="text-white" href="/data/persediaan">
                 <i class="bi bi-boombox mr-2"></i>
-                Manajemen Persediaan
+                Persediaan
               </a>
             </li>
             <li>
-              <a class="text-white" href="/data/produksi">
+              <a class="text-white" href="/produksi">
                 <i class="bi bi-newspaper mr-2"></i>
-                Manajemen Produksi
+                Produksi
               </a>
             </li>
             <li>
-              <a class="text-white" href="/data/pembelian">
+              <a class="text-white" href="/pembelian">
                 <i class="bi bi-bicycle mr-2"></i>
-                Manajemen Pembelian
+                Pembelian
               </a>
             </li>
             <li>
-              <a class="text-white" href="/data/penjualan">
+              <a class="text-white" href="/penjualan">
                 <i class="bi bi-boombox mr-2"></i>
-                Manajemen Penjualan
+                Penjualan
               </a>
             </li>
             <li>
               <a class="text-white" href="#">
                 <i class="bi bi-film mr-2"></i>
                 Laporan
-              </a>
-            </li>
-            <li>
-              <a class="text-white" href="#">
-                <i class="bi bi-bookmark mr-2"></i>
-                Pengaturan
               </a>
             </li>
           </div>
