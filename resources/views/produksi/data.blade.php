@@ -3,11 +3,15 @@
     <h2>Data {{ $judul }}</h2> 
 @endsection
 @section('container')
-    <div class="col-2">
-        <button class="btn btn-success">
-            Tambah <?php echo $judul; ?>
-        </button>
-    </div>
+        <div class="row">
+            <div class="col-2 mb-2">
+                <a href="/tambah/produksi">
+                    <button class="btn btn-success shadow">
+                        Tambah
+                    </button>
+                </a>
+            </div>
+        </div>
         <div class="row">
             <div class="col">
                 <table class="table table-bordered">

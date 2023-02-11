@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Pembelian extends Model
 {
     use HasFactory;
+
+    protected $table = 'pembelian';
+    protected $primaryKey = 'id';
+    public $timestamps = true;
+    protected $fillable = ['tgl_pembelian', 'nama_pemasok','total'];
 }

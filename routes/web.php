@@ -44,9 +44,18 @@ Route::get('/ubah/persediaan/{id}', [PersediaanController::class, 'edit']);
 Route::post('/ubah/persediaan', [PersediaanController::class, 'update']);
 Route::post('/hapus/persediaan', [PersediaanController::class, 'destroy']);
 
+//Pembeliaan
+Route::get('/pembelian', [PembelianController::class, 'index']);
+Route::get('/tambah/pembelian', [PembelianController::class, 'create']);
+Route::get('/read/pembelian/{id}', [PembelianController::class, 'read']);
+Route::get('/ubah/pembelian/{id}', [PembelianController::class, 'edit']);
+
+Route::post('tambah/pembelian', [PembelianController::class, 'store']);
+Route::post('tambah/pembelian-detail', [PembelianController::class, 'insert']);
+
+//Produksi
 Route::get('/produksi', [ProduksiController::class, 'data']);
 
-Route::get('/pembelian', [PembelianController::class, 'data']);
-
+//Penjualan
 Route::get('/penjualan', [PenjualanController::class, 'data']);
 

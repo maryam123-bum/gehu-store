@@ -17,8 +17,7 @@ return new class extends Migration
             $table->id();
             $table->date('tgl_pembelian');
             $table->string('nama_pemasok');
-            $table->foreignId('id_barang')->constrained('persediaan');
-            $table->integer('jumlah');
+            $table->integer('total');
             $table->timestamps();
         });
     }

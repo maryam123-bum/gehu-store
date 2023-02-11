@@ -13,9 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('metode_bayar', function (Blueprint $table) {
-            $table->id();
-            $table->string('metode');
+        Schema::create('pembelian_detail', function (Blueprint $table) {
+            $table->foreignId('id_pembelian')->constrained('pembelian')->primary();
+            $table->foreignId('id_barang')->constrained('persediaan')->primary();
+            $table->integer('jumlah');
             $table->timestamps();
         });
     }
@@ -27,6 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('metode_bayar');
+        Schema::dropIfExists('pembelian_detail');
     }
 };
