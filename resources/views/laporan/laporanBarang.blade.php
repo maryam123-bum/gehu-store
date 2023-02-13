@@ -3,12 +3,14 @@
     <h2>DASHBOARD</h2> 
 
 @endsection
-@section('')
+@section('container')
   <figure class="highcharts-figure">
     <div id="container"></div>
-    
-  </figure>
-</body>
+  </figure> 
+@endsection
+
+@section('script')
+  
 <script src="https://code.highcharts.com/highcharts.js"></script>
 <script src="https://code.highcharts.com/modules/data.js"></script>
 <script src="https://code.highcharts.com/modules/drilldown.js"></script>
