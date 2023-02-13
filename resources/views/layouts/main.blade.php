@@ -5,12 +5,13 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Gehu Store</title>
         <!-- bootstrap 5 css -->
-        <link
+        {{-- <link
           rel="stylesheet"
           href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha2/css/bootstrap.min.css"
           integrity="sha384-DhY6onE6f3zzKbjUPRc2hOzGAdEf4/Dz+WJwBvEYL/lkkIsI3ihufq9hk9K4lVoK"
           crossorigin="anonymous"
-        />
+        /> --}}
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
         <!-- custom css -->
         <!-- <link rel="stylesheet" href="style.css" /> -->
         <link
@@ -46,12 +47,64 @@
           #main-content {
             transition: 0.4s;
           }
+          .active {
+            background-color: #fff;
+            color: #fff;
+          }
         </style>
+        <style>
+          .highcharts-figure,
+          .highcharts-data-table table {
+            min-width: 310px;
+            max-width: 800px;
+            margin: 1em auto;
+          }
+          
+          #container {
+            height: 400px;
+          }
+          
+          .highcharts-data-table table {
+            font-family: Verdana, sans-serif;
+            border-collapse: collapse;
+            border: 1px solid #ebebeb;
+            margin: 10px auto;
+            text-align: center;
+            width: 100%;
+            max-width: 500px;
+          }
+          
+          .highcharts-data-table caption {
+            padding: 1em 0;
+            font-size: 1.2em;
+            color: #555;
+          }
+          
+          .highcharts-data-table th {
+            font-weight: 600;
+            padding: 0.5em;
+          }
+          
+          .highcharts-data-table td,
+          .highcharts-data-table th,
+          .highcharts-data-table caption {
+            padding: 0.5em;
+          }
+          
+          .highcharts-data-table thead tr,
+          .highcharts-data-table tr:nth-child(even) {
+            background: #f8f8f8;
+          }
+          
+          .highcharts-data-table tr:hover {
+            background: #f1f7ff;
+          }
+          </style>
       </head>
-    
+      <?php $active = 0; ?>
       <body>
         <div>
-          <div class="sidebar active-sidebar p-4 bg-primary" id="sidebar">
+          <div class="sidebar active-sidebar p-4" style="background-color:#2E2C44 " id="sidebar">
             <h4 class="mb-5 text-white">Gehu Store</h4>
             <li>
               <a class="text-white" href="/dashboard">
@@ -61,49 +114,72 @@
             </li>
             <li>
               <a class="text-white" href="/data/karyawan">
-                <i class="bi bi-fire mr-2"></i>
+                <i class="bi bi-person-square"></i>
                 Karyawan
               </a>
             </li>
             <li>
               <a class="text-white" href="/data/persediaan">
-                <i class="bi bi-boombox mr-2"></i>
+                <i class="bi bi-box-seam"></i>
                 Persediaan
               </a>
             </li>
             <li>
               <a class="text-white" href="/produksi">
-                <i class="bi bi-newspaper mr-2"></i>
+                <i class="bi bi-hammer"></i>
                 Produksi
               </a>
             </li>
             <li>
               <a class="text-white" href="/pembelian">
-                <i class="bi bi-bicycle mr-2"></i>
+                <i class="bi bi-cart3"></i>
                 Pembelian
               </a>
             </li>
             <li>
               <a class="text-white" href="/penjualan">
-                <i class="bi bi-boombox mr-2"></i>
+                <i class="bi bi-shop"></i>
                 Penjualan
               </a>
             </li>
             <li>
-              <a class="text-white" href="#">
-                <i class="bi bi-film mr-2"></i>
+              <a class="text-white" href="/laporan">
+                <i class="bi bi-clipboard2-pulse"></i>
                 Laporan
               </a>
             </li>
           </div>
         </div>
+        
         <div class="p-4 active-main-content" id="main-content">
-          @yield('title')
+          <header class="p-2 mb-3 border-bottom">
+            <div class="d-flex flex-wrap">
+              <a href="/" class="d-flex  mb-3 mb-lg-0 me-lg-auto text-dark text-decoration-none">
+                <svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"/></svg>
+                <span class="fs-4">@yield('title')</span>
+              </a>
+              <div class="dropdown" style="position:relative;text-align: right">
+                <a href="#" class="link-dark text-decoration-none dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  <img src="https://github.com/mdo.png" alt="mdo" width="32" height="32" class="rounded-circle">
+                </a>
+                <ul class="dropdown-menu text-small">
+                  <li><a class="dropdown-item" href="#">New project...</a></li>
+                  <li><a class="dropdown-item" href="#">Settings</a></li>
+                  <li><a class="dropdown-item" href="#">Profile</a></li>
+                  <li><hr class="dropdown-divider"></li>
+                  <li><a class="dropdown-item" href="#">Sign out</a></li>
+                </ul>
+              </div>
+            </div>
+          </header>
+          
           <div class="container py-5">
             @yield('container')
           </div>
         </div>
       </body>
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
       <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+      <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
       @yield('script')
     </html>

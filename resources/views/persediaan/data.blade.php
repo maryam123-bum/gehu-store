@@ -6,7 +6,7 @@
     <div class="row">
         <div class="col-2 mb-2">
             <a href="/tambah/persediaan">
-                <button class="btn btn-success shadow">
+                <button class="btn btn-light shadow" style="background-color: #2528DC;color:#fff">
                     Tambah
                 </button>
             </a>
@@ -16,7 +16,7 @@
         <div class="col">
             <table class="table table-bordered">
                 <thead>
-                <tr class="bg-dark text-white">
+                <tr style="background-color: #28276A;color:#fff">
                     <th scope="col">No</th>
                     <th scope="col">Kode Barang</th>
                     <th scope="col">Nama Barang</th>
@@ -38,19 +38,19 @@
                                 <td><?php echo $key['stok'].' '.$key['nama_satuan'];; ?></td>
                                 <td>Rp. <?php echo $key['harga_pokok']; ?></td>
                                 <td>
-                                    <a href="/ubah/persediaan/{{ $key['id'] }}" class="btn btn-primary">Ubah</a>
+                                    <a href="/ubah/persediaan/{{ $key['id'] }}" class="btn btn-light shadow" style="background-color: #212290"><i class="bi bi-pencil-square"  style="color: aliceblue"></a>
                                     <form action="/hapus/persediaan" method="post" style="display:inline-block">
                                         @csrf
                                         <input type="hidden" name="id" value="{{ $key['id'] }}" readonly>
-                                        <button type="submit" class="btn btn-danger">Hapus</button>
+                                        <button type="submit" class="btn btn-danger"><i class="bi bi-trash3"></i></i></button>
                                 </form>
                                 </td>
                             </tr>
                         <?php
                         } ?>
                     @else
-                        <tr class="text-center">
-                            <td colspan="7">No Data Found.</td>
+                        <tr class="text-center font-weight-bold">
+                            <td colspan="7">Tidak Ada Data</td>
                         </tr>
                     @endif
                     

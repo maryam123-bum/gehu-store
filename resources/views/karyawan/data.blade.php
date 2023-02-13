@@ -6,7 +6,7 @@
     <div class="row">
         <div class="col-2 mb-2">
             <a href="/tambah/karyawan">
-                <button class="btn btn-success shadow">
+                <button class="btn btn-light shadow" style="background-color: #2528DC;color:#fff">
                     Tambah
                 </button>
             </a>
@@ -16,7 +16,7 @@
         <div class="col">
             <table class="table table-bordered">
                 <thead>
-                    <tr class="bg-dark text-white text-center">
+                    <tr style="background-color: #28276A;color:#fff">
                         <th scope="col">No</th>
                         <th scope="col">ID Karyawan</th>
                         <th scope="col">Nama Karyawan</th>
@@ -44,18 +44,18 @@
                             </td>
                             <td>{{ $key['alamat'] }}</td>
                             <td class="text-center">
-                                <a href="/ubah/karyawan/{{ $key['id'] }}" class="btn btn-primary">Ubah</a>
+                                <a href="/ubah/karyawan/{{ $key['id'] }}" class="btn btn-light shadow" style="background-color: #212290"><i class="bi bi-pencil-square"  style="color: aliceblue"></i></a>
                                 <form action="/hapus/karyawan" method="post" style="display:inline-block">
                                     @csrf
                                     <input type="hidden" name="id" value="{{ $key['id'] }}" readonly>
-                                    <button type="submit" class="btn btn-danger">Hapus</button>
+                                    <button type="submit" class="btn btn-danger"><i class="bi bi-trash3"></i></i></button>
                                 </form>
                             </td>
                         </tr>
                     <?php } 
                 } else{ ?>
-                    <tr class="text-center">
-                        <td colspan="7">No Data Found.</td>
+                    <tr class="text-center font-weight-bold">
+                        <td colspan="7">Tidak Ada Data</td>
                     </tr>
                 <?php } ?>
                 </tbody>

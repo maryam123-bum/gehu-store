@@ -1,7 +1,7 @@
 @extends('layouts.main')
 
 @section('title')
-    <h2>Tambah Pembelian</h2>
+    <h2>Ubah Penjualan</h2>
 @endsection
 
 @section('container')
@@ -11,11 +11,11 @@
         <div class="row mb-3">
             <div class="col-10">
                 <h3 class="font-weight-bold">
-                    Data Pembelian
+                    Data Penjualan
                 </h3>
             </div>
             <div class="col-2">
-                <button type="button" class="btn btn-primary" style="background-color: #080E7D;color:#fff" onclick="store()">Buat Transaksi</button>
+                <button type="button" class="btn btn-primary" onclick="store()">Buat Transaksi</button>
             </div>
         </div>
         <div class="row mb-3">
@@ -23,12 +23,12 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="row">
-                            <input type="hidden" id="id_pembelian">
+                            <input type="hidden" id="id_penjualan">
                             <div class="col-2 font-weight-bold">
-                                <h5>Nama Pemasok</h5>
+                                <h5>Nama Pelanggan</h5>
                             </div>
                             <div class="col-3 mb-2">
-                                <input type="text" name="nama_pemasok" class="d-inline form-control form-control-sm" width="" id="nama_pemasok">
+                                <input type="text" name="nama_pelanggan" class="d-inline form-control form-control-sm" width="" value="{{ $header['nama_pelanggan'] }}" id="nama_pelanggan">
                             </div>
                             <div class="col-1"></div>
                             <div class="col-2 font-weight-bold">
@@ -36,7 +36,7 @@
                             </div>
                             <div class="col-4">
                                 <?php date_default_timezone_set('Asia/Jakarta'); ?>
-                                <h5><span class="badge bg-light" style="color:#000">{{ date("d/F/Y") }}</span></h5>
+                                <h5><span class="badge bg-success">{{ $header['tgl_penjualan'] }}</span></h5>
                             </div>
                         </div>
                         <div class="row">
@@ -44,7 +44,7 @@
                                 <h5>No Invoice</h5>
                             </div>
                             <div class="col-5">
-                                <h5><span class="badge bg-light" style="color:#000">20230102001</span></h5>
+                                <h5><span class="badge bg-success">{{ $header['id'] }}</span></h5>
                             </div>
                         </div>
                     </div>
@@ -83,7 +83,7 @@
                                     <label for="jumlah" class="mb-2 font-weight-bold">Jumlah Barang</label>
                                     <input type="text" class="form-control mb-2" placeholder="0" name="jumlah" id="jumlah">
                                 </div>
-                                <button class="w-100 btn btn-primary btn-md" style="background-color: #080E7D;color:#fff" type="button" onclick="insert()">Simpan Data</button>
+                                <button class="w-100 btn btn-primary btn-md" type="button" onclick="insert()">Simpan Data</button>
                             
                         </div>
                     </div>
@@ -96,40 +96,40 @@
 @section('script')
   <script type="text/javascript">
     $(document).ready(function() {
-        read(0)
+        read({{ $header['id'] }})
     });
 
     // Read Database
     function read(id) {
-        $.get("{{ url('/read/pembelian') }}/"+ id, {}, function(data, status) {
+        $.get("{{ url('/read/penjualan') }}/"+ id, {}, function(data, status) {
             $("#read").html(data);
         });
     }
     // untuk proses create data
     function store() {
-        var nama_pemasok = $("#nama_pemasok").val();
+        var nama_pelanggan = $("#nama_pelanggan").val();
         $.ajax({
             type: "post",
-            url: "{{ url('/tambah/pembelian') }}",
+            url: "{{ url('/tambah/penjualan') }}",
             data: {
                 "_token": "{{ csrf_token() }}",
-                "nama_pemasok": nama_pemasok
+                "nama_pelanggan": nama_pelanggan
             },
             success: function(data) {
-                $("#id_pembelian").val(data.id)
+                $("#id_pelanggan").val(data.id)
             }
         });
     }
     function insert() {
-        var id_pembelian = $("#id_pembelian").val()
+        var id_penjualan = $("#id_penjualan").val()
         var id_barang = $("#barang").val()
         var jumlah = $("#jumlah").val()
         $.ajax({
             type: "post",
-            url: "{{ url('/tambah/pembelian-detail') }}",
+            url: "{{ url('/tambah/penjualan-detail') }}",
             data: {
                 "_token": "{{ csrf_token() }}",
-                "id_pembelian": id_pembelian,
+                "id_penjualan": id_penjualan,
                 "id_barang": id_barang,
                 "jumlah": jumlah
             },

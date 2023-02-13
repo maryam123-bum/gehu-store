@@ -6,7 +6,7 @@
         <div class="row">
             <div class="col-2 mb-2">
                 <a href="/tambah/produksi">
-                    <button class="btn btn-success shadow">
+                    <button class="btn btn-light shadow" style="background-color: #2528DC;color:#fff">
                         Tambah
                     </button>
                 </a>
@@ -16,27 +16,41 @@
             <div class="col">
                 <table class="table table-bordered">
                     <thead>
-                      <tr class="bg-dark text-white">
+                      <tr style="background-color: #28276A;color:#fff">
                         <th scope="col">No</th>
                         <th scope="col">Tanggal</th>
-                        <th scope="col">Kode Produksi</th>
+                        <th scope="col">Biaya Bahan Baku</th>
+                        <th scope="col">Biaya Overhead</th>
+                        <th scope="col">Biaya Tenaga Kerja</th>
+                        <th scope="col">Harga Pokok Produksi</th>
+                        <th scope="col">Harga Jual</th>
                         <th scope="col">Option</th>
                       </tr>
                     </thead>
                     <tbody>
-                        <?php $no = 1; ?>
-                        <?php foreach ($data as $key) { ?>
+                        @if (!$data->isEmpty())
+                            <?php $no = 1; ?>
+                            <?php foreach ($data as $key) { ?>
+                                <tr>
+                                    <th scope="row"><?php echo $no++ ?></th>
+                                    <td><?php echo $key['tgl_produksi']; ?></td>
+                                    <td><?php echo $key['biaya_bahan_baku']; ?></td>
+                                    <td><?php echo $key['biaya_overhead']; ?></td>
+                                    <td><?php echo $key['biaya_tenaga_kerja']; ?></td>
+                                    <td><?php echo $key['biaya_bahan_baku'] + $key['biaya_overhead'] + $key['biaya_tenaga_kerja']; ?></td>
+                                    <td><?php echo $key['harga_jual']; ?></td>
+                                    <td>
+                                        <button class="btn btn-light shadow" style="background-color: #212290"><i class="bi bi-pencil-square"  style="color: aliceblue"></button>
+                                        <button class="btn btn-danger"><i class="bi bi-trash3"></i></i></button>
+                                    </td>
+                                </tr>
+                            <?php
+                            } ?>
+                        @else
                             <tr>
-                                <th scope="row"><?php echo $no++ ?></th>
-                                <td><?php echo $key['tgl']; ?></td>
-                                <td><?php echo $key['kode']; ?></td>
-                                <td>
-                                    <button class="btn btn-primary">UBAH</button>
-                                    <button class="btn btn-danger">HAPUS</button>
-                                </td>
-                              </tr>
-                        <?php
-                        } ?>
+                                <td colspan="8" class="text-center font-weight-bold">Tidak Ada Data</td>
+                            </tr>
+                        @endif
                       
                     </tbody>
                   </table>

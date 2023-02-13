@@ -1,7 +1,7 @@
 @extends('layouts.main')
 
 @section('title')
-    <h2>Tambah Pembelian</h2>
+    <h2>Tambah Penjualan</h2>
 @endsection
 
 @section('container')
@@ -11,7 +11,7 @@
         <div class="row mb-3">
             <div class="col-10">
                 <h3 class="font-weight-bold">
-                    Data Pembelian
+                    Data Penjualan
                 </h3>
             </div>
             <div class="col-2">
@@ -23,16 +23,16 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="row">
-                            <input type="hidden" id="id_pembelian">
+                            <input type="hidden" id="id_penjualan">
                             <div class="col-2 font-weight-bold">
-                                <h5>Nama Pemasok</h5>
+                                <h6>Nama Pelanggan</h6>
                             </div>
                             <div class="col-3 mb-2">
-                                <input type="text" name="nama_pemasok" class="d-inline form-control form-control-sm" width="" id="nama_pemasok">
+                                <input type="text" name="nama_pelanggan" class="d-inline form-control form-control-sm" width="" id="nama_pelanggan">
                             </div>
                             <div class="col-1"></div>
                             <div class="col-2 font-weight-bold">
-                                <h5>Tanggal</h5>
+                                <h6>Tanggal</h6>
                             </div>
                             <div class="col-4">
                                 <?php date_default_timezone_set('Asia/Jakarta'); ?>
@@ -41,7 +41,7 @@
                         </div>
                         <div class="row">
                             <div class="col-2 font-weight-bold">
-                                <h5>No Invoice</h5>
+                                <h6>No Invoice</h6>
                             </div>
                             <div class="col-5">
                                 <h5><span class="badge bg-light" style="color:#000">20230102001</span></h5>
@@ -51,6 +51,7 @@
                 </div>
             </div>
         </div>
+        
         <div class="row mb-3">
             <div class="col-8">
                 
@@ -59,7 +60,22 @@
                         Data Barang
                     </h4>
                     <div class="card-body">
-                        <div id="read"></div>
+                        <div id="read">
+                            <table class="table table bordered">
+                                <tr style="background-color: #28276A; color:#fff">
+                                    <th>No</th>
+                                    <th>Nama Barang</th>
+                                    <th>Jenis Barang</th>
+                                    <th>Harga</th>
+                                    <th>Jumlah</th>
+                                    <th>Total</th>
+                                </tr>
+                                <tr>
+                                    <td>col 2.1</td>
+                                    <td>col 2.2</td>
+                                </tr>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -90,6 +106,7 @@
                 </div>
             </div>
       </div>
+      
     </div>
   </div>
 @endsection
@@ -101,35 +118,35 @@
 
     // Read Database
     function read(id) {
-        $.get("{{ url('/read/pembelian') }}/"+ id, {}, function(data, status) {
+        $.get("{{ url('/read/penjualan') }}/"+ id, {}, function(data, status) {
             $("#read").html(data);
         });
     }
     // untuk proses create data
     function store() {
-        var nama_pemasok = $("#nama_pemasok").val();
+        var nama_pemasok = $("#nama_pelanggan").val();
         $.ajax({
             type: "post",
-            url: "{{ url('/tambah/pembelian') }}",
+            url: "{{ url('/tambah/penjualan') }}",
             data: {
                 "_token": "{{ csrf_token() }}",
-                "nama_pemasok": nama_pemasok
+                "nama_pelanggan": nama_pelanggan
             },
             success: function(data) {
-                $("#id_pembelian").val(data.id)
+                $("#id_penjualan").val(data.id)
             }
         });
     }
     function insert() {
-        var id_pembelian = $("#id_pembelian").val()
+        var id_penjualan = $("#id_penjualan").val()
         var id_barang = $("#barang").val()
         var jumlah = $("#jumlah").val()
         $.ajax({
             type: "post",
-            url: "{{ url('/tambah/pembelian-detail') }}",
+            url: "{{ url('/tambah/penjualan-detail') }}",
             data: {
                 "_token": "{{ csrf_token() }}",
-                "id_pembelian": id_pembelian,
+                "id_penjualan": id_penjualan,
                 "id_barang": id_barang,
                 "jumlah": jumlah
             },

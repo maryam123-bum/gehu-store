@@ -6,6 +6,7 @@ use App\Http\Controllers\PersediaanController;
 use App\Http\Controllers\ProduksiController;
 use App\Http\Controllers\PenjualanController;
 use App\Http\Controllers\PembelianController;
+use App\Http\Controllers\AdminController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,13 +21,20 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('/login/login');
 });
+
+Route::post('/login', [AdminController::class, 'cekdata']);
 
 //Dashboard
 Route::get('/dashboard', function() {
     return view('/dashboard/dashboard');
 });
+
+Route::get('/chart', function() {
+    return view('/dashboard/chart');
+});
+
 
 //Karyawan
 Route::get('/data/karyawan', [KaryawanController::class, 'index']);
@@ -55,7 +63,13 @@ Route::post('tambah/pembelian-detail', [PembelianController::class, 'insert']);
 
 //Produksi
 Route::get('/produksi', [ProduksiController::class, 'data']);
+Route::get('/tambah/produksi', [ProduksiController::class, 'create']);
 
 //Penjualan
 Route::get('/penjualan', [PenjualanController::class, 'data']);
+Route::get('/tambah/penjualan', [PenjualanController::class, 'create']);
 
+//login
+Route::get('/laporan', function () {
+    return view('/laporan/view');
+});

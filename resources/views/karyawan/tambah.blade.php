@@ -34,8 +34,9 @@
             <label for="proffesion" class="form-label">Jabatan</label>
             <select class="form-select" name="proffesion" id="proffession" required>
               <option value="">Pilihan...</option>
-              <option value="Dokter">Dokter</option>
-              <option value="Guru">Guru</option>
+              <option value="Direktur">Direktur</option>
+              <option value="Karyawan Administrasi">Karyawan Administrasi</option>
+              <option value="Karyawan Produksi">Karyawan Produksi</option>
             </select>
             <div class="invalid-feedback">
               Silahkan Pilih Jabatan.
@@ -65,7 +66,7 @@
 
           <hr class="my-4">
 
-          <button class="w-100 btn btn-primary btn-lg" type="submit">Simpan Data</button>
+          <button class="w-100 btn btn-primary btn-lg" style="background-color: #080E7D;color:#fff" type="submit">Simpan Data</button>
         </form>
       </div>
     </div>
