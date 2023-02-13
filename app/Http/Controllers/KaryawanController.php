@@ -20,7 +20,8 @@ class KaryawanController extends Controller
 
         return view('karyawan/data', [
             'judul' => 'Karyawan',
-            'data' => $karyawan
+            'data' => $karyawan,
+            'active' => "karyawan"
         ]);
     }
 
@@ -31,7 +32,9 @@ class KaryawanController extends Controller
      */
     public function create()
     {
-        return view('karyawan.tambah', []);
+        return view('karyawan.tambah', [
+            'active' => "karyawan"
+        ]);
     }
 
     /**
@@ -59,17 +62,6 @@ class KaryawanController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Karyawan  $karyawan
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Karyawan $karyawan)
-    {
-        //
-    }
-
-    /**
      * Show the form for editing the specified resource.
      *
      * @param  \App\Models\Karyawan  $karyawan
@@ -79,7 +71,8 @@ class KaryawanController extends Controller
     {
         $karyawan = Karyawan::where('id', $id)->first();
         return view('karyawan/ubah', [
-            'data' => $karyawan
+            'data' => $karyawan,
+            'active' => "karyawan"
         ]);
     }
 

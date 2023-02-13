@@ -100,49 +100,53 @@
             background: #f1f7ff;
           }
           </style>
+          <style>
+            .active {
+              background-color: #5052dc
+            }
+          </style>
       </head>
-      <?php $active = 0; ?>
       <body>
         <div>
-          <div class="sidebar active-sidebar p-4" style="background-color:#2E2C44 " id="sidebar">
-            <h4 class="mb-5 text-white">Gehu Store</h4>
-            <li>
+          <div class="sidebar active-sidebar" style="background-color:#2E2C44 " id="sidebar">
+            <h4 class="mb-5 text-white p-4">Gehu Store</h4>
+            <li class="px-4 py-2 {{ ($active == "dashboard") ? 'active' : '' }}">
               <a class="text-white" href="/dashboard">
                 <i class="bi bi-house mr-2"></i>
                 Dashboard
               </a>
             </li>
-            <li>
+            <li class="px-4 py-2 {{ ($active == "karyawan") ? 'active' : '' }}">
               <a class="text-white" href="/data/karyawan">
                 <i class="bi bi-person-square"></i>
                 Karyawan
               </a>
             </li>
-            <li>
+            <li class="px-4 py-2 {{ ($active == "persediaan") ? 'active' : '' }}">
               <a class="text-white" href="/data/persediaan">
                 <i class="bi bi-box-seam"></i>
                 Persediaan
               </a>
             </li>
-            <li>
+            <li class="px-4 py-2 {{ ($active == "produksi") ? 'active' : '' }}">
               <a class="text-white" href="/produksi">
                 <i class="bi bi-hammer"></i>
                 Produksi
               </a>
             </li>
-            <li>
+            <li class="px-4 py-2 {{ ($active == "pembelian") ? 'active' : '' }}">
               <a class="text-white" href="/pembelian">
                 <i class="bi bi-cart3"></i>
                 Pembelian
               </a>
             </li>
-            <li>
+            <li class="px-4 py-2 {{ ($active == "penjualan") ? 'active' : '' }}">
               <a class="text-white" href="/penjualan">
                 <i class="bi bi-shop"></i>
                 Penjualan
               </a>
             </li>
-            <li>
+            <li class="px-4 py-2 {{ ($active == "laporan") ? 'active' : '' }}">
               <a class="text-white" href="/laporan">
                 <i class="bi bi-clipboard2-pulse"></i>
                 Laporan

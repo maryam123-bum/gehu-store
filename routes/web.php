@@ -28,7 +28,9 @@ Route::post('/login', [AdminController::class, 'cekdata']);
 
 //Dashboard
 Route::get('/dashboard', function() {
-    return view('/dashboard/dashboard');
+    return view('/dashboard/dashboard', [
+        'active' => "dashboard"
+    ]);
 });
 
 Route::get('/chart', function() {
