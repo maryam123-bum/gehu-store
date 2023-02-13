@@ -3,6 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Produksi;
+use App\Models\Karyawan;
+use App\Models\Persediaan;
+use App\Models\ProduksiBaku;
+use App\Models\ProduksiTenaga;
+use App\Models\ProduksiOverhead;
 
 class ProduksiController extends Controller
 {
@@ -13,16 +19,7 @@ class ProduksiController extends Controller
      */
     public function data()
     {
-        $data_produksi = [
-            [
-                "tgl" => "1 Januari 2023",
-                "kode" => 10001,
-            ],
-            [
-                "tgl" => "2 Januari 2023",
-                "kode" => 10002,
-            ]
-        ];
+        $data_produksi = Produksi::all();
         
         return view('produksi/data', [
             'judul' => "Produksi",
@@ -38,7 +35,12 @@ class ProduksiController extends Controller
      */
     public function create()
     {
-        return "ini create";
+        return view('produksi/tambah', [
+            'barang' => Persediaan::join('jenis_persediaan', 'persediaan.id_jenis', '=', 'jenis_persediaan.id')
+            ->join('satuan', 'persediaan.id_satuan', '=', 'satuan.id')
+            ->get(['persediaan.*', 'satuan.nama_satuan', 'jenis_persediaan.nama_jenis']),
+            'karyawan' => Karyawan::all()
+        ]);
     }
 
     /**
