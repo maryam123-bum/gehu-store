@@ -20,7 +20,8 @@ class PersediaanController extends Controller
             'judul' => 'Persediaan',
             'data' => Persediaan::join('jenis_persediaan', 'persediaan.id_jenis', '=', 'jenis_persediaan.id')
                 ->join('satuan', 'persediaan.id_satuan', '=', 'satuan.id')
-                ->get(['persediaan.*', 'satuan.nama_satuan', 'jenis_persediaan.nama_jenis'])
+                ->get(['persediaan.*', 'satuan.nama_satuan', 'jenis_persediaan.nama_jenis']),
+            'active' => "persediaan"
         ]);
     }
 
@@ -33,7 +34,8 @@ class PersediaanController extends Controller
     {
         return view('persediaan/tambah', [
             'jenis' => JenisPersediaan::all(),
-            'satuan' => Satuan::all()
+            'satuan' => Satuan::all(),
+            'active' => "persediaan"
         ]);
     }
 
@@ -68,7 +70,8 @@ class PersediaanController extends Controller
         return view('persediaan/ubah', [
             'data' => $data,
             'jenis' => JenisPersediaan::all(),
-            'satuan' => Satuan::all()
+            'satuan' => Satuan::all(),
+            'active' => "persediaan"
         ]);
     }
 

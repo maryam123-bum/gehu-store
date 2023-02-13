@@ -71,7 +71,19 @@ Route::get('/tambah/produksi', [ProduksiController::class, 'create']);
 Route::get('/penjualan', [PenjualanController::class, 'data']);
 Route::get('/tambah/penjualan', [PenjualanController::class, 'create']);
 
-//login
+//laporan
 Route::get('/laporan', function () {
-    return view('/laporan/view');
+    return view('/laporan/view', [
+        'active' => "laporan"
+    ]);
+});
+
+Route::get('/laporan/laporanBarang', function () {
+    return view('/laporan/laporanBarang', [
+        'active' => "laporan"
+    ]);
+});
+
+Route::get('/chart', function () {
+    return view('/laporan/chart1');
 });

@@ -10,7 +10,7 @@
           <h5 class="card-title">Laporan Barang</h5>
           <h6 class="card-subtitle mb-2 text-muted">Persediaan</h6>
           <p class="card-text">Berisi Laporan Data Barang Persediaan yang keluar dan masuk</p>
-          <a href="#" class="card-link">Preview</a>
+          <a href="/laporan/laporanBarang" class="card-link">Preview</a>
           <a href="#" class="card-link">Import as PDF</a>
         </div>
     </div>

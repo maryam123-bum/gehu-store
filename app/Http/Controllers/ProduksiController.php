@@ -23,7 +23,8 @@ class ProduksiController extends Controller
         
         return view('produksi/data', [
             'judul' => "Produksi",
-            'data' => $data_produksi
+            'data' => $data_produksi,
+            'active' => "produksi"
         ]);
 
     }
@@ -39,7 +40,8 @@ class ProduksiController extends Controller
             'barang' => Persediaan::join('jenis_persediaan', 'persediaan.id_jenis', '=', 'jenis_persediaan.id')
             ->join('satuan', 'persediaan.id_satuan', '=', 'satuan.id')
             ->get(['persediaan.*', 'satuan.nama_satuan', 'jenis_persediaan.nama_jenis']),
-            'karyawan' => Karyawan::all()
+            'karyawan' => Karyawan::all(),
+            'active' => "produksi"
         ]);
     }
 

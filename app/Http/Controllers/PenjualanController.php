@@ -21,7 +21,8 @@ class PenjualanController extends Controller
         
         return view('penjualan/data', [
             'judul' => "Penjualan",
-            'data' => $data_penjualan
+            'data' => $data_penjualan,
+            'active' => "penjualan"
         ]);
     }
 
@@ -35,7 +36,8 @@ class PenjualanController extends Controller
         return view('penjualan/tambah', [
             'barang' => Persediaan::join('jenis_persediaan', 'persediaan.id_jenis', '=', 'jenis_persediaan.id')
             ->join('satuan', 'persediaan.id_satuan', '=', 'satuan.id')
-            ->get(['persediaan.*', 'satuan.nama_satuan', 'jenis_persediaan.nama_jenis'])
+            ->get(['persediaan.*', 'satuan.nama_satuan', 'jenis_persediaan.nama_jenis']),
+            'active' => "penjualan"
         ]);
     }
 
@@ -108,7 +110,8 @@ class PenjualanController extends Controller
 
         return view('penjualan.edit', [
             'header' => $header,
-            'barang' => $baranglist
+            'barang' => $baranglist,
+            'active' => "penjualan"
         ]);
     }
 
