@@ -84,6 +84,31 @@ Route::get('/laporan/laporanBarang', function () {
     ]);
 });
 
+Route::get('/laporan/labaRugi', function () {
+    return view('/laporan/labaRugi', [
+        'active' => "laporan"
+    ]);
+});
+
+Route::get('/laporan/lapHpp', function () {
+    return view('/laporan/lapHpp', [
+        'active' => "laporan"
+    ]);
+});
+
 Route::get('/chart', function () {
     return view('/laporan/chart1');
+});
+
+//Pengaturan
+Route::get('/pengaturan', function () {
+    return view('/login/user', [
+        'active' => "pengaturan"
+    ]);
+});
+
+Route::get('/pengaturan/profil', function () {
+    return view('/login/user', [
+        'active' => "pengaturan"
+    ]);
 });

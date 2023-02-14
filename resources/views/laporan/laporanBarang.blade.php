@@ -1,12 +1,17 @@
 @extends('layouts/main')
 @section('title')
-    <h2>DASHBOARD</h2> 
+    <h2>LAPORAN</h2> 
 
 @endsection
 @section('container')
-  <figure class="highcharts-figure">
-    <div id="container"></div>
-  </figure> 
+<div class="card">
+  <div class="card-body">
+    <figure class="highcharts-figure">
+      <div id="container"></div>
+    </figure> 
+  </div>
+</div>
+  
 @endsection
 
 @section('script')
@@ -30,11 +35,11 @@ Highcharts.chart('container', {
     type: 'column'
   },
   title: {
-    align: 'left',
+    align: 'center',
     text: 'Laporan Barang'
   },
   subtitle: {
-    align: 'left',
+    align: 'center',
     text: 'Januari, 2023'
   },
   accessibility: {

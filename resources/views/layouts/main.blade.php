@@ -103,8 +103,8 @@
           <style>
             .highcharts-figure,
             .highcharts-data-table table {
-              min-width: 310px;
-              max-width: 800px;
+              min-width: 50%;
+              max-width: 100%;
               margin: 1em auto;
             }
             
@@ -153,6 +153,7 @@
               background-color: #5052dc
             }
           </style>
+          {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script> --}}
       </head>
       <body>
         <div>
@@ -200,6 +201,12 @@
                 Laporan
               </a>
             </li>
+            <li class="px-4 py-2 {{ ($active == "pengaturan") ? 'active' : '' }}">
+              <a class="text-white" href="/pengaturan">
+                <i class="bi bi-wrench-adjustable-circle"></i>
+                Pengaturan
+              </a>
+            </li>
           </div>
         </div>
         
@@ -212,14 +219,12 @@
               </a>
               <div class="dropdown" style="position:relative;text-align: right">
                 <a href="#" class="link-dark text-decoration-none dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  <img src="https://github.com/mdo.png" alt="mdo" width="32" height="32" class="rounded-circle">
+                  <img src="/gambar/foto.png" alt="mdo" width="32" height="32" class="rounded-circle">
                 </a>
                 <ul class="dropdown-menu text-small">
-                  <li><a class="dropdown-item" href="#">New project...</a></li>
-                  <li><a class="dropdown-item" href="#">Settings</a></li>
-                  <li><a class="dropdown-item" href="#">Profile</a></li>
+                  <li><a class="dropdown-item" href="/profil">Profile</a></li>
                   <li><hr class="dropdown-divider"></li>
-                  <li><a class="dropdown-item" href="#">Sign out</a></li>
+                  <li><a class="dropdown-item" href="/">Sign out</a></li>
                 </ul>
               </div>
             </div>
