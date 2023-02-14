@@ -10,36 +10,49 @@
 <div class="card" id="content">
     <div class="card-body" >
         <div style="font-size: 14px">
-            <div class="row">
-                <div class="col">
-                    <h3 style="text-align: center">Laporan Laba Rugi Kotor</h3><br>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col">
-                    <h4 style="text-align: center">Januari 2023</h4><br>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col">
-                    <p>Pendapatan</p>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-6" style="margin-left: 3%">
-                    <p>Penjualan</p>
-                </div>
+            <div class="row mb-3">
                 <div class="col-2">
-                    <p>Rp 300.000.000</p>
+                    <img src="/gambar/logo.jpg" width="80" height="80" alt="">
                 </div>
-                <div class="col-2">
+                <div class="col-8">
+                    <div class="row">
+                        <div class="col">
+                            <h5 style="text-align: center;color:#2596be;font-weight:bold">Gehu Store Quee</h5>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <h5 style="text-align: center">Laporan Laba Rugi Kotor</h5>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <h6 style="text-align: center">Januari 2023</h6>
+                        </div>
+                    </div>
                 </div>
-                <div class="col-2">
+                <div class="col-2"></div>
+            </div>
+            <div class="row mb-1">
+                <div class="col">
+                    <p style="color:#2596be;font-weight:bold">Pendapatan</p>
                 </div>
             </div>
-            <div class="row">
+            <div class="row mb-1">
                 <div class="col-6">
-                    <p>Total Pendapatan</p>
+                    <p class="px-5">Penjualan</p>
+                </div>
+                <div class="col-2">
+                    <p>&nbsp;&nbsp;Rp 3.000.000</p>
+                </div>
+                <div class="col-2">
+                </div>
+                <div class="col-2">
+                </div>
+            </div>
+            <div class="row mb-1">
+                <div class="col-6">
+                    <p style="font-weight: bold">Total Pendapatan</p>
                 </div>
                 <div class="col-2">
 
@@ -48,17 +61,17 @@
                     
                 </div>
                 <div class="col-2">
-                    <p>Rp 3.000.000</p>
+                    <p style="font-weight: bold">Rp 3.000.000</p>
                 </div>
             </div>
-            <div class="row">
+            <div class="row mb-1">
                 <div class="col">
-                    <p>Biaya atas Pendapatan</p>
+                    <p style="color:#2596be;font-weight:bold">Biaya atas Pendapatan</p>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-6" style="margin-left: 3%">
-                    <p>Potongan Pembelian</p>
+            <div class="row mb-1">
+                <div class="col-6">
+                    <p class="px-5">Potongan Pembelian</p>
                 </div>
                 <div class="col-2">
                     <p>-Rp 1.000.000</p>
@@ -68,33 +81,45 @@
                 <div class="col-2">
                 </div>
             </div>
-            <div class="row">
-                <div class="col-6" style="margin-left: 3%">
-                    <p>Biaya pengiriman</p>
+            <div class="row mb-1">
+                <div class="col-6">
+                    <p class="px-5">Biaya pengiriman</p>
+                </div>
+                <div class="col-2 border-bottom border-dark">
+                    <p>&nbsp;&nbsp;Rp 150.000</p>
                 </div>
                 <div class="col-2">
-                    <p>Rp 150.000</p>
                 </div>
                 <div class="col-2">
+                </div>
+            </div>
+            <div class="row mb-1">
+                <div class="col-6">
+                    <p class="px-5" style="font-weight: bold">Total</p>
+                </div>
+                <div class="col-2">
+                </div>
+                <div class="col-2">
+                    <p style="font-weight: bold">-Rp 850.000</p>
                 </div>
                 <div class="col-2">
                 </div>
             </div>
             <div class="row">
                 <div class="col-6">
-                    <p>Total Biaya atas Pendapatan</p>
+                    <p style="font-weight: bold">Total Biaya atas Pendapatan</p>
                 </div>
                 <div class="col-2">
                 </div>
                 <div class="col-2">
-                    <p>-Rp 850.000</p>
                 </div>
                 <div class="col-2">
+                    <p style="font-weight: bold">-Rp 850.000</p>
                 </div>
             </div>
             <div class="row bg-secondary pt-2 text-white">
                 <div class="col">
-                    <p>Laba/Rugi Kotor</p>
+                    <p style="font-weight: bold">Laba/Rugi Kotor</p>
                 </div>
                 <div class="col-2">
                 </div>
@@ -102,7 +127,7 @@
                     
                 </div>
                 <div class="col-2">
-                    <p>Rp 850.000</p>
+                    <p style="font-weight: bold">Rp 2.150.000</p>
                 </div>
             </div>
         </div>
