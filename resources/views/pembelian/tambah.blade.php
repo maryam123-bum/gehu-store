@@ -14,9 +14,7 @@
                     Data Pembelian
                 </h3>
             </div>
-            <div class="col-2">
-                <button type="button" class="btn btn-primary" style="background-color: #080E7D;color:#fff" onclick="store()">Buat Transaksi</button>
-            </div>
+            
         </div>
         <div class="row mb-3">
             <div class="container">
@@ -25,26 +23,26 @@
                         <div class="row">
                             <input type="hidden" id="id_pembelian">
                             <div class="col-2 font-weight-bold">
-                                <h5>Nama Pemasok</h5>
+                                <h6>Nama Pemasok</h6>
                             </div>
                             <div class="col-3 mb-2">
                                 <input type="text" name="nama_pemasok" class="d-inline form-control form-control-sm" width="" id="nama_pemasok">
                             </div>
                             <div class="col-1"></div>
                             <div class="col-2 font-weight-bold">
-                                <h5>Tanggal</h5>
+                                <h6>Tanggal</h6>
                             </div>
                             <div class="col-4">
                                 <?php date_default_timezone_set('Asia/Jakarta'); ?>
-                                <h5><span class="badge bg-light" style="color:#000">{{ date("d/F/Y") }}</span></h5>
+                                <h6><span class="badge bg-light" style="color:#000">{{ date("d/F/Y") }}</span></h6>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-2 font-weight-bold">
-                                <h5>No Invoice</h5>
+                                <h6>No Invoice</h6>
                             </div>
                             <div class="col-5">
-                                <h5><span class="badge bg-light" style="color:#000">20230102001</span></h5>
+                                <h6><span class="badge bg-light" style="color:#000">20230102001</span></h6>
                             </div>
                         </div>
                     </div>
@@ -66,29 +64,64 @@
             <div class="col-4">
                     <div class="card">
                         <div class="card-body">
-                                <div class="form-group mb-2">
-                                    <label for="barang" class="mb-2 font-weight-bold">Nama Barang</label>
-                                    <select name="barang" id="barang" class="form-select" >
-                                        @foreach ($barang as $item)
-                                            <option value="{{ $item['id'] }}">{{ $item['nama_barang'] }}</option>
-                                        @endforeach
-                                    </select>
-                                    <span style="font-size: 14px" >Barang tidak ada? silahkan <a href="/tambah/persediaan">tambah barang</a></span>
-                                </div>
-                                <div class="form-group">
-                                    <label for="harga" class="mb-2 font-weight-bold">Harga Barang</label>
-                                    <input type="text" class="form-control mb-2" placeholder="0" name="harga" id="harga">
-                                </div>
-                                <div class="form-group">
-                                    <label for="jumlah" class="mb-2 font-weight-bold">Jumlah Barang</label>
-                                    <input type="text" class="form-control mb-2" placeholder="0" name="jumlah" id="jumlah">
-                                </div>
-                                <button class="w-100 btn btn-primary btn-md" style="background-color: #080E7D;color:#fff" type="button" onclick="insert()">Simpan Data</button>
-                            
+                            <div class="form-group mb-2">
+                                <label for="barang" class="mb-2 font-weight-bold">Nama Barang</label>
+                                <select name="barang" id="barang" class="form-select" >
+                                    @foreach ($barang as $item)
+                                        <option value="{{ $item['id'] }}">{{ $item['nama_barang'] }}</option>
+                                    @endforeach
+                                </select>
+                                <span style="font-size: 14px" >Barang tidak ada? silahkan <a href="/tambah/persediaan">tambah barang</a></span>
+                            </div>
+                            <div class="form-group">
+                                <label for="harga" class="mb-2 font-weight-bold">Harga Barang</label>
+                                <input type="text" class="form-control mb-2" placeholder="0" name="harga" id="harga">
+                            </div>
+                            <div class="form-group">
+                                <label for="jumlah" class="mb-2 font-weight-bold">Jumlah Barang</label>
+                                <input type="text" class="form-control mb-2" placeholder="0" name="jumlah" id="jumlah">
+                            </div>
+                            <button class="w-100 btn btn-primary btn-md" style="background-color: #080E7D;color:#fff" type="button" onclick="insert()">Simpan Data</button>
                         </div>
                     </div>
+            </div>
+        </div>
+        <div class="card">
+            <h4 class="font-weight-bold pl-4 pr-4 pt-4">
+                Biaya Tambahan
+            </h4>
+            <div class="card-body">
+                <div id="read">
+                    <table class="table table bordered">
+                        <tr>
+                            <th>Deskripsi Biaya</th>
+                            <th>Biaya</th>
+                        </tr>
+                        <tr>
+                            <td class="">
+                                <h6><input type="text" name="nama_barang" class="d-inline form-control form-control-sm" width="" id="nama_barang"></h6>
+                            </td>
+                            <td class="">
+                                <h6><input type="text" name="nama_barang" class="d-inline form-control form-control-sm" width="" id="nama_barang"></h6>
+                            </td>
+                        </tr>
+                    </table>
                 </div>
             </div>
+        </div>
+        <div class="col-2">
+            <h4 class="font-weight-bold pl-4 pr-4 pt-4">
+                Total
+            </h4>
+        </div>
+        <div class="col-4">
+            <h6 class="font-weight-bold pl-4 pr-4 pt-4">
+                <input type="text" name="hpp" class="d-inline form-control form-control-sm" width="" id="hpp">
+            </h6>
+        </div>
+        <div class="col-2">
+            <button type="button" class="btn btn-primary" style="background-color: #080E7D;color:#fff" onclick="store()">Buat Transaksi</button>
+        </div>
       </div>
     </div>
   </div>

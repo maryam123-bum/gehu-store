@@ -17,12 +17,12 @@
                 <div class="col-8">
                     <div class="row">
                         <div class="col">
-                            <h5 style="text-align: center;color:#2596be;font-weight:bold">Gehu Store Quee</h5>
+                            <h5 style="text-align: center;color:#2596be;font-weight:bold">Gehu Store</h5>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col">
-                            <h5 style="text-align: center">Laporan Laba Rugi Kotor</h5>
+                            <h5 style="text-align: center">Laporan Harga Pokok Produksi</h5>
                         </div>
                     </div>
                     <div class="row">
@@ -38,12 +38,12 @@
             </div>
             <div class="row mb-1 mt-5">
                 <div class="col">
-                    <p style="color:#2596be;font-weight:bold">Pendapatan</p>
+                    <p style="color:#2596be;font-weight:bold">Bahan Baku</p>
                 </div>
             </div>
             <div class="row mb-1">
                 <div class="col-6">
-                    <p class="px-5">Penjualan</p>
+                    <p class="px-5">Persediaan Bahan Baku Awal</p>
                 </div>
                 <div class="col-2">
                     <p>&nbsp;&nbsp;Rp 3.000.000</p>
@@ -55,38 +55,88 @@
             </div>
             <div class="row mb-1">
                 <div class="col-6">
-                    <p style="font-weight: bold">Total Pendapatan</p>
+                    <p class="px-5">Pembelian Bahan Baku</p>
                 </div>
                 <div class="col-2">
-
+                    <p>&nbsp;&nbsp;Rp 3.000.000</p>
                 </div>
                 <div class="col-2">
-                    
                 </div>
                 <div class="col-2">
-                    <p style="font-weight: bold">Rp 3.000.000</p>
-                </div>
-            </div>
-            <div class="row mb-1">
-                <div class="col">
-                    <p style="color:#2596be;font-weight:bold">Biaya atas Pendapatan</p>
                 </div>
             </div>
             <div class="row mb-1">
                 <div class="col-6">
-                    <p class="px-5">Potongan Pembelian</p>
+                    <p class="px-5">Retur Pembelian</p>
                 </div>
-                <div class="col-2">
+                <div class="col-2 border-bottom border-dark">
                     <p>-Rp 1.000.000</p>
                 </div>
                 <div class="col-2">
                 </div>
                 <div class="col-2">
                 </div>
+            <div class="row mb-1">
+                <div class="col-6">
+                    <p class="px-10" style="font-weight: bold">Total Pembelian Bahan Baku</p>
+                </div>
+                <div class="col-2">
+                </div>
+                <div class="col-2">
+                    <p style="font-weight: bold">Rp 7.000.000</p>
+                </div>
+                <div class="col-2">
+                </div>
             </div>
             <div class="row mb-1">
                 <div class="col-6">
-                    <p class="px-5">Biaya pengiriman</p>
+                    <p class="px-5">Persediaan Bahan Baku Akhir</p>
+                </div>
+                <div class="col-2">
+                </div>
+                <div class="col-2">
+                    <p>Rp 2.850.000</p>
+                </div>
+                <div class="col-2">
+                </div>
+            </div>
+            <div class="row mb-1">
+                <div class="col-6">
+                    <p class="px-10" style="font-weight: bold">Total Biaya Bahan Baku</p>
+                </div>
+                <div class="col-2">
+                </div>
+                <div class="col-2">
+                    <p style="font-weight: bold">Rp 9.850.000</p>
+                </div>
+                <div class="col-2">
+                </div>
+            </div>
+            <div class="row mb-1">
+                <div class="col">
+                    <p style="color:#2596be;font-weight:bold">Biaya Tenaga Kerja Langsung</p>
+                </div>
+            </div>
+            <div class="row mb-1">
+                <div class="col">
+                    <p style="color:#2596be;font-weight:bold">Biaya Overhead Pabrik</p>
+                </div>
+            </div>
+            <div class="row mb-1">
+                <div class="col-6">
+                    <p class="px-5">Biaya Listrik & Air</p>
+                </div>
+                <div class="col-2">
+                    <p>&nbsp;&nbsp;Rp 300.000</p>
+                </div>
+                <div class="col-2">
+                </div>
+                <div class="col-2">
+                </div>
+            </div>
+            <div class="row mb-1">
+                <div class="col-6">
+                    <p class="px-5">Biaya Pemeliharaan Peralatan</p>
                 </div>
                 <div class="col-2 border-bottom border-dark">
                     <p>&nbsp;&nbsp;Rp 150.000</p>
@@ -98,84 +148,19 @@
             </div>
             <div class="row mb-1">
                 <div class="col-6">
-                    <p class="px-5" style="font-weight: bold">Total</p>
+                    <p class="px-5" style="font-weight: bold">Total Biaya Overhead Pabrik</p>
                 </div>
                 <div class="col-2">
                 </div>
                 <div class="col-2">
-                    <p style="font-weight: bold">-Rp 850.000</p>
+                    <p style="font-weight: bold">Rp 450.000</p>
                 </div>
                 <div class="col-2">
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-6">
-                    <p style="font-weight: bold">Total Biaya atas Pendapatan</p>
-                </div>
-                <div class="col-2">
-                </div>
-                <div class="col-2">
-                </div>
-                <div class="col-2">
-                    <p style="font-weight: bold">-Rp 850.000</p>
-                </div>
-            </div>
-            <div class="row mb-1">
-                <div class="col">
-                    <p style="color:#2596be;font-weight:bold">Pengeluaran Operasional</p>
-                </div>
-            </div>
-            <div class="row mb-1">
-                <div class="col-6">
-                    <p class="px-5">Gaji Karyawan</p>
-                </div>
-                <div class="col-2">
-                    <p>Rp 1.000.000</p>
-                </div>
-                <div class="col-2">
-                </div>
-                <div class="col-2">
-                </div>
-            </div>
-            <div class="row mb-1">
-                <div class="col-6">
-                    <p class="px-5">Listrik & Air</p>
-                </div>
-                <div class="col-2 border-bottom border-dark">
-                    <p>Rp 150.000</p>
-                </div>
-                <div class="col-2">
-                </div>
-                <div class="col-2">
-                </div>
-            </div>
-            <div class="row mb-1">
-                <div class="col-6">
-                    <p class="px-5" style="font-weight: bold">Total</p>
-                </div>
-                <div class="col-2">
-                </div>
-                <div class="col-2">
-                    <p style="font-weight: bold">Rp 850.000</p>
-                </div>
-                <div class="col-2">
-                </div>
-            </div>
-            <div class="row mb-1">
-                <div class="col-6">
-                    <p class="px-5" style="font-weight: bold">Total Biaya Pengeluaran Operasional</p>
-                </div>
-                <div class="col-2">
-                </div>
-                <div class="col-2">
-                </div>
-                <div class="col-2">
-                    <p style="font-weight: bold">Rp 850.000</p>
                 </div>
             </div>
             <div class="row bg-secondary pt-2 text-white">
                 <div class="col">
-                    <p style="font-weight: bold">Laba/Rugi Kotor</p>
+                    <p style="font-weight: bold">Harga Pokok Produksi</p>
                 </div>
                 <div class="col-2">
                 </div>
@@ -183,7 +168,7 @@
                     
                 </div>
                 <div class="col-2">
-                    <p style="font-weight: bold">Rp 3.000.000</p>
+                    <p style="font-weight: bold">Rp 10.300.000</p>
                 </div>
             </div>
         </div>

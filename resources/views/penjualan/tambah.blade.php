@@ -14,9 +14,7 @@
                     Data Penjualan
                 </h3>
             </div>
-            <div class="col-2">
-                <button type="button" class="btn btn-primary" style="background-color: #080E7D;color:#fff" onclick="store()">Buat Transaksi</button>
-            </div>
+            
         </div>
         <div class="row mb-3">
             <div class="container">
@@ -103,6 +101,42 @@
                             
                         </div>
                     </div>
+                </div>
+                <div class="card">
+                    <h4 class="font-weight-bold pl-4 pr-4 pt-4">
+                        Biaya Tambahan
+                    </h4>
+                    <div class="card-body">
+                        <div id="read">
+                            <table class="table table bordered">
+                                <tr>
+                                    <th>Deskripsi Biaya</th>
+                                    <th>Biaya</th>
+                                </tr>
+                                <tr>
+                                    <td class="">
+                                      <h6><input type="text" name="nama_barang" class="d-inline form-control form-control-sm" width="" id="nama_barang"></h6>
+                                    </td>
+                                    <td class="">
+                                      <h6><input type="text" name="nama_barang" class="d-inline form-control form-control-sm" width="" id="nama_barang"></h6>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                  </div>
+                  <div class="col-2">
+                    <h4 class="font-weight-bold pl-4 pr-4 pt-4">
+                      Total
+                    </h4>
+                  </div>
+                  <div class="col-4">
+                    <h6 class="font-weight-bold pl-4 pr-4 pt-4">
+                      <input type="text" name="hpp" class="d-inline form-control form-control-sm" width="" id="hpp">
+                    </h6>
+                  </div>
+                <div class="col-2 pl-4 pr-4 pt-4">
+                    <button type="button" class="btn btn-primary" style="background-color: #080E7D;color:#fff" onclick="store()">Buat Transaksi</button>
                 </div>
             </div>
       </div>

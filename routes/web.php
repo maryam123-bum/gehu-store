@@ -100,15 +100,15 @@ Route::get('/chart', function () {
     return view('/laporan/chart1');
 });
 
-//Pengaturan
-Route::get('/pengaturan', function () {
+//user
+Route::get('/profil', function () {
     return view('/login/user', [
-        'active' => "pengaturan"
+        'active' => "user"
     ]);
 });
 
-Route::get('/pengaturan/profil', function () {
-    return view('/login/user', [
-        'active' => "pengaturan"
+Route::get('/access', function () {
+    return view('/login/admin', [
+        'active' => "admin"
     ]);
 });

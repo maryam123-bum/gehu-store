@@ -16,7 +16,7 @@
             <div class="col">
                 <table class="table table-bordered">
                     <thead>
-                      <tr style="background-color: #28276A;color:#fff">
+                      <tr style="background-color: #28276A;color:#fff; font-size: 12">
                         <th scope="col">No</th>
                         <th scope="col">Tanggal</th>
                         <th scope="col">Biaya Bahan Baku</th>
@@ -40,8 +40,8 @@
                                     <td><?php echo $key['biaya_bahan_baku'] + $key['biaya_overhead'] + $key['biaya_tenaga_kerja']; ?></td>
                                     <td><?php echo $key['harga_jual']; ?></td>
                                     <td>
-                                        <button class="btn btn-light shadow" style="background-color: #212290"><i class="bi bi-pencil-square"  style="color: aliceblue"></button>
-                                        <button class="btn btn-danger"><i class="bi bi-trash3"></i></i></button>
+                                        <button class="btn btn-light shadow" style="background-color: #212290"><i class="bi bi-pencil-square"  style="color: aliceblue"></i></button>
+                                        <button class="btn btn-danger"><i class="bi bi-trash3"></i></button>
                                     </td>
                                 </tr>
                             <?php

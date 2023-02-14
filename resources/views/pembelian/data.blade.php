@@ -34,7 +34,7 @@
                                 <td><?php echo $key['tgl_pembelian']; ?></td>
                                 <td><?php echo $key['id']; ?></td>
                                 <td><?php echo $key['nama_pemasok']; ?></td>
-                                <td><?php echo $key['total']; ?></td>
+                                <td><?php echo $key['jumlah']; ?></td>
                                 <td>
                                     <button class="btn btn-light shadow" style="background-color: #212290"><i class="bi bi-pencil-square"  style="color: aliceblue"></i></button>
                                     <button class="btn btn-danger"><i class="bi bi-trash3"></i></button>

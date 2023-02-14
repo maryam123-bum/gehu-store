@@ -14,9 +14,7 @@
                     Data Produksi
                 </h3>
             </div>
-            <div class="col-2">
-                <button type="button" class="btn btn-light shadow" style="background-color: #080E7D;color:#fff" onclick="store()">Selesai</button>
-            </div>
+            
         </div>
         <div class="row mb-3">
             <div class="container">
@@ -60,169 +58,154 @@
         </div>
         
         <div class="row mb-3">
-            <div class="col-8"> 
-                <div class="card">
-                  <div class="row mb-3">
-                    <div class="col-6">
-                      <h4 class="font-weight-bold pl-4 pr-4 pt-4">
-                        Biaya Bahan Baku
-                      </h4>
-                    </div>
-                    <div class="col-2">
-                      <h4 class="font-weight-bold pl-4 pr-4 pt-4">
-                        Total
-                      </h4>
-                    </div>
-                    <div class="col-4">
-                      <h6 class="font-weight-bold pl-4 pr-4 pt-4">
-                        <input type="text" name="hpp" class="d-inline form-control form-control-sm" width="" id="hpp">
-                      </h6>
-                    </div>
+          <div class="col-8"> 
+              <div class="card px-3">
+                <div class="row mb-3">
+                  <div class="col">
+                    <h4 class="font-weight-bold pl-4 pr-4 pt-4">
+                      Biaya Bahan Baku
+                    </h4>
                   </div>
-                  
-                    <div class="card-body">
-                        <div id="read">
-                            <table class="table table bordered">
-                                <tr>
-                                    <th>Bahan</th>
-                                    <th>Posisi</th>
-                                    <th>P</th>
-                                    <th>L</th>
-                                    <th>Jumlah</th>
-                                    <th>Hasil</th>
-                                    <th>Harga Karton</th>
-                                    <th>Harga Pokok</th>
-                                </tr>
-                                <tr>
-                                  <th rowspan="3" style="vertical-align : middle;text-align:center;">Karton</th>
-                                  <td>Alas & Tutup</td>
-                                  <td class="p">P</td>
-                                  <td class="l">L</td>
-                                  <td></td>
-                                  <td></td>
-                                  <td></td>
-                                  <td></td>
-                                </tr>
-                                <tr>
-                                  <td>Sisi Kotak Luar</td>
-                                  <td class="p">P</td>
-                                  <td class="t">T</td>
-                                  <td></td>
-                                  <td></td>
-                                  <td></td>
-                                  <td></td>
-                                </tr>
-                                <tr>
-                                  <td>Sisi Kotak Dalam</td>
-                                  <td class="p">P</td>
-                                  <td class="t">T</td>
-                                  <td></td>
-                                  <td></td>
-                                  <td></td>
-                                  <td></td>
-                                </tr>
-                                <tr>
-                                  <th rowspan="4" style="vertical-align : middle;text-align:center;">Kertas Luar</th>
-                                  <td>Dalam Kotak</td>
-                                  <td class="p">P</td>
-                                  <td class="l">L</td>
-                                  <td></td>
-                                  <td></td>
-                                  <td></td>
-                                  <td></td>
-                                </tr>
-                                <tr>
-                                  <td>Luar Kotak</td>
-                                  <td class="p">P</td>
-                                  <td class="l">L</td>
-                                  <td></td>
-                                  <td></td>
-                                  <td></td>
-                                  <td></td>
-                                </tr>
-                                <tr>
-                                  <td>Sisi Dalam</td>
-                                  <td class="p">P</td>
-                                  <td class="t">T</td>
-                                  <td></td>
-                                  <td></td>
-                                  <td></td>
-                                  <td></td>
-                                </tr>
-                                <tr>
-                                  <td>Sisi Luar</td>
-                                  <td class="p">P</td>
-                                  <td class="t">T</td>
-                                  <td></td>
-                                  <td></td>
-                                  <td></td>
-                                  <td></td>
-                                </tr>
-                                <tr>
-                                  <th rowspan="3" style="vertical-align : middle;text-align:center;">Kertas Kotak</th>
-                                  <td>Alas dalam luar</td>
-                                  <td class="p">P</td>
-                                  <td class="l">L</td>
-                                  <td></td>
-                                  <td></td>
-                                  <td></td>
-                                  <td></td>
-                                </tr>
-                                <tr>
-                                  <td>Sisi Dalam</td>
-                                  <td class="p">P</td>
-                                  <td class="t">T</td>
-                                  <td></td>
-                                  <td></td>
-                                  <td></td>
-                                  <td></td>
-                                </tr>
-                                <tr>
-                                  <td>Sisi Luar</td>
-                                  <td class="p">L</td>
-                                  <td class="t">T</td>
-                                  <td></td>
-                                  <td></td>
-                                  <td></td>
-                                  <td></td>
-                                </tr>
-                            </table>
-                        </div>
-                    </div>
                 </div>
-            </div>
-            <div class="col-4">
-                    <div class="card">
-                        <div class="card-body">
-                                <div class="form-group mb-2">
-                                    <label for="barang" class="mb-2 font-weight-bold">Nama Barang</label>
-                                    <select name="barang" id="barang" class="form-select" >
-                                        @foreach ($barang as $item)
-                                            <option value="{{ $item['id'] }}">{{ $item['nama_barang'] }}</option>
-                                        @endforeach
-                                    </select>
-                                    <span style="font-size: 14px" >Barang tidak ada? silahkan <a href="/tambah/persediaan">tambah barang</a></span>
-                                </div>
-                                <div class="form-group">
-                                    <label for="harga" class="mb-2 font-weight-bold">Panjang</label>
-                                    <input type="text" class="form-control mb-2" placeholder="0" name="panjang" id="panjang" onchange="ubahPanjang()">
-                                </div>
-                                <div class="form-group">
-                                  <label for="harga" class="mb-2 font-weight-bold">Lebar</label>
-                                  <input type="text" class="form-control mb-2" placeholder="0" name="lebar" id="lebar" onchange="ubahLebar()">
-                              </div>
-                              <div class="form-group">
-                                <label for="harga" class="mb-2 font-weight-bold">Tinggi</label>
-                                <input type="text" class="form-control mb-2" placeholder="0" name="tinggi" id="tinggi" onchange="ubahTinggi()">
-                            </div>
-                                <button class="w-100 btn btn-light btn-md" style="background-color: #080E7D;color:#fff" type="button" onclick="">Input</button>
-                        </div>
-                    </div>
+                <div class="card-body">
+                  <div id="read">
+                      <table class="table table bordered">
+                          <tr>
+                              <th>Bahan</th>
+                              <th>Posisi</th>
+                              <th>P</th>
+                              <th>L</th>
+                              <th>Jumlah</th>
+                              <th>Hasil</th>
+                              <th>Harga Karton</th>
+                              <th>Harga Pokok</th>
+                          </tr>
+                          <tr>
+                            <th rowspan="3" style="vertical-align : middle;text-align:center;">Karton</th>
+                            <td>Alas & Tutup</td>
+                            <td class="p">P</td>
+                            <td class="l">L</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                          </tr>
+                          <tr>
+                            <td>Sisi Kotak Luar</td>
+                            <td class="p">P</td>
+                            <td class="t">T</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                          </tr>
+                          <tr>
+                            <td>Sisi Kotak Dalam</td>
+                            <td class="p">P</td>
+                            <td class="t">T</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                          </tr>
+                          <tr>
+                            <th rowspan="4" style="vertical-align : middle;text-align:center;">Kertas Luar</th>
+                            <td>Dalam Kotak</td>
+                            <td class="p">P</td>
+                            <td class="l">L</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                          </tr>
+                          <tr>
+                            <td>Luar Kotak</td>
+                            <td class="p">P</td>
+                            <td class="l">L</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                          </tr>
+                          <tr>
+                            <td>Sisi Dalam</td>
+                            <td class="p">P</td>
+                            <td class="t">T</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                          </tr>
+                          <tr>
+                            <td>Sisi Luar</td>
+                            <td class="p">P</td>
+                            <td class="t">T</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                          </tr>
+                          <tr>
+                            <th rowspan="3" style="vertical-align : middle;text-align:center;">Kertas Kotak</th>
+                            <td>Alas dalam luar</td>
+                            <td class="p">P</td>
+                            <td class="l">L</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                          </tr>
+                          <tr>
+                            <td>Sisi Dalam</td>
+                            <td class="p">P</td>
+                            <td class="t">T</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                          </tr>
+                          <tr>
+                            <td>Sisi Luar</td>
+                            <td class="p">L</td>
+                            <td class="t">T</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                          </tr>
+                          <tr style="font-weight:bold">
+                            <td colspan="4"></td>
+                            <td colspan="2" style="text-align: right">Total</td>
+                            <td colspan="2" style="text-align: right">Rp. 0,-</td>
+                          </tr>
+                      </table>
+                  </div>
                 </div>
-            </div>
+              </div>
+          </div>
+          <div class="col-4">
+              <div class="card">
+                  <div class="card-body">
+                      <div class="form-group">
+                          <label for="harga" class="mb-2 font-weight-bold">Panjang</label>
+                          <input type="text" class="form-control mb-2" placeholder="0" name="panjang" id="panjang" onchange="ubahPanjang()">
+                      </div>
+                      <div class="form-group">
+                        <label for="harga" class="mb-2 font-weight-bold">Lebar</label>
+                        <input type="text" class="form-control mb-2" placeholder="0" name="lebar" id="lebar" onchange="ubahLebar()">
+                      </div>
+                      <div class="form-group">
+                        <label for="harga" class="mb-2 font-weight-bold">Tinggi</label>
+                        <input type="text" class="form-control mb-2" placeholder="0" name="tinggi" id="tinggi" onchange="ubahTinggi()">
+                      </div>
+                      <button class="w-100 btn btn-light btn-md" style="background-color: #080E7D;color:#fff" type="button" onclick="">Input</button>
+                  </div>
+              </div>
+          </div>
+        </div>
         <div class="row mb-3">
           <div class="col-8"> 
-            <div class="card">
+            <div class="card px-3">
               <h4 class="font-weight-bold pl-4 pr-4 pt-4">
                   Biaya Tenaga Kerja
               </h4>
@@ -237,57 +220,84 @@
                               <td class="nama"></td>
                               <td class="upah">0</td>
                           </tr>
+                          <tr style="font-weight:bold">
+                            <td style="text-align: right">Total</td>
+                            <td style="text-align: right">Rp. 0,-</td>
+                          </tr>
                       </table>
                   </div>
               </div>
             </div>
           </div>
-        
-        <div class="col-4">
-          <div class="card">
-              <div class="card-body">
+          <div class="col-4">
+            <div class="card">
+                <div class="card-body">
+                    <div class="form-group mb-2">
+                        <label for="barang" class="mb-2 font-weight-bold">Nama Karyawan</label>
+                        <select name="karyawan" id="karyawan" class="form-select" >
+                            @foreach ($karyawan as $item)
+                                <option value="{{ $item['id'] }}">{{ $item['nama'] }}</option>
+                            @endforeach
+                        </select>
+                        <span style="font-size: 14px" >Karyawan tidak ada? silahkan <a href="/tambah/karyawan">tambah karyawan</a></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="harga" class="mb-2 font-weight-bold">Upah</label>
+                        <input type="text" class="form-control mb-2" placeholder="0" name="upah" id="upah" onchange="ubahUpah()">
+                    </div>
+                    <button class="w-100 btn btn-light btn-md" style="background-color: #080E7D;color:#fff" type="button" onclick="">Input</button>
+                </div>
+            </div>
+          </div>
+        </div>
+        <div class="row mb-3">
+            <div class="col-8"> 
+              <div class="card px-3">
+                <h4 class="font-weight-bold pl-4 pr-4 pt-4">
+                    Biaya Tenaga Kerja
+                </h4>
+                <div class="card-body">
+                    <div id="read">
+                        <table class="table table bordered">
+                            <tr>
+                                <th>Deskripsi Biaya</th>
+                                <th>Biaya (Rp)</th>
+                            </tr>
+                            <tr>
+                                <td class="deskripsi"></td>
+                                <td class="biaya">0</td>
+                            </tr>
+                            <tr style="font-weight:bold">
+                              <td style="text-align: right">Total</td>
+                              <td style="text-align: right">Rp. 0,-</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-4">
+              <div class="card">
+                  <div class="card-body">
                       <div class="form-group mb-2">
-                          <label for="barang" class="mb-2 font-weight-bold">Nama Karyawan</label>
-                          <select name="karyawan" id="karyawan" class="form-select" >
-                              @foreach ($karyawan as $item)
-                                  <option value="{{ $item['id'] }}">{{ $item['nama'] }}</option>
-                              @endforeach
-                          </select>
-                          <span style="font-size: 14px" >Barang tidak ada? silahkan <a href="/tambah/karyawan">tambah karyawan</a></span>
+                        <label for="harga" class="mb-2 font-weight-bold">Deskripsi</label>
+                        <input type="text" class="form-control mb-2" name="deskripsi" id="deskripsi" onchange="ubahDeskripsi()">
                       </div>
                       <div class="form-group">
-                          <label for="harga" class="mb-2 font-weight-bold">Upah</label>
-                          <input type="text" class="form-control mb-2" placeholder="0" name="upah" id="upah" onchange="ubahUpah()">
+                          <label for="harga" class="mb-2 font-weight-bold">Biaya (Rp)</label>
+                          <input type="text" class="form-control mb-2" placeholder="0" name="biaya" id="biaya" onchange="ubahUpah()">
                       </div>
-                        <button class="w-100 btn btn-light btn-md" style="background-color: #080E7D;color:#fff" type="button" onclick="">Input</button>
+                      <button class="w-100 btn btn-light btn-md" style="background-color: #080E7D;color:#fff" type="button" onclick="">Input</button>
+                  </div>
               </div>
-          </div>
-        </div>
-    </div>
-    <div class="row mb-3">
-      <div class="col-8"> 
-        <div class="card">
-          <h4 class="font-weight-bold pl-4 pr-4 pt-4">
-              Biaya Overhead Pabrik & Biaya Tambahan
-          </h4>
-          <div class="card-body">
-              <div id="read">
-                  <table class="table table bordered">
-                      <tr>
-                          <th>Deskripsi Biaya</th>
-                          <th>Biaya</th>
-                      </tr>
-                      <tr>
-                          <td class="">col 2.1</td>
-                          <td class="">col 2.2</td>
-                      </tr>
-                  </table>
-              </div>
-          </div>
+            </div>
         </div>
       </div>
+      <div class="col-2 pl-4 pr-4 pt-4 mb-3" style="text-align: right">
+        <button type="button" class="btn btn-primary" style="background-color: #080E7D;color:#fff" onclick="store()">Buat Transaksi</button>
+      </div> 
   </div>
-
+</div>
 @endsection
 @section('script')
   <script type="text/javascript">
@@ -313,6 +323,11 @@
     function ubahUpah(){
       var upah = $('#upah').val()
       $('.upah').html(upah)
+    }
+
+    function ubahDeskripsi(){
+      var upah = $('#deskripsi').val()
+      $('.deskripsi').html(upah)
     }
 
     // Read Database

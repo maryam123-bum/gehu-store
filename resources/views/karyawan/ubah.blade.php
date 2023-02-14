@@ -27,8 +27,9 @@
             <label for="proffesion" class="form-label">Jabatan</label>
             <select class="form-select" name="proffesion" id="proffession" value="{{ $data['jabatan'] }}" required>
               <option value="">Pilihan...</option>
-              <option value="Dokter">Dokter</option>
-              <option value="Guru">Guru</option>
+              <option value="Direktur">Direktur</option>
+              <option value="Karyawan Administrasi">Karyawan Administrasi</option>
+              <option value="Karyawan Produksi">Direktur</option>
             </select>
             <div class="invalid-feedback">
               Silahkan Pilih Jabatan.
