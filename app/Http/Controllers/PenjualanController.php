@@ -6,42 +6,34 @@ use Illuminate\Http\Request;
 use App\Models\Persediaan;
 use App\Models\Penjualan;
 use App\Models\PenjualanDetail;
-
+use App\Models\PenjualanDetailDeskripsi;
 
 class PenjualanController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function data()
+    public function index()
     {
-        $data_penjualan = Penjualan::all();
+        $data_penjualan = penjualan::all();
         
         return view('penjualan/data', [
-            'judul' => "Penjualan",
+            'judul' => "penjualan",
             'data' => $data_penjualan,
             'active' => "penjualan"
         ]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
-    {
+    {   
         return view('penjualan/tambah', [
             'barang' => Persediaan::join('jenis_persediaan', 'persediaan.id_jenis', '=', 'jenis_persediaan.id')
-            ->join('satuan', 'persediaan.id_satuan', '=', 'satuan.id')
-            ->get(['persediaan.*', 'satuan.nama_satuan', 'jenis_persediaan.nama_jenis']),
-            'active' => "penjualan"
+                ->join('satuan', 'persediaan.id_satuan', '=', 'satuan.id')
+                ->where('id_jenis', 3)
+                ->get(['persediaan.*', 'satuan.nama_satuan', 'jenis_persediaan.nama_jenis']),
+                'active' => "penjualan",
+            'estimateid' => Penjualan::latest()->first()['id'] + 1
         ]);
     }
 
-    public function read($id = 0){
+    public function bacaBarang($id = 0){
         $baranglist = [];
         if($id != 0){
             $baranglist = PenjualanDetail::join('persediaan', 'penjualan_detail.id_barang', '=', 'persediaan.id')
@@ -49,13 +41,40 @@ class PenjualanController extends Controller
             ->join('satuan', 'persediaan.id_satuan', '=', 'satuan.id')
             ->where('id_penjualan', $id)
             ->get(['persediaan.*', 'satuan.nama_satuan', 'jenis_persediaan.nama_jenis', 'penjualan_detail.jumlah']);
+            
         }
-        return view('penjualan/read')->with([
+        return view('penjualan/barang')->with([
             'data' => $baranglist
         ]);
     }
+    public function bacaDeskripsi($id = 0){
+        $deskripsiList = [];
+        if($id != 0){
+            $deskripsiList = PenjualanDetailDeskripsi::where('id_penjualan', $id)
+            ->get();
+        }
+        return view('penjualan/deskripsi')->with([
+            'data' => $deskripsiList
+        ]);
+    }
+    public function bacaTotal($id = 0){
+        $total = 0;
+        if($id != 0){
+            $totalBarang = 0;
+            $data = PenjualanDetail::join('persediaan', 'penjualan_detail.id_barang', '=', 'persediaan.id')
+                ->where('id_penjualan', $id)
+                ->get(['persediaan.harga_pokok', 'penjualan_detail.jumlah']);
+            foreach($data as $item){
 
-    public function insert(Request $request)
+                $totalBarang = $totalBarang + ($item['harga_pokok'] * $item['jumlah']);
+            }
+            $dataDeskripsi = PenjualanDetailDeskripsi::where('id_penjualan', $id)->get();
+            $totalDeskripsi = $dataDeskripsi->sum('biaya');
+            $total = $totalBarang + $totalDeskripsi;
+        }
+        return $total;
+    }
+    public function insertBarang(Request $request)
     {
         PenjualanDetail::create([
             'id_penjualan' => $request->id_penjualan,
@@ -65,12 +84,16 @@ class PenjualanController extends Controller
         return $request->id_penjualan;
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+    public function insertDeskripsi(Request $request)
+    {
+        PenjualanDetailDeskripsi::create([
+            'id_penjualan' => $request->id_penjualan,
+            'deskripsi' => $request->deskripsi,
+            'biaya' => $request->biaya
+        ]);
+        return $request->id_penjualan;
+    }
+
     public function store(Request $request)
     {
         Penjualan::create([
@@ -82,23 +105,6 @@ class PenjualanController extends Controller
         return $id;
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
         $header = Penjualan::where('id', $id)->first();
@@ -111,7 +117,8 @@ class PenjualanController extends Controller
         return view('penjualan.edit', [
             'header' => $header,
             'barang' => $baranglist,
-            'active' => "penjualan"
+            'active' => "penjualan",
+            'estimateid' => Penjualan::latest()->first()['id'] + 1
         ]);
     }
 

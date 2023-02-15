@@ -20,18 +20,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
+Route::get('/login', function () {
     return view('/login/login');
 });
 
 Route::post('/login', [AdminController::class, 'cekdata']);
 
 //Dashboard
-Route::get('/dashboard', function() {
-    return view('/dashboard/dashboard', [
-        'active' => "dashboard"
-    ]);
-});
+Route::get('/', [AdminController::class, 'index']);
 
 Route::get('/chart', function() {
     return view('/dashboard/chart');
@@ -57,19 +53,36 @@ Route::post('/hapus/persediaan', [PersediaanController::class, 'destroy']);
 //Pembeliaan
 Route::get('/pembelian', [PembelianController::class, 'index']);
 Route::get('/tambah/pembelian', [PembelianController::class, 'create']);
-Route::get('/read/pembelian/{id}', [PembelianController::class, 'read']);
+Route::get('/barang/pembelian/{id}', [PembelianController::class, 'bacaBarang']);
+Route::get('/deskripsi/pembelian/{id}', [PembelianController::class, 'bacaDeskripsi']);
+Route::get('/total/pembelian/{id}', [PembelianController::class, 'bacaTotal']);
 Route::get('/ubah/pembelian/{id}', [PembelianController::class, 'edit']);
 
 Route::post('tambah/pembelian', [PembelianController::class, 'store']);
-Route::post('tambah/pembelian-detail', [PembelianController::class, 'insert']);
+Route::post('tambah/barang/pembelian-detail', [PembelianController::class, 'insertBarang']);
+Route::post('tambah/deskripsi/pembelian-detail', [PembelianController::class, 'insertDeskripsi']);
 
 //Produksi
 Route::get('/produksi', [ProduksiController::class, 'data']);
 Route::get('/tambah/produksi', [ProduksiController::class, 'create']);
+Route::get('/karyawan/produksi/{id}', [ProduksiController::class, 'bacaKaryawan']);
+Route::get('/overhead/produksi/{id}', [ProduksiController::class, 'bacaOverhead']);
+Route::post('/tambah/karyawan/produksi', [ProduksiController::class, 'insertKaryawan']);
+Route::post('/tambah/overhead/produksi', [ProduksiController::class, 'insertOverhead']);
+Route::post('/tambah/produksi', [ProduksiController::class, 'store']);
+
 
 //Penjualan
-Route::get('/penjualan', [PenjualanController::class, 'data']);
+Route::get('/penjualan', [PenjualanController::class, 'index']);
 Route::get('/tambah/penjualan', [PenjualanController::class, 'create']);
+Route::get('/barang/penjualan/{id}', [PenjualanController::class, 'bacaBarang']);
+Route::get('/deskripsi/penjualan/{id}', [PenjualanController::class, 'bacaDeskripsi']);
+Route::get('/total/penjualan/{id}', [PenjualanController::class, 'bacaTotal']);
+Route::get('/ubah/penjualan/{id}', [PenjualanController::class, 'edit']);
+
+Route::post('tambah/penjualan', [PenjualanController::class, 'store']);
+Route::post('tambah/barang/penjualan-detail', [PenjualanController::class, 'insertBarang']);
+Route::post('tambah/deskripsi/penjualan-detail', [PenjualanController::class, 'insertDeskripsi']);
 
 //laporan
 Route::get('/laporan', function () {

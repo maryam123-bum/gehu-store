@@ -13,12 +13,8 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('penjualan_detail', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('id_penjualan')->constrained('penjualan');
+        Schema::table('produksi', function (Blueprint $table) {
             $table->foreignId('id_barang')->constrained('persediaan');
-            $table->integer('jumlah');
-            $table->timestamps();
         });
     }
 
@@ -29,6 +25,8 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('penjualan_detail');
+        Schema::table('produksi', function (Blueprint $table) {
+            //
+        });
     }
 };

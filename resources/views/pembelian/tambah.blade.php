@@ -14,7 +14,9 @@
                     Data Pembelian
                 </h3>
             </div>
-            
+            <div class="col-2">
+                <button type="button" class="btn btn-primary" style="background-color: #080E7D;color:#fff" onclick="store()">Buat Transaksi</button>
+            </div>
         </div>
         <div class="row mb-3">
             <div class="container">
@@ -42,7 +44,7 @@
                                 <h6>No Invoice</h6>
                             </div>
                             <div class="col-5">
-                                <h6><span class="badge bg-light" style="color:#000">20230102001</span></h6>
+                                <h6><span class="badge bg-light" style="color:#000"><?php echo substr_replace("INV-000",$estimateid,7-strlen($estimateid)); ?></span></h6>
                             </div>
                         </div>
                     </div>
@@ -53,11 +55,11 @@
             <div class="col-8">
                 
                 <div class="card">
-                    <h4 class="font-weight-bold pl-4 pr-4 pt-4">
+                    <h4 class="font-weight-bold p-4">
                         Data Barang
                     </h4>
                     <div class="card-body">
-                        <div id="read"></div>
+                        <div id="barangId"></div>
                     </div>
                 </div>
             </div>
@@ -81,47 +83,51 @@
                                 <label for="jumlah" class="mb-2 font-weight-bold">Jumlah Barang</label>
                                 <input type="text" class="form-control mb-2" placeholder="0" name="jumlah" id="jumlah">
                             </div>
-                            <button class="w-100 btn btn-primary btn-md" style="background-color: #080E7D;color:#fff" type="button" onclick="insert()">Simpan Data</button>
+                            <button class="w-100 btn btn-primary btn-md" style="background-color: #080E7D;color:#fff" type="button" onclick="insertBarang()">Simpan Data</button>
                         </div>
                     </div>
             </div>
         </div>
-        <div class="card">
-            <h4 class="font-weight-bold pl-4 pr-4 pt-4">
-                Biaya Tambahan
-            </h4>
-            <div class="card-body">
-                <div id="read">
-                    <table class="table table bordered">
-                        <tr>
-                            <th>Deskripsi Biaya</th>
-                            <th>Biaya</th>
-                        </tr>
-                        <tr>
-                            <td class="">
-                                <h6><input type="text" name="nama_barang" class="d-inline form-control form-control-sm" width="" id="nama_barang"></h6>
-                            </td>
-                            <td class="">
-                                <h6><input type="text" name="nama_barang" class="d-inline form-control form-control-sm" width="" id="nama_barang"></h6>
-                            </td>
-                        </tr>
-                    </table>
+        <div class="row mb-3">
+            <div class="col-8">
+                
+                <div class="card">
+                    <h4 class="font-weight-bold p-4">
+                        Biaya Tambahan
+                    </h4>
+                    <div class="card-body">
+                        <div id="deskripsiId"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="form-group">
+                            <label for="harga" class="mb-2 font-weight-bold">Deskripsi</label>
+                            <input type="text" class="form-control mb-2" placeholder="0" name="deskripsi" id="deskripsi">
+                        </div>
+                        <div class="form-group">
+                            <label for="jumlah" class="mb-2 font-weight-bold">Biaya</label>
+                            <input type="text" class="form-control mb-2" placeholder="0" name="biaya" id="biaya">
+                        </div>
+                        <button class="w-100 btn btn-primary btn-md" style="background-color: #080E7D;color:#fff" type="button" onclick="insertDeskripsi()">Simpan Data</button>
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="col-2">
-            <h4 class="font-weight-bold pl-4 pr-4 pt-4">
-                Total
-            </h4>
+        <div class="row mb-3">
+            <div class="col-8">
+                <div class="card">
+                    <h4 class="font-weight-bold p-4">
+                        Total : <span id="totalSemua">0</span></p>
+                    </h4>
+                </div>
+            </div>
         </div>
-        <div class="col-4">
-            <h6 class="font-weight-bold pl-4 pr-4 pt-4">
-                <input type="text" name="hpp" class="d-inline form-control form-control-sm" width="" id="hpp">
-            </h6>
-        </div>
-        <div class="col-2">
+        {{-- <div class="col-2">
             <button type="button" class="btn btn-primary" style="background-color: #080E7D;color:#fff" onclick="store()">Buat Transaksi</button>
-        </div>
+        </div> --}}
       </div>
     </div>
   </div>
@@ -129,13 +135,29 @@
 @section('script')
   <script type="text/javascript">
     $(document).ready(function() {
-        read(0)
+        bacaBarang(0)
+        bacaDeskripsi(0)
+        fetchTotal(0)
     });
 
+    function fetchTotal(num){
+        $('#totalSemua').html(num)
+    }
+
     // Read Database
-    function read(id) {
-        $.get("{{ url('/read/pembelian') }}/"+ id, {}, function(data, status) {
-            $("#read").html(data);
+    function bacaBarang(id) {
+        $.get("{{ url('/barang/pembelian') }}/"+ id, {}, function(data, status) {
+            $("#barangId").html(data);
+        });
+    }
+    function bacaTotal(id) {
+        $.get("{{ url('/total/pembelian') }}/"+ id, {}, function(data, status) {
+            fetchTotal(data)
+        });
+    }
+    function bacaDeskripsi(id) {
+        $.get("{{ url('/deskripsi/pembelian') }}/"+ id, {}, function(data, status) {
+            $("#deskripsiId").html(data);
         });
     }
     // untuk proses create data
@@ -150,16 +172,24 @@
             },
             success: function(data) {
                 $("#id_pembelian").val(data.id)
+                if(data){
+                    swal({
+                        title: "Sukses",
+                        text: "Pembelian dibuat!",
+                        icon: "success",
+                        button: "Close!",
+                    });
+                }
             }
         });
     }
-    function insert() {
+    function insertBarang() {
         var id_pembelian = $("#id_pembelian").val()
         var id_barang = $("#barang").val()
         var jumlah = $("#jumlah").val()
         $.ajax({
             type: "post",
-            url: "{{ url('/tambah/pembelian-detail') }}",
+            url: "{{ url('/tambah/barang/pembelian-detail') }}",
             data: {
                 "_token": "{{ csrf_token() }}",
                 "id_pembelian": id_pembelian,
@@ -167,12 +197,40 @@
                 "jumlah": jumlah
             },
             success: function(data) {
-                read(data)
-                console.log(data)
+                bacaBarang(data)
+                bacaTotal(data)
             }
         });
     }
-    
-
+    function insertDeskripsi() {
+        var id_pembelian = $("#id_pembelian").val()
+        var deskripsi = $("#deskripsi").val()
+        var biaya = $("#biaya").val()
+        $.ajax({
+            type: "post",
+            url: "{{ url('/tambah/deskripsi/pembelian-detail') }}",
+            data: {
+                "_token": "{{ csrf_token() }}",
+                "id_pembelian": id_pembelian,
+                "deskripsi": deskripsi,
+                "biaya": biaya
+            },
+            success: function(data) {
+                bacaDeskripsi(data)
+                bacaTotal(data)
+            }
+        });
+    }
+  </script>
+  <script>
+      @if (session('success'))
+          swal({
+              title: "Sukses",
+              text: "{{ session('success') }}",
+              icon: "success",
+              button: "Close!",
+          });
+      @endif
+      
   </script>
 @endsection

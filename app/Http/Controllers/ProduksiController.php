@@ -12,11 +12,6 @@ use App\Models\ProduksiOverhead;
 
 class ProduksiController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function data()
     {
         $data_produksi = Produksi::all();
@@ -26,14 +21,8 @@ class ProduksiController extends Controller
             'data' => $data_produksi,
             'active' => "produksi"
         ]);
-
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         return view('produksi/tambah', [
@@ -45,26 +34,68 @@ class ProduksiController extends Controller
         ]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
+    public function bacaKaryawan($id){
+        $karyawanlist = [];
+        if ($id != 0) {
+            $karyawanlist = ProduksiTenaga::join('karyawan', 'produksi_tenaga_kerja.id_karyawan', '=', 'karyawan.id')
+                ->where('id_produksi',$id)
+                ->get(['karyawan.nama', 'produksi_tenaga_kerja.*']);
+        }
+        return view('produksi/tenagakerja')->with([
+            'data' => $karyawanlist
+        ]);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
+    public function insertKaryawan(Request $request){
+        return 
+        ProduksiTenaga::create([
+            'id_produksi' => $request->id_produksi,
+            'id_karyawan' => $request->id_karyawan,
+            'upah' => $request->upah
+        ]);
+        return $request->id_produksi;
+    }
+
+    public function bacaOverhead($id){
+        $overheadlist = [];
+        if ($id != 0) {
+            $overheadlist = ProduksiOverhead::where('id_produksi', $id)->get();
+        }
+        return view('produksi/overhead')->with([
+            'data' => $overheadlist
+        ]);
+    }
+
+    public function insertOverhead(Request $request){
+        return 
+        ProduksiOverhead::create([
+            'id_produksi' => $request->id_produksi,
+            'deskripsi' => $request->ov_deskripsi,
+            'biaya' => $request->ov_biaya
+        ]);
+        return $request->id_produksi;
+    }
+
+    public function store(Request $request)
+    {   
+        // return $request->nama_barang_produksi;
+        $datapersediaan = Persediaan::create([
+            'nama_barang' => $request->nama_barang_produksi,
+            'id_jenis' => 3,
+            'stok' => 0,
+            'harga_pokok' => 0,
+            'id_satuan' => 4
+        ]);
+        $id = $datapersediaan->id;
+        $dataproduksi = Produksi::create([
+            'tgl_produksi' => now(),
+            'biaya_bahan_baku' => 0,
+            'biaya_overhead' => 0,
+            'biaya_tenaga_kerja' => 0,
+            'harga_jual' => 0,
+            'id_barang' => $id
+        ]);
+        return $dataproduksi->id;
     }
 
     /**

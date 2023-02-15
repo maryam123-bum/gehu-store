@@ -14,7 +14,9 @@
                     Data Produksi
                 </h3>
             </div>
-            
+            <div class="col-2">
+              <button class="btn btn-primary" onclick="store()">Buat Transaksi</button>
+            </div>
         </div>
         <div class="row mb-3">
             <div class="container">
@@ -42,7 +44,7 @@
                                 <h6>Nama Barang Produksi</h6>
                             </div>
                             <div class="col-3">
-                                <h6><input type="text" name="nama_barang" class="d-inline form-control form-control-sm" width="" id="nama_barang"></h6>
+                                <h6><input type="text" name="nama_barang_produksi" class="d-inline form-control form-control-sm" width="" id="nama_barang_produksi"></h6>
                             </div>
                             <div class="col-1"></div>
                             <div class="col-2 font-weight-bold">
@@ -210,22 +212,7 @@
                   Biaya Tenaga Kerja
               </h4>
               <div class="card-body">
-                  <div id="read">
-                      <table class="table table bordered">
-                          <tr>
-                              <th>Nama Karyawan</th>
-                              <th>Upah</th>
-                          </tr>
-                          <tr>
-                              <td class="nama"></td>
-                              <td class="upah">0</td>
-                          </tr>
-                          <tr style="font-weight:bold">
-                            <td style="text-align: right">Total</td>
-                            <td style="text-align: right">Rp. 0,-</td>
-                          </tr>
-                      </table>
-                  </div>
+                  <div id="tenagaKerjaId"></div>
               </div>
             </div>
           </div>
@@ -234,7 +221,7 @@
                 <div class="card-body">
                     <div class="form-group mb-2">
                         <label for="barang" class="mb-2 font-weight-bold">Nama Karyawan</label>
-                        <select name="karyawan" id="karyawan" class="form-select" >
+                        <select name="karyawan" id="id_karyawan" class="form-select" >
                             @foreach ($karyawan as $item)
                                 <option value="{{ $item['id'] }}">{{ $item['nama'] }}</option>
                             @endforeach
@@ -243,9 +230,9 @@
                     </div>
                     <div class="form-group">
                         <label for="harga" class="mb-2 font-weight-bold">Upah</label>
-                        <input type="text" class="form-control mb-2" placeholder="0" name="upah" id="upah" onchange="ubahUpah()">
+                        <input type="text" class="form-control mb-2" placeholder="0" name="upah" id="upah" >
                     </div>
-                    <button class="w-100 btn btn-light btn-md" style="background-color: #080E7D;color:#fff" type="button" onclick="">Input</button>
+                    <button class="w-100 btn btn-light btn-md" style="background-color: #080E7D;color:#fff" type="button" onclick="handleTenagaKerja()">Input</button>
                 </div>
             </div>
           </div>
@@ -254,25 +241,10 @@
             <div class="col-8"> 
               <div class="card px-3">
                 <h4 class="font-weight-bold pl-4 pr-4 pt-4">
-                    Biaya Tenaga Kerja
+                    Biaya Overhead Pabrik
                 </h4>
                 <div class="card-body">
-                    <div id="read">
-                        <table class="table table bordered">
-                            <tr>
-                                <th>Deskripsi Biaya</th>
-                                <th>Biaya (Rp)</th>
-                            </tr>
-                            <tr>
-                                <td class="deskripsi"></td>
-                                <td class="biaya">0</td>
-                            </tr>
-                            <tr style="font-weight:bold">
-                              <td style="text-align: right">Total</td>
-                              <td style="text-align: right">Rp. 0,-</td>
-                            </tr>
-                        </table>
-                    </div>
+                    <div id="overheadId"></div>
                 </div>
               </div>
             </div>
@@ -301,9 +273,7 @@
 @endsection
 @section('script')
   <script type="text/javascript">
-    // $(document).ready(function() {
-    //     read(0)
-    // });
+    var tableupah = []
 
     function ubahPanjang(){
       var panjang = $('#panjang').val()
@@ -320,57 +290,97 @@
       $('.t').html(tinggi)
     }
 
-    function ubahUpah(){
-      var upah = $('#upah').val()
-      $('.upah').html(upah)
-    }
+    
 
     function ubahDeskripsi(){
       var upah = $('#deskripsi').val()
       $('.deskripsi').html(upah)
     }
-
-    // Read Database
-    // function read(id) {
-    //     $.get("{{ url('/read/produksi') }}/"+ id, {}, function(data, status) {
-    //         $("#read").html(data);
-    //     });
-    // }
-    // untuk proses create data
-    // function store() {
-    //     var nama_pemasok = $("#nama_pelanggan").val();
-    //     $.ajax({
-    //         type: "post",
-    //         url: "{{ url('/tambah/penjualan') }}",
-    //         data: {
-    //             "_token": "{{ csrf_token() }}",
-    //             "nama_pelanggan": nama_pelanggan
-    //         },
-    //         success: function(data) {
-    //             $("#id_penjualan").val(data.id)
-    //         }
-    //     });
-    // }
-    // function insert() {
-    //     var id_produksi = $("#id_produksi").val()
-    //     var id_barang = $("#barang").val()
-    //     var jumlah = $("#jumlah").val()
-    //     $.ajax({
-    //         type: "post",
-    //         url: "{{ url('/tambah/produksi-detail') }}",
-    //         data: {
-    //             "_token": "{{ csrf_token() }}",
-    //             "id_penjualan": id_penjualan,
-    //             "id_barang": id_barang,
-    //             "jumlah": jumlah
-    //         },
-    //         success: function(data) {
-    //             read(data)
-    //             console.log(data)
-    //         }
-    //     });
-    // }
     
 
+  </script>
+  <script>
+    $(document).ready(function() {
+        bacaTenagaKerja(0)
+        bacaOverheadPabrik(0)
+    });
+    //Field Tenaga Kerja
+    function bacaTenagaKerja(id) {
+        $.get("{{ url('/karyawan/produksi') }}/"+ id, {}, function(data, status) {
+            $("#tenagaKerjaId").html(data);
+        });
+    }
+    function handleTenagaKerja(){
+        var id_produksi = $('#id_produksi').val()
+        var id_karyawan = $("#id_karyawan").val()
+        var upah = $("#upah").val()
+        console.log(upah)
+        $.ajax({
+            type: "post",
+            url: "{{ url('/tambah/karyawan/produksi') }}",
+            data: {
+                "_token": "{{ csrf_token() }}",
+                "id_produksi": id_produksi,
+                "id_karyawan": id_karyawan,
+                "upah": upah
+            },
+            success: function(data) {
+                bacaTenagaKerja(data)
+                console.log(data)
+            }
+        });
+    }
+    //Field Tenaga Kerja
+    function bacaOverheadPabrik(id) {
+        $.get("{{ url('/overhead/produksi') }}/"+ id, {}, function(data, status) {
+          console.log(data)
+            $("#overheadId").html(data);
+        });
+    }
+    function handleOverheadPabrik(){
+        var id_produksi = $('#id_produksi').val()
+        var ov_deskripsi = $("#ov_deskripsi").val()
+        var ov_biaya = $("#ov_biaya").val()
+        console.log(ov_deskripsi,ov_biaya)
+        $.ajax({
+            type: "post",
+            url: "{{ url('/tambah/overhead/produksi') }}",
+            data: {
+                "_token": "{{ csrf_token() }}",
+                "id_produksi": id_produksi,
+                "ov_deskripsi": ov_deskripsi,
+                "ov_biaya": ov_biaya
+            },
+            success: function(data) {
+                bacaOverheadPabrik(data)
+                console.log(data)
+            }
+        });
+    }
+
+    //insert data header
+    function store() {
+        var nama_barang_produksi = $("#nama_barang_produksi").val();
+        $.ajax({
+            type: "post",
+            url: "{{ url('/tambah/produksi') }}",
+            data: {
+                "_token": "{{ csrf_token() }}",
+                "nama_barang_produksi": nama_barang_produksi
+            },
+            success: function(data) {
+                $("#id_produksi").val(data)
+                console.log(data)
+                if(data){
+                    swal({
+                        title: "Sukses",
+                        text: "Pembelian dibuat!",
+                        icon: "success",
+                        button: "Close!",
+                    });
+                }
+            }
+        });
+    }
   </script>
 @endsection

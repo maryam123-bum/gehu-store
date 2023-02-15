@@ -21,7 +21,7 @@
                 <div class="card">
                   <div class="card-body shadow">
                     <div class="row">
-                      <div class="col"><h5>5</h5></div>
+                      <div class="col"><h5>{{ $data['karyawan'] }}</h5></div>
                     </div>
                     <div class="row">
                       <div class="col"><a href="/data/karyawan"><h5 class="text-primary">Karyawan</h5></a></div>
@@ -33,7 +33,7 @@
                 <div class="card">
                   <div class="card-body shadow">
                     <div class="row">
-                      <div class="col"><h5>2</h5></div>
+                      <div class="col"><h5>{{ $data['produksi'] }}</h5></div>
                     </div>
                     <div class="row">
                       <div class="col"><a href="/produksi"><h5 class="text-success">Produksi</h5></a></div>
@@ -47,7 +47,7 @@
                 <div class="card">
                   <div class="card-body shadow">
                     <div class="row">
-                      <div class="col"><h5>3</h5></div>
+                      <div class="col"><h5>{{ $data['pembelian'] }}</h5></div>
                     </div>
                     <div class="row">
                       <div class="col"><a href="/pembelian"><h5 class="text-info">Pembelian</h5></a></div>
@@ -59,7 +59,7 @@
                 <div class="card">
                   <div class="card-body shadow">
                     <div class="row">
-                      <div class="col"><h5>6</h5></div>
+                      <div class="col"><h5>{{ $data['penjualan'] }}</h5></div>
                     </div>
                     <div class="row">
                       <div class="col"><a href="/penjualan"><h5 class="text-danger">Penjualan</h5></a></div>

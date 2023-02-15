@@ -32,12 +32,14 @@
                             <tr>
                                 <th scope="row"><?php echo $no++ ?></th>
                                 <td><?php echo $key['tgl_pembelian']; ?></td>
-                                <td><?php echo $key['id']; ?></td>
+                                <td><?php echo substr_replace("INV-000",$key['id'],7-strlen($key['id'])); ?></td>
                                 <td><?php echo $key['nama_pemasok']; ?></td>
                                 <td><?php echo $key['jumlah']; ?></td>
                                 <td>
-                                    <button class="btn btn-light shadow" style="background-color: #212290"><i class="bi bi-pencil-square"  style="color: aliceblue"></i></button>
-                                    <button class="btn btn-danger"><i class="bi bi-trash3"></i></button>
+                                    <a href="/ubah/pembelian/{{ $key['id'] }}">
+                                        <button class="btn btn-light shadow" style="background-color: #212290; color: aliceblue"><i class="bi bi-pencil-square"  > </i>Edit</button>
+                                    </a>
+                                        {{-- <button class="btn btn-danger"><i class="bi bi-trash3"></i></button> --}}
                                 </td>
                                 </tr>
                         <?php

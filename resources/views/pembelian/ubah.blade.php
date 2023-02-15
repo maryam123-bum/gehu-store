@@ -1,7 +1,7 @@
 @extends('layouts.main')
 
 @section('title')
-    <h2>Tambah Penjualan</h2>
+    <h2>Ubah Pembelian</h2>
 @endsection
 
 @section('container')
@@ -11,11 +11,11 @@
         <div class="row mb-3">
             <div class="col-10">
                 <h3 class="font-weight-bold">
-                    Data penjualan
+                    Data Pembelian
                 </h3>
             </div>
             <div class="col-2">
-                <button type="button" class="btn btn-primary" style="background-color: #080E7D;color:#fff" onclick="store()">Buat Transaksi</button>
+                {{-- <button type="button" class="btn btn-primary" style="background-color: #080E7D;color:#fff" onclick="store()">Buat Transaksi</button> --}}
             </div>
         </div>
         <div class="row mb-3">
@@ -23,12 +23,12 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="row">
-                            <input type="hidden" id="id_penjualan">
+                            <input type="hidden" id="id_pembelian" value="<?php echo $header['id'];?>">
                             <div class="col-2 font-weight-bold">
-                                <h6>Nama Pelanggan</h6>
+                                <h6>Nama Pemasok</h6>
                             </div>
                             <div class="col-3 mb-2">
-                                <input type="text" name="nama_pelanggan" class="d-inline form-control form-control-sm" width="" id="nama_pelanggan">
+                                <input type="text" name="nama_pemasok" class="d-inline form-control form-control-sm" width="" id="nama_pemasok" value="<?php echo $header['nama_pemasok'];?>">
                             </div>
                             <div class="col-1"></div>
                             <div class="col-2 font-weight-bold">
@@ -43,9 +43,9 @@
                             <div class="col-2 font-weight-bold">
                                 <h6>No Invoice</h6>
                             </div>
-                            {{-- <div class="col-5">
-                                <h6><span class="badge bg-light" style="color:#000"><?php echo substr_replace("INV-000",$estimateid,7-strlen($estimateid)); ?></span></h6>
-                            </div> --}}
+                            <div class="col-5">
+                                <h6><span class="badge bg-light" style="color:#000"><?php echo substr_replace("INV-000","1",7-strlen("1")); ?></span></h6>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -135,9 +135,10 @@
 @section('script')
   <script type="text/javascript">
     $(document).ready(function() {
-        bacaBarang(0)
-        bacaDeskripsi(0)
-        fetchTotal(0)
+        var id = "<?php echo $header['id'];?>"
+        bacaBarang(id)
+        bacaDeskripsi(id)
+        bacaTotal(id)
     });
 
     function fetchTotal(num){
@@ -146,36 +147,36 @@
 
     // Read Database
     function bacaBarang(id) {
-        $.get("{{ url('/barang/penjualan') }}/"+ id, {}, function(data, status) {
+        $.get("{{ url('/barang/pembelian') }}/"+ id, {}, function(data, status) {
             $("#barangId").html(data);
         });
     }
     function bacaTotal(id) {
-        $.get("{{ url('/total/penjualan') }}/"+ id, {}, function(data, status) {
+        $.get("{{ url('/total/pembelian') }}/"+ id, {}, function(data, status) {
             fetchTotal(data)
         });
     }
     function bacaDeskripsi(id) {
-        $.get("{{ url('/deskripsi/penjualan') }}/"+ id, {}, function(data, status) {
+        $.get("{{ url('/deskripsi/pembelian') }}/"+ id, {}, function(data, status) {
             $("#deskripsiId").html(data);
         });
     }
     // untuk proses create data
     function store() {
-        var nama_pelanggan = $("#nama_pelanggan").val();
+        var nama_pemasok = $("#nama_pemasok").val();
         $.ajax({
             type: "post",
-            url: "{{ url('/tambah/penjualan') }}",
+            url: "{{ url('/tambah/pembelian') }}",
             data: {
                 "_token": "{{ csrf_token() }}",
-                "nama_pelanggan": nama_pelanggan
+                "nama_pemasok": nama_pemasok
             },
             success: function(data) {
-                $("#id_penjualan").val(data.id)
+                $("#id_pembelian").val(data.id)
                 if(data){
                     swal({
                         title: "Sukses",
-                        text: "penjualan dibuat!",
+                        text: "Pembelian dibuat!",
                         icon: "success",
                         button: "Close!",
                     });
@@ -184,15 +185,15 @@
         });
     }
     function insertBarang() {
-        var id_penjualan = $("#id_penjualan").val()
+        var id_pembelian = $("#id_pembelian").val()
         var id_barang = $("#barang").val()
         var jumlah = $("#jumlah").val()
         $.ajax({
             type: "post",
-            url: "{{ url('/tambah/barang/penjualan-detail') }}",
+            url: "{{ url('/tambah/barang/pembelian-detail') }}",
             data: {
                 "_token": "{{ csrf_token() }}",
-                "id_penjualan": id_penjualan,
+                "id_pembelian": id_pembelian,
                 "id_barang": id_barang,
                 "jumlah": jumlah
             },
@@ -203,15 +204,15 @@
         });
     }
     function insertDeskripsi() {
-        var id_penjualan = $("#id_penjualan").val()
+        var id_pembelian = $("#id_pembelian").val()
         var deskripsi = $("#deskripsi").val()
         var biaya = $("#biaya").val()
         $.ajax({
             type: "post",
-            url: "{{ url('/tambah/deskripsi/penjualan-detail') }}",
+            url: "{{ url('/tambah/deskripsi/pembelian-detail') }}",
             data: {
                 "_token": "{{ csrf_token() }}",
-                "id_penjualan": id_penjualan,
+                "id_pembelian": id_pembelian,
                 "deskripsi": deskripsi,
                 "biaya": biaya
             },

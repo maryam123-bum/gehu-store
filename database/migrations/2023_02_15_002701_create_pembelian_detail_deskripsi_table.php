@@ -13,11 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('penjualan_detail', function (Blueprint $table) {
+        Schema::create('pembelian_detail_deskripsi', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('id_penjualan')->constrained('penjualan');
-            $table->foreignId('id_barang')->constrained('persediaan');
-            $table->integer('jumlah');
+            $table->foreignId('id_pembelian')->constrained('pembelian');
+            $table->string('deskripsi');
+            $table->integer('biaya');
             $table->timestamps();
         });
     }
@@ -29,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('penjualan_detail');
+        Schema::dropIfExists('pembelian_detail_deskripsi');
     }
 };

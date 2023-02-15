@@ -55,7 +55,7 @@ class PersediaanController extends Controller
             'id_satuan' => $request->satuan,
         ]);
 
-        return redirect('data/persediaan');
+        return redirect('data/persediaan')->with('success', 'tambah data persediaan sukses');;
     }
 
     /**
@@ -92,7 +92,7 @@ class PersediaanController extends Controller
                 'id_satuan' => $request->satuan,
             ]);
 
-        return redirect('data/persediaan');
+        return redirect('data/persediaan')->with('success', 'ubah data persediaan sukses');
     }
 
     /**
@@ -104,6 +104,6 @@ class PersediaanController extends Controller
     public function destroy(Request $request)
     {
         Persediaan::where('id', $request->id)->delete();
-        return redirect('data/persediaan');
+        return redirect('data/persediaan')->with('success', 'hapus data persediaan sukses');;
     }
 }
