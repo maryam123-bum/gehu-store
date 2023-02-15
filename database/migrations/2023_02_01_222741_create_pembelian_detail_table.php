@@ -17,6 +17,7 @@ return new class extends Migration
             $table->foreignId('id_pembelian')->constrained('pembelian')->primary();
             $table->foreignId('id_barang')->constrained('persediaan')->primary();
             $table->integer('jumlah');
+            $table->integer('diskon');
             $table->timestamps();
         });
     }

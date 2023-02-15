@@ -16,10 +16,9 @@ return new class extends Migration
         Schema::create('produksi', function (Blueprint $table) {
             $table->id();
             $table->date('tgl_produksi');
-            $table->integer('biaya_bahan_baku');
-            $table->integer('biaya_overhead');
-            $table->integer('biaya_tenaga_kerja');
+            $table->integer('harga_pokok_produksi');
             $table->integer('harga_jual');
+            $table->foreignId('id_barang')->constrained('persediaan');
             $table->timestamps();
         });
     }

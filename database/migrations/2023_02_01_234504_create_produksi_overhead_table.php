@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('produksi_overhead', function (Blueprint $table) {
             $table->id();
             $table->foreignId('id_produksi')->constrained('produksi');
-            $table->string('deskripsi');
+            $table->foreignId('id_deskripsi')->constrained('deskripsi');
             $table->integer('biaya');
             $table->timestamps();
         });

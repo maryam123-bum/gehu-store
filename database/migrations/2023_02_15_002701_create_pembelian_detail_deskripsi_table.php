@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('pembelian_detail_deskripsi', function (Blueprint $table) {
             $table->id();
             $table->foreignId('id_pembelian')->constrained('pembelian');
-            $table->string('deskripsi');
+            $table->foreignId('id_deskripsi')->constrained('deskripsi');
             $table->integer('biaya');
             $table->timestamps();
         });

@@ -13,8 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('produksi', function (Blueprint $table) {
-            $table->foreignId('id_barang')->constrained('persediaan');
+        Schema::create('deskripsi', function (Blueprint $table) {
+            $table->id();
+            $table->string('deskripsi');
+            $table->timestamps();
         });
     }
 
@@ -25,8 +27,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table('produksi', function (Blueprint $table) {
-            //
-        });
+        Schema::dropIfExists('deskripsi');
     }
 };

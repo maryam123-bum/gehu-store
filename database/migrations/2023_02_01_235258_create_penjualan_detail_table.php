@@ -18,6 +18,7 @@ return new class extends Migration
             $table->foreignId('id_penjualan')->constrained('penjualan');
             $table->foreignId('id_barang')->constrained('persediaan');
             $table->integer('jumlah');
+            $table->integer('diskon');
             $table->timestamps();
         });
     }
