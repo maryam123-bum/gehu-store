@@ -41,7 +41,7 @@
                                     <td><?php echo $key['harga_jual']; ?></td>
                                     <td>
                                         <button class="btn btn-light shadow" style="background-color: #212290"><i class="bi bi-pencil-square"  style="color: aliceblue"></i></button>
-                                        <button class="btn btn-danger"><i class="bi bi-trash3"></i></button>
+                                        {{-- <button class="btn btn-danger"><i class="bi bi-trash3"></i></button> --}}
                                     </td>
                                 </tr>
                             <?php

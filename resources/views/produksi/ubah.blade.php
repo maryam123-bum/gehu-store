@@ -14,9 +14,9 @@
                     Data Produksi
                 </h3>
             </div>
-            <div class="col-2">
+            {{-- <div class="col-2">
               <button class="btn btn-primary" onclick="store()">Buat Transaksi</button>
-            </div>
+            </div> --}}
         </div>
         <div class="row mb-3">
             <div class="container">
@@ -28,7 +28,7 @@
                                 <h6>Kode Produksi</h6>
                             </div>
                             <div class="col-3">
-                              <h5><span class="badge bg-light" style="color:#000">20230102001</span></h5>
+                              <h5><span class="badge bg-light" style="color:#000"><?php echo substr_replace("PRO-000",$estimateid,7-strlen($estimateid)); ?></span></h5>
                           </div>
                             <div class="col-1"></div>
                             <div class="col-2 font-weight-bold">
@@ -79,7 +79,7 @@
                               <th>L</th>
                               <th>Jumlah</th>
                               <th>Hasil</th>
-                              <th>Harga Karton</th>
+                              <th>Harga Satuan</th>
                               <th>Harga Pokok</th>
                           </tr>
                           <tr>

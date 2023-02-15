@@ -98,15 +98,23 @@ class ProduksiController extends Controller
         return $dataproduksi->id;
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
+    
+        public function edit($id)
     {
-        //
+        $header = Produksi::where('id', $id)->first();
+        // $baranglist = Produksi::join('persediaan', 'produksi_detail.id_barang', '=', 'persediaan.id')
+        //     ->join('jenis_persediaan', 'persediaan.id_jenis', '=', 'jenis_persediaan.id')
+        //     ->join('satuan', 'persediaan.id_satuan', '=', 'satuan.id')
+        //     ->where('id_produksi', $id)
+        //     ->get(['persediaan.*', 'satuan.nama_satuan', 'jenis_persediaan.nama_jenis', 'produksi_detail.jumlah']);
+
+        return view('produksi.ubah', [
+            'header' => $header,
+            // 'barang' => $baranglist,
+            'active' => "produksi",
+            'estimateid' => Produksi::latest()->first()['id'] + 1
+        ]);
+    
     }
 
     /**
