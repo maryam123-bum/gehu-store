@@ -201,6 +201,12 @@
                 Laporan
               </a>
             </li>
+            <li class="px-4 py-2 {{ ($active == "data-tambahan") ? 'active' : '' }}">
+              <a class="text-white" href="/data-tambahan">
+                <i class="bi bi-briefcase"></i>
+                Data Tambahan
+              </a>
+            </li>
           </div>
         </div>
         
