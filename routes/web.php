@@ -50,6 +50,14 @@ Route::get('/ubah/persediaan/{id}', [PersediaanController::class, 'edit']);
 Route::post('/ubah/persediaan', [PersediaanController::class, 'update']);
 Route::post('/hapus/persediaan', [PersediaanController::class, 'destroy']);
 
+Route::get('/tambah/jenis', function () {
+    return view('/persediaan/jenis');
+});
+
+Route::get('/tambah/satuan', function () {
+    return view('/persediaan/satuan');
+});
+
 //Pembeliaan
 Route::get('/pembelian', [PembelianController::class, 'index']);
 Route::get('/tambah/pembelian', [PembelianController::class, 'create']);
@@ -109,9 +117,9 @@ Route::get('/laporan/lapHpp', function () {
     ]);
 });
 
-Route::get('/chart', function () {
-    return view('/laporan/chart1');
-});
+// Route::get('/chart', function () {
+//     return view('/laporan/chart1');
+// });
 
 //user
 Route::get('/profil', function () {
