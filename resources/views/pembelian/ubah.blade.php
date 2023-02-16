@@ -28,7 +28,8 @@
                                 <h6>Nama Pemasok</h6>
                             </div>
                             <div class="col-3 mb-2">
-                                <input type="text" name="nama_pemasok" class="d-inline form-control form-control-sm" width="" id="nama_pemasok" value="<?php echo $header['nama_pemasok'];?>">
+                                {{-- <input type="text" name="nama_pemasok" class="d-inline form-control form-control-sm" width="" id="nama_pemasok" value="<?php echo $header['nama_pemasok'];?>"> --}}
+                                <h6>{{ $header['nama_pemasok'] }}</h6>
                             </div>
                             <div class="col-1"></div>
                             <div class="col-2 font-weight-bold">
@@ -36,7 +37,7 @@
                             </div>
                             <div class="col-4">
                                 <?php date_default_timezone_set('Asia/Jakarta'); ?>
-                                <h6><span class="badge bg-light" style="color:#000">{{ date("d/F/Y") }}</span></h6>
+                                <h6><span class="badge bg-light" style="color:#000">{{ $header->tgl_pembelian }}</span></h6>
                             </div>
                         </div>
                         <div class="row">
@@ -44,7 +45,7 @@
                                 <h6>No Invoice</h6>
                             </div>
                             <div class="col-5">
-                                <h6><span class="badge bg-light" style="color:#000"><?php echo substr_replace("INV-000","1",7-strlen("1")); ?></span></h6>
+                                <h6><span class="badge bg-dark text-white"><?php echo substr_replace("INV-000",$header->id,7-strlen($header->id)); ?></span></h6>
                             </div>
                         </div>
                     </div>
@@ -76,12 +77,12 @@
                                 <span style="font-size: 14px" >Barang tidak ada? silahkan <a href="/tambah/persediaan">tambah barang</a></span>
                             </div>
                             <div class="form-group">
-                                <label for="harga" class="mb-2 font-weight-bold">Harga Barang</label>
-                                <input type="text" class="form-control mb-2" placeholder="0" name="harga" id="harga">
-                            </div>
-                            <div class="form-group">
                                 <label for="jumlah" class="mb-2 font-weight-bold">Jumlah Barang</label>
                                 <input type="text" class="form-control mb-2" placeholder="0" name="jumlah" id="jumlah">
+                            </div>
+                            <div class="form-group">
+                                <label for="jumlah" class="mb-2 font-weight-bold">Potongan</label>
+                                <input type="text" class="form-control mb-2" placeholder="0" name="diskon" id="diskon">
                             </div>
                             <button class="w-100 btn btn-primary btn-md" style="background-color: #080E7D;color:#fff" type="button" onclick="insertBarang()">Simpan Data</button>
                         </div>
@@ -103,9 +104,14 @@
             <div class="col-4">
                 <div class="card">
                     <div class="card-body">
-                        <div class="form-group">
-                            <label for="harga" class="mb-2 font-weight-bold">Deskripsi</label>
-                            <input type="text" class="form-control mb-2" placeholder="0" name="deskripsi" id="deskripsi">
+                        <div class="form-group mb-3">
+                            <select name="deskripsi" id="deskripsi" class="form-select" required>
+                                <option value="" selected>Pilih Deskripsi...</option>
+                                @foreach ($deskripsilist as $item)  
+                                    <option value="{{ $item['id'] }}">{{ $item['deskripsi'] }}</option>
+                                @endforeach
+                            </select>
+                            <span style="font-size: 14px" >Deskripsi tidak ada? silahkan <a href="/tambah/deskripsi">tambah deskripsi</a></span>
                         </div>
                         <div class="form-group">
                             <label for="jumlah" class="mb-2 font-weight-bold">Biaya</label>
@@ -188,6 +194,7 @@
         var id_pembelian = $("#id_pembelian").val()
         var id_barang = $("#barang").val()
         var jumlah = $("#jumlah").val()
+        var diskon = $("#diskon").val()
         $.ajax({
             type: "post",
             url: "{{ url('/tambah/barang/pembelian-detail') }}",
@@ -195,7 +202,8 @@
                 "_token": "{{ csrf_token() }}",
                 "id_pembelian": id_pembelian,
                 "id_barang": id_barang,
-                "jumlah": jumlah
+                "jumlah": jumlah,
+                "diskon": diskon
             },
             success: function(data) {
                 bacaBarang(data)

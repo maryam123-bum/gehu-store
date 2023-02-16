@@ -3,11 +3,21 @@
     <h2>Data {{ $judul }}</h2> 
 @endsection
 @section('container')
-    <div class="row">
-        <div class="col-2 mb-2">
+    <div class="row mb-2">
+        <div class="col">
             <a href="/tambah/persediaan">
                 <button class="btn btn-light shadow" style="background-color: #2528DC;color:#fff">
-                    Tambah
+                    + Persediaan
+                </button>
+            </a>
+            <a href="/tambah/jenis">
+                <button class="btn btn-light shadow" style="background-color: #d8cc2a;color:#fff">
+                    + Jenis
+                </button>
+            </a>
+            <a href="/tambah/satuan">
+                <button class="btn btn-light shadow" style="background-color: #19b399;color:#fff">
+                    + Satuan
                 </button>
             </a>
         </div>

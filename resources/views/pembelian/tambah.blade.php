@@ -75,13 +75,17 @@
                                 </select>
                                 <span style="font-size: 14px" >Barang tidak ada? silahkan <a href="/tambah/persediaan">tambah barang</a></span>
                             </div>
-                            <div class="form-group">
+                            {{-- <div class="form-group">
                                 <label for="harga" class="mb-2 font-weight-bold">Harga Barang</label>
                                 <input type="text" class="form-control mb-2" placeholder="0" name="harga" id="harga">
-                            </div>
+                            </div> --}}
                             <div class="form-group">
                                 <label for="jumlah" class="mb-2 font-weight-bold">Jumlah Barang</label>
                                 <input type="text" class="form-control mb-2" placeholder="0" name="jumlah" id="jumlah">
+                            </div>
+                            <div class="form-group">
+                                <label for="jumlah" class="mb-2 font-weight-bold">Potongan</label>
+                                <input type="text" class="form-control mb-2" placeholder="0" name="diskon" id="diskon">
                             </div>
                             <button class="w-100 btn btn-primary btn-md" style="background-color: #080E7D;color:#fff" type="button" onclick="insertBarang()">Simpan Data</button>
                         </div>
@@ -103,9 +107,14 @@
             <div class="col-4">
                 <div class="card">
                     <div class="card-body">
-                        <div class="form-group">
-                            <label for="harga" class="mb-2 font-weight-bold">Deskripsi</label>
-                            <input type="text" class="form-control mb-2" placeholder="0" name="deskripsi" id="deskripsi">
+                        <div class="form-group mb-3">
+                            <select name="deskripsi" id="deskripsi" class="form-select" required>
+                                <option value="" selected>Pilih Deskripsi...</option>
+                                @foreach ($deskripsilist as $item)  
+                                    <option value="{{ $item['id'] }}">{{ $item['deskripsi'] }}</option>
+                                @endforeach
+                            </select>
+                            <span style="font-size: 14px" >Deskripsi tidak ada? silahkan <a href="/tambah/deskripsi">tambah deskripsi</a></span>
                         </div>
                         <div class="form-group">
                             <label for="jumlah" class="mb-2 font-weight-bold">Biaya</label>
@@ -187,6 +196,7 @@
         var id_pembelian = $("#id_pembelian").val()
         var id_barang = $("#barang").val()
         var jumlah = $("#jumlah").val()
+        var diskon = $("#diskon").val()
         $.ajax({
             type: "post",
             url: "{{ url('/tambah/barang/pembelian-detail') }}",
@@ -194,7 +204,8 @@
                 "_token": "{{ csrf_token() }}",
                 "id_pembelian": id_pembelian,
                 "id_barang": id_barang,
-                "jumlah": jumlah
+                "jumlah": jumlah,
+                "diskon": diskon
             },
             success: function(data) {
                 bacaBarang(data)

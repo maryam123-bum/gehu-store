@@ -70,139 +70,106 @@
                   </div>
                 </div>
                 <div class="card-body">
-                  <div id="read">
-                      <table class="table table bordered">
-                          <tr>
-                              <th>Bahan</th>
-                              <th>Posisi</th>
-                              <th>P</th>
-                              <th>L</th>
-                              <th>Jumlah</th>
-                              <th>Hasil</th>
-                              <th>Harga Karton</th>
-                              <th>Harga Pokok</th>
-                          </tr>
-                          <tr>
-                            <th rowspan="3" style="vertical-align : middle;text-align:center;">Karton</th>
-                            <td>Alas & Tutup</td>
-                            <td class="p">P</td>
-                            <td class="l">L</td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                          </tr>
-                          <tr>
-                            <td>Sisi Kotak Luar</td>
-                            <td class="p">P</td>
-                            <td class="t">T</td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                          </tr>
-                          <tr>
-                            <td>Sisi Kotak Dalam</td>
-                            <td class="p">P</td>
-                            <td class="t">T</td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                          </tr>
-                          <tr>
-                            <th rowspan="4" style="vertical-align : middle;text-align:center;">Kertas Luar</th>
-                            <td>Dalam Kotak</td>
-                            <td class="p">P</td>
-                            <td class="l">L</td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                          </tr>
-                          <tr>
-                            <td>Luar Kotak</td>
-                            <td class="p">P</td>
-                            <td class="l">L</td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                          </tr>
-                          <tr>
-                            <td>Sisi Dalam</td>
-                            <td class="p">P</td>
-                            <td class="t">T</td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                          </tr>
-                          <tr>
-                            <td>Sisi Luar</td>
-                            <td class="p">P</td>
-                            <td class="t">T</td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                          </tr>
-                          <tr>
-                            <th rowspan="3" style="vertical-align : middle;text-align:center;">Kertas Kotak</th>
-                            <td>Alas dalam luar</td>
-                            <td class="p">P</td>
-                            <td class="l">L</td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                          </tr>
-                          <tr>
-                            <td>Sisi Dalam</td>
-                            <td class="p">P</td>
-                            <td class="t">T</td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                          </tr>
-                          <tr>
-                            <td>Sisi Luar</td>
-                            <td class="p">L</td>
-                            <td class="t">T</td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                          </tr>
-                          <tr style="font-weight:bold">
-                            <td colspan="4"></td>
-                            <td colspan="2" style="text-align: right">Total</td>
-                            <td colspan="2" style="text-align: right">Rp. 0,-</td>
-                          </tr>
-                      </table>
-                  </div>
+                  <div id="bahanBakuId"></div>
                 </div>
               </div>
           </div>
           <div class="col-4">
-              <div class="card">
+              <div class="card mb-3">
                   <div class="card-body">
-                      <div class="form-group">
+                    <div class="row">
+                      <div class="col">
+                        <div class="form-group">
                           <label for="harga" class="mb-2 font-weight-bold">Panjang</label>
-                          <input type="text" class="form-control mb-2" placeholder="0" name="panjang" id="panjang" onchange="ubahPanjang()">
+                          <input type="text" class="form-control mb-2" placeholder="0" name="bb_panjang" id="bb_panjang">
+                        </div>
                       </div>
-                      <div class="form-group">
-                        <label for="harga" class="mb-2 font-weight-bold">Lebar</label>
-                        <input type="text" class="form-control mb-2" placeholder="0" name="lebar" id="lebar" onchange="ubahLebar()">
+                      <div class="col">
+                        <div class="form-group">
+                          <label for="harga" class="mb-2 font-weight-bold">Lebar</label>
+                          <input type="text" class="form-control mb-2" placeholder="0" name="bb_lebar" id="bb_lebar">
+                        </div>
                       </div>
-                      <div class="form-group">
-                        <label for="harga" class="mb-2 font-weight-bold">Tinggi</label>
-                        <input type="text" class="form-control mb-2" placeholder="0" name="tinggi" id="tinggi" onchange="ubahTinggi()">
+                      <div class="col">
+                        <div class="form-group">
+                          <label for="harga" class="mb-2 font-weight-bold">Tinggi</label>
+                          <input type="text" class="form-control mb-2" placeholder="0" name="bb_tinggi" id="bb_tinggi">
+                        </div>
                       </div>
-                      <button class="w-100 btn btn-light btn-md" style="background-color: #080E7D;color:#fff" type="button" onclick="">Input</button>
+                    </div>
+                    <button class="w-100 btn btn-light btn-md" style="background-color: #080E7D;color:#fff" type="button" onclick="handleProduksiBaku()">Input</button>
                   </div>
               </div>
+              <div class="card">
+                <div class="card-body">
+                    <div class="row">
+                      <div class="col">
+                        <h6>Karton</h6>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col">
+                        <label for="harga" class="mb-2 font-weight-bold" style="font-size: 11px">Alas & Tutup</label>
+                        <input type="text" class="form-control mb-2" placeholder="0" name="karton_at" id="karton_at">
+                      </div>
+                      <div class="col">
+                        <label for="harga" class="mb-2 font-weight-bold" style="font-size: 11px">Sisi Kotak Luar</label>
+                        <input type="text" class="form-control mb-2" placeholder="0" name="karton_skl" id="karton_skl">
+                      </div>
+                      <div class="col">
+                        <label for="harga" class="mb-2 font-weight-bold" style="font-size: 11px">Sisi Kotak Dalam</label>
+                        <input type="text" class="form-control mb-2" placeholder="0" name="karton_skd" id="karton_skd">
+                      </div>
+                    </div> 
+                    <hr>
+                    <div class="row">
+                      <div class="col">
+                        <h6>Kertas Luar</h6>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col">
+                        <label for="harga" class="mb-2 font-weight-bold" style="font-size: 11px">Dalam Kotak</label>
+                        <input type="text" class="form-control mb-2" placeholder="0" name="kertasluar_dk" id="kertasluar_dk">
+                      </div>
+                      <div class="col">
+                        <label for="harga" class="mb-2 font-weight-bold" style="font-size: 11px">Luar Kotak</label>
+                        <input type="text" class="form-control mb-2" placeholder="0" name="kertasluar_lk" id="kertasluar_lk">
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col">
+                        <label for="harga" class="mb-2 font-weight-bold" style="font-size: 11px">Sisi Dalam</label>
+                        <input type="text" class="form-control mb-2" placeholder="0" name="kertasluar_sd" id="kertasluar_sd">
+                      </div>
+                      <div class="col">
+                        <label for="harga" class="mb-2 font-weight-bold" style="font-size: 11px">Sisi Luar</label>
+                        <input type="text" class="form-control mb-2" placeholder="0" name="kertasluar_sl" id="kertasluar_sl">
+                      </div>
+                    </div> 
+                    <hr>
+                    <div class="row">
+                      <div class="col">
+                        <h6>Kertas Kotak</h6>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col">
+                        <label for="harga" class="mb-2 font-weight-bold" style="font-size: 11px">Alas Dalam Luar</label>
+                        <input type="text" class="form-control mb-2" placeholder="0" name="kertaskotak_adl" id="kertaskotak_adl">
+                      </div>
+                      <div class="col">
+                        <label for="harga" class="mb-2 font-weight-bold" style="font-size: 11px">Sisi Dalam</label>
+                        <input type="text" class="form-control mb-2" placeholder="0" name="kertaskotak_sd" id="kertaskotak_sd">
+                      </div>
+                      <div class="col">
+                        <label for="harga" class="mb-2 font-weight-bold" style="font-size: 11px">Sisi Luar</label>
+                        <input type="text" class="form-control mb-2" placeholder="0" name="kertaskotak_sl" id="kertaskotak_sl">
+                      </div>
+                    </div> 
+                    <button class="w-100 btn btn-light btn-md" style="background-color: #080E7D;color:#fff" type="button" onclick="handleSetData()">Input</button>
+                </div>
+            </div>
           </div>
         </div>
         <div class="row mb-3">
@@ -252,22 +219,37 @@
               <div class="card">
                   <div class="card-body">
                       <div class="form-group mb-2">
-                        <label for="harga" class="mb-2 font-weight-bold">Deskripsi</label>
-                        <input type="text" class="form-control mb-2" name="deskripsi" id="deskripsi" onchange="ubahDeskripsi()">
+                        <label for="deskripsi" class="mb-2 font-weight-bold">Deskripsi</label>
+                        <select name="deskripsi" id="deskripsi" class="form-select" required>
+                          <option value="" selected>Pilih Deskripsi...</option>
+                          @foreach ($deskripsilist as $item)  
+                              <option value="{{ $item['id'] }}">{{ $item['deskripsi'] }}</option>
+                          @endforeach
+                        </select>
+                        <span style="font-size: 14px" >Deskripsi tidak ada? silahkan <a href="/tambah/deskripsi">tambah deskripsi</a></span>
                       </div>
                       <div class="form-group">
-                          <label for="harga" class="mb-2 font-weight-bold">Biaya (Rp)</label>
-                          <input type="text" class="form-control mb-2" placeholder="0" name="biaya" id="biaya" onchange="ubahUpah()">
+                        <label for="jumlah" class="mb-2 font-weight-bold">Biaya</label>
+                        <input type="text" class="form-control mb-2" placeholder="0" name="biaya" id="biaya">
                       </div>
-                      <button class="w-100 btn btn-light btn-md" style="background-color: #080E7D;color:#fff" type="button" onclick="">Input</button>
+                      <button class="w-100 btn btn-primary btn-md" style="background-color: #080E7D;color:#fff" type="button" onclick="handleOverheadPabrik()">Simpan Data</button>
                   </div>
               </div>
             </div>
         </div>
+        <div class="row mb-3">
+          <div class="col-8">
+              <div class="card">
+                  <h4 class="font-weight-bold p-4">
+                      Total : <span id="totalSemua">0</span></p>
+                  </h4>
+              </div>
+          </div>
       </div>
-      <div class="col-2 pl-4 pr-4 pt-4 mb-3" style="text-align: right">
+      </div>
+      {{-- <div class="col-2 pl-4 pr-4 pt-4 mb-3" style="text-align: right">
         <button type="button" class="btn btn-primary" style="background-color: #080E7D;color:#fff" onclick="store()">Buat Transaksi</button>
-      </div> 
+      </div>  --}}
   </div>
 </div>
 @endsection
@@ -303,6 +285,7 @@
     $(document).ready(function() {
         bacaTenagaKerja(0)
         bacaOverheadPabrik(0)
+        bacaBahanBaku(0)
     });
     //Field Tenaga Kerja
     function bacaTenagaKerja(id) {
@@ -333,7 +316,6 @@
     //Field Tenaga Kerja
     function bacaOverheadPabrik(id) {
         $.get("{{ url('/overhead/produksi') }}/"+ id, {}, function(data, status) {
-          console.log(data)
             $("#overheadId").html(data);
         });
     }
@@ -382,5 +364,71 @@
             }
         });
     }
+
+    function bacaBahanBaku(id) {
+        $.get("{{ url('bahanbaku/produksi') }}/"+ id, {}, function(data, status) {
+            $("#bahanBakuId").html(data);
+        });
+    }
+    function handleProduksiBaku(){
+        var panjang = $('#bb_panjang').val()
+        var lebar = $("#bb_lebar").val()
+        var tinggi = $("#bb_tinggi").val()
+        var id_produksi = $("#id_produksi").val()
+        console.log(panjang, lebar, tinggi, id_produksi)
+        $.ajax({
+            type: "post",
+            url: "{{ url('/update/bahanbaku/produksi') }}",
+            data: {
+                "_token": "{{ csrf_token() }}",
+                "id_produksi": id_produksi,
+                "panjang": panjang,
+                "lebar": lebar,
+                "tinggi": tinggi
+            },
+            success: function(data) {
+                bacaBahanBaku(data)
+                console.log(data)
+            }
+        });
+    }
+
+    function handleSetData(){
+        var id_produksi = $("#id_produksi").val()
+
+        var karton_at = $('#karton_at').val()
+        var karton_skl = $('#karton_skl').val()
+        var karton_skd = $('#karton_skd').val()
+        var kertaskotak_adl = $('#kertaskotak_adl').val()
+        var kertaskotak_sd = $('#kertaskotak_sd').val()
+        var kertaskotak_sl = $('#kertaskotak_sl').val()
+        var kertasluar_dk = $('#kertasluar_dk').val()
+        var kertasluar_lk = $('#kertasluar_lk').val()
+        var kertasluar_sd = $('#kertasluar_sd').val()
+        var kertasluar_sl = $('#kertasluar_sl').val()
+        $.ajax({
+            type: "post",
+            url: "{{ url('/update/bahanbakudetail/produksi') }}",
+            data: {
+                "_token": "{{ csrf_token() }}",
+                "id_produksi": id_produksi,
+                "karton_at": karton_at,
+                "karton_skl": karton_skl,
+                "karton_skd": karton_skd,
+                "kertaskotak_adl": kertaskotak_adl,
+                "kertaskotak_sd": kertaskotak_sd,
+                "kertaskotak_sl": kertaskotak_sl,
+                "kertasluar_dk": kertasluar_dk,
+                "kertasluar_lk": kertasluar_lk,
+                "kertasluar_sd": kertasluar_sd,
+                "kertasluar_sl": kertasluar_sl,
+            },
+            success: function(data) {
+                bacaBahanBaku(data)
+                console.log(data)
+            }
+        });
+    }
+
   </script>
 @endsection

@@ -11,5 +11,5 @@ class JenisPersediaan extends Model
     protected $table = 'jenis_persediaan';
     protected $primaryKey = 'id';
     public $timestamps = true;
-    protected $fillable = ['nama_persediaan'];
+    protected $fillable = ['nama_jenis'];
 }

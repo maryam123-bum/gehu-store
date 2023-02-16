@@ -1,11 +1,11 @@
 @extends('layouts/main')
 @section('title')
-    <h2>Data {{ $judul }}</h2> 
+    <h2>Data Admin</h2> 
 @endsection
 @section('container')
     <div class="row">
         <div class="col-2 mb-2">
-            <a href="/tambah/karyawan">
+            <a href="/tambah/access">
                 <button class="btn btn-light shadow" style="background-color: #2528DC;color:#fff">
                     Tambah
                 </button>
@@ -18,11 +18,8 @@
                 <thead>
                     <tr style="background-color: #28276A;color:#fff">
                         <th scope="col">No</th>
-                        <th scope="col">ID Karyawan</th>
+                        <th scope="col">Username</th>
                         <th scope="col">Nama Karyawan</th>
-                        <th scope="col">Jabatan</th>
-                        <th scope="col">Jenis Kelamin</th>
-                        <th scope="col">Alamat</th>
                         <th scope="col">OPSI</th>
                     </tr>
                 </thead>
@@ -32,19 +29,10 @@
                     foreach ($data as $key) { ?>
                         <tr>
                             <th scope="row" class="text-center">{{ $no++ }}</th>
-                            <td>KRY-00{{ $key['id'] }}</td>
+                            <td>{{ $key['username'] }}</td>
                             <td>{{ $key['nama'] }}</td>
-                            <td>{{ $key['jabatan'] }}</td>
-                            <td>
-                                @if ($key['jenis_kelamin'] == 'lk')
-                                    {{ "Laki-laki" }}
-                                @else
-                                    {{ "Perempuan" }}
-                                @endif
-                            </td>
-                            <td>{{ $key['alamat'] }}</td>
                             <td class="text-center">
-                                <a href="/ubah/karyawan/{{ $key['id'] }}" class="btn btn-light shadow" style="background-color: #212290"><i class="bi bi-pencil-square"  style="color: aliceblue"></i></a>
+                                <a href="/ubah/access/{{ $key['id'] }}" class="btn btn-light shadow" style="background-color: #212290"><i class="bi bi-pencil-square"  style="color: aliceblue"></i></a>
                                 <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deletemodal"><i class="bi bi-trash3"></i></button>
                                 {{-- <form action="/hapus/karyawan" method="post" style="display:inline-block">
                                     @csrf
@@ -76,7 +64,7 @@
                         </div>
                         <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <form action="/hapus/karyawan" method="post" style="display:inline-block">
+                            <form action="/hapus/access" method="post" style="display:inline-block">
                                 @csrf
                                 <input type="hidden" name="id" value="<?php if(!$data->isEmpty()) $key['id'] ?>" readonly>
                                 <button type="submit" class="btn btn-danger">Ya, tentu</button>

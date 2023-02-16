@@ -7,6 +7,9 @@ use App\Http\Controllers\ProduksiController;
 use App\Http\Controllers\PenjualanController;
 use App\Http\Controllers\PembelianController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\JenisPersediaanController;
+use App\Http\Controllers\SatuanController;
+use App\Http\Controllers\DeskripsiController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -50,13 +53,17 @@ Route::get('/ubah/persediaan/{id}', [PersediaanController::class, 'edit']);
 Route::post('/ubah/persediaan', [PersediaanController::class, 'update']);
 Route::post('/hapus/persediaan', [PersediaanController::class, 'destroy']);
 
-Route::get('/tambah/jenis', function () {
-    return view('/persediaan/jenis');
-});
+//Jenis
+Route::get('/tambah/jenis', [JenisPersediaanController::class, 'create']);
+Route::post('/tambah/jenis', [JenisPersediaanController::class, 'store']);
 
-Route::get('/tambah/satuan', function () {
-    return view('/persediaan/satuan');
-});
+//Satuan
+Route::get('/tambah/satuan', [SatuanController::class, 'create']);
+Route::post('/tambah/satuan', [SatuanController::class, 'store']);
+
+//Deskripsi
+Route::get('/tambah/deskripsi', [DeskripsiController::class, 'create']);
+Route::post('/tambah/deskripsi', [DeskripsiController::class, 'store']);
 
 //Pembeliaan
 Route::get('/pembelian', [PembelianController::class, 'index']);
@@ -75,10 +82,13 @@ Route::get('/produksi', [ProduksiController::class, 'data']);
 Route::get('/tambah/produksi', [ProduksiController::class, 'create']);
 Route::get('/karyawan/produksi/{id}', [ProduksiController::class, 'bacaKaryawan']);
 Route::get('/overhead/produksi/{id}', [ProduksiController::class, 'bacaOverhead']);
+Route::get('/bahanbaku/produksi/{id}', [ProduksiController::class, 'bacaBahanBaku']);
 Route::post('/tambah/karyawan/produksi', [ProduksiController::class, 'insertKaryawan']);
 Route::post('/tambah/overhead/produksi', [ProduksiController::class, 'insertOverhead']);
 Route::post('/tambah/produksi', [ProduksiController::class, 'store']);
 
+Route::post('/update/bahanbaku/produksi', [ProduksiController::class, 'updateProduksiBaku']);
+Route::post('/update/bahanbakudetail/produksi', [ProduksiController::class, 'updateBahanBaku']);
 
 //Penjualan
 Route::get('/penjualan', [PenjualanController::class, 'index']);
@@ -128,8 +138,10 @@ Route::get('/profil', function () {
     ]);
 });
 
-Route::get('/access', function () {
-    return view('/login/admin', [
-        'active' => "admin"
-    ]);
-});
+//Admin
+Route::get('/data/access', [AdminController::class, 'data']);
+Route::get('/tambah/access', [AdminController::class, 'create']);
+Route::get('/ubah/access/{id}', [AdminController::class, 'edit']);
+Route::post('/tambah/access', [AdminController::class, 'store']);
+Route::post('/ubah/access', [AdminController::class, 'update']);
+Route::post('/hapus/access', [AdminController::class, 'destroy']);

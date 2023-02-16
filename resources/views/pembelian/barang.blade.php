@@ -6,6 +6,7 @@
         <th>Harga</th>
         <th>Jumlah</th>
         <th>Total</th>
+        <th>Potongan</th>
         <th>Opsi</th>
     </tr>
     @if ($data)
@@ -15,9 +16,10 @@
             <td>{{ $i++ }}</td>
             <td>{{ $item['nama_barang'] }}</td>
             <td>{{ $item['nama_jenis'] }}</td>
-            <td>{{ $item['harga_pokok'] }}</td>
-            <td>{{ $item['jumlah'] }}</td>
-            <td>{{ $item['harga_pokok'] * $item['jumlah'] }}</td>
+            <td>{{ "Rp. ".$item['harga_pokok'] }}</td>
+            <td>{{ $item['jumlah']." ".$item['nama_satuan'] }}</td>
+            <td>{{ "Rp. ".$item['harga_pokok'] * $item['jumlah'] }}</td>
+            <td>{{ "Rp. ".$item['diskon'] }}</td>
             <td>
                 <button id="edit_barang" type="button" class="btn btn-light shadow btn-sm" style="background-color: #212290; color: aliceblue" data-id="{{ $item['id'] }}" data-bs-toggle="modal" data-bs-target="#exampleModal">
                     <i class="bi bi-pencil-square"  > </i>

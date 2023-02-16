@@ -11,7 +11,7 @@
         <tr>
             <td>{{ $i++ }}</td>
             <td>{{ $item['deskripsi'] }}</td>
-            <td>{{ $item['biaya'] }}</td>
+            <td>{{ "Rp. ".$item['biaya'] }}</td>
             <td>
                 <button id="edit_barang" type="button" class="btn btn-light shadow btn-sm" style="background-color: #212290; color: aliceblue" data-id="{{ $item['id'] }}" data-bs-toggle="modal" data-bs-target="#exampleModal">
                     <i class="bi bi-pencil-square"  > </i>

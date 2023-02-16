@@ -34,7 +34,7 @@
                                 <td><?php echo $key['tgl_pembelian']; ?></td>
                                 <td><?php echo substr_replace("INV-000",$key['id'],7-strlen($key['id'])); ?></td>
                                 <td><?php echo $key['nama_pemasok']; ?></td>
-                                <td><?php echo $key['jumlah']; ?></td>
+                                <td><?php echo "Rp. ".$key['total']; ?></td>
                                 <td>
                                     <a href="/ubah/pembelian/{{ $key['id'] }}">
                                         <button class="btn btn-light shadow" style="background-color: #212290; color: aliceblue"><i class="bi bi-pencil-square"  > </i>Edit</button>

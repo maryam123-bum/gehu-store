@@ -13,12 +13,13 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('produksi_bahan_baku', function (Blueprint $table) {
+        Schema::create('bahan_baku_kertasluar_detail', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('id_produksi')->constrained('produksi');
-            $table->integer('panjang');
-            $table->integer('lebar');
-            $table->integer('tinggi');
+            $table->foreignId('id_bahan_baku')->constrained('produksi_bahan_baku');
+            $table->integer('jml_dk');
+            $table->integer('jml_lk');
+            $table->integer('jml_sd');
+            $table->integer('jml_sl');
             $table->timestamps();
         });
     }
@@ -30,6 +31,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('produksi_bahan_baku');
+        Schema::dropIfExists('bahan_baku_kertasluar_detail');
     }
 };

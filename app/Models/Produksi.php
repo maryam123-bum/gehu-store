@@ -12,5 +12,5 @@ class Produksi extends Model
     protected $table = 'produksi';
     protected $primaryKey = 'id';
     public $timestamps = true;
-    protected $fillable = ['tgl_produksi', 'biaya_bahan_baku','biaya_overhead', 'biaya_tenaga_kerja','harga_jual', 'id_barang'];
+    protected $fillable = ['tgl_produksi', 'harga_pokok_produksi', 'harga_jual', 'id_barang'];
 }

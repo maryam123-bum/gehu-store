@@ -12,5 +12,5 @@ class PembelianDetail extends Model
     protected $table = 'pembelian_detail';
     protected $primaryKey = 'id_pembelian';
     public $timestamps = true;
-    protected $fillable = ['id_pembelian', 'id_barang','jumlah'];
+    protected $fillable = ['id_pembelian', 'id_barang','jumlah','diskon'];
 }

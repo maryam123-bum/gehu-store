@@ -202,9 +202,9 @@
               </a>
             </li>
             <li class="px-4 py-2 {{ ($active == "data-tambahan") ? 'active' : '' }}">
-              <a class="text-white" href="/data-tambahan">
+              <a class="text-white" href="/data/access">
                 <i class="bi bi-briefcase"></i>
-                Data Tambahan
+                Akses Admin
               </a>
             </li>
           </div>
@@ -224,7 +224,7 @@
                 </a>
                 <ul class="dropdown-menu text-small">
                   <li><a class="dropdown-item" href="/profil">Profile</a></li>
-                  <li><a class="dropdown-item" href="/access">Akses</a></li>
+                  <li><a class="dropdown-item" href="/tambah/access">Akses</a></li>
                   <li><hr class="dropdown-divider"></li>
                   <li><a class="dropdown-item" href="/">Sign out</a></li>
                 </ul>

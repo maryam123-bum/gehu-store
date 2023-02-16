@@ -7,6 +7,7 @@ use App\Models\Persediaan;
 use App\Models\Pembelian;
 use App\Models\PembelianDetail;
 use App\Models\PembelianDetailDeskripsi;
+use App\Models\Deskripsi;
 
 class PembelianController extends Controller
 {
@@ -23,12 +24,20 @@ class PembelianController extends Controller
 
     public function create()
     {   
+        $deskripsi = Deskripsi::all();
+        $latestid = Pembelian::latest()->first();
+        if($latestid){
+            $latestid = $latestid->id + 1;
+        }else{
+            $latestid = 1;
+        }
         return view('pembelian/tambah', [
             'barang' => Persediaan::join('jenis_persediaan', 'persediaan.id_jenis', '=', 'jenis_persediaan.id')
                 ->join('satuan', 'persediaan.id_satuan', '=', 'satuan.id')
                 ->get(['persediaan.*', 'satuan.nama_satuan', 'jenis_persediaan.nama_jenis']),
-                'active' => "pembelian",
-            'estimateid' => Pembelian::latest()->first()['id'] + 1
+            'active' => "pembelian",
+            'estimateid' => $latestid,
+            'deskripsilist' => $deskripsi
         ]);
     }
 
@@ -39,7 +48,7 @@ class PembelianController extends Controller
             ->join('jenis_persediaan', 'persediaan.id_jenis', '=', 'jenis_persediaan.id')
             ->join('satuan', 'persediaan.id_satuan', '=', 'satuan.id')
             ->where('id_pembelian', $id)
-            ->get(['persediaan.*', 'satuan.nama_satuan', 'jenis_persediaan.nama_jenis', 'pembelian_detail.jumlah']);
+            ->get(['persediaan.*', 'satuan.nama_satuan', 'jenis_persediaan.nama_jenis', 'pembelian_detail.jumlah', 'pembelian_detail.diskon']);
             
         }
         return view('pembelian/barang')->with([
@@ -49,7 +58,8 @@ class PembelianController extends Controller
     public function bacaDeskripsi($id = 0){
         $deskripsiList = [];
         if($id != 0){
-            $deskripsiList = PembelianDetailDeskripsi::where('id_pembelian', $id)
+            $deskripsiList = PembelianDetailDeskripsi::join('deskripsi', 'pembelian_detail_deskripsi.id_deskripsi', '=', 'deskripsi.id')
+            ->where('id_pembelian', $id)
             ->get();
         }
         return view('pembelian/deskripsi')->with([
@@ -60,35 +70,78 @@ class PembelianController extends Controller
         $total = 0;
         if($id != 0){
             $totalBarang = 0;
+            $totalDiskon = 0;
             $data = PembelianDetail::join('persediaan', 'pembelian_detail.id_barang', '=', 'persediaan.id')
                 ->where('id_pembelian', $id)
-                ->get(['persediaan.harga_pokok', 'pembelian_detail.jumlah']);
+                ->get(['persediaan.harga_pokok', 'pembelian_detail.jumlah', 'pembelian_detail.diskon']);
             foreach($data as $item){
-
+                $totalDiskon = $totalDiskon + $item['diskon'];
                 $totalBarang = $totalBarang + ($item['harga_pokok'] * $item['jumlah']);
             }
             $dataDeskripsi = PembelianDetailDeskripsi::where('id_pembelian', $id)->get();
             $totalDeskripsi = $dataDeskripsi->sum('biaya');
-            $total = $totalBarang + $totalDeskripsi;
+            $total = $totalBarang - $totalDiskon + $totalDeskripsi;
         }
         return $total;
     }
     public function insertBarang(Request $request)
-    {
+    {   
         PembelianDetail::create([
             'id_pembelian' => $request->id_pembelian,
             'id_barang' => $request->id_barang,
-            'jumlah' => $request->jumlah
+            'jumlah' => $request->jumlah,
+            'diskon' => $request->diskon
         ]);
+        //update total
+            $totalBarang = 0;
+            $totalDiskon = 0;
+            $data = PembelianDetail::join('persediaan', 'pembelian_detail.id_barang', '=', 'persediaan.id')
+                ->where('id_pembelian', $request->id_pembelian)
+                ->get(['persediaan.harga_pokok', 'pembelian_detail.jumlah', 'pembelian_detail.diskon']);
+            foreach($data as $item){
+                $totalDiskon = $totalDiskon + $item['diskon'];
+                $totalBarang = $totalBarang + ($item['harga_pokok'] * $item['jumlah']);
+            }
+            $dataDeskripsi = PembelianDetailDeskripsi::where('id_pembelian', $request->id_pembelian)->get();
+            $totalDeskripsi = $dataDeskripsi->sum('biaya');
+            $total = $totalBarang - $totalDiskon + $totalDeskripsi;
+            
+
+            Pembelian::where('id', $request->id_pembelian)
+            ->update([
+                'total' => $total
+            ]);
+            //end update
         return $request->id_pembelian;
     }
     public function insertDeskripsi(Request $request)
     {
         PembelianDetailDeskripsi::create([
             'id_pembelian' => $request->id_pembelian,
-            'deskripsi' => $request->deskripsi,
+            'id_deskripsi' => $request->deskripsi,
             'biaya' => $request->biaya
         ]);
+
+        //update total
+            $totalBarang = 0;
+            $totalDiskon = 0;
+            $data = PembelianDetail::join('persediaan', 'pembelian_detail.id_barang', '=', 'persediaan.id')
+                ->where('id_pembelian', $request->id_pembelian)
+                ->get(['persediaan.harga_pokok', 'pembelian_detail.jumlah', 'pembelian_detail.diskon']);
+            foreach($data as $item){
+                $totalDiskon = $totalDiskon + $item['diskon'];
+                $totalBarang = $totalBarang + ($item['harga_pokok'] * $item['jumlah']);
+            }
+            $dataDeskripsi = PembelianDetailDeskripsi::where('id_pembelian', $request->id_pembelian)->get();
+            $totalDeskripsi = $dataDeskripsi->sum('biaya');
+            $total = $totalBarang - $totalDiskon + $totalDeskripsi;
+            
+
+            Pembelian::where('id', $request->id_pembelian)
+            ->update([
+                'total' => $total
+            ]);
+            //end update
         return $request->id_pembelian;
     }
     public function store(Request $request)
@@ -104,17 +157,22 @@ class PembelianController extends Controller
 
     public function edit($id)
     {
+        $deskripsi = Deskripsi::all();
         $header = Pembelian::where('id', $id)->first();
-        $baranglist = PembelianDetail::join('persediaan', 'pembelian_detail.id_barang', '=', 'persediaan.id')
-            ->join('jenis_persediaan', 'persediaan.id_jenis', '=', 'jenis_persediaan.id')
-            ->join('satuan', 'persediaan.id_satuan', '=', 'satuan.id')
-            ->where('id_pembelian', $id)
-            ->get(['persediaan.*', 'satuan.nama_satuan', 'jenis_persediaan.nama_jenis', 'pembelian_detail.jumlah']);
+        $baranglist = Persediaan::join('jenis_persediaan', 'persediaan.id_jenis', '=', 'jenis_persediaan.id')
+                ->join('satuan', 'persediaan.id_satuan', '=', 'satuan.id')
+                ->get(['persediaan.*', 'satuan.nama_satuan', 'jenis_persediaan.nama_jenis']);
+
+        // $baranglist = PembelianDetail::join('persediaan', 'pembelian_detail.id_barang', '=', 'persediaan.id')
+        //     ->join('jenis_persediaan', 'persediaan.id_jenis', '=', 'jenis_persediaan.id')
+        //     ->join('satuan', 'persediaan.id_satuan', '=', 'satuan.id')
+        //     ->get(['persediaan.*', 'satuan.nama_satuan', 'jenis_persediaan.nama_jenis', 'pembelian_detail.jumlah']);
 
         return view('pembelian.ubah', [
             'header' => $header,
             'barang' => $baranglist,
-            'active' => "pembelian"
+            'active' => "pembelian",
+            'deskripsilist' => $deskripsi
         ]);
     }
 

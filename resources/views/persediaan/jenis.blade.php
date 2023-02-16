@@ -15,13 +15,17 @@
         @csrf
         <div class="row g-3">
             <div class="col-5">
-                <h6><span class="badge bg-light" style="color:#000"><?php echo substr_replace("JNS-000","1",7-strlen("1")); ?></span></h6>
+                <div class="form-group">
+                  <label for="id">Id Jenis</label><br>
+                  <h5 class="badge bg-info" id="id" style="color:#000">{{ substr_replace("JNS-000",$estimateid,7-strlen($estimateid)) }}</h5>
+              
+                </div>
             </div>
         </div>
         <div class="row">
             <div class="col-sm-6">
                 <label for="firstName" class="form-label">Nama Jenis</label>
-                <input type="text" class="form-control" name="namaJenis" id="namaJenis" value="" required>
+                <input type="text" class="form-control" name="nama_jenis" id="nama_jenis" value="" required>
             </div>
         </div>
 
