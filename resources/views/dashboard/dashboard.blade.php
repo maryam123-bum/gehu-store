@@ -90,7 +90,7 @@
     <script src="https://code.highcharts.com/modules/export-data.js"></script>
     <script src="https://code.highcharts.com/modules/accessibility.js"></script>
     <script>
-        console.log("{{$totalPembelian['feb']}}")
+        //console.log("{{$totalPembelian['feb']}}")
         Highcharts.chart('container', {
         chart: {
           type: 'column'
@@ -140,8 +140,20 @@
         },
         series: [{
           name: 'Penjualan',
-          data: [20000, 24000, 21000, 20100, 198700, 23000, 20000, 25000, 19000,
-            9500, 10055, 28000]
+          data: [
+            {{$totalPenjualan['jan']}},
+            {{$totalPenjualan['feb']}},
+            {{$totalPenjualan['mar']}},
+            {{$totalPenjualan['apr']}},
+            {{$totalPenjualan['mei']}},
+            {{$totalPenjualan['jun']}},
+            {{$totalPenjualan['jul']}},
+            {{$totalPenjualan['aug']}},
+            {{$totalPenjualan['sep']}},
+            {{$totalPenjualan['oct']}},
+            {{$totalPenjualan['nov']}},
+            {{$totalPenjualan['dec']}}
+          ]
       
         }, {
           name: 'Pembelian',

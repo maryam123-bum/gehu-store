@@ -8,8 +8,10 @@ use App\Models\Satuan;
 class SatuanController extends Controller
 {
     public function create(){
+        $data = Satuan::all();
         $id = Satuan::all()->count();
         return view('persediaan/satuan', [
+            'data' => $data,
             'active' => 'Persediaan',
             'estimateid' => $id + 1
         ]);
@@ -18,7 +20,7 @@ class SatuanController extends Controller
         Satuan::create([
             'nama_satuan' => $request->nama_satuan
         ]);
-        return redirect('/data/persediaan')->with('success', 'Tambah satuan sukses');
+        return redirect('/tambah/satuan')->with('success', 'Tambah satuan sukses');
     }
     public function edit($id){
         $data = Satuan::where('id', $id)->first();
@@ -29,11 +31,11 @@ class SatuanController extends Controller
             ->update([
                 'nama_satuan' => $request->nama_satuan
             ]);
-            return redirect('/data/persediaan')->with('success', 'Tambah satuan sukses');
+            return redirect('/tambah/satuan')->with('success', 'Tambah satuan sukses');
     }
     public function destroy(Request $request)
     {
         Satuan::where('id', $request->id)->delete();
-        return redirect('data/persediaan')->with('success', 'Hapus data satuan berhasil');
+        return redirect('tambah/satuan')->with('success', 'Hapus data satuan berhasil');
     }
 }
