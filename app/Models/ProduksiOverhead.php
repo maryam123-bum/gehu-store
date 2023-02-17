@@ -12,5 +12,5 @@ class ProduksiOverhead extends Model
     protected $table = 'produksi_overhead';
     protected $primaryKey = 'id_produksi';
     public $timestamps = true;
-    protected $fillable = ['id_produksi','deskripsi', 'biaya'];
+    protected $fillable = ['id_produksi','id_deskripsi', 'biaya'];
 }

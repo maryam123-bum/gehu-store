@@ -220,7 +220,7 @@
                   <div class="card-body">
                       <div class="form-group mb-2">
                         <label for="deskripsi" class="mb-2 font-weight-bold">Deskripsi</label>
-                        <select name="deskripsi" id="deskripsi" class="form-select" required>
+                        <select name="ov_deskripsi" id="ov_deskripsi" class="form-select" required>
                           <option value="" selected>Pilih Deskripsi...</option>
                           @foreach ($deskripsilist as $item)  
                               <option value="{{ $item['id'] }}">{{ $item['deskripsi'] }}</option>
@@ -230,7 +230,7 @@
                       </div>
                       <div class="form-group">
                         <label for="jumlah" class="mb-2 font-weight-bold">Biaya</label>
-                        <input type="text" class="form-control mb-2" placeholder="0" name="biaya" id="biaya">
+                        <input type="text" class="form-control mb-2" placeholder="0" name="ov_biaya" id="ov_biaya">
                       </div>
                       <button class="w-100 btn btn-primary btn-md" style="background-color: #080E7D;color:#fff" type="button" onclick="handleOverheadPabrik()">Simpan Data</button>
                   </div>

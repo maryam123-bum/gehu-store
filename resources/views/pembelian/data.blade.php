@@ -24,7 +24,7 @@
                         <th scope="col">No. Invoice</th>
                         <th scope="col">Nama Distributor</th>
                         <th scope="col">Total Harga</th>
-                        <?php if(session('jabatan') == 'Karyawab Administrasi'){ ?>
+                        <?php if(session('jabatan') == 'Karyawan Administrasi'){ ?>
                         <th scope="col">Option</th>
                         <?php } ?>
                     </tr>

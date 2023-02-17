@@ -67,6 +67,64 @@ class ProduksiController extends Controller
             'id_karyawan' => $request->id_karyawan,
             'upah' => $request->upah
         ]);
+
+        //Produksi
+        $data = ProduksiBaku::where('id_produksi', $request->id_produksi)->first();
+        $p = $data->panjang;
+        $l = $data->lebar;
+        $t = $data->tinggi;
+        //data 
+        $karton = KartonBahanBaku::where('id_bahan_baku', $request->id_produksi)->first();
+        $kertasluar = KertasluarBahanBaku::where('id_bahan_baku', $request->id_produksi)->first();
+        $kertaskotak = KertaskotakBahanBaku::where('id_bahan_baku', $request->id_produksi)->first();
+        //karton
+        $k_at = $karton->jml_at;
+        $k_skl = $karton->jml_skl;
+        $k_skd = $karton->jml_skd;
+        //kertasluar
+        $kl_dk = $kertasluar->jml_dk;
+        $kl_lk = $kertasluar->jml_lk;
+        $kl_sd = $kertasluar->jml_sd;
+        $kl_sl = $kertasluar->jml_sl;
+        //kertaskotak
+        $kk_adl = $kertaskotak->jml_adl;
+        $kk_sd = $kertaskotak->jml_sd;
+        $kk_sl = $kertaskotak->jml_sl;
+
+        //harga
+        $hrgkarton = Persediaan::where('nama_barang', "Karton")->first()->harga_pokok;
+        $hrgkertasluar = Persediaan::where('nama_barang', "Kertas Luar")->first()->harga_pokok;
+        $hrgkertaskotak = Persediaan::where('nama_barang', "Kertas Kotak")->first()->harga_pokok;
+
+        $hpp1 = $p*$l*$k_at*$hrgkarton;
+        $hpp2 = $p*$t*$k_skl*$hrgkarton;
+        $hpp3 = $p*$t*$k_skd*$hrgkarton;
+        $hpp4 = $p*$l*$kl_dk*$hrgkertasluar;
+        $hpp5 = $p*$l*$kl_lk*$hrgkertasluar;
+        $hpp6 = $p*$t*$kl_sd*$hrgkertasluar;
+        $hpp7 = $p*$t*$kl_sl*$hrgkertasluar;
+        $hpp8 = $p*$l*$kk_adl*$hrgkertaskotak;
+        $hpp9 = $p*$t*$kk_sd*$hrgkertaskotak;
+        $hpp10 = $l*$t*$kk_sl*$hrgkertaskotak;
+        
+        $hpptotal = $hpp1 + $hpp2 + $hpp3 + $hpp4 + $hpp5 + $hpp6 + $hpp7 + $hpp8 + $hpp9 + $hpp10;
+
+        //update total
+        $ov = ProduksiOverhead::where('id_produksi', $request->id_produksi)->get()->sum('biaya');
+        $tk = ProduksiTenaga::where('id_produksi', $request->id_produksi)->get()->sum('upah');
+        $bbb = $hpptotal;
+
+        $hpp = $ov + $tk + $bbb;
+
+        Produksi::where('id', $request->id_produksi)
+        ->update([
+            'harga_pokok_produksi' => $hpp
+        ]);
+        $idbarang = Produksi::where('id', $request->id_produksi)-first()->id_barang;
+        Persediaan::where('id', $idbarang)->update([
+            'harga_pokok' => $hpp
+        ]);
+        //end update
         return $request->id_produksi;
     }
 
@@ -89,9 +147,68 @@ class ProduksiController extends Controller
     public function insertOverhead(Request $request){
         ProduksiOverhead::create([
             'id_produksi' => $request->id_produksi,
-            'deskripsi' => $request->ov_deskripsi,
+            'id_deskripsi' => $request->ov_deskripsi,
             'biaya' => $request->ov_biaya
         ]);
+        
+        //Produksi
+        $data = ProduksiBaku::where('id_produksi', $request->id_produksi)->first();
+        $p = $data->panjang;
+        $l = $data->lebar;
+        $t = $data->tinggi;
+        //data 
+        $karton = KartonBahanBaku::where('id_bahan_baku', $request->id_produksi)->first();
+        $kertasluar = KertasluarBahanBaku::where('id_bahan_baku', $request->id_produksi)->first();
+        $kertaskotak = KertaskotakBahanBaku::where('id_bahan_baku', $request->id_produksi)->first();
+        //karton
+        $k_at = $karton->jml_at;
+        $k_skl = $karton->jml_skl;
+        $k_skd = $karton->jml_skd;
+        //kertasluar
+        $kl_dk = $kertasluar->jml_dk;
+        $kl_lk = $kertasluar->jml_lk;
+        $kl_sd = $kertasluar->jml_sd;
+        $kl_sl = $kertasluar->jml_sl;
+        //kertaskotak
+        $kk_adl = $kertaskotak->jml_adl;
+        $kk_sd = $kertaskotak->jml_sd;
+        $kk_sl = $kertaskotak->jml_sl;
+
+        //harga
+        $hrgkarton = Persediaan::where('nama_barang', "Karton")->first()->harga_pokok;
+        $hrgkertasluar = Persediaan::where('nama_barang', "Kertas Luar")->first()->harga_pokok;
+        $hrgkertaskotak = Persediaan::where('nama_barang', "Kertas Kotak")->first()->harga_pokok;
+
+        $hpp1 = $p*$l*$k_at*$hrgkarton;
+        $hpp2 = $p*$t*$k_skl*$hrgkarton;
+        $hpp3 = $p*$t*$k_skd*$hrgkarton;
+        $hpp4 = $p*$l*$kl_dk*$hrgkertasluar;
+        $hpp5 = $p*$l*$kl_lk*$hrgkertasluar;
+        $hpp6 = $p*$t*$kl_sd*$hrgkertasluar;
+        $hpp7 = $p*$t*$kl_sl*$hrgkertasluar;
+        $hpp8 = $p*$l*$kk_adl*$hrgkertaskotak;
+        $hpp9 = $p*$t*$kk_sd*$hrgkertaskotak;
+        $hpp10 = $l*$t*$kk_sl*$hrgkertaskotak;
+        
+        $hpptotal = $hpp1 + $hpp2 + $hpp3 + $hpp4 + $hpp5 + $hpp6 + $hpp7 + $hpp8 + $hpp9 + $hpp10;
+
+        //update total
+        $ov = ProduksiOverhead::where('id_produksi', $request->id_produksi)->get()->sum('biaya');
+        $tk = ProduksiTenaga::where('id_produksi', $request->id_produksi)->get()->sum('upah');
+        $bbb = $hpptotal;
+
+        $hpp = $ov + $tk + $bbb;
+
+        Produksi::where('id', $request->id_produksi)
+        ->update([
+            'harga_pokok_produksi' => $hpp
+        ]);
+        $idbarang = Produksi::where('id', $request->id_produksi)-first()->id_barang;
+        Persediaan::where('id', $idbarang)->update([
+            'harga_pokok' => $hpp
+        ]);
+        //end update
+
         return $request->id_produksi;
     }
 
@@ -101,7 +218,7 @@ class ProduksiController extends Controller
         $datapersediaan = Persediaan::create([
             'nama_barang' => $request->nama_barang_produksi,
             'id_jenis' => 3,
-            'stok' => 0,
+            'stok' => 1,
             'harga_pokok' => 0,
             'id_satuan' => 4
         ]);
@@ -208,6 +325,65 @@ class ProduksiController extends Controller
                 'tinggi' => $request->tinggi
             ]);
         $data = ProduksiBaku::latest()->first();
+
+        //Produksi
+        $data = ProduksiBaku::where('id_produksi', $request->id_produksi)->first();
+        $p = $data->panjang;
+        $l = $data->lebar;
+        $t = $data->tinggi;
+        //data 
+        $karton = KartonBahanBaku::where('id_bahan_baku', $request->id_produksi)->first();
+        $kertasluar = KertasluarBahanBaku::where('id_bahan_baku', $request->id_produksi)->first();
+        $kertaskotak = KertaskotakBahanBaku::where('id_bahan_baku', $request->id_produksi)->first();
+        //karton
+        $k_at = $karton->jml_at;
+        $k_skl = $karton->jml_skl;
+        $k_skd = $karton->jml_skd;
+        //kertasluar
+        $kl_dk = $kertasluar->jml_dk;
+        $kl_lk = $kertasluar->jml_lk;
+        $kl_sd = $kertasluar->jml_sd;
+        $kl_sl = $kertasluar->jml_sl;
+        //kertaskotak
+        $kk_adl = $kertaskotak->jml_adl;
+        $kk_sd = $kertaskotak->jml_sd;
+        $kk_sl = $kertaskotak->jml_sl;
+
+        //harga
+        $hrgkarton = Persediaan::where('nama_barang', "Karton")->first()->harga_pokok;
+        $hrgkertasluar = Persediaan::where('nama_barang', "Kertas Luar")->first()->harga_pokok;
+        $hrgkertaskotak = Persediaan::where('nama_barang', "Kertas Kotak")->first()->harga_pokok;
+
+        $hpp1 = $p*$l*$k_at*$hrgkarton;
+        $hpp2 = $p*$t*$k_skl*$hrgkarton;
+        $hpp3 = $p*$t*$k_skd*$hrgkarton;
+        $hpp4 = $p*$l*$kl_dk*$hrgkertasluar;
+        $hpp5 = $p*$l*$kl_lk*$hrgkertasluar;
+        $hpp6 = $p*$t*$kl_sd*$hrgkertasluar;
+        $hpp7 = $p*$t*$kl_sl*$hrgkertasluar;
+        $hpp8 = $p*$l*$kk_adl*$hrgkertaskotak;
+        $hpp9 = $p*$t*$kk_sd*$hrgkertaskotak;
+        $hpp10 = $l*$t*$kk_sl*$hrgkertaskotak;
+        
+        $hpptotal = $hpp1 + $hpp2 + $hpp3 + $hpp4 + $hpp5 + $hpp6 + $hpp7 + $hpp8 + $hpp9 + $hpp10;
+
+        //update total
+        $ov = ProduksiOverhead::where('id_produksi', $request->id_produksi)->get()->sum('biaya');
+        $tk = ProduksiTenaga::where('id_produksi', $request->id_produksi)->get()->sum('upah');
+        $bbb = $hpptotal;
+
+        $hpp = $ov + $tk + $bbb;
+
+        Produksi::where('id', $request->id_produksi)
+        ->update([
+            'harga_pokok_produksi' => $hpp
+        ]);
+        $idbarang = Produksi::where('id', $request->id_produksi)-first()->id_barang;
+        Persediaan::where('id', $idbarang)->update([
+            'harga_pokok' => $hpp
+        ]);
+        //end update
+
         return $data->id;
     }
 
@@ -233,6 +409,65 @@ class ProduksiController extends Controller
                 'jml_sd' => $request->kertasluar_sd,
                 'jml_sl' => $request->kertasluar_sl
             ]);
+
+        //Produksi
+        $data = ProduksiBaku::where('id_produksi', $request->id_produksi)->first();
+        $p = $data->panjang;
+        $l = $data->lebar;
+        $t = $data->tinggi;
+        //data 
+        $karton = KartonBahanBaku::where('id_bahan_baku', $request->id_produksi)->first();
+        $kertasluar = KertasluarBahanBaku::where('id_bahan_baku', $request->id_produksi)->first();
+        $kertaskotak = KertaskotakBahanBaku::where('id_bahan_baku', $request->id_produksi)->first();
+        //karton
+        $k_at = $karton->jml_at;
+        $k_skl = $karton->jml_skl;
+        $k_skd = $karton->jml_skd;
+        //kertasluar
+        $kl_dk = $kertasluar->jml_dk;
+        $kl_lk = $kertasluar->jml_lk;
+        $kl_sd = $kertasluar->jml_sd;
+        $kl_sl = $kertasluar->jml_sl;
+        //kertaskotak
+        $kk_adl = $kertaskotak->jml_adl;
+        $kk_sd = $kertaskotak->jml_sd;
+        $kk_sl = $kertaskotak->jml_sl;
+
+        //harga
+        $hrgkarton = Persediaan::where('nama_barang', "Karton")->first()->harga_pokok;
+        $hrgkertasluar = Persediaan::where('nama_barang', "Kertas Luar")->first()->harga_pokok;
+        $hrgkertaskotak = Persediaan::where('nama_barang', "Kertas Kotak")->first()->harga_pokok;
+
+        $hpp1 = $p*$l*$k_at*$hrgkarton;
+        $hpp2 = $p*$t*$k_skl*$hrgkarton;
+        $hpp3 = $p*$t*$k_skd*$hrgkarton;
+        $hpp4 = $p*$l*$kl_dk*$hrgkertasluar;
+        $hpp5 = $p*$l*$kl_lk*$hrgkertasluar;
+        $hpp6 = $p*$t*$kl_sd*$hrgkertasluar;
+        $hpp7 = $p*$t*$kl_sl*$hrgkertasluar;
+        $hpp8 = $p*$l*$kk_adl*$hrgkertaskotak;
+        $hpp9 = $p*$t*$kk_sd*$hrgkertaskotak;
+        $hpp10 = $l*$t*$kk_sl*$hrgkertaskotak;
+        
+        $hpptotal = $hpp1 + $hpp2 + $hpp3 + $hpp4 + $hpp5 + $hpp6 + $hpp7 + $hpp8 + $hpp9 + $hpp10;
+
+        //update total
+        $ov = ProduksiOverhead::where('id_produksi', $request->id_produksi)->get()->sum('biaya');
+        $tk = ProduksiTenaga::where('id_produksi', $request->id_produksi)->get()->sum('upah');
+        $bbb = $hpptotal;
+
+        $hpp = $ov + $tk + $bbb;
+
+        Produksi::where('id', $request->id_produksi)
+        ->update([
+            'harga_pokok_produksi' => $hpp
+        ]);
+        $idbarang = Produksi::where('id', $request->id_produksi)-first()->id_barang;
+        Persediaan::where('id', $idbarang)->update([
+            'harga_pokok' => $hpp
+        ]);
+        //end update
+        
         return $request->id_produksi;
     }
 
