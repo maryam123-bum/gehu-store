@@ -23,13 +23,19 @@ class PenjualanController extends Controller
 
     public function create()
     {   
+        $latestid = Penjualan::latest()->first();
+        if($latestid){
+            $latestid = $latestid->id + 1;
+        }else{
+            $latestid = 1;
+        }
         return view('penjualan/tambah', [
             'barang' => Persediaan::join('jenis_persediaan', 'persediaan.id_jenis', '=', 'jenis_persediaan.id')
                 ->join('satuan', 'persediaan.id_satuan', '=', 'satuan.id')
                 ->where('id_jenis', 3)
                 ->get(['persediaan.*', 'satuan.nama_satuan', 'jenis_persediaan.nama_jenis']),
                 'active' => "penjualan",
-            'estimateid' => Penjualan::latest()->first()['id'] + 1
+            'estimateid' => $latestid
         ]);
     }
 
