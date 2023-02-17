@@ -11,8 +11,9 @@
       <h5>Data Information</h5>
     </div>
     <div class="card-body">
-      <form class="needs-validation" action="/tambah/access" method="POST" novalidate>
+      <form class="needs-validation" action="/ubah/access" method="POST" novalidate>
         @csrf
+        <input type="hidden" value="{{ $admin->id }}" name="id">
         <div class="row g-3 mb-3">
             <div class="col-sm-6">
                 <label for="firstName" class="form-label">Username</label>
@@ -43,9 +44,7 @@
         </div>
      
           <hr class="my-4">
-          <a href="/tambah/access">
           <button class="w-100 btn btn-primary btn-lg" style="background-color: #080E7D;color:#fff" type="submit">Simpan Data</button>
-          </a>
         </form>
     </div>
   </div>

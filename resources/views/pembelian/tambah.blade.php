@@ -172,32 +172,45 @@
     // untuk proses create data
     function store() {
         var nama_pemasok = $("#nama_pemasok").val();
-        $.ajax({
+        if(nama_pemasok == ""){
+            panggilAlertValidation("Nama Pemasok Kosong")
+        }else{
+            $.ajax({
             type: "post",
             url: "{{ url('/tambah/pembelian') }}",
             data: {
                 "_token": "{{ csrf_token() }}",
                 "nama_pemasok": nama_pemasok
-            },
-            success: function(data) {
-                $("#id_pembelian").val(data.id)
-                if(data){
-                    swal({
-                        title: "Sukses",
-                        text: "Pembelian dibuat!",
-                        icon: "success",
-                        button: "Close!",
-                    });
+            }, success: function(data) {
+                    $("#id_pembelian").val(data.id)
+                    if(data){
+                        swal({
+                            title: "Sukses",
+                            text: "Pembelian dibuat!",
+                            icon: "success",
+                            button: "Close!",
+                        });
+                    }
                 }
-            }
-        });
+            });
+        }   
+        
     }
     function insertBarang() {
         var id_pembelian = $("#id_pembelian").val()
         var id_barang = $("#barang").val()
         var jumlah = $("#jumlah").val()
         var diskon = $("#diskon").val()
-        $.ajax({
+        if(id_pembelian == ""){
+            panggilAlertValidation('Buat Transaksi Dahulu')
+        }else if(id_barang == ""){
+            panggilAlertValidation('Tambahkan Barang Dahulu')
+        }else if(jumlah == ""){
+            panggilAlertValidation('Jumlah Barang Kosong!!')
+        }else if(diskon == ""){
+            panggilAlertValidation('diskon kosong!!')
+        }else{
+            $.ajax({
             type: "post",
             url: "{{ url('/tambah/barang/pembelian-detail') }}",
             data: {
@@ -206,31 +219,49 @@
                 "id_barang": id_barang,
                 "jumlah": jumlah,
                 "diskon": diskon
-            },
-            success: function(data) {
-                bacaBarang(data)
-                bacaTotal(data)
-            }
-        });
+            }, success: function(data) {
+                    bacaBarang(data)
+                    bacaTotal(data)
+                }
+            });
+        }
+        
     }
     function insertDeskripsi() {
         var id_pembelian = $("#id_pembelian").val()
         var deskripsi = $("#deskripsi").val()
         var biaya = $("#biaya").val()
-        $.ajax({
-            type: "post",
-            url: "{{ url('/tambah/deskripsi/pembelian-detail') }}",
-            data: {
-                "_token": "{{ csrf_token() }}",
-                "id_pembelian": id_pembelian,
-                "deskripsi": deskripsi,
-                "biaya": biaya
-            },
-            success: function(data) {
-                bacaDeskripsi(data)
-                bacaTotal(data)
-            }
-        });
+        if(id_pembelian == ""){
+            panggilAlertValidation('Buat Transaksi Dahulu')
+        }else if(deskripsi == ""){
+            panggilAlertValidation('Tambahkan Deskripsi Dahulu')
+        }else if(biaya == ""){
+            panggilAlertValidation('Biaya Kosong!!')
+        }else{
+            $.ajax({
+                type: "post",
+                url: "{{ url('/tambah/deskripsi/pembelian-detail') }}",
+                data: {
+                    "_token": "{{ csrf_token() }}",
+                    "id_pembelian": id_pembelian,
+                    "deskripsi": deskripsi,
+                    "biaya": biaya
+                },
+                success: function(data) {
+                    bacaDeskripsi(data)
+                    bacaTotal(data)
+                }
+            });
+        }
+    }
+
+    function panggilAlertValidation(text){
+        swal({
+              title: "Gagal",
+              text: text,
+              icon: "error",
+              button: "Tutup!",
+          });
     }
   </script>
   <script>
