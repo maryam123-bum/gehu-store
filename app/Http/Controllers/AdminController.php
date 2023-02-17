@@ -12,39 +12,42 @@ use Illuminate\Support\Facades\Auth;
 
 class AdminController extends Controller
 {
-    public function index(){
+    public function index(Request $request){
         // if(Auth::check()){
+        // return session()->all();
+        if(session('login') == "true"){
+            $data = [
+                'karyawan' => Karyawan::all()->count(),
+                'produksi' => Produksi::all()->count(),
+                'penjualan' => Penjualan::all()->count(),
+                'pembelian' => Pembelian::all()->count()
+            ];
 
-        $data = [
-            'karyawan' => Karyawan::all()->count(),
-            'produksi' => Produksi::all()->count(),
-            'penjualan' => Penjualan::all()->count(),
-            'pembelian' => Pembelian::all()->count()
-        ];
+            // $dataPembelian = Pembelian::whereDate('tgl_pembelian','>=', date('Y-m-d',strtotime('2023-02-15')))->whereDate('tgl_pembelian','<=', date('Y-m-d',strtotime('2023-02-16')))->get();
+            // $dataPembelian = Pembelian::all();
+            // $totalPembelian = $dataPembelian->sum('total');
 
-        // $dataPembelian = Pembelian::whereDate('tgl_pembelian','>=', date('Y-m-d',strtotime('2023-02-15')))->whereDate('tgl_pembelian','<=', date('Y-m-d',strtotime('2023-02-16')))->get();
-        // $dataPembelian = Pembelian::all();
-        // $totalPembelian = $dataPembelian->sum('total');
-
-        $totalPembelian = [
-            'jan' => Pembelian::whereDate('tgl_pembelian','>=', date('Y-m-d',strtotime('2023-01-01')))->whereDate('tgl_pembelian','<=', date('Y-m-d',strtotime('2023-01-31')))->get()->sum('total'),
-            'feb' => Pembelian::whereDate('tgl_pembelian','>=', date('Y-m-d',strtotime('2023-02-01')))->whereDate('tgl_pembelian','<=', date('Y-m-d',strtotime('2023-02-30')))->get()->sum('total'),
-            'mar' => Pembelian::whereDate('tgl_pembelian','>=', date('Y-m-d',strtotime('2023-03-01')))->whereDate('tgl_pembelian','<=', date('Y-m-d',strtotime('2023-03-31')))->get()->sum('total'),
-            'apr' => Pembelian::whereDate('tgl_pembelian','>=', date('Y-m-d',strtotime('2023-04-01')))->whereDate('tgl_pembelian','<=', date('Y-m-d',strtotime('2023-04-30')))->get()->sum('total'),
-            'mei' => Pembelian::whereDate('tgl_pembelian','>=', date('Y-m-d',strtotime('2023-05-01')))->whereDate('tgl_pembelian','<=', date('Y-m-d',strtotime('2023-05-31')))->get()->sum('total'),
-            'jun' => Pembelian::whereDate('tgl_pembelian','>=', date('Y-m-d',strtotime('2023-06-01')))->whereDate('tgl_pembelian','<=', date('Y-m-d',strtotime('2023-06-30')))->get()->sum('total'),
-            'jul' => Pembelian::whereDate('tgl_pembelian','>=', date('Y-m-d',strtotime('2023-07-01')))->whereDate('tgl_pembelian','<=', date('Y-m-d',strtotime('2023-07-31')))->get()->sum('total'),
-            'aug' => Pembelian::whereDate('tgl_pembelian','>=', date('Y-m-d',strtotime('2023-08-01')))->whereDate('tgl_pembelian','<=', date('Y-m-d',strtotime('2023-08-31')))->get()->sum('total'),
-            'sep' => Pembelian::whereDate('tgl_pembelian','>=', date('Y-m-d',strtotime('2023-09-01')))->whereDate('tgl_pembelian','<=', date('Y-m-d',strtotime('2023-09-30')))->get()->sum('total'),
-            'oct' => Pembelian::whereDate('tgl_pembelian','>=', date('Y-m-d',strtotime('2023-10-01')))->whereDate('tgl_pembelian','<=', date('Y-m-d',strtotime('2023-10-31')))->get()->sum('total'),
-            'nov' => Pembelian::whereDate('tgl_pembelian','>=', date('Y-m-d',strtotime('2023-11-01')))->whereDate('tgl_pembelian','<=', date('Y-m-d',strtotime('2023-11-30')))->get()->sum('total'),
-            'dec' => Pembelian::whereDate('tgl_pembelian','>=', date('Y-m-d',strtotime('2023-12-01')))->whereDate('tgl_pembelian','<=', date('Y-m-d',strtotime('2023-12-31')))->get()->sum('total'),
-        ];
-        return view('dashboard/dashboard', [
-            'active' =>'dashboard',
-            'data' => $data,
-            'totalPembelian' => $totalPembelian
-        ]);
+            $totalPembelian = [
+                'jan' => Pembelian::whereDate('tgl_pembelian','>=', date('Y-m-d',strtotime('2023-01-01')))->whereDate('tgl_pembelian','<=', date('Y-m-d',strtotime('2023-01-31')))->get()->sum('total'),
+                'feb' => Pembelian::whereDate('tgl_pembelian','>=', date('Y-m-d',strtotime('2023-02-01')))->whereDate('tgl_pembelian','<=', date('Y-m-d',strtotime('2023-02-30')))->get()->sum('total'),
+                'mar' => Pembelian::whereDate('tgl_pembelian','>=', date('Y-m-d',strtotime('2023-03-01')))->whereDate('tgl_pembelian','<=', date('Y-m-d',strtotime('2023-03-31')))->get()->sum('total'),
+                'apr' => Pembelian::whereDate('tgl_pembelian','>=', date('Y-m-d',strtotime('2023-04-01')))->whereDate('tgl_pembelian','<=', date('Y-m-d',strtotime('2023-04-30')))->get()->sum('total'),
+                'mei' => Pembelian::whereDate('tgl_pembelian','>=', date('Y-m-d',strtotime('2023-05-01')))->whereDate('tgl_pembelian','<=', date('Y-m-d',strtotime('2023-05-31')))->get()->sum('total'),
+                'jun' => Pembelian::whereDate('tgl_pembelian','>=', date('Y-m-d',strtotime('2023-06-01')))->whereDate('tgl_pembelian','<=', date('Y-m-d',strtotime('2023-06-30')))->get()->sum('total'),
+                'jul' => Pembelian::whereDate('tgl_pembelian','>=', date('Y-m-d',strtotime('2023-07-01')))->whereDate('tgl_pembelian','<=', date('Y-m-d',strtotime('2023-07-31')))->get()->sum('total'),
+                'aug' => Pembelian::whereDate('tgl_pembelian','>=', date('Y-m-d',strtotime('2023-08-01')))->whereDate('tgl_pembelian','<=', date('Y-m-d',strtotime('2023-08-31')))->get()->sum('total'),
+                'sep' => Pembelian::whereDate('tgl_pembelian','>=', date('Y-m-d',strtotime('2023-09-01')))->whereDate('tgl_pembelian','<=', date('Y-m-d',strtotime('2023-09-30')))->get()->sum('total'),
+                'oct' => Pembelian::whereDate('tgl_pembelian','>=', date('Y-m-d',strtotime('2023-10-01')))->whereDate('tgl_pembelian','<=', date('Y-m-d',strtotime('2023-10-31')))->get()->sum('total'),
+                'nov' => Pembelian::whereDate('tgl_pembelian','>=', date('Y-m-d',strtotime('2023-11-01')))->whereDate('tgl_pembelian','<=', date('Y-m-d',strtotime('2023-11-30')))->get()->sum('total'),
+                'dec' => Pembelian::whereDate('tgl_pembelian','>=', date('Y-m-d',strtotime('2023-12-01')))->whereDate('tgl_pembelian','<=', date('Y-m-d',strtotime('2023-12-31')))->get()->sum('total'),
+            ];
+            return view('dashboard/dashboard', [
+                'active' =>'dashboard',
+                'data' => $data,
+                'totalPembelian' => $totalPembelian
+            ]);
+        }
+        return redirect('/login')->with('error', 'Login terlebih dahulu');
         // }
         // return redirect('/login');
     }
@@ -52,12 +55,22 @@ class AdminController extends Controller
         $username = $request->username;
         $password = $request->password;
         $data = Admin::where('username', $username)->where('password', $password)->first();
+        $karyawan = Admin::join('karyawan', 'admin.id_karyawan', '=', 'karyawan.id')
+            ->where('admin.username', $username)
+            ->first();
 
         if($data){
+            $request->session()->put('login', "true");
+            $request->session()->put('nama', $karyawan->nama);
+            $request->session()->put('jabatan',$karyawan->jabatan);
             return redirect('/')->with('success', 'Berhasil Login');
         }else{
             return redirect('/login')->with('status', 'Gagal Login');
         }
+    }
+    public function logout(Request $request){
+        $request->session()->put('login','false');
+        return redirect('/login');
     }
 
     public function data(){

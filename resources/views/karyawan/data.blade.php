@@ -45,12 +45,37 @@
                             <td>{{ $key['alamat'] }}</td>
                             <td class="text-center">
                                 <a href="/ubah/karyawan/{{ $key['id'] }}" class="btn btn-light shadow" style="background-color: #212290"><i class="bi bi-pencil-square"  style="color: aliceblue"></i></a>
-                                <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deletemodal"><i class="bi bi-trash3"></i></button>
+                                <a href="#delete{{ $key['id'] }}" data-bs-toggle="modal" class="btn btn-danger" ><i class="bi bi-trash3"></i></a>
                                 {{-- <form action="/hapus/karyawan" method="post" style="display:inline-block">
                                     @csrf
                                     <input type="hidden" name="id" value="{{ $key['id'] }}" readonly>
                                     <button type="submit" class="btn btn-danger"><i class="bi bi-trash3"></i></i></button>
                                 </form> --}}
+                                <!-- Button trigger modal -->
+                
+                                    <!-- Modal -->
+                                    <div class="modal fade" id="delete{{ $key['id'] }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                            <h1 class="modal-title fs-5" id="exampleModalLabel">Hapus Data</h1>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                            <h4>Anda ingin menghapus data  {{  $key['nama'] }} ?</h4>
+                                            </div>
+                                            <div class="modal-footer">
+                                                
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                <form action="/hapus/karyawan" method="post" style="display:inline-block">
+                                                    @csrf
+                                                    <input type="hidden" id="id" name="id" value="{{ $key['id'] }}">
+                                                    <button type="submit" class="btn btn-danger">Ya, tentu</button>
+                                                </form>
+                                            </div>
+                                        </div>
+                                        </div>
+                                    </div>
                             </td>
                         </tr>
                     <?php } 
@@ -61,42 +86,31 @@
                 <?php } ?>
                 </tbody>
             </table>
-            <!-- Button trigger modal -->
-                
-                <!-- Modal -->
-                <div class="modal fade" id="deletemodal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="exampleModalLabel">Hapus Data</h1>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                        <h3>Yakin untuk menghapus data ?</h3>
-                        </div>
-                        <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <form action="/hapus/karyawan" method="post" style="display:inline-block">
-                                @csrf
-                                <input type="hidden" name="id" value="<?php if(!$data->isEmpty()) $key['id'] ?>" readonly>
-                                <button type="submit" class="btn btn-danger">Ya, tentu</button>
-                            </form>
-                        </div>
-                    </div>
-                    </div>
-                </div>
+            
         </div>
     </div>
 @endsection
 
 @section('script')
 <script>
+    function handleDelete(){
+        var id = $('#btnDelete').data('id')
+        $('#deleteid').val(id)
+    }
     @if (session('success'))
         swal({
             title: "Sukses",
             text: "{{ session('success') }}",
             icon: "success",
-            button: "Close!",
+            button: "tutup",
+        });
+    @endif
+    @if (session('error'))
+        swal({
+            title: "Gagal",
+            text: "{{ session('error') }}",
+            icon: "error",
+            button: "tutup",
         });
     @endif
     

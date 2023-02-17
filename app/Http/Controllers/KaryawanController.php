@@ -8,11 +8,6 @@ use Illuminate\Support\Facades\DB;
 
 class KaryawanController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
 
@@ -25,11 +20,6 @@ class KaryawanController extends Controller
         ]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         return view('karyawan.tambah', [
@@ -37,12 +27,6 @@ class KaryawanController extends Controller
         ]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         $firstName = $request->firstName;
@@ -61,12 +45,6 @@ class KaryawanController extends Controller
         return redirect('data/karyawan')->with('success', 'Tambah data karyawan berhasil');
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Karyawan  $karyawan
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
         $karyawan = Karyawan::where('id', $id)->first();
@@ -76,13 +54,6 @@ class KaryawanController extends Controller
         ]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Karyawan  $karyawan
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request)
     {
         Karyawan::where('id', $request->id)
@@ -96,15 +67,12 @@ class KaryawanController extends Controller
         return redirect('data/karyawan')->with('success', 'Ubah data karyawan berhasil');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Karyawan  $karyawan
-     * @return \Illuminate\Http\Response
-     */
     public function destroy(Request $request)
     {
-        Karyawan::where('id', $request->id)->delete();
-        return redirect('data/karyawan')->with('success', 'Hapus data karyawan berhasil');
+        if($request->id){
+            Karyawan::where('id', $request->id)->delete();
+            return redirect('data/karyawan')->with('success', 'Hapus data karyawan berhasil');
+        }
+        return redirect('data/karyawan')->with('error', 'Hapus data karyawan gagal');
     }
 }

@@ -34,6 +34,7 @@ class PembelianController extends Controller
         return view('pembelian/tambah', [
             'barang' => Persediaan::join('jenis_persediaan', 'persediaan.id_jenis', '=', 'jenis_persediaan.id')
                 ->join('satuan', 'persediaan.id_satuan', '=', 'satuan.id')
+                ->where('persediaan.id_jenis', '!=', '3')
                 ->get(['persediaan.*', 'satuan.nama_satuan', 'jenis_persediaan.nama_jenis']),
             'active' => "pembelian",
             'estimateid' => $latestid,
@@ -161,6 +162,7 @@ class PembelianController extends Controller
         $header = Pembelian::where('id', $id)->first();
         $baranglist = Persediaan::join('jenis_persediaan', 'persediaan.id_jenis', '=', 'jenis_persediaan.id')
                 ->join('satuan', 'persediaan.id_satuan', '=', 'satuan.id')
+                ->where('persediaan.id_jenis', '!=', '3')
                 ->get(['persediaan.*', 'satuan.nama_satuan', 'jenis_persediaan.nama_jenis']);
 
         // $baranglist = PembelianDetail::join('persediaan', 'pembelian_detail.id_barang', '=', 'persediaan.id')

@@ -87,7 +87,7 @@
                                 <label for="jumlah" class="mb-2 font-weight-bold">Potongan</label>
                                 <input type="text" class="form-control mb-2" placeholder="0" name="diskon" id="diskon">
                             </div>
-                            <button class="w-100 btn btn-primary btn-md" style="background-color: #080E7D;color:#fff" type="button" onclick="insertBarang()">Simpan Data</button>
+                            <button class="w-100 btn btn-primary btn-md" style="background-color: #080E7D;color:#fff" type="button" <?php  ?> onclick="insertBarang()">Simpan Data</button>
                         </div>
                     </div>
             </div>
