@@ -201,12 +201,14 @@
                 Laporan
               </a>
             </li>
-            <li class="px-4 py-2 {{ ($active == "data-tambahan") ? 'active' : '' }}">
-              <a class="text-white" href="/data/access">
-                <i class="bi bi-briefcase"></i>
-                Akses Admin
-              </a>
-            </li>
+            <?php if(session('jabatan') == 'Direktur'){ ?>
+              <li class="px-4 py-2 {{ ($active == "data-tambahan") ? 'active' : '' }}">
+                <a class="text-white" href="/data/access">
+                  <i class="bi bi-briefcase"></i>
+                  Akses Admin
+                </a>
+              </li>
+            <?php } ?>
           </div>
         </div>
         

@@ -3,6 +3,7 @@
     <h2>Data {{ $judul }}</h2> 
 @endsection
 @section('container')
+    <?php if(session('jabatan') == 'Direktur') { ?>
     <div class="row">
         <div class="col-2 mb-2">
             <a href="/tambah/karyawan">
@@ -12,6 +13,7 @@
             </a>
         </div>
     </div>
+    <?php } ?>
     <div class="row">
         <div class="col">
             <table class="table table-bordered">
@@ -23,7 +25,9 @@
                         <th scope="col">Jabatan</th>
                         <th scope="col">Jenis Kelamin</th>
                         <th scope="col">Alamat</th>
+                        <?php if(session('jabatan') == 'Direktur'){ ?>
                         <th scope="col">OPSI</th>
+                        <?php } ?>
                     </tr>
                 </thead>
                 <tbody>
@@ -43,6 +47,7 @@
                                 @endif
                             </td>
                             <td>{{ $key['alamat'] }}</td>
+                            <?php if(session('jabatan') == 'Direktur'){ ?>
                             <td class="text-center">
                                 <a href="/ubah/karyawan/{{ $key['id'] }}" class="btn btn-light shadow" style="background-color: #212290"><i class="bi bi-pencil-square"  style="color: aliceblue"></i></a>
                                 <a href="#delete{{ $key['id'] }}" data-bs-toggle="modal" class="btn btn-danger" ><i class="bi bi-trash3"></i></a>
@@ -77,6 +82,7 @@
                                         </div>
                                     </div>
                             </td>
+                            <?php } ?>
                         </tr>
                     <?php } 
                 } else{ ?>
