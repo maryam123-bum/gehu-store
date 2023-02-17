@@ -25,10 +25,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/login', function () {
 
-    if (session('login') == "false"){
         return view('/login/login');
-    }
-    return redirect('/')->with('success', 'Anda Sudah Login');
 });
 
 Route::post('/login', [AdminController::class, 'cekdata']);
