@@ -12,5 +12,5 @@ class PenjualanDetail extends Model
     protected $table = 'penjualan_detail';
     protected $primaryKey = 'id_penjualan';
     public $timestamps = true;
-    protected $fillable = ['id_penjualan', 'id_barang','jumlah'];
+    protected $fillable = ['id_penjualan', 'id_barang','jumlah', 'diskon'];
 }

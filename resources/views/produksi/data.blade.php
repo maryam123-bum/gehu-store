@@ -33,7 +33,7 @@
                                 <tr>
                                     <th scope="row"><?php echo $no++ ?></th>
                                     <td><?php echo $key['tgl_produksi']; ?></td>
-                                    <td><?php echo $key['biaya_bahan_baku'] + $key['biaya_overhead'] + $key['biaya_tenaga_kerja']; ?></td>
+                                    <td><?php echo "Rp. ".$key['harga_pokok_produksi']; ?></td>
                                     <td><i class="bi bi-pencil-square"></i><?php echo $key['harga_jual']; ?></td>
                                     
                                 </tr>

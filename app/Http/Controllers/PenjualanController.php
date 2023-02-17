@@ -7,6 +7,7 @@ use App\Models\Persediaan;
 use App\Models\Penjualan;
 use App\Models\PenjualanDetail;
 use App\Models\PenjualanDetailDeskripsi;
+use App\Models\Deskripsi;
 
 class PenjualanController extends Controller
 {
@@ -33,12 +34,14 @@ class PenjualanController extends Controller
         }else{
             $latestid = 1;
         }
+        $deskripsiList = Deskripsi::all();
         return view('penjualan/tambah', [
             'barang' => Persediaan::join('jenis_persediaan', 'persediaan.id_jenis', '=', 'jenis_persediaan.id')
                 ->join('satuan', 'persediaan.id_satuan', '=', 'satuan.id')
                 ->where('id_jenis', 3)
                 ->get(['persediaan.*', 'satuan.nama_satuan', 'jenis_persediaan.nama_jenis']),
                 'active' => "penjualan",
+                'deskripsilist' => $deskripsiList,
             'estimateid' => $latestid
         ]);
         }
@@ -66,7 +69,7 @@ class PenjualanController extends Controller
         if(session('login') == "true"){
             $deskripsiList = [];
             if($id != 0){
-                $deskripsiList = PenjualanDetailDeskripsi::where('id_penjualan', $id)
+                $deskripsiList = PenjualanDetailDeskripsi::join('deskripsi', 'penjualan_detail_deskripsi.id_deskripsi', '=', 'deskripsi.id')->where('id_penjualan', $id)
                 ->get();
             }
             return view('penjualan/deskripsi')->with([
@@ -78,13 +81,15 @@ class PenjualanController extends Controller
     public function bacaTotal($id = 0){
         $total = 0;
         if($id != 0){
+            
             $totalBarang = 0;
             $data = PenjualanDetail::join('persediaan', 'penjualan_detail.id_barang', '=', 'persediaan.id')
                 ->where('id_penjualan', $id)
                 ->get(['persediaan.harga_pokok', 'penjualan_detail.jumlah']);
-            foreach($data as $item){
-
-                $totalBarang = $totalBarang + ($item['harga_pokok'] * $item['jumlah']);
+            if($data){
+                foreach($data as $item){
+                    $totalBarang = $totalBarang + ($item['harga_pokok'] * $item['jumlah']);
+                }
             }
             $dataDeskripsi = PenjualanDetailDeskripsi::where('id_penjualan', $id)->get();
             $totalDeskripsi = $dataDeskripsi->sum('biaya');
@@ -97,8 +102,28 @@ class PenjualanController extends Controller
         PenjualanDetail::create([
             'id_penjualan' => $request->id_penjualan,
             'id_barang' => $request->id_barang,
-            'jumlah' => $request->jumlah
+            'jumlah' => $request->jumlah,
+            'diskon' => $request->diskon
         ]);
+        $total = 0;
+            
+        $totalBarang = 0;
+        $data = PenjualanDetail::join('persediaan', 'penjualan_detail.id_barang', '=', 'persediaan.id')
+            ->where('id_penjualan', $request->id_penjualan)
+            ->get(['persediaan.harga_pokok', 'penjualan_detail.jumlah']);
+        if($data){
+            foreach($data as $item){
+                $totalBarang = $totalBarang + ($item['harga_pokok'] * $item['jumlah']);
+            }
+        }
+        $dataDeskripsi = PenjualanDetailDeskripsi::where('id_penjualan', $request->id_penjualan)->get();
+        $totalDeskripsi = $dataDeskripsi->sum('biaya');
+        $total = $totalBarang + $totalDeskripsi;
+
+        Penjualan::where('id', $request->id_penjualan)->update([
+            'total' => $total
+        ]);
+
         return $request->id_penjualan;
     }
 
@@ -106,9 +131,27 @@ class PenjualanController extends Controller
     {
         PenjualanDetailDeskripsi::create([
             'id_penjualan' => $request->id_penjualan,
-            'deskripsi' => $request->deskripsi,
+            'id_deskripsi' => $request->deskripsi,
             'biaya' => $request->biaya
         ]);
+            
+        $totalBarang = 0;
+        $data = PenjualanDetail::join('persediaan', 'penjualan_detail.id_barang', '=', 'persediaan.id')
+            ->where('id_penjualan', $request->id_penjualan)
+            ->get(['persediaan.harga_pokok', 'penjualan_detail.jumlah']);
+        if($data){
+            foreach($data as $item){
+                $totalBarang = $totalBarang + ($item['harga_pokok'] * $item['jumlah']);
+            }
+        }
+        $dataDeskripsi = PenjualanDetailDeskripsi::where('id_penjualan', $request->id_penjualan)->get();
+        $totalDeskripsi = $dataDeskripsi->sum('biaya');
+        $total = $totalBarang + $totalDeskripsi;
+     
+        Penjualan::where('id', $request->id_penjualan)->update([
+            'total' => $total
+        ]);
+
         return $request->id_penjualan;
     }
 
