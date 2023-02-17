@@ -93,6 +93,9 @@ class PembelianController extends Controller
             'jumlah' => $request->jumlah,
             'diskon' => $request->diskon
         ]);
+        //update stok
+        $stok = Persediaan::where('id', $request->id_barang)->first()->stok;
+        Persediaan::where('id', $request->id_barang)->update(['stok' => $stok + $request->jumlah]);
         //update total
             $totalBarang = 0;
             $totalDiskon = 0;

@@ -43,9 +43,7 @@
         </div>
      
           <hr class="my-4">
-          <a href="/tambah/access">
           <button class="w-100 btn btn-primary btn-lg" style="background-color: #080E7D;color:#fff" type="submit">Simpan Data</button>
-          </a>
         </form>
     </div>
   </div>

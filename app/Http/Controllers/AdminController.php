@@ -85,7 +85,9 @@ class AdminController extends Controller
     }
 
     public function data(){
-        $admin = Admin::join('karyawan', 'admin.id_karyawan', '=', 'karyawan.id')->get();
+        $admin = Admin::join('karyawan', 'admin.id_karyawan', '=', 'karyawan.id')->get([
+            'admin.id', 'admin.username', 'karyawan.nama'
+        ]);
         return view('/login/access/data', [
             'data' => $admin,
             'active' => "data-tambahan"
@@ -134,7 +136,7 @@ class AdminController extends Controller
     }
     public function destroy(Request $request)
     {
-        Admin::where('id', $request->id)->destroy();
+        Admin::where('id', $request->id)->delete();
         return redirect('/data/access')->with('success', 'Hapus data berhasil');
     }
 }

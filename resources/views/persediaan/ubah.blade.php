@@ -1,7 +1,7 @@
 @extends('layouts.main')
 
 @section('title')
-    <h2>Tambah Persediaan</h2>
+    <h2>Ubah Persediaan</h2>
 @endsection
 
 @section('container')
@@ -38,7 +38,7 @@
 
           <div class="col-sm-5">
             <label for="stok" class="form-label">Stok</label>
-            <input type="text" class="form-control" name="stok" value={{ $data['stok'] }} id="stok" placeholder="Masukan jumlah stok..." required>
+            <input type="text" class="form-control" disabled name="stok" value={{ $data['stok'] }} id="stok" placeholder="Masukan jumlah stok..." required>
             <div class="invalid-feedback">
               Stok tidak boleh kosong.
             </div>
