@@ -95,6 +95,9 @@ Route::post('/tambah/produksi', [ProduksiController::class, 'store']);
 Route::post('/update/bahanbaku/produksi', [ProduksiController::class, 'updateProduksiBaku']);
 Route::post('/update/bahanbakudetail/produksi', [ProduksiController::class, 'updateBahanBaku']);
 
+Route::get('/hargaJual/produksi', function(){
+    return view('/produksi/hargaJual');
+});
 //Penjualan
 Route::get('/penjualan', [PenjualanController::class, 'index']);
 Route::get('/tambah/penjualan', [PenjualanController::class, 'create']);

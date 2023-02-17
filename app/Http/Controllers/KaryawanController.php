@@ -52,7 +52,7 @@ class KaryawanController extends Controller
 
     public function edit($id)
     {
-        if(session('login') == "true"){
+        if(session('login') == "true" && session('jabatan') == "Direktur"){
         $karyawan = Karyawan::where('id', $id)->first();
         return view('karyawan/ubah', [
             'data' => $karyawan,
