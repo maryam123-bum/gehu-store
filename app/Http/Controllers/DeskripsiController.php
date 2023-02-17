@@ -8,11 +8,14 @@ use App\Models\Deskripsi;
 class DeskripsiController extends Controller
 {
     public function create(){
-        $id = Deskripsi::all()->count();
-        return view('persediaan/deskripsi', [
-            'active' => 'Persediaan',
-            'estimateid' => $id + 1
-        ]);
+        if(session('login') == "true"){
+            $id = Deskripsi::all()->count();
+            return view('persediaan/deskripsi', [
+                'active' => 'Persediaan',
+                'estimateid' => $id + 1
+            ]);
+        }
+        return redirect('/login');
     }
     public function store(Request $request){
         Deskripsi::create([

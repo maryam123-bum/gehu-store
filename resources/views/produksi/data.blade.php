@@ -3,6 +3,7 @@
     <h2>Data {{ $judul }}</h2> 
 @endsection
 @section('container')
+        <?php if(session('jabatan') == 'Karyawan Administrasi'){ ?>
         <div class="row">
             <div class="col-2 mb-2">
                 <a href="/tambah/produksi">
@@ -12,6 +13,7 @@
                 </a>
             </div>
         </div>
+        <?php } ?>
         <div class="row">
             <div class="col">
                 <table class="table table-bordered">
@@ -24,7 +26,9 @@
                         <th scope="col">Biaya Tenaga Kerja</th>
                         <th scope="col">Harga Pokok Produksi</th>
                         <th scope="col">Harga Jual</th>
+                        <?php if(session('jabatan') == 'Karyawan Administrasi'){ ?>
                         <th scope="col">Option</th>
+                        <?php } ?>
                       </tr>
                     </thead>
                     <tbody>
@@ -39,10 +43,12 @@
                                     <td><?php echo $key['biaya_tenaga_kerja']; ?></td>
                                     <td><?php echo $key['biaya_bahan_baku'] + $key['biaya_overhead'] + $key['biaya_tenaga_kerja']; ?></td>
                                     <td><?php echo $key['harga_jual']; ?></td>
+                                    <?php if(session('jabatan') == 'Karyawan Administrasi'){ ?>
                                     <td>
                                         <button class="btn btn-light shadow" style="background-color: #212290"><i class="bi bi-pencil-square"  style="color: aliceblue"></i></button>
                                         {{-- <button class="btn btn-danger"><i class="bi bi-trash3"></i></button> --}}
                                     </td>
+                                    <?php } ?>
                                 </tr>
                             <?php
                             } ?>

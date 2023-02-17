@@ -10,7 +10,7 @@ class KaryawanController extends Controller
 {
     public function index()
     {
-
+        if(session('login') == "true"){
         $karyawan = Karyawan::all();
 
         return view('karyawan/data', [
@@ -18,13 +18,18 @@ class KaryawanController extends Controller
             'data' => $karyawan,
             'active' => "karyawan"
         ]);
+        }
+        return redirect('/login');
     }
 
     public function create()
     {
+        if(session('login') == "true"){
         return view('karyawan.tambah', [
             'active' => "karyawan"
         ]);
+        }
+        return redirect('/login');
     }
 
     public function store(Request $request)
@@ -47,11 +52,14 @@ class KaryawanController extends Controller
 
     public function edit($id)
     {
+        if(session('login') == "true"){
         $karyawan = Karyawan::where('id', $id)->first();
         return view('karyawan/ubah', [
             'data' => $karyawan,
             'active' => "karyawan"
         ]);
+        }
+        return redirect('/login');
     }
 
     public function update(Request $request)

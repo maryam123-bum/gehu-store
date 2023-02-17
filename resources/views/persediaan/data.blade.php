@@ -3,6 +3,7 @@
     <h2>Data {{ $judul }}</h2> 
 @endsection
 @section('container')
+    <?php if(session('jabatan') == 'Karyawan Administrasi'){ ?>
     <div class="row mb-2">
         <div class="col">
             <a href="/tambah/persediaan">
@@ -22,6 +23,7 @@
             </a>
         </div>
     </div>
+    <?php } ?>
     <div class="row">
         <div class="col">
             <table class="table table-bordered">
@@ -33,7 +35,9 @@
                     <th scope="col">Jenis Barang</th>
                     <th scope="col">Stok</th>
                     <th scope="col">Harga Pokok</th>
+                    <?php if(session('jabatan') == 'Karyawan Administrasi'){ ?>
                     <th scope="col">Option</th>
+                    <?php } ?>
                 </tr>
                 </thead>
                 <tbody>
@@ -47,10 +51,12 @@
                                 <td><?php echo $key['nama_jenis']; ?></td>
                                 <td><?php echo $key['stok'].' '.$key['nama_satuan']; ?></td>
                                 <td>Rp. <?php echo $key['harga_pokok'].' per '.$key['nama_satuan']; ?></td>
+                                <?php if(session('jabatan') == 'Karyawan Administrasi'){ ?>
                                 <td>
                                     <a href="/ubah/persediaan/{{ $key['id'] }}" class="btn btn-light shadow" style="background-color: #212290"><i class="bi bi-pencil-square"  style="color: aliceblue"></a>
                                     <a href="#delete{{ $key['id'] }}" class="btn btn-danger" data-bs-toggle="modal"><i class="bi bi-trash3"></i></a>
                                 </td>
+                                <?php } ?>
                             </tr>
                             <!-- Button trigger modal -->
                 

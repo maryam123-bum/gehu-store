@@ -8,13 +8,16 @@ use App\Models\JenisPersediaan;
 class JenisPersediaanController extends Controller
 {
     public function create(){
-        $data = JenisPersediaan::all();
-        $id = JenisPersediaan::all()->count();
-        return view('persediaan/jenis', [
-            'active' => 'Persediaan',
-            'estimateid' => $id + 1,
-            'data' => $data,
-        ]);
+        if(session('login') == "true"){
+            $data = JenisPersediaan::all();
+            $id = JenisPersediaan::all()->count();
+            return view('persediaan/jenis', [
+                'active' => 'Persediaan',
+                'estimateid' => $id + 1,
+                'data' => $data,
+            ]);
+        }
+        return redirect('/login');
     }
     public function store(Request $request){
         JenisPersediaan::create([

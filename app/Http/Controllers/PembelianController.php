@@ -13,6 +13,7 @@ class PembelianController extends Controller
 {
     public function index()
     {
+        if(session('login') == "true"){
         $data_pembelian = Pembelian::all();
         
         return view('pembelian/data', [
@@ -20,10 +21,13 @@ class PembelianController extends Controller
             'data' => $data_pembelian,
             'active' => "pembelian"
         ]);
+        }
+        return redirect('/login');
     }
 
     public function create()
-    {   
+    { 
+        if(session('login') == "true"){  
         $deskripsi = Deskripsi::all();
         $latestid = Pembelian::latest()->first();
         if($latestid){
@@ -40,32 +44,40 @@ class PembelianController extends Controller
             'estimateid' => $latestid,
             'deskripsilist' => $deskripsi
         ]);
+        }
+        return redirect('/login');
     }
 
     public function bacaBarang($id = 0){
-        $baranglist = [];
-        if($id != 0){
-            $baranglist = PembelianDetail::join('persediaan', 'pembelian_detail.id_barang', '=', 'persediaan.id')
-            ->join('jenis_persediaan', 'persediaan.id_jenis', '=', 'jenis_persediaan.id')
-            ->join('satuan', 'persediaan.id_satuan', '=', 'satuan.id')
-            ->where('id_pembelian', $id)
-            ->get(['persediaan.*', 'satuan.nama_satuan', 'jenis_persediaan.nama_jenis', 'pembelian_detail.jumlah', 'pembelian_detail.diskon']);
-            
+        if(session('login') == "true"){
+            $baranglist = [];
+            if($id != 0){
+                $baranglist = PembelianDetail::join('persediaan', 'pembelian_detail.id_barang', '=', 'persediaan.id')
+                ->join('jenis_persediaan', 'persediaan.id_jenis', '=', 'jenis_persediaan.id')
+                ->join('satuan', 'persediaan.id_satuan', '=', 'satuan.id')
+                ->where('id_pembelian', $id)
+                ->get(['persediaan.*', 'satuan.nama_satuan', 'jenis_persediaan.nama_jenis', 'pembelian_detail.jumlah', 'pembelian_detail.diskon']);
+                
+            }
+            return view('pembelian/barang')->with([
+                'data' => $baranglist
+            ]);
         }
-        return view('pembelian/barang')->with([
-            'data' => $baranglist
-        ]);
+        return redirect('/login');
     }
     public function bacaDeskripsi($id = 0){
-        $deskripsiList = [];
-        if($id != 0){
-            $deskripsiList = PembelianDetailDeskripsi::join('deskripsi', 'pembelian_detail_deskripsi.id_deskripsi', '=', 'deskripsi.id')
-            ->where('id_pembelian', $id)
-            ->get();
+        if(session('login') == "true"){
+            $deskripsiList = [];
+            if($id != 0){
+                $deskripsiList = PembelianDetailDeskripsi::join('deskripsi', 'pembelian_detail_deskripsi.id_deskripsi', '=', 'deskripsi.id')
+                ->where('id_pembelian', $id)
+                ->get();
+            }
+            return view('pembelian/deskripsi')->with([
+                'data' => $deskripsiList
+            ]);
         }
-        return view('pembelian/deskripsi')->with([
-            'data' => $deskripsiList
-        ]);
+        return redirect('/login');
     }
     public function bacaTotal($id = 0){
         $total = 0;
@@ -158,6 +170,7 @@ class PembelianController extends Controller
 
     public function edit($id)
     {
+        if(session('login') == "true"){
         $deskripsi = Deskripsi::all();
         $header = Pembelian::where('id', $id)->first();
         $baranglist = Persediaan::join('jenis_persediaan', 'persediaan.id_jenis', '=', 'jenis_persediaan.id')
@@ -176,6 +189,8 @@ class PembelianController extends Controller
             'active' => "pembelian",
             'deskripsilist' => $deskripsi
         ]);
+        }
+        return redirect('/login');
     }
 
     /**

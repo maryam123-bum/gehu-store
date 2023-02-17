@@ -12,6 +12,7 @@ class PenjualanController extends Controller
 {
     public function index()
     {
+        if(session('login') == "true"){
         $data_penjualan = penjualan::all();
         
         return view('penjualan/data', [
@@ -19,10 +20,13 @@ class PenjualanController extends Controller
             'data' => $data_penjualan,
             'active' => "penjualan"
         ]);
+        }
+        return redirect('/login');
     }
 
     public function create()
     {   
+        if(session('login') == "true"){
         $latestid = Penjualan::latest()->first();
         if($latestid){
             $latestid = $latestid->id + 1;
@@ -37,31 +41,39 @@ class PenjualanController extends Controller
                 'active' => "penjualan",
             'estimateid' => $latestid
         ]);
+        }
+        return redirect('/login');
     }
 
     public function bacaBarang($id = 0){
-        $baranglist = [];
-        if($id != 0){
-            $baranglist = PenjualanDetail::join('persediaan', 'penjualan_detail.id_barang', '=', 'persediaan.id')
-            ->join('jenis_persediaan', 'persediaan.id_jenis', '=', 'jenis_persediaan.id')
-            ->join('satuan', 'persediaan.id_satuan', '=', 'satuan.id')
-            ->where('id_penjualan', $id)
-            ->get(['persediaan.*', 'satuan.nama_satuan', 'jenis_persediaan.nama_jenis', 'penjualan_detail.jumlah']);
-            
+        if(session('login') == "true"){
+            $baranglist = [];
+            if($id != 0){
+                $baranglist = PenjualanDetail::join('persediaan', 'penjualan_detail.id_barang', '=', 'persediaan.id')
+                ->join('jenis_persediaan', 'persediaan.id_jenis', '=', 'jenis_persediaan.id')
+                ->join('satuan', 'persediaan.id_satuan', '=', 'satuan.id')
+                ->where('id_penjualan', $id)
+                ->get(['persediaan.*', 'satuan.nama_satuan', 'jenis_persediaan.nama_jenis', 'penjualan_detail.jumlah']);
+                
+            }
+            return view('penjualan/barang')->with([
+                'data' => $baranglist
+            ]);
         }
-        return view('penjualan/barang')->with([
-            'data' => $baranglist
-        ]);
+        return redirect('/login');
     }
     public function bacaDeskripsi($id = 0){
-        $deskripsiList = [];
-        if($id != 0){
-            $deskripsiList = PenjualanDetailDeskripsi::where('id_penjualan', $id)
-            ->get();
+        if(session('login') == "true"){
+            $deskripsiList = [];
+            if($id != 0){
+                $deskripsiList = PenjualanDetailDeskripsi::where('id_penjualan', $id)
+                ->get();
+            }
+            return view('penjualan/deskripsi')->with([
+                'data' => $deskripsiList
+            ]);
         }
-        return view('penjualan/deskripsi')->with([
-            'data' => $deskripsiList
-        ]);
+        return redirect('/login');
     }
     public function bacaTotal($id = 0){
         $total = 0;
@@ -113,19 +125,22 @@ class PenjualanController extends Controller
 
     public function edit($id)
     {
-        $header = Penjualan::where('id', $id)->first();
-        $baranglist = PenjualanDetail::join('persediaan', 'penjualan_detail.id_barang', '=', 'persediaan.id')
-            ->join('jenis_persediaan', 'persediaan.id_jenis', '=', 'jenis_persediaan.id')
-            ->join('satuan', 'persediaan.id_satuan', '=', 'satuan.id')
-            ->where('id_penjualan', $id)
-            ->get(['persediaan.*', 'satuan.nama_satuan', 'jenis_persediaan.nama_jenis', 'penjualan_detail.jumlah']);
+        if(session('login') == "true"){
+            $header = Penjualan::where('id', $id)->first();
+            $baranglist = PenjualanDetail::join('persediaan', 'penjualan_detail.id_barang', '=', 'persediaan.id')
+                ->join('jenis_persediaan', 'persediaan.id_jenis', '=', 'jenis_persediaan.id')
+                ->join('satuan', 'persediaan.id_satuan', '=', 'satuan.id')
+                ->where('id_penjualan', $id)
+                ->get(['persediaan.*', 'satuan.nama_satuan', 'jenis_persediaan.nama_jenis', 'penjualan_detail.jumlah']);
 
-        return view('penjualan.edit', [
-            'header' => $header,
-            'barang' => $baranglist,
-            'active' => "penjualan",
-            'estimateid' => Penjualan::latest()->first()['id'] + 1
-        ]);
+            return view('penjualan.edit', [
+                'header' => $header,
+                'barang' => $baranglist,
+                'active' => "penjualan",
+                'estimateid' => Penjualan::latest()->first()['id'] + 1
+            ]);
+        }
+        return redirect('/login');
     }
 
     /**

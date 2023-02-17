@@ -8,6 +8,7 @@ use App\Models\Satuan;
 class SatuanController extends Controller
 {
     public function create(){
+        if(session('login') == "true"){
         $data = Satuan::all();
         $id = Satuan::all()->count();
         return view('persediaan/satuan', [
@@ -15,6 +16,8 @@ class SatuanController extends Controller
             'active' => 'Persediaan',
             'estimateid' => $id + 1
         ]);
+        }
+        return redirect('/login');
     }
     public function store(Request $request){
         Satuan::create([

@@ -18,6 +18,7 @@ class ProduksiController extends Controller
 {
     public function data()
     {
+        if(session('login') == "true"){
         $data_produksi = Produksi::all();
         
         return view('produksi/data', [
@@ -25,10 +26,13 @@ class ProduksiController extends Controller
             'data' => $data_produksi,
             'active' => "produksi"
         ]);
+        }
+        return redirect('/login');
     }
 
     public function create()
     {   
+        if(session('login') == "true"){
         $deskripsi = Deskripsi::all();
         return view('produksi/tambah', [
             'barang' => Persediaan::join('jenis_persediaan', 'persediaan.id_jenis', '=', 'jenis_persediaan.id')
@@ -38,9 +42,12 @@ class ProduksiController extends Controller
             'active' => "produksi",
             'deskripsilist' => $deskripsi
         ]);
+        }
+        return redirect('/login');
     }
 
     public function bacaKaryawan($id){
+        if(session('login') == "true"){
         $karyawanlist = [];
         if ($id != 0) {
             $karyawanlist = ProduksiTenaga::join('karyawan', 'produksi_tenaga_kerja.id_karyawan', '=', 'karyawan.id')
@@ -50,6 +57,8 @@ class ProduksiController extends Controller
         return view('produksi/tenagakerja')->with([
             'data' => $karyawanlist
         ]);
+        }
+        return redirect('/login');
     }
 
     public function insertKaryawan(Request $request){
@@ -63,6 +72,7 @@ class ProduksiController extends Controller
 
 
     public function bacaOverhead($id = 0){
+        if(session('login') == "true"){
         $deskripsiList = [];
         if($id != 0){
             $deskripsiList = ProduksiOverhead::join('deskripsi', 'produksi_overhead.id_deskripsi', '=', 'deskripsi.id')
@@ -72,6 +82,8 @@ class ProduksiController extends Controller
         return view('produksi/overhead')->with([
             'data' => $deskripsiList
         ]);
+        }
+        return redirect('/login');
     }
 
     public function insertOverhead(Request $request){
@@ -135,6 +147,7 @@ class ProduksiController extends Controller
 
     public function edit($id)
     {
+        if(session('login') == "true"){
         $header = Produksi::where('id', $id)->first();
 
         return view('produksi.ubah', [
@@ -143,10 +156,13 @@ class ProduksiController extends Controller
             'active' => "produksi",
             'estimateid' => Produksi::latest()->first()['id'] + 1
         ]);
+        }
+        return redirect('/login');
     
     }
 
     public function bacaBahanBaku($id){
+        if(session('login') == "true"){
         $data_produksibaku = [];
         $data_karton = [];
         $data_kertasluar = [];
@@ -177,6 +193,8 @@ class ProduksiController extends Controller
             'kertaskotak' => $data_kertaskotak,
             'hargapokok' => $harga_pokok
         ]);
+        }
+        return redirect('/login');
         
     }
 

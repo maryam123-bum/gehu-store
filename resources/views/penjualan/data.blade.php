@@ -3,6 +3,7 @@
     <h2>Data {{ $judul }}</h2> 
 @endsection
 @section('container')
+    <?php if(session('jabatan') == 'Karyawan Administrasi'){ ?>
     <div class="row">
         <div class="col-2 mb-2">
             <a href="/tambah/penjualan">
@@ -12,6 +13,7 @@
             </a>
         </div>
     </div>
+    <?php } ?>
     <div class="row">
         <div class="col">
             <table class="table table-bordered">
@@ -22,7 +24,9 @@
                     <th scope="col">No. Invoice</th>
                     <th scope="col">Nama Pelanggan</th>
                     <th scope="col">Total Harga</th>
+                    <?php if(session('jabatan') == 'Karyawan Administrasi'){ ?>
                     <th scope="col">Option</th>
+                    <?php } ?>
                     </tr>
                 </thead>
                 <tbody>
@@ -35,12 +39,14 @@
                                 <td><?php echo substr_replace("INV-000",$key['id'],7-strlen($key['id'])); ?></td>
                                 <td><?php echo $key['nama_pelanggan']; ?></td>
                                 <td><?php echo $key['total']; ?></td>
+                                <?php if(session('jabatan') == 'Karyawan Administrasi'){ ?>
                                 <td>
                                     <a href="/ubah/penjualan/{{ $key['id'] }}">
                                         <button class="btn btn-light shadow" style="background-color: #212290"><i class="bi bi-pencil-square"  style="color: aliceblue"></button>
                                     </a>
                                         {{-- <button class="btn btn-danger"><i class="bi bi-trash3"></i></i></button> --}}
                                 </td>
+                                <?php } ?>
                                 </tr>
                         <?php
                         } ?>

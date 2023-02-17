@@ -16,6 +16,7 @@ class PersediaanController extends Controller
      */
     public function index()
     {   
+        if(session('login') == "true"){
         return view('persediaan/data', [
             'judul' => 'Persediaan',
             'data' => Persediaan::join('jenis_persediaan', 'persediaan.id_jenis', '=', 'jenis_persediaan.id')
@@ -23,6 +24,8 @@ class PersediaanController extends Controller
                 ->get(['persediaan.*', 'satuan.nama_satuan', 'jenis_persediaan.nama_jenis']),
             'active' => "persediaan"
         ]);
+        }
+        return redirect('/login');
     }
 
     /**
@@ -32,11 +35,14 @@ class PersediaanController extends Controller
      */
     public function create()
     {
-        return view('persediaan/tambah', [
-            'jenis' => JenisPersediaan::all(),
-            'satuan' => Satuan::all(),
-            'active' => "persediaan"
-        ]);
+        if(session('login') == "true"){
+            return view('persediaan/tambah', [
+                'jenis' => JenisPersediaan::all(),
+                'satuan' => Satuan::all(),
+                'active' => "persediaan"
+            ]);
+        }
+        return redirect('/login');
     }
 
     /**
@@ -66,6 +72,7 @@ class PersediaanController extends Controller
      */
     public function edit($id)
     {
+        if(session('login') == "true"){
         $data = Persediaan::where('id', $id)->first();
         return view('persediaan/ubah', [
             'data' => $data,
@@ -73,6 +80,8 @@ class PersediaanController extends Controller
             'satuan' => Satuan::all(),
             'active' => "persediaan"
         ]);
+        }
+        return redirect('/login');
     }
 
     /**
