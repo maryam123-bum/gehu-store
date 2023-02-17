@@ -203,7 +203,7 @@ class ProduksiController extends Controller
         ->update([
             'harga_pokok_produksi' => $hpp
         ]);
-        $idbarang = Produksi::where('id', $request->id_produksi)-first()->id_barang;
+        $idbarang = Produksi::where('id', $request->id_produksi)->first()->id_barang;
         Persediaan::where('id', $idbarang)->update([
             'harga_pokok' => $hpp
         ]);
@@ -378,7 +378,7 @@ class ProduksiController extends Controller
         ->update([
             'harga_pokok_produksi' => $hpp
         ]);
-        $idbarang = Produksi::where('id', $request->id_produksi)-first()->id_barang;
+        $idbarang = Produksi::where('id', $request->id_produksi)->first()->id_barang;
         Persediaan::where('id', $idbarang)->update([
             'harga_pokok' => $hpp
         ]);
@@ -462,7 +462,7 @@ class ProduksiController extends Controller
         ->update([
             'harga_pokok_produksi' => $hpp
         ]);
-        $idbarang = Produksi::where('id', $request->id_produksi)-first()->id_barang;
+        $idbarang = Produksi::where('id', $request->id_produksi)->first()->id_barang;
         Persediaan::where('id', $idbarang)->update([
             'harga_pokok' => $hpp
         ]);

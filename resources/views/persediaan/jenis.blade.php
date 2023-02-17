@@ -6,7 +6,7 @@
 
 @section('container')
 <div class="row">
-  <div class="col-md-9 col-lg-9">
+  <div class="col-md-8 col-lg-8">
       <div class="card">
         <div class="card-body">
           <div class="row">
@@ -23,7 +23,6 @@
                       <th scope="col">No</th>
                       <th scope="col">Kode Jenis</th>
                       <th scope="col">Nama Jenis</th>
-                      <th scope="col">Opsi</th>
                   </tr>
                   </thead>
                   <tbody>
@@ -75,7 +74,7 @@
       </div>
   </div>
  
-  <div class="col-md-3 col-lg-3">
+  <div class="col-md-4 col-lg-4">
     <div class="card">
       <div class="card-header">
         <h5>Data Information</h5>

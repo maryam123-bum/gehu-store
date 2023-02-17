@@ -22,7 +22,7 @@
                     </div>
                     <div class="row">
                         <div class="col">
-                            <h5 style="text-align: center">Laporan Laba Rugi Kotor</h5>
+                            <h5 style="text-align: center">Laporan Laba Rugi</h5>
                         </div>
                     </div>
                     <div class="row">
