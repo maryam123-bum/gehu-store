@@ -23,10 +23,20 @@ class AdminController extends Controller
                 'pembelian' => Pembelian::all()->count()
             ];
 
-            // $dataPembelian = Pembelian::whereDate('tgl_pembelian','>=', date('Y-m-d',strtotime('2023-02-15')))->whereDate('tgl_pembelian','<=', date('Y-m-d',strtotime('2023-02-16')))->get();
-            // $dataPembelian = Pembelian::all();
-            // $totalPembelian = $dataPembelian->sum('total');
-
+            $totalPenjualan = [
+                'jan' => Penjualan::whereDate('tgl_penjualan','>=', date('Y-m-d',strtotime('2023-01-01')))->whereDate('tgl_penjualan','<=', date('Y-m-d',strtotime('2023-01-31')))->get()->sum('total'),
+                'feb' => Penjualan::whereDate('tgl_penjualan','>=', date('Y-m-d',strtotime('2023-02-01')))->whereDate('tgl_penjualan','<=', date('Y-m-d',strtotime('2023-02-30')))->get()->sum('total'),
+                'mar' => Penjualan::whereDate('tgl_penjualan','>=', date('Y-m-d',strtotime('2023-03-01')))->whereDate('tgl_penjualan','<=', date('Y-m-d',strtotime('2023-03-31')))->get()->sum('total'),
+                'apr' => Penjualan::whereDate('tgl_penjualan','>=', date('Y-m-d',strtotime('2023-04-01')))->whereDate('tgl_penjualan','<=', date('Y-m-d',strtotime('2023-04-30')))->get()->sum('total'),
+                'mei' => Penjualan::whereDate('tgl_penjualan','>=', date('Y-m-d',strtotime('2023-05-01')))->whereDate('tgl_penjualan','<=', date('Y-m-d',strtotime('2023-05-31')))->get()->sum('total'),
+                'jun' => Penjualan::whereDate('tgl_penjualan','>=', date('Y-m-d',strtotime('2023-06-01')))->whereDate('tgl_penjualan','<=', date('Y-m-d',strtotime('2023-06-30')))->get()->sum('total'),
+                'jul' => Penjualan::whereDate('tgl_penjualan','>=', date('Y-m-d',strtotime('2023-07-01')))->whereDate('tgl_penjualan','<=', date('Y-m-d',strtotime('2023-07-31')))->get()->sum('total'),
+                'aug' => Penjualan::whereDate('tgl_penjualan','>=', date('Y-m-d',strtotime('2023-08-01')))->whereDate('tgl_penjualan','<=', date('Y-m-d',strtotime('2023-08-31')))->get()->sum('total'),
+                'sep' => Penjualan::whereDate('tgl_penjualan','>=', date('Y-m-d',strtotime('2023-09-01')))->whereDate('tgl_penjualan','<=', date('Y-m-d',strtotime('2023-09-30')))->get()->sum('total'),
+                'oct' => Penjualan::whereDate('tgl_penjualan','>=', date('Y-m-d',strtotime('2023-10-01')))->whereDate('tgl_penjualan','<=', date('Y-m-d',strtotime('2023-10-31')))->get()->sum('total'),
+                'nov' => Penjualan::whereDate('tgl_penjualan','>=', date('Y-m-d',strtotime('2023-11-01')))->whereDate('tgl_penjualan','<=', date('Y-m-d',strtotime('2023-11-30')))->get()->sum('total'),
+                'dec' => Penjualan::whereDate('tgl_penjualan','>=', date('Y-m-d',strtotime('2023-12-01')))->whereDate('tgl_penjualan','<=', date('Y-m-d',strtotime('2023-12-31')))->get()->sum('total'),
+            ];
             $totalPembelian = [
                 'jan' => Pembelian::whereDate('tgl_pembelian','>=', date('Y-m-d',strtotime('2023-01-01')))->whereDate('tgl_pembelian','<=', date('Y-m-d',strtotime('2023-01-31')))->get()->sum('total'),
                 'feb' => Pembelian::whereDate('tgl_pembelian','>=', date('Y-m-d',strtotime('2023-02-01')))->whereDate('tgl_pembelian','<=', date('Y-m-d',strtotime('2023-02-30')))->get()->sum('total'),
@@ -41,17 +51,18 @@ class AdminController extends Controller
                 'nov' => Pembelian::whereDate('tgl_pembelian','>=', date('Y-m-d',strtotime('2023-11-01')))->whereDate('tgl_pembelian','<=', date('Y-m-d',strtotime('2023-11-30')))->get()->sum('total'),
                 'dec' => Pembelian::whereDate('tgl_pembelian','>=', date('Y-m-d',strtotime('2023-12-01')))->whereDate('tgl_pembelian','<=', date('Y-m-d',strtotime('2023-12-31')))->get()->sum('total'),
             ];
+
             return view('dashboard/dashboard', [
                 'active' =>'dashboard',
                 'data' => $data,
-                'totalPembelian' => $totalPembelian
+                'totalPenjualan' => $totalPenjualan,
+                'totalPembelian' => $totalPembelian,
             ]);
         }
-        return redirect('/login')->with('error', 'Login terlebih dahulu');
-        // }
-        // return redirect('/login');
+        return redirect('login');
     }
-    public function cekdata(Request $request){
+
+    public function cekdata(Request $request) {
         $username = $request->username;
         $password = $request->password;
         $data = Admin::where('username', $username)->where('password', $password)->first();
