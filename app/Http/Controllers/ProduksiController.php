@@ -220,7 +220,7 @@ class ProduksiController extends Controller
             'id_jenis' => 3,
             'stok' => 1,
             'harga_pokok' => 0,
-            'id_satuan' => 4
+            'id_satuan' => 4 
         ]);
         $id = $datapersediaan->id;
         $dataproduksi = Produksi::create([
