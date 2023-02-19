@@ -8,12 +8,20 @@
         <div class="modal-body">
             <div class="row">
                 <div class="col">
-                   aaa
+                   Harga Pokok Produksi
                 </div>
                 <div class="col">
-                    aaa
+                  <?php echo "Rp. ".$key['harga_pokok_produksi']; ?>
                  </div>
             </div>
+            <div class="row">
+              <div class="col">
+                 Markup
+              </div>
+              <div class="col">
+                <input type="text">
+               </div>
+          </div>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
