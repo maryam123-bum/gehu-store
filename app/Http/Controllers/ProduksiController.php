@@ -34,13 +34,20 @@ class ProduksiController extends Controller
     {   
         if(session('login') == "true"){
         $deskripsi = Deskripsi::all();
+        $latestid = Produksi::latest()->first();
+            if($latestid){
+                $latestid = $latestid->id + 1;
+            }else{
+                $latestid = 1;
+            }
         return view('produksi/tambah', [
             'barang' => Persediaan::join('jenis_persediaan', 'persediaan.id_jenis', '=', 'jenis_persediaan.id')
             ->join('satuan', 'persediaan.id_satuan', '=', 'satuan.id')
             ->get(['persediaan.*', 'satuan.nama_satuan', 'jenis_persediaan.nama_jenis']),
             'karyawan' => Karyawan::all(),
             'active' => "produksi",
-            'deskripsilist' => $deskripsi
+            'deskripsilist' => $deskripsi,
+            'estimateid' => $latestid
         ]);
         }
         return redirect('/login');

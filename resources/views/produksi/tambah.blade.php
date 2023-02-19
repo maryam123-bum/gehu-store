@@ -28,7 +28,7 @@
                                 <h6>Kode Produksi</h6>
                             </div>
                             <div class="col-3">
-                              <h5><span class="badge bg-light" style="color:#000"></span></h5>
+                              <h5><span class="badge bg-light" style="color:#000"><?php echo substr_replace("INV-000",$estimateid,7-strlen($estimateid)); ?></span></h5>
                           </div>
                             <div class="col-1"></div>
                             <div class="col-2 font-weight-bold">
