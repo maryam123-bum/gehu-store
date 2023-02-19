@@ -248,6 +248,7 @@
       <script src="{!! asset('js/bootstrap.bundle.min.js') !!}" ></script>
       <script src="{!! asset('js/bootstrap2.bundle.min.js') !!}"></script>
       <script src="{!! asset('js/popper.min.js') !!}"></script>
+      <script src="{!! asset('js/sweetalert.min.js') !!}"></script>
       <script src="{!! asset('js/bootstrap.min.js') !!}" ></script>
       @yield('script')
     </html>
