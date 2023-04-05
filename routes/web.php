@@ -91,6 +91,11 @@ Route::post('/tambah/produksi', [ProduksiController::class, 'store']);
 
 Route::post('/update/bahanbaku/produksi', [ProduksiController::class, 'updateProduksiBaku']);
 Route::post('/update/bahanbakudetail/produksi', [ProduksiController::class, 'updateBahanBaku']);
+Route::get('/produksi/hargaJual', function () {
+    return view('produksi/hargaJual', [
+        'active' => "produksi"
+    ]);
+});
 
 //Penjualan
 Route::get('/penjualan', [PenjualanController::class, 'index']);

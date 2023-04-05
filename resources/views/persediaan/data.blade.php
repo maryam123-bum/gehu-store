@@ -54,7 +54,7 @@
                                 <?php if(session('jabatan') == 'Karyawan Administrasi'){ ?>
                                 <td>
                                     <a href="/ubah/persediaan/{{ $key['id'] }}" class="btn btn-light shadow" style="background-color: #212290"><i class="bi bi-pencil-square"  style="color: aliceblue"></a>
-                                    <a href="#delete{{ $key['id'] }}" class="btn btn-danger" data-bs-toggle="modal"><i class="bi bi-trash3"></i></a>
+                                    <a href="/hapus/persediaan{{ $key['id'] }}" class="btn btn-danger" data-bs-toggle="modal"><i class="bi bi-trash3"></i></a>
                                 </td>
                                 <?php } ?>
                             </tr>
@@ -74,7 +74,7 @@
                                             <div class="modal-footer">
                                                 
                                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                                <form action="/hapus/karyawan" method="post" style="display:inline-block">
+                                                <form action="/hapus/persediaan" method="post" style="display:inline-block">
                                                     @csrf
                                                     <input type="hidden" id="id" name="id" value="{{ $key['id'] }}">
                                                     <button type="submit" class="btn btn-danger">Ya, tentu</button>

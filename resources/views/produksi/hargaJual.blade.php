@@ -1,4 +1,4 @@
-<div class="modal" tabindex="-1">
+{{-- <div class="modal" tabindex="-1">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
@@ -11,7 +11,8 @@
                    Harga Pokok Produksi
                 </div>
                 <div class="col">
-                  <?php echo "Rp. ".$key['harga_pokok_produksi']; ?>
+                  {{-- <?php echo "Rp. ".$key['harga_pokok_produksi']; ?> --}}
+                  {{-- <input type="text">
                  </div>
             </div>
             <div class="row">
@@ -28,5 +29,5 @@
           <button type="button" class="btn btn-primary">Save changes</button>
         </div>
       </div>
-    </div>
-  </div>
+    </div> --}}
+  {{-- </div> --}}

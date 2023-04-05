@@ -1,7 +1,7 @@
 @extends('layouts.main')
 
 @section('title')
-    <h2>Tambah Akses Admin</h2>
+    <h2>Tambah Akses User</h2>
 @endsection
 
 @section('container')
