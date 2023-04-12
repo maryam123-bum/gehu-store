@@ -41,6 +41,7 @@
             <div class="invalid-feedback">
               Silahkan Pilih Jabatan.
             </div>
+           {{-- <span style="font-size: 14px" >Jabatan tidak ada? silahkan <a href="#" data-bs-toggle="modal" data-bs-target="#modaljabatan">tambah jabatan</a></span> --}}
           </div>
 
           <div class="col-12">

@@ -83,4 +83,6 @@ class KaryawanController extends Controller
         }
         return redirect('data/karyawan')->with('error', 'Hapus data karyawan gagal');
     }
+
+    public function simpanjbt()
 }

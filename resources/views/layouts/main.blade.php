@@ -20,6 +20,7 @@
         /> --}}
         <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
         <link rel="stylesheet" href="{{ asset('css/icon/bootstrapicons.css') }}">
+        <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css">
         <style>
           li {
             list-style: none;
@@ -250,5 +251,6 @@
       <script src="{!! asset('js/popper.min.js') !!}"></script>
       <script src="{!! asset('js/bootstrap.min.js') !!}" ></script>
       <script src="{!! asset('js/sweetalert.min.js') !!}"></script>
+      <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
       @yield('script')
     </html>

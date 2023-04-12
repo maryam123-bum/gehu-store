@@ -16,7 +16,7 @@
         <?php } ?>
         <div class="row">
             <div class="col">
-                <table class="table table-bordered">
+                <table class="table table-bordered" id="produksi">
                     <thead>
                       <tr style="background-color: #28276A;color:#fff; font-size: 12; text-align:center">
                         <th scope="col">No</th>
@@ -40,42 +40,47 @@
                                         </button>
                                           
                                           <!-- Modal -->
-                                          <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                          <div class="modal fade" id="modaljabatan" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                                             <div class="modal-dialog">
                                               <div class="modal-content">
                                                 <div class="modal-header">
-                                                  <h1 class="modal-title fs-5" id="staticBackdropLabel">Harga Jual</h1>
+                                                  <h1 class="modal-title fs-5" id="modaltitlejabatan">Harga Jual</h1>
                                                   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                 </div>
                                                 <div class="modal-body">
-                                                  <div class="row">
-                                                    <div class="col">
-                                                        Harga Pokok Produksi
-                                                    </div>
-                                                    <div class="col">
+                                                  <form action="">
+                                                    <div class="row">
+                                                      <div class="col-sm-12">
+                                                        <label for="hargajual" class="form-label">Harga Jual</label>
                                                         <?php echo "Rp. ".$key['harga_pokok_produksi']; ?>
+                                                        <div class="invalid-feedback">
+                                                          Silahkan isi harga jual.
+                                                        </div>
+                                                      </div>
                                                     </div>
-                                                  </div>
-                                                  <div class="row">
-                                                    <div class="col">
-                                                        Markup
+                                                    <div class="row">
+                                                      <div class="col-sm-12">
+                                                        <label for="markup" class="form-label">Markup</label>
+                                                        <input type="text" class="form-control" name="markup" id="markup" placeholder="Masukkan nilai markup" value="" required>%
+                                                        <div class="invalid-feedback">
+                                                          Silahkan isi nilai markup.
+                                                        </div>
+                                                      </div>
                                                     </div>
-                                                    <div class="col">
-                                                        <input type="text">
+                                                    <div class="row">
+                                                      <div class="col-sm-12">
+                                                        <label for="hargajual" class="form-label">Harga Jual</label>
+                                                        <?php echo "Rp. ".$key['harga_jual']; ?>
+                                                        <div class="invalid-feedback">
+                                                          Silahkan isi harga jual.
+                                                        </div>
+                                                      </div>
                                                     </div>
-                                                  </div>
-                                                  <div class="row">
-                                                    <div class="col">
-                                                        Harga Jual
-                                                    </div>
-                                                    <div class="col">
-                                                        <input type="text">
-                                                    </div>
-                                                  </div>
+                                                  </form>
                                                 </div>
                                                 <div class="modal-footer">
                                                   <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
-                                                  <button type="button" class="btn btn-primary">Simpan</button>
+                                                  <button type="submit" class="btn btn-primary">Simpan</button>
                                                 </div>
                                               </div>
                                             </div>
@@ -97,4 +102,9 @@
             </div>
         </div>
     </div>
+@endsection
+@section('script')
+<script>
+  let table = new DataTable('#produksi');
+</script>
 @endsection

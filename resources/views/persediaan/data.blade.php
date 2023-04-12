@@ -21,12 +21,17 @@
                     + Satuan
                 </button>
             </a>
+            <a href="#">
+                <button class="btn btn-light shadow" style="background-color: #b31966;color:#fff">
+                    + Stok Opname
+                </button>
+            </a>
         </div>
     </div>
     <?php } ?>
     <div class="row">
         <div class="col">
-            <table class="table table-bordered">
+            <table class="table table-bordered" id="persediaan">
                 <thead>
                 <tr style="background-color: #28276A;color:#fff">
                     <th scope="col">No</th>
@@ -98,6 +103,7 @@
     
 @endsection
 @section('script')
+
 <script>
     @if (session('success'))
         swal({
@@ -107,6 +113,6 @@
             button: "Close!",
         });
     @endif
-    
+    let table = new DataTable('#persediaan');
 </script>
 @endsection

@@ -16,7 +16,7 @@
     <?php } ?>
     <div class="row">
         <div class="col">
-            <table class="table table-bordered">
+            <table class="table table-bordered" id="kry">
                 <thead>
                     <tr style="background-color: #28276A;color:#fff">
                         <th scope="col">No</th>
@@ -98,6 +98,9 @@
 @endsection
 
 @section('script')
+<script>
+    let table = new DataTable('#kry');
+</script>
 <script>
     function handleDelete(){
         var id = $('#btnDelete').data('id')

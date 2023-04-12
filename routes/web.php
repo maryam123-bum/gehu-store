@@ -46,6 +46,7 @@ Route::post('/tambah/karyawan', [KaryawanController::class, 'store']);
 Route::get('/ubah/karyawan/{id}', [KaryawanController::class, 'edit']);
 Route::post('/ubah/karyawan', [KaryawanController::class, 'update']);
 Route::post('/hapus/karyawan', [KaryawanController::class, 'destroy']);
+Route::post('/tambah/namajabatan', [KaryawanController::class, 'simpanjbt']);
 
 //Persediaan
 Route::get('/data/persediaan', [PersediaanController::class, 'index']);
