@@ -92,11 +92,14 @@ class PersediaanController extends Controller
      */
     public function update(Request $request)
     {
+        $data = Persediaan::where('id', $request->id)->first();
+        $stok_sekarang = $data->stok;
+
         Persediaan::where('id', $request->id)
             -> update([
                 'nama_barang' => $request->nama_barang,
                 'id_jenis' => $request->jenis_barang,
-                'stok' => $request->stok,
+                'stok' => $stok_sekarang,
                 'harga_pokok' => $request->harga_pokok,
                 'id_satuan' => $request->satuan,
             ]);

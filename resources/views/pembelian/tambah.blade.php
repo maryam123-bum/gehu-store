@@ -80,7 +80,7 @@
                                 <input type="text" class="form-control mb-2" placeholder="0" name="harga" id="harga">
                             </div> --}}
                             <div class="form-group">
-                                <label for="jumlah" class="mb-2 font-weight-bold">Jumlah Barang</label>
+                                <label for="jumlah" class="mb-2 font-weight-bold">Jumlah Barang (CM)</label>
                                 <input type="text" class="form-control mb-2" placeholder="0" name="jumlah" id="jumlah">
                             </div>
                             <div class="form-group">
