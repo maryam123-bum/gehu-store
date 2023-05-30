@@ -3,7 +3,7 @@
     <h2>Data {{ $judul }}</h2> 
 @endsection
 @section('container')
-        <?php if(session('jabatan') == 'Karyawan Administrasi'){ ?>
+        <?php if(session('jabatan') == 'Karyawan Produksi'){ ?>
         <div class="row">
             <div class="col-2 mb-2">
                 <a href="/tambah/produksi">
