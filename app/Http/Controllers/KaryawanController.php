@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Karyawan;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
 class KaryawanController extends Controller
 {
@@ -84,5 +83,5 @@ class KaryawanController extends Controller
         return redirect('data/karyawan')->with('error', 'Hapus data karyawan gagal');
     }
 
-    public function simpanjbt()
+    
 }

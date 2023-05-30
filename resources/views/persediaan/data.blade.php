@@ -4,7 +4,7 @@
 @endsection
 @section('container')
     <?php if(session('jabatan') == 'Karyawan Administrasi'){ ?>
-    <div class="row mb-2">
+    <div class="row mb-3">
         <div class="col">
             <a href="/tambah/persediaan">
                 <button class="btn btn-light shadow" style="background-color: #2528DC;color:#fff">

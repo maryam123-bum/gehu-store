@@ -239,7 +239,7 @@
             </div>
           </header>
           
-          <div class="container py-5">
+          <div class="container py-3">
             @yield('container')
           </div>
         </div>
