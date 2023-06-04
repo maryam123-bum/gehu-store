@@ -20,7 +20,7 @@
         /> --}}
         <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
         <link rel="stylesheet" href="{{ asset('css/icon/bootstrapicons.css') }}">
-        <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css">
+        <link rel="stylesheet" href="{{ asset('css/jquery.dataTables.min.css') }}">
         <style>
           li {
             list-style: none;
@@ -161,6 +161,14 @@
       <body>
         <div>
           <div class="sidebar active-sidebar" style="background-color:#2E2C44 " id="sidebar">
+            {{-- <div class="row">
+              <div class="col-4">
+                <img src="/gambar/logo.jpg" alt="Logo" object-fit="cover" border-radius=100% overflow="hidden">
+              </div>
+              <div class="col-8">
+                <h4 class="mb-5 text-white p-4">Gehu Store</h4>
+              </div>
+            </div> --}}
             <h4 class="mb-5 text-white p-4">Gehu Store</h4>
             <li class="px-4 py-2 {{ ($active == "dashboard") ? 'active' : '' }}">
               <a class="text-white" href="/">
@@ -251,6 +259,6 @@
       <script src="{!! asset('js/popper.min.js') !!}"></script>
       <script src="{!! asset('js/bootstrap.min.js') !!}" ></script>
       <script src="{!! asset('js/sweetalert.min.js') !!}"></script>
-      <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+      <script src="{!! asset('js/jquery.dataTables.min.js') !!}"></script>
       @yield('script')
     </html>

@@ -1,7 +1,12 @@
 @extends('layouts.main')
 
 @section('title')
-    <h2>Tambah Penjualan</h2>
+    <div class="col">
+        <a href="/penjualan"><i class="bi bi-chevron-left fs-2"></i></a>
+    </div>
+    <div class="col-10">
+        <h2>Tambah Penjualan</h2>
+    </div>
 @endsection
 
 @section('container')

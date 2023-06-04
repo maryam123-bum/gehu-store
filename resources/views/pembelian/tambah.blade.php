@@ -1,7 +1,12 @@
 @extends('layouts.main')
 
 @section('title')
-    <h2>Tambah Pembelian</h2>
+    <div class="col">
+        <a href="/pembelian"><i class="bi bi-chevron-left fs-2"></i></a>
+    </div>
+    <div class="col-10">
+        <h2>Tambah Pembelian</h2>
+    </div>
 @endsection
 
 @section('container')
@@ -15,7 +20,7 @@
                 </h3>
             </div>
             <div class="col-2">
-                <button type="button" class="btn btn-primary" style="background-color: #080E7D;color:#fff" onclick="store()">Buat Transaksi</button>
+                <button type="button" class="btn" style="background-color: #080E7D;color:#fff" onclick="store()">Buat Transaksi</button>
             </div>
         </div>
         <div class="row mb-3">
@@ -87,7 +92,7 @@
                                 <label for="jumlah" class="mb-2 font-weight-bold">Potongan</label>
                                 <input type="text" class="form-control mb-2" placeholder="0" name="diskon" id="diskon">
                             </div>
-                            <button class="w-100 btn btn-primary btn-md" style="background-color: #080E7D;color:#fff" type="button" <?php  ?> onclick="insertBarang()">Simpan Data</button>
+                            <button class="w-100 btn btn-md" style="background-color: #080E7D;color:#fff" type="button" <?php  ?> onclick="insertBarang()">Simpan Data</button>
                         </div>
                     </div>
             </div>
@@ -120,7 +125,7 @@
                             <label for="jumlah" class="mb-2 font-weight-bold">Biaya</label>
                             <input type="text" class="form-control mb-2" placeholder="0" name="biaya" id="biaya">
                         </div>
-                        <button class="w-100 btn btn-primary btn-md" style="background-color: #080E7D;color:#fff" type="button" onclick="insertDeskripsi()">Simpan Data</button>
+                        <button class="w-100 btn btn-md" style="background-color: #080E7D;color:#fff" type="button" onclick="insertDeskripsi()">Simpan Data</button>
                     </div>
                 </div>
             </div>
@@ -128,9 +133,16 @@
         <div class="row mb-3">
             <div class="col-8">
                 <div class="card">
-                    <h4 class="font-weight-bold p-4">
-                        Total : <span id="totalSemua">0</span></p>
-                    </h4>
+                    <div class="row">
+                        <div class="col-10">
+                            <h4 class="font-weight-bold p-4">
+                                Total : <span id="totalSemua">0</span></p>
+                            </h4>
+                        </div>
+                        <div class="col-2 py-4">
+                            <button type="button" class="btn" style="background-color: #080E7D"><a href="/pembelian" style="color:#fff">Selesai</a></button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

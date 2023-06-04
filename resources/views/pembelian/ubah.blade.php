@@ -1,7 +1,12 @@
 @extends('layouts.main')
 
 @section('title')
-    <h2>Ubah Pembelian</h2>
+    <div class="col">
+        <a href="/pembelian"><i class="bi bi-chevron-left fs-2"></i></a>
+    </div>
+    <div class="col-10">
+        <h2>Ubah Pembelian</h2>
+    </div>
 @endsection
 
 @section('container')
@@ -128,6 +133,9 @@
                     <h4 class="font-weight-bold p-4">
                         Total : <span id="totalSemua">0</span></p>
                     </h4>
+                </div>
+                <div class="col-2 py-4">
+                    <button type="button" class="btn" style="background-color: #080E7D"><a href="/pembelian" style="color:#fff">Selesai</a></button>
                 </div>
             </div>
         </div>

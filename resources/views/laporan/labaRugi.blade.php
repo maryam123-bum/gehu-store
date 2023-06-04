@@ -1,6 +1,11 @@
 @extends('layouts/main')
 @section('title')
-    <h2>LAPORAN</h2> 
+<div class="col">
+    <a href="/laporan"><i class="bi bi-chevron-left fs-2"></i></a>
+</div>
+<div class="col-10">
+    <h2>Laporan Laba Rugi</h2>
+</div> 
 
 @endsection
 @section('container')
@@ -17,7 +22,7 @@
                 <div class="col-8">
                     <div class="row">
                         <div class="col">
-                            <h5 style="text-align: center;color:#2596be;font-weight:bold">Gehu Store Quee</h5>
+                            <h5 style="text-align: center;color:#2596be;font-weight:bold">Gehu Store</h5>
                         </div>
                     </div>
                     <div class="row">

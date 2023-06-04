@@ -1,6 +1,11 @@
 @extends('layouts/main')
 @section('title')
-    <h2>LAPORAN</h2> 
+<div class="col">
+  <a href="/laporan"><i class="bi bi-chevron-left fs-2"></i></a>
+</div>
+<div class="col-10">
+  <h2>Laporan Persediaan Barang</h2>
+</div>
 
 @endsection
 @section('container')

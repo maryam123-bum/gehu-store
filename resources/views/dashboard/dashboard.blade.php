@@ -3,10 +3,11 @@
     <h2>DASHBOARD</h2> 
 
 @endsection
+
 @section('container')
     <div class="container text-center">
         <div class="row">
-          <div class="col-7">
+          <div class="col-9">
             <div class="card">
               <div class="card-body p-3">
                 <figure class="highcharts-figure">
@@ -15,7 +16,7 @@
               </div>
             </div>
           </div>
-          <div class="col-5">
+          <div class="col-3">
             <div class="row mb-3">
               <div class="col">
                 <div class="card">
@@ -29,6 +30,9 @@
                   </div>
                 </div>
               </div>
+            </div>
+
+            <div class="row mb-3">
               <div class="col">
                 <div class="card">
                   <div class="card-body shadow">
@@ -42,7 +46,8 @@
                 </div>
               </div>
             </div>
-            <div class="row">
+
+            <div class="row mb-3">
               <div class="col">
                 <div class="card">
                   <div class="card-body shadow">
@@ -55,6 +60,9 @@
                   </div>
                 </div>
               </div>
+            </div>
+
+            <div class="row mb-3">
               <div class="col">
                 <div class="card">
                   <div class="card-body shadow">
@@ -68,10 +76,12 @@
                 </div>
               </div>
             </div>
+
           </div>
         </div>
     </div>
 @endsection
+
 @section('script')
 
 <script>

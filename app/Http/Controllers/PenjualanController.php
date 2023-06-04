@@ -17,7 +17,7 @@ class PenjualanController extends Controller
         $data_penjualan = penjualan::all();
         
         return view('penjualan/data', [
-            'judul' => "penjualan",
+            'judul' => "Penjualan",
             'data' => $data_penjualan,
             'active' => "penjualan"
         ]);

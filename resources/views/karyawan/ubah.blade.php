@@ -1,7 +1,12 @@
 @extends('layouts.main')
 
 @section('title')
+  <div class="col">
+    <a href="/data/karyawan"><i class="bi bi-chevron-left fs-2"></i></a>
+  </div>
+  <div class="col-10">
     <h2>Ubah Karyawan</h2>
+  </div>
 @endsection
 
 @section('container')
