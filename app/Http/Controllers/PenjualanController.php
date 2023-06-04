@@ -11,40 +11,54 @@ use App\Models\Deskripsi;
 
 class PenjualanController extends Controller
 {
+    //Fungsi untuk menampilkan Data
     public function index()
     {
+        /*
+            Tampil Data Semua Penjualan dalam bentuk Tabel
+            1. Ambil data dari database (?)
+            2. Data simpan di variable
+            3. Menampilkan view penjualan/data
+        */
+
+        //if untuk mengecek apakah user masih login atau tidak
         if(session('login') == "true"){
-        $data_penjualan = penjualan::all();
-        
-        return view('penjualan/data', [
-            'judul' => "Penjualan",
-            'data' => $data_penjualan,
-            'active' => "penjualan"
-        ]);
+            //Mengambil data dari database
+            $data_penjualan = Penjualan::all();
+            
+            //return alamat view + data dalam bentuk array
+            // kata kunci => data
+            return view('penjualan/data', [
+                'judul' => "Penjualan",
+                'data' => $data_penjualan,
+                'active' => "penjualan"
+            ]);
         }
+        //Jika user tidak login maka akan dikembalikan
         return redirect('/login');
     }
 
     public function create()
     {   
         if(session('login') == "true"){
-        $latestid = Penjualan::latest()->first();
-        if($latestid){
-            $latestid = $latestid->id + 1;
-        }else{
-            $latestid = 1;
-        }
-        $deskripsiList = Deskripsi::all();
-        return view('penjualan/tambah', [
-            'barang' => Persediaan::join('jenis_persediaan', 'persediaan.id_jenis', '=', 'jenis_persediaan.id')
-                ->join('satuan', 'persediaan.id_satuan', '=', 'satuan.id')
-                ->where('id_jenis', 3)
-                ->get(['persediaan.*', 'satuan.nama_satuan', 'jenis_persediaan.nama_jenis']),
+            $latestid = Penjualan::latest()->first();
+            if($latestid){
+                $latestid = $latestid->id + 1;
+            }else{
+                $latestid = 1;
+            }
+            $deskripsiList = Deskripsi::all();
+            return view('penjualan/tambah', [
+                'barang' => Persediaan::join('jenis_persediaan', 'persediaan.id_jenis', '=', 'jenis_persediaan.id')
+                    ->join('satuan', 'persediaan.id_satuan', '=', 'satuan.id')
+                    ->where('id_jenis', 3)
+                    ->get(['persediaan.*', 'satuan.nama_satuan', 'jenis_persediaan.nama_jenis']),
                 'active' => "penjualan",
                 'deskripsilist' => $deskripsiList,
-            'estimateid' => $latestid
-        ]);
+                'estimateid' => $latestid
+            ]);
         }
+
         return redirect('/login');
     }
 
@@ -53,10 +67,10 @@ class PenjualanController extends Controller
             $baranglist = [];
             if($id != 0){
                 $baranglist = PenjualanDetail::join('persediaan', 'penjualan_detail.id_barang', '=', 'persediaan.id')
-                ->join('jenis_persediaan', 'persediaan.id_jenis', '=', 'jenis_persediaan.id')
-                ->join('satuan', 'persediaan.id_satuan', '=', 'satuan.id')
-                ->where('id_penjualan', $id)
-                ->get(['persediaan.*', 'satuan.nama_satuan', 'jenis_persediaan.nama_jenis', 'penjualan_detail.jumlah']);
+                    ->join('jenis_persediaan', 'persediaan.id_jenis', '=', 'jenis_persediaan.id')
+                    ->join('satuan', 'persediaan.id_satuan', '=', 'satuan.id')
+                    ->where('id_penjualan', $id)
+                    ->get(['persediaan.*', 'satuan.nama_satuan', 'jenis_persediaan.nama_jenis', 'penjualan_detail.jumlah']);
                 
             }
             return view('penjualan/barang')->with([
@@ -65,6 +79,7 @@ class PenjualanController extends Controller
         }
         return redirect('/login');
     }
+
     public function bacaDeskripsi($id = 0){
         if(session('login') == "true"){
             $deskripsiList = [];
@@ -78,6 +93,7 @@ class PenjualanController extends Controller
         }
         return redirect('/login');
     }
+
     public function bacaTotal($id = 0){
         $total = 0;
         if($id != 0){
@@ -97,6 +113,7 @@ class PenjualanController extends Controller
         }
         return $total;
     }
+
     public function insertBarang(Request $request)
     {
         PenjualanDetail::create([
