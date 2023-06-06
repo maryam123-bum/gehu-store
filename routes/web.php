@@ -27,19 +27,17 @@ Route::get('/login', function () {
 
         return view('/login/login');
 });
-
-//mengirim data login
-Route::post('/login', [AdminController::class, 'cekdata']);
-//mengirim data logout
-Route::post('/logout', [AdminController::class, 'logout']);
-
-//Dashboard
-Route::get('/', [AdminController::class, 'index']);
-
 Route::get('/chart', function() {
     return view('/dashboard/chart');
 });
 
+//ubah seperti ini
+Route::controller(AdminController::class)->group(function () {
+    Route::get('/', 'index');
+
+    Route::get('/login', 'cekdata');
+    Route::get('/logout', 'logout');
+});
 
 //Karyawan
 Route::get('/data/karyawan', [KaryawanController::class, 'index']);
