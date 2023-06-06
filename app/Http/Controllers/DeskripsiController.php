@@ -40,6 +40,7 @@ class DeskripsiController extends Controller
 
     //menyimpan perubahan data pada DB
     public function update(Request $request){
+        //memperbarui
         Deskripsi::where('id', $request->id)
             ->update([
                 'deskripsi' => $request->deskripsi

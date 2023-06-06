@@ -34,81 +34,98 @@ Route::get('/chart', function() {
 //ubah seperti ini
 Route::controller(AdminController::class)->group(function () {
     Route::get('/', 'index');
-
-    Route::get('/login', 'cekdata');
-    Route::get('/logout', 'logout');
+    Route::post('/login', 'cekdata');
+    Route::post('/logout', 'logout');
 });
 
 //Karyawan
-Route::get('/data/karyawan', [KaryawanController::class, 'index']);
-Route::get('/tambah/karyawan', [KaryawanController::class, 'create']);
-Route::post('/tambah/karyawan', [KaryawanController::class, 'store']);
-Route::get('/ubah/karyawan/{id}', [KaryawanController::class, 'edit']);
-Route::post('/ubah/karyawan', [KaryawanController::class, 'update']);
-Route::post('/hapus/karyawan', [KaryawanController::class, 'destroy']);
-Route::post('/tambah/namajabatan', [KaryawanController::class, 'simpanjbt']);
+Route::controller(KaryawanController::class)->group(function () {
+    Route::get('/data/karyawan', 'index');
+    Route::get('/tambah/karyawan', 'create');
+    Route::get('/ubah/karyawan/{id}', 'edit');
+
+    Route::post('/tambah/karyawan', 'store');
+    Route::post('/ubah/karyawan', 'update');
+    Route::post('/hapus/karyawan', 'destroy');
+    Route::post('/tambah/namajabatan', 'simpanjbt');
+});
 
 //Persediaan
-Route::get('/data/persediaan', [PersediaanController::class, 'index']);
-Route::get('/tambah/persediaan', [PersediaanController::class, 'create']);
-Route::post('/tambah/persediaan', [PersediaanController::class, 'store']);
-Route::get('/ubah/persediaan/{id}', [PersediaanController::class, 'edit']);
-Route::post('/ubah/persediaan', [PersediaanController::class, 'update']);
-Route::post('/hapus/persediaan', [PersediaanController::class, 'destroy']);
+Route::controller(PersediaanController::class)->group(function () {
+    Route::get('/data/persediaan', 'index');
+    Route::get('/tambah/persediaan', 'create');
+    Route::get('/ubah/persediaan/{id}', 'edit');
+
+    Route::post('/tambah/persediaan', 'store');
+    Route::post('/ubah/persediaan', 'update');
+    Route::post('/hapus/persediaan', 'destroy');
+});
 
 //Jenis
-Route::get('/tambah/jenis', [JenisPersediaanController::class, 'create']);
-Route::post('/tambah/jenis', [JenisPersediaanController::class, 'store']);
+Route::controller(JenisPersediaanController::class)->group(function () {
+    Route::get('/tambah/jenis', 'create');
+    Route::post('/tambah/jenis', 'store');
+});
 
 //Satuan
-Route::get('/tambah/satuan', [SatuanController::class, 'create']);
-Route::post('/tambah/satuan', [SatuanController::class, 'store']);
+Route::controller(SatuanController::class)->group(function () {
+    Route::get('/tambah/satuan', 'create');
+    Route::post('/tambah/satuan', 'store');
+});
 
 //Deskripsi
-Route::get('/tambah/deskripsi', [DeskripsiController::class, 'create']);
-Route::post('/tambah/deskripsi', [DeskripsiController::class, 'store']);
+Route::controller(DeskripsiController::class)->group(function () {
+    Route::get('/tambah/deskripsi', 'create');
+    Route::post('/tambah/deskripsi', 'store');
+});
 
 //Pembeliaan
-Route::get('/pembelian', [PembelianController::class, 'index']);
-Route::get('/tambah/pembelian', [PembelianController::class, 'create']);
-Route::get('/barang/pembelian/{id}', [PembelianController::class, 'bacaBarang']);
-Route::get('/deskripsi/pembelian/{id}', [PembelianController::class, 'bacaDeskripsi']);
-Route::get('/total/pembelian/{id}', [PembelianController::class, 'bacaTotal']);
-Route::get('/ubah/pembelian/{id}', [PembelianController::class, 'edit']);
+Route::controller(PembelianController::class)->group(function () {
+    Route::get('/pembelian', 'index');
+    Route::get('/tambah/pembelian', 'create');
+    Route::get('/barang/pembelian/{id}', 'bacaBarang');
+    Route::get('/deskripsi/pembelian/{id}', 'bacaDeskripsi');
+    Route::get('/total/pembelian/{id}', 'bacaTotal');
+    Route::get('/ubah/pembelian/{id}', 'edit');
 
-Route::post('tambah/pembelian', [PembelianController::class, 'store']);
-Route::post('tambah/barang/pembelian-detail', [PembelianController::class, 'insertBarang']);
-Route::post('tambah/deskripsi/pembelian-detail', [PembelianController::class, 'insertDeskripsi']);
+    Route::post('/tambah/pembelian', 'store');
+    Route::post('/tambah/barang/pembelian-detail', 'insertBarang');
+    Route::post('/tambah/deskripsi/pembelian-detail', 'insertDeskripsi');
+});
 
 //Produksi
-Route::get('/produksi', [ProduksiController::class, 'data']);
-Route::get('/tambah/produksi', [ProduksiController::class, 'create']);
-Route::get('/karyawan/produksi/{id}', [ProduksiController::class, 'bacaKaryawan']);
-Route::get('/overhead/produksi/{id}', [ProduksiController::class, 'bacaOverhead']);
-Route::get('/bahanbaku/produksi/{id}', [ProduksiController::class, 'bacaBahanBaku']);
-Route::post('/tambah/karyawan/produksi', [ProduksiController::class, 'insertKaryawan']);
-Route::post('/tambah/overhead/produksi', [ProduksiController::class, 'insertOverhead']);
-Route::post('/tambah/produksi', [ProduksiController::class, 'store']);
+Route::controller(ProduksiController::class)->group(function () {
+    Route::get('/produksi', 'data');
+    Route::get('/tambah/produksi', 'create');
+    Route::get('/karyawan/produksi/{id}', 'bacaKaryawan');
+    Route::get('/overhead/produksi/{id}', 'bacaOverhead');
+    Route::get('/bahanbaku/produksi/{id}', 'bacaBahanBaku');
+    Route::get('/produksi/hargaJual', function () {
+        return view('produksi/hargaJual', [
+            'active' => "produksi"
+        ]);
+    });
 
-Route::post('/update/bahanbaku/produksi', [ProduksiController::class, 'updateProduksiBaku']);
-Route::post('/update/bahanbakudetail/produksi', [ProduksiController::class, 'updateBahanBaku']);
-Route::get('/produksi/hargaJual', function () {
-    return view('produksi/hargaJual', [
-        'active' => "produksi"
-    ]);
+    Route::post('/tambah/karyawan/produksi', 'insertKaryawan');
+    Route::post('/tambah/overhead/produksi', 'insertOverhead');
+    Route::post('/tambah/produksi', 'store');
+    Route::post('/update/bahanbaku/produksi', 'updateProduksiBaku');
+    Route::post('/update/bahanbakudetail/produksi', 'updateBahanBaku');
 });
 
 //Penjualan
-Route::get('/penjualan', [PenjualanController::class, 'index']);
-Route::get('/tambah/penjualan', [PenjualanController::class, 'create']);
-Route::get('/barang/penjualan/{id}', [PenjualanController::class, 'bacaBarang']);
-Route::get('/deskripsi/penjualan/{id}', [PenjualanController::class, 'bacaDeskripsi']);
-Route::get('/total/penjualan/{id}', [PenjualanController::class, 'bacaTotal']);
-Route::get('/ubah/penjualan/{id}', [PenjualanController::class, 'edit']);
+Route::controller(PenjualanController::class)->group(function () {
+    Route::get('/penjualan', 'index');
+    Route::get('/tambah/penjualan', 'create');
+    Route::get('/barang/penjualan/{id}', 'bacaBarang');
+    Route::get('/deskripsi/penjualan/{id}', 'bacaDeskripsi');
+    Route::get('/total/penjualan/{id}', 'bacaTotal');
+    Route::get('/ubah/penjualan/{id}', 'edit');
 
-Route::post('tambah/penjualan', [PenjualanController::class, 'store']);
-Route::post('tambah/barang/penjualan-detail', [PenjualanController::class, 'insertBarang']);
-Route::post('tambah/deskripsi/penjualan-detail', [PenjualanController::class, 'insertDeskripsi']);
+    Route::post('/tambah/penjualan', 'store');
+    Route::post('/tambah/barang/penjualan-detail', 'insertBarang');
+    Route::post('/tambah/deskripsi/penjualan-detail', 'insertDeskripsi');
+});
 
 //laporan
 Route::get('/laporan', function () {
@@ -147,9 +164,12 @@ Route::get('/profil', function () {
 });
 
 //Admin
-Route::get('/data/access', [AdminController::class, 'data']);
-Route::get('/tambah/access', [AdminController::class, 'create']);
-Route::get('/ubah/access/{id}', [AdminController::class, 'edit']);
-Route::post('/tambah/access', [AdminController::class, 'store']);
-Route::post('/ubah/access', [AdminController::class, 'update']);
-Route::post('/hapus/access', [AdminController::class, 'destroy']);
+Route::controller(AdminController::class)->group(function () {
+    Route::get('/data/access', 'data');
+    Route::get('/tambah/access', 'create');
+    Route::get('/ubah/acess/{id}', 'edit');
+
+    Route::post('/tambah/access', 'store');
+    Route::post('/ubah/access', 'update');
+    Route::post('/hapus/access', 'destroy');
+});

@@ -120,6 +120,8 @@ class PembelianController extends Controller
         //update total
             $totalBarang = 0;
             $totalDiskon = 0;
+            //menggabungkan tabel pembelianDetail dg persediaan pk=id fk=id_barang
+            //get= harga_pokok->persediaan, jumlah->pembelian_detail, diskon->pembelian_detail
             $data = PembelianDetail::join('persediaan', 'pembelian_detail.id_barang', '=', 'persediaan.id')
                 ->where('id_pembelian', $request->id_pembelian)
                 ->get(['persediaan.harga_pokok', 'pembelian_detail.jumlah', 'pembelian_detail.diskon']);
