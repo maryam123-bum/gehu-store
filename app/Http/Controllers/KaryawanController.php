@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 
 class KaryawanController extends Controller
 {
+    //menampilkan data karyawan
     public function index()
     {
         if(session('login') == "true"){
@@ -21,6 +22,7 @@ class KaryawanController extends Controller
         return redirect('/login');
     }
 
+    //menambahkan data baru
     public function create()
     {
         if(session('login') == "true"){
@@ -31,6 +33,7 @@ class KaryawanController extends Controller
         return redirect('/login');
     }
 
+    //menyimpan data kedalam DB
     public function store(Request $request)
     {
         $firstName = $request->firstName;
@@ -49,6 +52,7 @@ class KaryawanController extends Controller
         return redirect('data/karyawan')->with('success', 'Tambah data karyawan berhasil');
     }
 
+    //mengubah data
     public function edit($id)
     {
         if(session('login') == "true" && session('jabatan') == "Direktur"){
@@ -61,6 +65,7 @@ class KaryawanController extends Controller
         return redirect('/login');
     }
 
+    //memperbarui/merubah data pada DB
     public function update(Request $request)
     {
         Karyawan::where('id', $request->id)
@@ -74,6 +79,7 @@ class KaryawanController extends Controller
         return redirect('data/karyawan')->with('success', 'Ubah data karyawan berhasil');
     }
 
+    //menghapus data
     public function destroy(Request $request)
     {
         if($request->id){

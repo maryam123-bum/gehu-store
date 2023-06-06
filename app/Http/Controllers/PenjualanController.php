@@ -38,16 +38,23 @@ class PenjualanController extends Controller
         return redirect('/login');
     }
 
+    //fungsi menambah data/membuat data baru
     public function create()
     {   
         if(session('login') == "true"){
+
+            //memberi urutan id
             $latestid = Penjualan::latest()->first();
             if($latestid){
                 $latestid = $latestid->id + 1;
             }else{
                 $latestid = 1;
             }
+
+            //menampilkan deskripsi
             $deskripsiList = Deskripsi::all();
+
+            //menampilkan data pada form tambah penjualan
             return view('penjualan/tambah', [
                 'barang' => Persediaan::join('jenis_persediaan', 'persediaan.id_jenis', '=', 'jenis_persediaan.id')
                     ->join('satuan', 'persediaan.id_satuan', '=', 'satuan.id')
@@ -62,6 +69,7 @@ class PenjualanController extends Controller
         return redirect('/login');
     }
 
+    //menampilkan list barang di tambah penjualan
     public function bacaBarang($id = 0){
         if(session('login') == "true"){
             $baranglist = [];
@@ -80,6 +88,7 @@ class PenjualanController extends Controller
         return redirect('/login');
     }
 
+    //menampilkan data deskripsi
     public function bacaDeskripsi($id = 0){
         if(session('login') == "true"){
             $deskripsiList = [];
@@ -94,6 +103,8 @@ class PenjualanController extends Controller
         return redirect('/login');
     }
 
+
+    //menampilkan total harga
     public function bacaTotal($id = 0){
         $total = 0;
         if($id != 0){
@@ -114,6 +125,7 @@ class PenjualanController extends Controller
         return $total;
     }
 
+    //menambah barang untuk di jual di form tambah penjualan
     public function insertBarang(Request $request)
     {
         PenjualanDetail::create([
@@ -144,6 +156,7 @@ class PenjualanController extends Controller
         return $request->id_penjualan;
     }
 
+    //menambah deskripsi
     public function insertDeskripsi(Request $request)
     {
         PenjualanDetailDeskripsi::create([
@@ -172,6 +185,7 @@ class PenjualanController extends Controller
         return $request->id_penjualan;
     }
 
+    //menyimpan data penjualan ke database
     public function store(Request $request)
     {
         Penjualan::create([
@@ -183,6 +197,7 @@ class PenjualanController extends Controller
         return $id;
     }
 
+    //merubah data penjualan yang telah dibuat
     public function edit($id)
     {
         if(session('login') == "true"){

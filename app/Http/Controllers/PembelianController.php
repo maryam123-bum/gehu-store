@@ -11,6 +11,7 @@ use App\Models\Deskripsi;
 
 class PembelianController extends Controller
 {
+    //menampilkan data
     public function index()
     {
         if(session('login') == "true"){
@@ -25,6 +26,7 @@ class PembelianController extends Controller
         return redirect('/login');
     }
 
+    //membuat data
     public function create()
     { 
         if(session('login') == "true"){  
@@ -48,6 +50,7 @@ class PembelianController extends Controller
         return redirect('/login');
     }
 
+    //menampilkan data barang dalam form
     public function bacaBarang($id = 0){
         if(session('login') == "true"){
             $baranglist = [];
@@ -65,6 +68,8 @@ class PembelianController extends Controller
         }
         return redirect('/login');
     }
+
+    //menampilkan data deskripsi pada form
     public function bacaDeskripsi($id = 0){
         if(session('login') == "true"){
             $deskripsiList = [];
@@ -79,6 +84,8 @@ class PembelianController extends Controller
         }
         return redirect('/login');
     }
+
+    //menampilkan data total pada form
     public function bacaTotal($id = 0){
         $total = 0;
         if($id != 0){
@@ -97,6 +104,8 @@ class PembelianController extends Controller
         }
         return $total;
     }
+
+    //menyimpan data yg di tambahkan pada form
     public function insertBarang(Request $request)
     {   
         PembelianDetail::create([
@@ -130,6 +139,8 @@ class PembelianController extends Controller
             //end update
         return $request->id_pembelian;
     }
+
+    //menambah deskripsi pada form
     public function insertDeskripsi(Request $request)
     {
         PembelianDetailDeskripsi::create([
@@ -160,6 +171,8 @@ class PembelianController extends Controller
             //end update
         return $request->id_pembelian;
     }
+
+    //menyimpan data pada DB
     public function store(Request $request)
     {
         Pembelian::create([
@@ -171,6 +184,7 @@ class PembelianController extends Controller
         return $id;
     }
 
+    //mengubah data
     public function edit($id)
     {
         if(session('login') == "true"){

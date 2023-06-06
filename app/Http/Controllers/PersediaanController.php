@@ -14,6 +14,8 @@ class PersediaanController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+     //menampilkan data
     public function index()
     {   
         if(session('login') == "true"){
@@ -33,6 +35,8 @@ class PersediaanController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+     //menambah data baru
     public function create()
     {
         if(session('login') == "true"){
@@ -51,6 +55,8 @@ class PersediaanController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+
+     //menyimpan data pada DB
     public function store(Request $request)
     {
         Persediaan::create([
@@ -70,6 +76,8 @@ class PersediaanController extends Controller
      * @param  integer $id
      * @return \Illuminate\Http\Response
      */
+
+     //mengubah data
     public function edit($id)
     {
         if(session('login') == "true"){
@@ -90,6 +98,8 @@ class PersediaanController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+
+     //menyimpan perubahan pada DB
     public function update(Request $request)
     {
         $data = Persediaan::where('id', $request->id)->first();
@@ -113,6 +123,8 @@ class PersediaanController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+
+     //menghapus data
     public function destroy(Request $request)
     {
         Persediaan::where('id', $request->id)->delete();

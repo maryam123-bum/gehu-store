@@ -16,6 +16,7 @@ use App\Models\Deskripsi;
 
 class ProduksiController extends Controller
 {
+    //menampilkan data
     public function data()
     {
         if(session('login') == "true"){
@@ -30,6 +31,7 @@ class ProduksiController extends Controller
         return redirect('/login');
     }
 
+    //membuat data
     public function create()
     {   
         if(session('login') == "true"){
@@ -53,6 +55,7 @@ class ProduksiController extends Controller
         return redirect('/login');
     }
 
+    //menampilkan data karyawan pada form
     public function bacaKaryawan($id){
         if(session('login') == "true"){
         $karyawanlist = [];
@@ -68,6 +71,7 @@ class ProduksiController extends Controller
         return redirect('/login');
     }
 
+    //menambah data karyawan pada form
     public function insertKaryawan(Request $request){
         ProduksiTenaga::create([
             'id_produksi' => $request->id_produksi,
@@ -136,6 +140,7 @@ class ProduksiController extends Controller
     }
 
 
+    //menampilkan data overhead pada form
     public function bacaOverhead($id = 0){
         if(session('login') == "true"){
         $deskripsiList = [];
@@ -151,6 +156,7 @@ class ProduksiController extends Controller
         return redirect('/login');
     }
 
+    //menambah pada form
     public function insertOverhead(Request $request){
         ProduksiOverhead::create([
             'id_produksi' => $request->id_produksi,
@@ -219,6 +225,7 @@ class ProduksiController extends Controller
         return $request->id_produksi;
     }
 
+    //menyimpan kedalam DB
     public function store(Request $request)
     {   
         // return $request->nama_barang_produksi;
@@ -269,6 +276,7 @@ class ProduksiController extends Controller
         return $dataproduksi->id;
     }
 
+    //mengubah data
     public function edit($id)
     {
         if(session('login') == "true"){
@@ -285,6 +293,7 @@ class ProduksiController extends Controller
     
     }
 
+    //menampilkan data pada form
     public function bacaBahanBaku($id){
         if(session('login') == "true"){
         $data_produksibaku = [];
@@ -322,6 +331,7 @@ class ProduksiController extends Controller
         
     }
 
+    //memperbarui persediaan
     public function updateProduksiBaku(Request $request)
     {
         ProduksiBaku::where('id_produksi', $request->id_produksi)

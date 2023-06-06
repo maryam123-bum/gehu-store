@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Auth;
 
 class AdminController extends Controller
 {
+    //mengambil data pada dashboard
     public function index(Request $request){
         // if(Auth::check()){
         // return session()->all();
@@ -62,6 +63,7 @@ class AdminController extends Controller
         return redirect('login');
     }
 
+    //cek data login
     public function cekdata(Request $request) {
         $username = $request->username;
         $password = $request->password;
@@ -79,11 +81,14 @@ class AdminController extends Controller
             return redirect('/login')->with('status', 'Gagal Login');
         }
     }
+
+    //keluar aplikasi
     public function logout(Request $request){
         $request->session()->put('login','false');
         return redirect('/login');
     }
 
+    //menampilkan data akses pada menu data akses
     public function data(){
         $admin = Admin::join('karyawan', 'admin.id_karyawan', '=', 'karyawan.id')->get([
             'admin.id', 'admin.username', 'karyawan.nama'
@@ -94,6 +99,7 @@ class AdminController extends Controller
         ]);
     }
 
+    //menambah data akses
     public function create()
     {   
         $karyawan = Karyawan::all();
@@ -103,6 +109,8 @@ class AdminController extends Controller
             'active' => "data-tambahan"
         ]);
     }
+
+    //menyimpan data admin
     public function store(Request $request)
     {
         Admin::create([
@@ -112,6 +120,8 @@ class AdminController extends Controller
         ]);
         return redirect('/data/access')->with('success', 'Tambah Admin Behasil');
     }
+
+    //mengubah data admin
     public function edit($id)
     {    
         $karyawan = Karyawan::all();
@@ -124,6 +134,7 @@ class AdminController extends Controller
         ]);
     }
     
+    //memperbarui data baru yang telah diubah pada databasse
     public function update(Request $request)
     {
         Admin::where('id',$request->id)
@@ -134,6 +145,8 @@ class AdminController extends Controller
         ]);
         return redirect('/data/access')->with('success', 'Tambah Admin Behasil');
     }
+
+    //menghapus data admin
     public function destroy(Request $request)
     {
         Admin::where('id', $request->id)->delete();
