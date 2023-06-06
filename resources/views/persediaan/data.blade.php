@@ -23,7 +23,7 @@
             </a>
             <a href="#">
                 <button class="btn btn-light shadow" style="background-color: #b31966;color:#fff">
-                    + Stok Opname
+                    + Stock Opname
                 </button>
             </a>
         </div>

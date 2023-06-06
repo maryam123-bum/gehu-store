@@ -9,21 +9,26 @@ class DeskripsiController extends Controller
 {
     //membuat data
     public function create(){
-        if(session('login') == "true"){
-            $id = Deskripsi::all()->count();
-            return view('persediaan/deskripsi', [
+        if(session('login') == "true"){  
+            $id = Deskripsi::all()->count(); //mengambil id dari semua database Deskripsi
+            //menampilkan data deskripsi
+            return view('persediaan/deskripsi', [ 
                 'active' => 'Persediaan',
                 'estimateid' => $id + 1
             ]);
         }
+
+        //mengembalikan ke halaman login
         return redirect('/login');
     }
 
     //menyimpan data kedalam DB
     public function store(Request $request){
+        //menambah deskripsi baru
         Deskripsi::create([
             'deskripsi' => $request->deskripsi
         ]);
+        //mengembalikan pada halaman persediaan
         return redirect('/data/persediaan')->with('success', 'Tambah deskripsi sukses');
     }
 

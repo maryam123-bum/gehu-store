@@ -22,13 +22,15 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+//meminta login
 Route::get('/login', function () {
 
         return view('/login/login');
 });
 
+//mengirim data login
 Route::post('/login', [AdminController::class, 'cekdata']);
+//mengirim data logout
 Route::post('/logout', [AdminController::class, 'logout']);
 
 //Dashboard

@@ -17,6 +17,7 @@ class AdminController extends Controller
         // if(Auth::check()){
         // return session()->all();
         if(session('login') == "true"){
+            //ngambil data dari DB
             $data = [
                 'karyawan' => Karyawan::all()->count(),
                 'produksi' => Produksi::all()->count(),
@@ -24,6 +25,7 @@ class AdminController extends Controller
                 'pembelian' => Pembelian::all()->count()
             ];
 
+            //menampilkan total data perjualan perbulan
             $totalPenjualan = [
                 'jan' => Penjualan::whereDate('tgl_penjualan','>=', date('Y-m-d',strtotime('2023-01-01')))->whereDate('tgl_penjualan','<=', date('Y-m-d',strtotime('2023-01-31')))->get()->sum('total'),
                 'feb' => Penjualan::whereDate('tgl_penjualan','>=', date('Y-m-d',strtotime('2023-02-01')))->whereDate('tgl_penjualan','<=', date('Y-m-d',strtotime('2023-02-30')))->get()->sum('total'),
@@ -38,6 +40,8 @@ class AdminController extends Controller
                 'nov' => Penjualan::whereDate('tgl_penjualan','>=', date('Y-m-d',strtotime('2023-11-01')))->whereDate('tgl_penjualan','<=', date('Y-m-d',strtotime('2023-11-30')))->get()->sum('total'),
                 'dec' => Penjualan::whereDate('tgl_penjualan','>=', date('Y-m-d',strtotime('2023-12-01')))->whereDate('tgl_penjualan','<=', date('Y-m-d',strtotime('2023-12-31')))->get()->sum('total'),
             ];
+
+            //menampilkan total data pembelian perbulan
             $totalPembelian = [
                 'jan' => Pembelian::whereDate('tgl_pembelian','>=', date('Y-m-d',strtotime('2023-01-01')))->whereDate('tgl_pembelian','<=', date('Y-m-d',strtotime('2023-01-31')))->get()->sum('total'),
                 'feb' => Pembelian::whereDate('tgl_pembelian','>=', date('Y-m-d',strtotime('2023-02-01')))->whereDate('tgl_pembelian','<=', date('Y-m-d',strtotime('2023-02-30')))->get()->sum('total'),
@@ -53,6 +57,7 @@ class AdminController extends Controller
                 'dec' => Pembelian::whereDate('tgl_pembelian','>=', date('Y-m-d',strtotime('2023-12-01')))->whereDate('tgl_pembelian','<=', date('Y-m-d',strtotime('2023-12-31')))->get()->sum('total'),
             ];
 
+            //menampilkan pada halaman dashboard
             return view('dashboard/dashboard', [
                 'active' =>'dashboard',
                 'data' => $data,
@@ -60,6 +65,7 @@ class AdminController extends Controller
                 'totalPembelian' => $totalPembelian,
             ]);
         }
+        //mengembalikan pada halaman login
         return redirect('login');
     }
 
@@ -72,6 +78,7 @@ class AdminController extends Controller
             ->where('admin.username', $username)
             ->first();
 
+        //memeriksa data login
         if($data){
             $request->session()->put('login', "true");
             $request->session()->put('nama', $karyawan->nama);
@@ -104,6 +111,7 @@ class AdminController extends Controller
     {   
         $karyawan = Karyawan::all();
 
+        //menampilkan halaman tambah access
         return view('/login/access/tambah',[
             'karyawan'=> $karyawan,
             'active' => "data-tambahan"
@@ -113,17 +121,20 @@ class AdminController extends Controller
     //menyimpan data admin
     public function store(Request $request)
     {
+        //database admin membuat data baru
         Admin::create([
             'username' => $request->username,
             'password' => $request->password,
             'id_karyawan' => $request->id_karyawan
         ]);
+        //menampilkan data access
         return redirect('/data/access')->with('success', 'Tambah Admin Behasil');
     }
 
     //mengubah data admin
     public function edit($id)
     {    
+        
         $karyawan = Karyawan::all();
         $admin = Admin::where('admin.id', $id)->first();
 
