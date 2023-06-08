@@ -3,7 +3,7 @@
     <h2>Data {{ $judul }}</h2> 
 @endsection
 @section('container')
-    <?php if(session('jabatan') == 'Karyawan Administrasi'){ ?>
+    <?php if(session('jabatan') == $access){ ?>
     <div class="row">
         <div class="col-2 mb-2">
             <a href="/tambah/pembelian">
@@ -20,11 +20,11 @@
                 <thead>
                     <tr style="background-color: #28276A;color:#fff">
                         <th scope="col">No</th>
-                        <th scope="col">Tanggal</th>
                         <th scope="col">No. Invoice</th>
                         <th scope="col">Nama Distributor</th>
+                        <th scope="col">Tanggal</th>
                         <th scope="col">Total Harga</th>
-                        <?php if(session('jabatan') == 'Karyawan Administrasi'){ ?>
+                        <?php if(session('jabatan') == $access){ ?>
                         <th scope="col">Option</th>
                         <?php } ?>
                     </tr>
@@ -35,16 +35,16 @@
                         <?php foreach ($data as $key) { ?>
                             <tr>
                                 <th scope="row"><?php echo $no++ ?></th>
-                                <td><?php echo $key['tgl_pembelian']; ?></td>
                                 <td><?php echo substr_replace("INV-000",$key['id'],7-strlen($key['id'])); ?></td>
                                 <td><?php echo $key['nama_pemasok']; ?></td>
+                                <td><?php echo $key['tgl_pembelian']; ?></td>
                                 <td><?php echo "Rp. ".$key['total']; ?></td>
-                                <?php if(session('jabatan') == 'Karyawan Administrasi'){ ?>
+                                <?php if(session('jabatan') == $access){ ?>
                                 <td>
                                     <a href="/ubah/pembelian/{{ $key['id'] }}">
-                                        <button class="btn btn-light shadow" style="background-color: #212290; color: aliceblue"><i class="bi bi-pencil-square"  > </i>Edit</button>
+                                        <button class="btn shadow" style="background-color: #212290; color: aliceblue"><i class="bi bi-pencil-square"  > </i>Edit</button>
                                     </a>
-                                        {{-- <button class="btn btn-danger"><i class="bi bi-trash3"></i></button> --}}
+                                        <button class="btn btn-danger"><i class="bi bi-trash3"></i>Hapus</button>
                                 </td>
                                 <?php } ?>
                                 </tr>

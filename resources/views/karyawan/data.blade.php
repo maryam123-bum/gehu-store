@@ -3,7 +3,7 @@
     <h2>Data {{ $judul }}</h2> 
 @endsection
 @section('container')
-    <?php if(session('jabatan') == 'Direktur') { ?>
+    <?php if(session('jabatan') == $access){ ?>
     <div class="row">
         <div class="col-2 mb-2">
             <a href="/tambah/karyawan">
@@ -25,7 +25,7 @@
                         <th scope="col">Jabatan</th>
                         <th scope="col">Jenis Kelamin</th>
                         <th scope="col">Alamat</th>
-                        <?php if(session('jabatan') == 'Direktur'){ ?>
+                        <?php if(session('jabatan') == $access){ ?>
                         <th scope="col">OPSI</th>
                         <?php } ?>
                     </tr>
@@ -47,7 +47,7 @@
                                 @endif
                             </td>
                             <td>{{ $key['alamat'] }}</td>
-                            <?php if(session('jabatan') == 'Direktur'){ ?>
+                            <?php if(session('jabatan') == $access){ ?>
                             <td class="text-center">
                                 <a href="/ubah/karyawan/{{ $key['id'] }}" class="btn btn-light shadow" style="background-color: #212290"><i class="bi bi-pencil-square"  style="color: aliceblue"></i></a>
                                 <a href="#delete{{ $key['id'] }}" data-bs-toggle="modal" class="btn btn-danger" ><i class="bi bi-trash3"></i></a>

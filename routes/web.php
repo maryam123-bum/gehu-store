@@ -22,6 +22,7 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
 //meminta login
 Route::get('/login', function () {
 
@@ -40,7 +41,7 @@ Route::controller(AdminController::class)->group(function () {
 
 //Karyawan
 Route::controller(KaryawanController::class)->group(function () {
-    Route::get('/data/karyawan', 'index');
+    Route::get('/karyawan', 'index');
     Route::get('/tambah/karyawan', 'create');
     Route::get('/ubah/karyawan/{id}', 'edit');
 
@@ -52,7 +53,7 @@ Route::controller(KaryawanController::class)->group(function () {
 
 //Persediaan
 Route::controller(PersediaanController::class)->group(function () {
-    Route::get('/data/persediaan', 'index');
+    Route::get('/persediaan', 'index');
     Route::get('/tambah/persediaan', 'create');
     Route::get('/ubah/persediaan/{id}', 'edit');
 
@@ -99,12 +100,14 @@ Route::controller(ProduksiController::class)->group(function () {
     Route::get('/tambah/produksi', 'create');
     Route::get('/karyawan/produksi/{id}', 'bacaKaryawan');
     Route::get('/overhead/produksi/{id}', 'bacaOverhead');
+    Route::get('/ubah/produksi/{id}', 'edit');
     Route::get('/bahanbaku/produksi/{id}', 'bacaBahanBaku');
     Route::get('/produksi/hargaJual', function () {
         return view('produksi/hargaJual', [
             'active' => "produksi"
         ]);
     });
+
 
     Route::post('/tambah/karyawan/produksi', 'insertKaryawan');
     Route::post('/tambah/overhead/produksi', 'insertOverhead');

@@ -14,8 +14,17 @@ use App\Models\KertasluarBahanBaku;
 use App\Models\KertaskotakBahanBaku;
 use App\Models\Deskripsi;
 
+use function PHPUnit\Framework\returnValueMap;
+
 class ProduksiController extends Controller
 {
+    public $access;
+
+    public function __construct()
+    {
+        $this->access = "Karyawan Produksi" || "Direktur";
+    }
+
     //menampilkan data
     public function data()
     {
@@ -24,6 +33,7 @@ class ProduksiController extends Controller
         
         return view('produksi/data', [
             'judul' => "Produksi",
+            'access' => $this->access,
             'data' => $data_produksi,
             'active' => "produksi"
         ]);
@@ -35,22 +45,27 @@ class ProduksiController extends Controller
     public function create()
     {   
         if(session('login') == "true"){
-        $deskripsi = Deskripsi::all();
-        $latestid = Produksi::latest()->first();
-            if($latestid){
-                $latestid = $latestid->id + 1;
-            }else{
-                $latestid = 1;
+            if(session('jabatan') == $this->access){
+                $deskripsi = Deskripsi::all();
+                $latestid = Produksi::latest()->first();
+                    if($latestid){
+                        $latestid = $latestid->id + 1;
+                    }else{
+                        $latestid = 1;
+                    }
+                return view('produksi/tambah', [
+                    'barang' => Persediaan::join('jenis_persediaan', 'persediaan.id_jenis', '=', 'jenis_persediaan.id')
+                    ->join('satuan', 'persediaan.id_satuan', '=', 'satuan.id')
+                    ->get(['persediaan.*', 'satuan.nama_satuan', 'jenis_persediaan.nama_jenis']),
+                    'karyawan' => Karyawan::all(),
+                    'active' => "produksi",
+                    'deskripsilist' => $deskripsi,
+                    'estimateid' => $latestid
+                ]);
+            } else {
+                return redirect('/');
             }
-        return view('produksi/tambah', [
-            'barang' => Persediaan::join('jenis_persediaan', 'persediaan.id_jenis', '=', 'jenis_persediaan.id')
-            ->join('satuan', 'persediaan.id_satuan', '=', 'satuan.id')
-            ->get(['persediaan.*', 'satuan.nama_satuan', 'jenis_persediaan.nama_jenis']),
-            'karyawan' => Karyawan::all(),
-            'active' => "produksi",
-            'deskripsilist' => $deskripsi,
-            'estimateid' => $latestid
-        ]);
+        
         }
         return redirect('/login');
     }
@@ -280,14 +295,19 @@ class ProduksiController extends Controller
     public function edit($id)
     {
         if(session('login') == "true"){
-        $header = Produksi::where('id', $id)->first();
+            if(session('jabatan') == $this->access){
+                $header = Produksi::where('id', $id)->first();
 
-        return view('produksi.ubah', [
-            'header' => $header,
-            // 'barang' => $baranglist,
-            'active' => "produksi",
-            'estimateid' => Produksi::latest()->first()['id'] + 1
-        ]);
+                return view('produksi.ubah', [
+                    'header' => $header,
+                    // 'barang' => $baranglist,
+                    'active' => "produksi",
+                    'estimateid' => Produksi::latest()->first()['id'] + 1
+                ]);
+            } else{
+                return redirect('/');
+            }
+        
         }
         return redirect('/login');
     
@@ -486,6 +506,12 @@ class ProduksiController extends Controller
         //end update
 
         return $request->id_produksi;
+    }
+
+    public function destroy(Request $request)
+    {
+        Persediaan::where('id', $request->id)->delete();
+        return redirect('/produksi')->with('success', 'hapus data persediaan sukses');;
     }
 
 }

@@ -7,16 +7,28 @@ use App\Models\JenisPersediaan;
 
 class JenisPersediaanController extends Controller
 {
+    public $access;
+
+    public function __construct()
+    {
+        $this->access = "Karyawan Administrasi" || "Direktur";
+    }
+
     //membuat data baru
     public function create(){
         if(session('login') == "true"){
-            $data = JenisPersediaan::all();
-            $id = JenisPersediaan::all()->count();
-            return view('persediaan/jenis', [
-                'active' => 'Persediaan',
-                'estimateid' => $id + 1,
-                'data' => $data,
-            ]);
+            if(session('jabatan') == $this->access){
+                $data = JenisPersediaan::all();
+                $id = JenisPersediaan::all()->count();
+                return view('persediaan/jenis', [
+                    'active' => 'Persediaan',
+                    'estimateid' => $id + 1,
+                    'data' => $data,
+                ]);
+            } else{
+                return redirect('/');
+            }
+            
         }
         return redirect('/login');
     }

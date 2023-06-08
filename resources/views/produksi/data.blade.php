@@ -3,7 +3,6 @@
     <h2>Data {{ $judul }}</h2> 
 @endsection
 @section('container')
-        <?php if(session('jabatan') == 'Karyawan Administrasi'){ ?>
         <div class="row">
             <div class="col-2 mb-2">
                 <a href="/tambah/produksi">
@@ -13,7 +12,6 @@
                 </a>
             </div>
         </div>
-        <?php } ?>
         <div class="row">
             <div class="col">
                 <table class="table table-bordered" id="produksi">
@@ -23,6 +21,7 @@
                         <th scope="col">Tanggal</th>
                         <th scope="col">Harga Pokok Produksi</th>
                         <th scope="col">Harga Jual</th>
+                        <th scope="col">Opsi</th>
                         
                       </tr>
                     </thead>
@@ -39,6 +38,10 @@
                                             <i class="bi bi-pencil-square"></i>
                                         </button>
                                         <?php echo $key['harga_jual']; ?>
+                                    </td>
+                                    <td>
+                                      <a href="/ubah/produksi/{{ $key['id'] }}" class="btn btn-light shadow" style="background-color: #212290"><i class="bi bi-pencil-square"  style="color: aliceblue"></a>
+                                      <a href="/hapus/produksi/{{ $key['id'] }}" class="btn btn-danger" data-bs-toggle="modal"><i class="bi bi-trash3"></i></a>
                                     </td>
                                     
                                 </tr>

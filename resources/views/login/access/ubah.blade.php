@@ -1,5 +1,9 @@
 @extends('layouts.main')
 
+@section('kembali')
+  <a href="/data/access"><i class="bi bi-chevron-left fs-2"></i></a>
+@endsection
+
 @section('title')
     <h2>Ubah Akses Akun</h2>
 @endsection

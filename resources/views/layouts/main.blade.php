@@ -176,42 +176,52 @@
                 Dashboard
               </a>
             </li>
-            <li class="px-4 py-2 {{ ($active == "persediaan") ? 'active' : '' }}">
-              <a class="text-white" href="/data/persediaan">
-                <i class="bi bi-box-seam"></i>
-                Persediaan
-              </a>
-            </li>
-            <li class="px-4 py-2 {{ ($active == "pembelian") ? 'active' : '' }}">
-              <a class="text-white" href="/pembelian">
-                <i class="bi bi-cart3"></i>
-                Pembelian
-              </a>
-            </li>
-            <li class="px-4 py-2 {{ ($active == "produksi") ? 'active' : '' }}">
-              <a class="text-white" href="/produksi">
-                <i class="bi bi-hammer"></i>
-                Produksi
-              </a>
-            </li>
-            <li class="px-4 py-2 {{ ($active == "penjualan") ? 'active' : '' }}">
-              <a class="text-white" href="/penjualan">
-                <i class="bi bi-shop"></i>
-                Penjualan
-              </a>
-            </li>
+            <?php if(session('jabatan') == 'Karyawan Administrasi' || (session('jabatan') == 'Direktur') ){ ?>
+              <li class="px-4 py-2 {{ ($active == "persediaan") ? 'active' : '' }}">
+                <a class="text-white" href="/persediaan">
+                  <i class="bi bi-box-seam"></i>
+                  Persediaan
+                </a>
+              </li>
+            <?php } ?>
+            <?php if(session('jabatan') == 'Karyawan Administrasi' || (session('jabatan') == 'Direktur') ){ ?>
+              <li class="px-4 py-2 {{ ($active == "pembelian") ? 'active' : '' }}">
+                <a class="text-white" href="/pembelian">
+                  <i class="bi bi-cart3"></i>
+                  Pembelian
+                </a>
+              </li>
+            <?php }?>
+            <?php if(session('jabatan') == 'Karyawan Produksi' || (session('jabatan') == 'Direktur') ){ ?>
+              <li class="px-4 py-2 {{ ($active == "produksi") ? 'active' : '' }}">
+                <a class="text-white" href="/produksi">
+                  <i class="bi bi-hammer"></i>
+                  Produksi
+                </a>
+              </li>
+            <?php }?>
+            <?php if(session('jabatan') == 'Karyawan Administrasi' || (session('jabatan') == 'Direktur') ){ ?>
+              <li class="px-4 py-2 {{ ($active == "penjualan") ? 'active' : '' }}">
+                <a class="text-white" href="/penjualan">
+                  <i class="bi bi-shop"></i>
+                  Penjualan
+                </a>
+              </li>
+            <?php }?>
             <li class="px-4 py-2 {{ ($active == "laporan") ? 'active' : '' }}">
               <a class="text-white" href="/laporan">
                 <i class="bi bi-graph-down"></i>
                 Laporan
               </a>
             </li>
-            <li class="px-4 py-2 {{ ($active == "karyawan") ? 'active' : '' }}">
-              <a class="text-white" href="/data/karyawan">
-                <i class="bi bi-person-square"></i>
-                Karyawan
-              </a>
-            </li>
+            <?php if(session('jabatan') == 'Direktur'){ ?>
+              <li class="px-4 py-2 {{ ($active == "karyawan") ? 'active' : '' }}">
+                <a class="text-white" href="/karyawan">
+                  <i class="bi bi-person-square"></i>
+                  Karyawan
+                </a>
+              </li>
+            <?php }?>
             <?php if(session('jabatan') == 'Direktur'){ ?>
               <li class="px-4 py-2 {{ ($active == "data-tambahan") ? 'active' : '' }}">
                 <a class="text-white" href="/data/access">
@@ -226,6 +236,7 @@
         <div class="p-4 active-main-content" id="main-content">
           <header class="p-2 mb-3 border-bottom">
             <div class="d-flex flex-wrap">
+              @yield('kembali')
               <a href="" class="d-flex  mb-3 mb-lg-0 me-lg-auto text-dark text-decoration-none">
                 <svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"/></svg>
                 <span class="fs-4">@yield('title')</span>

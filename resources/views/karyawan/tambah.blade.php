@@ -1,12 +1,11 @@
 @extends('layouts.main')
 
+@section('kembali')
+  <a href="/karyawan"><i class="bi bi-chevron-left fs-2"></i></a>
+@endsection
+
 @section('title')
-<div class="col">
-  <a href="/data/karyawan"><i class="bi bi-chevron-left fs-2"></i></a>
-</div>
-<div class="col-10">
   <h2>Tambah Karyawan</h2>
-</div>
 @endsection
 
 @section('container')
@@ -42,6 +41,7 @@
               <option value="Direktur">Direktur</option>
               <option value="Karyawan Administrasi">Karyawan Administrasi</option>
               <option value="Karyawan Produksi">Karyawan Produksi</option>
+              <option value="Pekerja Lepas">Pekerja Lepas</option>
             </select>
             <div class="invalid-feedback">
               Silahkan Pilih Jabatan.

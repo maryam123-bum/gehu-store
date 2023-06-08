@@ -11,17 +11,25 @@ use App\Models\Deskripsi;
 
 class PembelianController extends Controller
 {
+    public $access;
+
+    public function __construct()
+    {
+        $this->access = "Karyawan Administrasi" || "Direktur";
+    }
+    
     //menampilkan data
     public function index()
     {
         if(session('login') == "true"){
-        $data_pembelian = Pembelian::all();
-        
-        return view('pembelian/data', [
-            'judul' => "Pembelian",
-            'data' => $data_pembelian,
-            'active' => "pembelian"
-        ]);
+            $data_pembelian = Pembelian::all();
+            
+            return view('pembelian/data', [
+                'judul' => "Pembelian",
+                'access' => $this->access,
+                'data' => $data_pembelian,
+                'active' => "pembelian"
+            ]);
         }
         return redirect('/login');
     }
@@ -30,22 +38,26 @@ class PembelianController extends Controller
     public function create()
     { 
         if(session('login') == "true"){  
-        $deskripsi = Deskripsi::all();
-        $latestid = Pembelian::latest()->first();
-        if($latestid){
-            $latestid = $latestid->id + 1;
-        }else{
-            $latestid = 1;
-        }
-        return view('pembelian/tambah', [
-            'barang' => Persediaan::join('jenis_persediaan', 'persediaan.id_jenis', '=', 'jenis_persediaan.id')
-                ->join('satuan', 'persediaan.id_satuan', '=', 'satuan.id')
-                ->where('persediaan.id_jenis', '!=', '3')
-                ->get(['persediaan.*', 'satuan.nama_satuan', 'jenis_persediaan.nama_jenis']),
-            'active' => "pembelian",
-            'estimateid' => $latestid,
-            'deskripsilist' => $deskripsi
-        ]);
+            if(session('jabatan') == $this->access) {
+                $deskripsi = Deskripsi::all();
+                $latestid = Pembelian::latest()->first();
+                if($latestid){
+                    $latestid = $latestid->id + 1;
+                }else{
+                    $latestid = 1;
+                }
+                return view('pembelian/tambah', [
+                    'barang' => Persediaan::join('jenis_persediaan', 'persediaan.id_jenis', '=', 'jenis_persediaan.id')
+                        ->join('satuan', 'persediaan.id_satuan', '=', 'satuan.id')
+                        ->where('persediaan.id_jenis', '!=', '3')
+                        ->get(['persediaan.*', 'satuan.nama_satuan', 'jenis_persediaan.nama_jenis']),
+                    'active' => "pembelian",
+                    'estimateid' => $latestid,
+                    'deskripsilist' => $deskripsi
+                ]);
+            } else {
+                return redirect('/');
+            }
         }
         return redirect('/login');
     }
@@ -53,18 +65,23 @@ class PembelianController extends Controller
     //menampilkan data barang dalam form
     public function bacaBarang($id = 0){
         if(session('login') == "true"){
-            $baranglist = [];
-            if($id != 0){
-                $baranglist = PembelianDetail::join('persediaan', 'pembelian_detail.id_barang', '=', 'persediaan.id')
-                ->join('jenis_persediaan', 'persediaan.id_jenis', '=', 'jenis_persediaan.id')
-                ->join('satuan', 'persediaan.id_satuan', '=', 'satuan.id')
-                ->where('id_pembelian', $id)
-                ->get(['persediaan.*', 'satuan.nama_satuan', 'jenis_persediaan.nama_jenis', 'pembelian_detail.jumlah', 'pembelian_detail.diskon']);
-                
+            if(session('jabatan') == $this->access){
+                $baranglist = [];
+                if($id != 0){
+                    $baranglist = PembelianDetail::join('persediaan', 'pembelian_detail.id_barang', '=', 'persediaan.id')
+                    ->join('jenis_persediaan', 'persediaan.id_jenis', '=', 'jenis_persediaan.id')
+                    ->join('satuan', 'persediaan.id_satuan', '=', 'satuan.id')
+                    ->where('id_pembelian', $id)
+                    ->get(['persediaan.*', 'satuan.nama_satuan', 'jenis_persediaan.nama_jenis', 'pembelian_detail.jumlah', 'pembelian_detail.diskon']);
+                    
+                }
+                return view('pembelian/barang')->with([
+                    'data' => $baranglist
+                ]);
+            } else{
+                return redirect('/');
             }
-            return view('pembelian/barang')->with([
-                'data' => $baranglist
-            ]);
+            
         }
         return redirect('/login');
     }
@@ -190,24 +207,29 @@ class PembelianController extends Controller
     public function edit($id)
     {
         if(session('login') == "true"){
-        $deskripsi = Deskripsi::all();
-        $header = Pembelian::where('id', $id)->first();
-        $baranglist = Persediaan::join('jenis_persediaan', 'persediaan.id_jenis', '=', 'jenis_persediaan.id')
-                ->join('satuan', 'persediaan.id_satuan', '=', 'satuan.id')
-                ->where('persediaan.id_jenis', '!=', '3')
-                ->get(['persediaan.*', 'satuan.nama_satuan', 'jenis_persediaan.nama_jenis']);
-
-        // $baranglist = PembelianDetail::join('persediaan', 'pembelian_detail.id_barang', '=', 'persediaan.id')
-        //     ->join('jenis_persediaan', 'persediaan.id_jenis', '=', 'jenis_persediaan.id')
-        //     ->join('satuan', 'persediaan.id_satuan', '=', 'satuan.id')
-        //     ->get(['persediaan.*', 'satuan.nama_satuan', 'jenis_persediaan.nama_jenis', 'pembelian_detail.jumlah']);
-
-        return view('pembelian.ubah', [
-            'header' => $header,
-            'barang' => $baranglist,
-            'active' => "pembelian",
-            'deskripsilist' => $deskripsi
-        ]);
+            if(session('jabatan') == $this->access){
+                $deskripsi = Deskripsi::all();
+                $header = Pembelian::where('id', $id)->first();
+                $baranglist = Persediaan::join('jenis_persediaan', 'persediaan.id_jenis', '=', 'jenis_persediaan.id')
+                        ->join('satuan', 'persediaan.id_satuan', '=', 'satuan.id')
+                        ->where('persediaan.id_jenis', '!=', '3')
+                        ->get(['persediaan.*', 'satuan.nama_satuan', 'jenis_persediaan.nama_jenis']);
+        
+                // $baranglist = PembelianDetail::join('persediaan', 'pembelian_detail.id_barang', '=', 'persediaan.id')
+                //     ->join('jenis_persediaan', 'persediaan.id_jenis', '=', 'jenis_persediaan.id')
+                //     ->join('satuan', 'persediaan.id_satuan', '=', 'satuan.id')
+                //     ->get(['persediaan.*', 'satuan.nama_satuan', 'jenis_persediaan.nama_jenis', 'pembelian_detail.jumlah']);
+        
+                return view('pembelian.ubah', [
+                    'header' => $header,
+                    'barang' => $baranglist,
+                    'active' => "pembelian",
+                    'deskripsilist' => $deskripsi
+                ]);
+            } else{
+                return redirect('/');
+            }
+        
         }
         return redirect('/login');
     }

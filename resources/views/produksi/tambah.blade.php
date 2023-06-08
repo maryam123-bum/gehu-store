@@ -1,12 +1,11 @@
 @extends('layouts.main')
 
+@section('kembali')
+  <a href="/produksi"><i class="bi bi-chevron-left fs-2"></i></a>
+@endsection
+
 @section('title')
-  <div class="col">
-    <a href="/pembelian"><i class="bi bi-chevron-left fs-2"></i></a>
-  </div>
-  <div class="col-10">
-    <h2>Tambah Produksi</h2>
-  </div>
+  <h2>Tambah Produksi</h2>
 @endsection
 
 @section('container')

@@ -1,7 +1,11 @@
 @extends('layouts.main')
 
+@section('kembali')
+  <a href="/produksi"><i class="bi bi-chevron-left fs-2"></i></a>
+@endsection
+
 @section('title')
-    <h2>Tambah Produksi</h2>
+    <h2>Ubah Produksi</h2>
 @endsection
 
 @section('container')

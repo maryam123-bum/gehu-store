@@ -16,7 +16,9 @@
               </div>
             </div>
           </div>
+          
           <div class="col-3">
+            <?php if(session('jabatan') == 'Direktur'){ ?>
             <div class="row mb-3">
               <div class="col">
                 <div class="card">
@@ -25,13 +27,14 @@
                       <div class="col"><h5>{{ $data['karyawan'] }}</h5></div>
                     </div>
                     <div class="row">
-                      <div class="col"><a href="/data/karyawan"><h5 class="text-primary">Karyawan</h5></a></div>
+                      <div class="col"><a href="/karyawan"><h5 class="text-primary">Karyawan</h5></a></div>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-
+            <?php } ?>
+            <?php if(session('jabatan') == 'Karyawan Produksi' || (session('jabatan') == 'Direktur')){ ?>
             <div class="row mb-3">
               <div class="col">
                 <div class="card">
@@ -46,7 +49,8 @@
                 </div>
               </div>
             </div>
-
+            <?php } ?>
+            <?php if(session('jabatan') == 'Karyawan Administrasi' || (session('jabatan') == 'Direktur')){ ?>
             <div class="row mb-3">
               <div class="col">
                 <div class="card">
@@ -61,7 +65,8 @@
                 </div>
               </div>
             </div>
-
+            <?php } ?>
+            <?php if(session('jabatan') == 'Karyawan Administrasi' || (session('jabatan') == 'Direktur')){ ?>
             <div class="row mb-3">
               <div class="col">
                 <div class="card">
@@ -76,7 +81,7 @@
                 </div>
               </div>
             </div>
-
+            <?php } ?>
           </div>
         </div>
     </div>
@@ -109,7 +114,7 @@
           text: 'DATA KEUANGAN PERUSAHAAN'
         },
         subtitle: {
-          text: 'TAHUN 2022'
+          text: 'TAHUN 2023'
         },
         xAxis: {
           categories: [

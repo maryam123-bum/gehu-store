@@ -7,15 +7,27 @@ use App\Models\Satuan;
 
 class SatuanController extends Controller
 {
+    public $access;
+
+    public function __construct()
+    {
+        $this->access = "Karyawan Administrasi" || "Direktur";
+    }
+
     public function create(){
         if(session('login') == "true"){
-        $data = Satuan::all();
-        $id = Satuan::all()->count();
-        return view('persediaan/satuan', [
-            'data' => $data,
-            'active' => 'Persediaan',
-            'estimateid' => $id + 1
-        ]);
+            if(session('jabatan') == $this->access){
+                $data = Satuan::all();
+                $id = Satuan::all()->count();
+                return view('persediaan/satuan', [
+                    'data' => $data,
+                    'active' => 'Persediaan',
+                    'estimateid' => $id + 1
+                ]);
+            } else{
+                return redirect('/');
+            }
+        
         }
         return redirect('/login');
     }

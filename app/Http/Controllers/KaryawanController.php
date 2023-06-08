@@ -7,6 +7,13 @@ use Illuminate\Http\Request;
 
 class KaryawanController extends Controller
 {
+    public $access;
+
+    public function __construct()
+    {
+        $this->access = "Direktur";
+    }
+
     //menampilkan data karyawan
     public function index()
     {
@@ -15,6 +22,7 @@ class KaryawanController extends Controller
 
         return view('karyawan/data', [
             'judul' => 'Karyawan',
+            'access' => $this->access,
             'data' => $karyawan,
             'active' => "karyawan"
         ]);
@@ -26,9 +34,14 @@ class KaryawanController extends Controller
     public function create()
     {
         if(session('login') == "true"){
-        return view('karyawan.tambah', [
-            'active' => "karyawan"
-        ]);
+            if(session('jabatan') == $this->access){
+                return view('karyawan.tambah', [
+                    'active' => "karyawan"
+                ]);
+            } else{
+                return redirect('/');
+            }
+        
         }
         return redirect('/login');
     }
@@ -55,12 +68,17 @@ class KaryawanController extends Controller
     //mengubah data
     public function edit($id)
     {
-        if(session('login') == "true" && session('jabatan') == "Direktur"){
-        $karyawan = Karyawan::where('id', $id)->first();
-        return view('karyawan/ubah', [
-            'data' => $karyawan,
-            'active' => "karyawan"
-        ]);
+        if(session('login') == "true"){
+            if(session('jabatan') == $this->access){
+                $karyawan = Karyawan::where('id', $id)->first();
+                return view('karyawan/ubah', [
+                    'data' => $karyawan,
+                    'active' => "karyawan"
+                ]);
+            } else{
+                return redirect('/');
+            }
+        
         }
         return redirect('/login');
     }

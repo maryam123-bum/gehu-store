@@ -1,5 +1,9 @@
 @extends('layouts.main')
 
+@section('kembali')
+  <a href="/persediaan"><i class="bi bi-chevron-left fs-2"></i></a>
+@endsection
+
 @section('title')
     <h2>Tambah Jenis Barang</h2>
 @endsection

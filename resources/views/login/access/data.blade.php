@@ -3,6 +3,7 @@
     <h2>Data Admin</h2> 
 @endsection
 @section('container')
+<?php if(session('jabatan') == $access){ ?>
     <div class="row">
         <div class="col-2 mb-2">
             <a href="/tambah/access">
@@ -12,6 +13,7 @@
             </a>
         </div>
     </div>
+<?php } ?>
     <div class="row">
         <div class="col">
             <table class="table table-bordered">
@@ -20,6 +22,7 @@
                         <th scope="col">No</th>
                         <th scope="col">Username</th>
                         <th scope="col">Nama Karyawan</th>
+                        <th scope="col">Jabatan</th>
                         <th scope="col">OPSI</th>
                     </tr>
                 </thead>
@@ -31,6 +34,7 @@
                             <th scope="row" class="text-center">{{ $no++ }}</th>
                             <td>{{ $key['username'] }}</td>
                             <td>{{ $key['nama'] }}</td>
+                            <td>{{ $key['jabatan'] }}</td>
                             <td class="text-center">
                                 <a href="/ubah/access/{{ $key['id'] }}" class="btn btn-light shadow" style="background-color: #212290"><i class="bi bi-pencil-square"  style="color: aliceblue"></i></a>
                                 <a href="#delete{{ $key['id'] }}" class="btn btn-danger" data-bs-toggle="modal"><i class="bi bi-trash3"></i></a>
