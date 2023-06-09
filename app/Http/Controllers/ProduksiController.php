@@ -27,7 +27,7 @@ class ProduksiController extends Controller
     public function data()
     {
         if(session('login') == "true"){
-        $data_produksi = Produksi::join('persediaan', 'produksi.id_barang', '=', 'persediaan.id')->get();
+        $data_produksi = Produksi::join('persediaan', 'produksi.id_barang', '=', 'persediaan.id')->get(['produksi.*','persediaan.nama_barang']);
         
         return view('produksi/data', [
             'judul' => "Produksi",
@@ -52,9 +52,6 @@ class ProduksiController extends Controller
                         $latestid = 1;
                     }
                 return view('produksi/tambah', [
-                    'barang' => Persediaan::join('jenis_persediaan', 'persediaan.id_jenis', '=', 'jenis_persediaan.id')
-                    ->join('satuan', 'persediaan.id_satuan', '=', 'satuan.id')
-                    ->get(['persediaan.*', 'satuan.nama_satuan', 'jenis_persediaan.nama_jenis']),
                     'karyawan' => Karyawan::all(),
                     'active' => "produksi",
                     'deskripsilist' => $deskripsi,
@@ -296,13 +293,13 @@ class ProduksiController extends Controller
     {
         if(session('login') == "true"){
             if(session('jabatan') == $this->access){
-                $header = Produksi::where('id', $id)->first();
-
+                $deskripsi = Deskripsi::all();
+                $header = Produksi::join('persediaan', 'produksi.id_barang', '=', 'persediaan.id')->where('produksi.id', $id)->first(['produksi.*','persediaan.nama_barang']);
                 return view('produksi.ubah', [
                     'header' => $header,
-                    // 'barang' => $baranglist,
-                    'active' => "produksi",
-                    'estimateid' => Produksi::latest()->first()['id'] + 1
+                    'deskripsilist' => $deskripsi,
+                    'karyawan' => Karyawan::all(),
+                    'active' => "produksi"
                 ]);
             } else{
                 return redirect('/');
@@ -508,6 +505,16 @@ class ProduksiController extends Controller
         //end update
 
         return $request->id_produksi;
+    }
+
+    public function updateHargaJual(Request $request)
+    {
+        
+        $hpp = Produksi::where('id', $request->id)->value('harga_pokok_produksi');
+        $harga_jual = $hpp + round($hpp*$request->markup/100);
+        Produksi::where('id', $request->id)->update([
+            'harga_jual' => $harga_jual
+        ]);
     }
 
     public function destroy(Request $request)

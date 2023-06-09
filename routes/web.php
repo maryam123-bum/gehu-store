@@ -114,6 +114,7 @@ Route::controller(ProduksiController::class)->group(function () {
     Route::post('/tambah/produksi', 'store');
     Route::post('/update/bahanbaku/produksi', 'updateProduksiBaku');
     Route::post('/update/bahanbakudetail/produksi', 'updateBahanBaku');
+    Route::post('/update/hargajual/produksi', 'updateHargaJual');
 });
 
 //Penjualan
