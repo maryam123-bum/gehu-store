@@ -4,21 +4,8 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Gehu Store</title>
-        <!-- bootstrap 5 css -->
-        {{-- <link
-          rel="stylesheet"
-          href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha2/css/bootstrap.min.css"
-          integrity="sha384-DhY6onE6f3zzKbjUPRc2hOzGAdEf4/Dz+WJwBvEYL/lkkIsI3ihufq9hk9K4lVoK"
-          crossorigin="anonymous"
-        /> --}}
-        {{-- <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous"> --}}
-        <!-- custom css -->
-        <!-- <link rel="stylesheet" href="style.css" /> -->
-        {{-- <link
-          rel="stylesheet"
-          href="{{ asset('css/bootstrap-icons.css') }}"
-        /> --}}
-        <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
+        
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
         <link rel="stylesheet" href="{{ asset('css/icon/bootstrapicons.css') }}">
         <link rel="stylesheet" href="{{ asset('css/jquery.dataTables.min.css') }}">
         <style>
@@ -265,10 +252,7 @@
         
       </body>
       <script src="{!! asset('js/jquery.min.js') !!}"></script>
-      <script src="{!! asset('js/bootstrap.bundle.min.js') !!}" ></script>
-      <script src="{!! asset('js/bootstrap2.bundle.min.js') !!}"></script>
-      <script src="{!! asset('js/popper.min.js') !!}"></script>
-      <script src="{!! asset('js/bootstrap.min.js') !!}" ></script>
+      <script src="https://getbootstrap.com/docs/5.3/dist/js/bootstrap.bundle.min.js" ></script>
       <script src="{!! asset('js/sweetalert.min.js') !!}"></script>
       <script src="{!! asset('js/jquery.dataTables.min.js') !!}"></script>
       @yield('script')

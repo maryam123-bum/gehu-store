@@ -98,7 +98,7 @@ class AdminController extends Controller
     //menampilkan data akses pada menu data akses
     public function data(){
         $admin = Admin::join('karyawan', 'admin.id_karyawan', '=', 'karyawan.id')->get([
-            'admin.id', 'admin.username', 'karyawan.nama', 'karyawan.jabatan'
+            'admin.id', 'admin.username', 'karyawan.nama', 'karyawan.jabatan', 'admin.created_at'
         ]);
         return view('/login/access/data', [
             'data' => $admin,

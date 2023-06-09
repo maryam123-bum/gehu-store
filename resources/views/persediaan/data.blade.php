@@ -33,7 +33,7 @@
                     <th scope="col">Jenis Barang</th>
                     <th scope="col">Stok</th>
                     <th scope="col">Harga Pokok</th>
-                    <th scope="col">Opsi</th>
+                    <th scope="col" class="text-center">Opsi</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -47,48 +47,40 @@
                                 <td><?php echo $key['nama_jenis']; ?></td>
                                 <td><?php echo $key['stok'].' '.$key['nama_satuan']; ?></td>
                                 <td>Rp. <?php echo $key['harga_pokok'].' per '.$key['nama_satuan']; ?></td>
-                                <td>
-                                    <a href="/ubah/persediaan/{{ $key['id'] }}" class="btn btn-light shadow" style="background-color: #212290"><i class="bi bi-pencil-square"  style="color: aliceblue"></a>
-                                    <a href="/hapus/persediaan{{ $key['id'] }}" class="btn btn-danger" data-bs-toggle="modal"><i class="bi bi-trash3"></i></a>
+                                <td class="text-center">
+                                    <a href="/ubah/persediaan/{{ $key['id'] }}" class="btn btn-light shadow" style="background-color: #212290;color: aliceblue"><i class="bi bi-pencil-square"></i> Ubah</a>
+                                    <a href="#" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal"><i class="bi bi-trash3"></i> Hapus</a>
                                 </td>
                             </tr>
-                            <!-- Button trigger modal -->
-                
-                                    <!-- Modal -->
-                                    <div class="modal fade" id="delete{{ $key['id'] }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                        <div class="modal-dialog">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                            <h1 class="modal-title fs-5" id="exampleModalLabel">Hapus Data</h1>
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                            </div>
-                                            <div class="modal-body">
-                                            <h4>Anda ingin menghapus data  {{  $key['nama_barang'] }} ?</h4>
-                                            </div>
-                                            <div class="modal-footer">
-                                                
-                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                                <form action="/hapus/persediaan" method="post" style="display:inline-block">
-                                                    @csrf
-                                                    <input type="hidden" id="id" name="id" value="{{ $key['id'] }}">
-                                                    <button type="submit" class="btn btn-danger">Ya, tentu</button>
-                                                </form>
-                                            </div>
-                                        </div>
-                                        </div>
-                                    </div>
                         <?php
                         } ?>
                     @else
-                        <tr class="text-center font-weight-bold">
-                            <td colspan="7">Tidak Ada Data</td>
-                        </tr>
+                            <tr class="text-center font-weight-bold">
+                                <td colspan="7">Tidak Ada Data</td>
+                            </tr>
                     @endif
-                    
                 </tbody>
             </table>
         </div>
     </div>
+    <!-- Delete Modal -->
+    <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModelLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">Confirmation</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <p>Are you sure?</p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-danger">Delete</button>
+            </div>
+          </div>
+        </div>
+      </div>
     
 @endsection
 @section('script')

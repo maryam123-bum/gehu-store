@@ -14,8 +14,6 @@ use App\Models\KertasluarBahanBaku;
 use App\Models\KertaskotakBahanBaku;
 use App\Models\Deskripsi;
 
-use function PHPUnit\Framework\returnValueMap;
-
 class ProduksiController extends Controller
 {
     public $access;
@@ -29,7 +27,7 @@ class ProduksiController extends Controller
     public function data()
     {
         if(session('login') == "true"){
-        $data_produksi = Produksi::all();
+        $data_produksi = Produksi::join('persediaan', 'produksi.id_barang', '=', 'persediaan.id')->get();
         
         return view('produksi/data', [
             'judul' => "Produksi",
@@ -144,7 +142,8 @@ class ProduksiController extends Controller
 
         Produksi::where('id', $request->id_produksi)
         ->update([
-            'harga_pokok_produksi' => $hpp
+            'harga_pokok_produksi' => $hpp,
+            'harga_jual' => $hpp
         ]);
         $idbarang = Produksi::where('id', $request->id_produksi)->first()->id_barang;
         Persediaan::where('id', $idbarang)->update([
@@ -229,7 +228,8 @@ class ProduksiController extends Controller
 
         Produksi::where('id', $request->id_produksi)
         ->update([
-            'harga_pokok_produksi' => $hpp
+            'harga_pokok_produksi' => $hpp,
+            'harga_jual' => $hpp
         ]);
         $idbarang = Produksi::where('id', $request->id_produksi)->first()->id_barang;
         Persediaan::where('id', $idbarang)->update([
@@ -413,7 +413,8 @@ class ProduksiController extends Controller
 
         Produksi::where('id', $request->id_produksi)
         ->update([
-            'harga_pokok_produksi' => $hpp
+            'harga_pokok_produksi' => $hpp,
+            'harga_jual' => $hpp
         ]);
         $idbarang = Produksi::where('id', $request->id_produksi)->first()->id_barang;
         Persediaan::where('id', $idbarang)->update([
@@ -497,7 +498,8 @@ class ProduksiController extends Controller
 
         Produksi::where('id', $request->id_produksi)
         ->update([
-            'harga_pokok_produksi' => $hpp
+            'harga_pokok_produksi' => $hpp,
+            'harga_jual' => $hpp
         ]);
         $idbarang = Produksi::where('id', $request->id_produksi)->first()->id_barang;
         Persediaan::where('id', $idbarang)->update([

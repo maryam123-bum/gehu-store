@@ -7,7 +7,7 @@
             <div class="col-2 mb-2">
                 <a href="/tambah/produksi">
                     <button class="btn btn-light shadow" style="background-color: #2528DC;color:#fff">
-                        Tambah
+                        + Produksi
                     </button>
                 </a>
             </div>
@@ -17,33 +17,36 @@
                 <table class="table table-bordered" id="produksi">
                     <thead>
                       <tr style="background-color: #28276A;color:#fff; font-size: 12; text-align:center">
-                        <th scope="col">No</th>
+                        <th scope="col" class="">No</th>
+                        <th scope="col">Kode Produksi</th>
                         <th scope="col">Tanggal</th>
+                        <th scope="col">Nama Barang</th>
                         <th scope="col">Harga Pokok Produksi</th>
                         <th scope="col">Harga Jual</th>
-                        <th scope="col">Opsi</th>
+                        <th scope="col" class="text-center">Opsi</th>
                         
                       </tr>
                     </thead>
                     <tbody>
                         @if (!$data->isEmpty())
                             <?php $no = 1; ?>
-                            <?php foreach ($data as $key) { ?>
+                            <?php foreach ($data as $item) { ?>
                                 <tr>
-                                    <th scope="row"><?php echo $no++ ?></th>
-                                    <td><?php echo $key['tgl_produksi']; ?></td>
-                                    <td><?php echo "Rp. ".$key['harga_pokok_produksi']; ?></td>
+                                    <th scope="row" class="text-center">{{ $no++ }}</th>
+                                    <td>{{ "PROD-00".$item->id }}</td>
+                                    <td>{{ $item->tgl_produksi }}</td>
+                                    <td>{{ $item->nama_barang }}</td>
+                                    <td>{{ "Rp. ".$item->harga_pokok_produksi }}</td>
                                     <td>
-                                        <button type="button" class="btn btn-primary btnEdit" data-id={{ $key }} data-bs-toggle="modal" data-bs-target="#modalHargaJual">
+                                        {{ "Rp. ".$item->harga_jual }}
+                                        <button type="button" class="btn btn-primary btn-sm btnUbahJual" data-hpp={{ $item->harga_pokok_produksi }} data-hj={{ $item->harga_jual }} data-bs-toggle="modal" data-bs-target="#modalHargaJual">
                                             <i class="bi bi-pencil-square"></i>
                                         </button>
-                                        <?php echo $key['harga_jual']; ?>
                                     </td>
-                                    <td>
-                                      <a href="/ubah/produksi/{{ $key['id'] }}" class="btn btn-light shadow" style="background-color: #212290"><i class="bi bi-pencil-square"  style="color: aliceblue"></a>
-                                      <a href="/hapus/produksi/{{ $key['id'] }}" class="btn btn-danger" data-bs-toggle="modal"><i class="bi bi-trash3"></i></a>
+                                    <td class="text-center">
+                                      <a href="/ubah/produksi/{{ $item->id }}" class="btn btn-light shadow" style="background-color: #212290;color: aliceblue"><i class="bi bi-pencil-square"></i> Ubah</a>
+                                      <a href="/hapus/produksi/{{ $item->id }}" class="btn btn-danger" data-bs-toggle="modal"><i class="bi bi-trash3"></i> Hapus</a>
                                     </td>
-                                    
                                 </tr>
                             <?php
                             } ?>
@@ -81,7 +84,7 @@
                 <label for="inputPassword" class="col-sm-5 col-form-label">Markup</label>
                 <div class="col-sm-7">
                   <div class="input-group mb-3">
-                    <input type="text" class="form-control" value="0" id="modal_markup">
+                    <input type="number" class="form-control" value="0" id="modal_markup">
                     <span class="input-group-text" id="basic-addon2">%</span>
                   </div>
                 </div>
@@ -109,14 +112,20 @@
 <script>
   let table = new DataTable('#produksi');
   $(document).ready(function(){
-      $('.btnEdit').on('click', function(){
-        var data = $(this).data('id')
-        $('#modal_hpp').val(data.harga_pokok_produksi)
-        $('#modal_hargajual').val(data.harga_pokok_produksi)
+      $('.btnUbahJual').on('click', function(){
+        
+        var hpp = $(this).data('hpp')
+        var hj = $(this).data('hj')
+        $('#modal_hpp').val(hpp)
+        $('#modal_hargajual').val(hj)
       })
-      $('#modal_markup').on('change', function(){
+      $('#modal_markup').on('keyup', function(){
         var hpp = parseInt($('#modal_hpp').val())
         var markup = parseInt($(this).val())
+        if(markup == isNaN()){
+          markup = 0
+        }
+        
         var result = (hpp*markup/100) + hpp
         $('#modal_hargajual').val(result)
       });

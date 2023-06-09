@@ -7,7 +7,7 @@
         <div class="col-2 mb-2">
             <a href="/tambah/penjualan">
                 <button class="btn btn-light shadow" style="background-color: #2528DC;color:#fff">
-                    Tambah
+                    + Penjualan
                 </button>
             </a>
         </div>
@@ -22,7 +22,7 @@
                     <th scope="col">No. Invoice</th>
                     <th scope="col">Nama Pelanggan</th>
                     <th scope="col">Total Harga</th>
-                    <th scope="col">Option</th>
+                    <th scope="col" class="text-center">Opsi</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -32,12 +32,12 @@
                             <tr>
                                 <th scope="row"><?php echo $no++ ?></th>
                                 <td><?php echo $key['tgl_penjualan']; ?></td>
-                                <td><?php echo substr_replace("INV-000",$key['id'],7-strlen($key['id'])); ?></td>
+                                <td><?php echo substr_replace("INVPENJ-00",$key['id'],11-strlen($key['id'])); ?></td>
                                 <td><?php echo $key['nama_pelanggan']; ?></td>
                                 <td><?php echo $key['total']; ?></td>
                                 <td>
                                     <a href="/ubah/penjualan/{{ $key['id'] }}">
-                                        <button class="btn btn-light shadow" style="background-color: #212290"><i class="bi bi-pencil-square"  style="color: aliceblue"></button>
+                                        <button class="btn btn-light shadow" style="background-color: #212290;color: aliceblue"><i class="bi bi-pencil-square"></i> Ubah</button>
                                     </a>
                                         {{-- <button class="btn btn-danger"><i class="bi bi-trash3"></i></i></button> --}}
                                 </td>

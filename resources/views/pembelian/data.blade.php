@@ -8,7 +8,7 @@
         <div class="col-2 mb-2">
             <a href="/tambah/pembelian">
                 <button class="btn btn-light shadow" style="background-color: #2528DC;color:#fff">
-                    Tambah
+                    + Pembelian
                 </button>
             </a>
         </div>
@@ -24,38 +24,37 @@
                         <th scope="col">Nama Distributor</th>
                         <th scope="col">Tanggal</th>
                         <th scope="col">Total Harga</th>
-                        <?php if(session('jabatan') == $access){ ?>
-                        <th scope="col">Option</th>
-                        <?php } ?>
+                    <?php if(session('jabatan') == $access){ ?>
+                        <th scope="col" class="text-center">Opsi</th>
+                    <?php } ?>
                     </tr>
                 </thead>
                 <tbody>
                     @if (!$data->isEmpty())
                         <?php $no = 1; ?>
-                        <?php foreach ($data as $key) { ?>
+                        <?php foreach ($data as $item) { ?>
                             <tr>
-                                <th scope="row"><?php echo $no++ ?></th>
-                                <td><?php echo substr_replace("INV-000",$key['id'],7-strlen($key['id'])); ?></td>
-                                <td><?php echo $key['nama_pemasok']; ?></td>
-                                <td><?php echo $key['tgl_pembelian']; ?></td>
-                                <td><?php echo "Rp. ".$key['total']; ?></td>
+                                <th scope="row">{{ $no++ }}</th>
+                                <td>{{ substr_replace("INVPEMB-000",$item->id,11-strlen($item->id)) }}</td>
+                                <td>{{ $item->nama_pemasok }}</td>
+                                <td>{{ $item->tgl_pembelian }}</td>
+                                <td>{{ "Rp. ".$item->total }}</td>
                                 <?php if(session('jabatan') == $access){ ?>
-                                <td>
-                                    <a href="/ubah/pembelian/{{ $key['id'] }}">
-                                        <button class="btn shadow" style="background-color: #212290; color: aliceblue"><i class="bi bi-pencil-square"  > </i>Edit</button>
-                                    </a>
-                                        <button class="btn btn-danger"><i class="bi bi-trash3"></i>Hapus</button>
-                                </td>
+                                    <td class="text-center">
+                                        <a href="/ubah/pembelian/{{ $item->id }}">
+                                            <button class="btn shadow" style="background-color: #212290; color: aliceblue"><i class="bi bi-pencil-square"></i> Ubah</button>
+                                        </a>
+                                            <button class="btn btn-danger"><i class="bi bi-trash3"></i> Hapus</button>
+                                    </td>
                                 <?php } ?>
                                 </tr>
                         <?php
                         } ?>
                     @else
-                    <tr class="text-center font-weight-bold">
-                        <td colspan="6">Tidak Ada Data</td>
-                    </tr>
-                @endif
-
+                        <tr class="text-center font-weight-bold">
+                            <td colspan="6">Tidak Ada Data</td>
+                        </tr>
+                    @endif
                 </tbody>
             </table>
         </div>

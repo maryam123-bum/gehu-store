@@ -29,15 +29,12 @@
 
           <div class="col-12">
             <label for="jenis_barang" class="form-label">Jenis</label>
-            <select class="form-select" name="jenis_barang" id="jenis_barang" required>
-              <option value="">Pilihan...</option>
+            <select class="form-select" name="jenis_barang" id="jenis_barang" value={{ $data->id_jenis }}>
+              <option value="0" selected>Pilihan...</option>
               @foreach ($jenis as $item)
                 <option value="{{ $item['id'] }}">{{ $item['nama_jenis'] }}</option>
               @endforeach
             </select>
-            <div class="invalid-feedback">
-              Silahkan Pilih Jenis Barang.
-            </div>
           </div>
 
           <div class="col-sm-5">
@@ -73,9 +70,18 @@
 
           <hr class="my-4">
 
-          <button class="w-100 btn btn-primary btn-lg" type="submit">Simpan Data</button>
+          <button class="w-100 btn btn-primary btn-lg" type="submit">Ubah</button>
         </form>
       </div>
     </div>
   </div>
+@endsection
+
+@section('script')
+  <script>
+    $(document).ready(function(){
+      $("#jenis_barang").val({{ $data->id_jenis }})
+      $("#satuan").val({{ $data->id_satuan }})
+    })
+  </script>
 @endsection

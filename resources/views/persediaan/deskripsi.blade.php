@@ -12,7 +12,7 @@
 <div class="col-md-7 col-lg-8">
   <div class="card">
     <div class="card-header">
-      <h5>Data Information</h5>
+      <h5>Tambah Jenis</h5>
     </div>
     <div class="card-body">
       <form class="needs-validation" action="/tambah/deskripsi" method="POST" novalidate>

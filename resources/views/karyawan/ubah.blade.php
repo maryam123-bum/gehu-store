@@ -29,29 +29,24 @@
 
           <div class="col-12">
             <label for="proffesion" class="form-label">Jabatan</label>
-            <select class="form-select" name="proffesion" id="proffession" value="{{ $data['jabatan'] }}" required>
-              <option value="">Pilihan...</option>
+            <select class="form-select" name="proffesion" id="proffesion" required>
+              <option value="0">Pilihan...</option>
               <option value="Direktur">Direktur</option>
               <option value="Karyawan Administrasi">Karyawan Administrasi</option>
-              <option value="Karyawan Produksi">Direktur</option>
+              <option value="Karyawan Produksi">Karyawan Produksi</option>
+              <option value="Pekerja Lepas">Pekerja Lepas</option>
             </select>
-            <div class="invalid-feedback">
-              Silahkan Pilih Jabatan.
-            </div>
           </div>
 
           <div class="col-12">
             <label for="address" class="form-label">Alamat</label>
             <textarea class="form-control" name="textAddress" id="address" placeholder="Silahkan masukkan alamat..." required>{{ $data['alamat'] }}</textarea>
-            <div class="invalid-feedback">
-              Silahkan masukkan alamat.
-            </div>
           </div>
 
           <div class="col-12">
             <label for="jekel" class="form-label">Jenis Kelamin</label>
             <select class="form-select" name="jekel" id="jekel" required>
-              <option value="">Pilihan...</option>
+              <option value="0">Pilihan...</option>
               <option value="lk">Laki-laki</option>
               <option value="pr">Perempuan</option>
             </select>
@@ -68,4 +63,13 @@
       </div>
     </div>
   </div>
+@endsection
+
+@section('script')
+  <script>
+    $(document).ready(function(){
+      $("#proffesion").val("{{ $data->jabatan }}");
+      $("#jekel").val("{{ $data->jenis_kelamin }}")
+    })
+  </script>
 @endsection

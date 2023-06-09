@@ -8,7 +8,7 @@
         <div class="col-2 mb-2">
             <a href="/tambah/karyawan">
                 <button class="btn btn-light shadow" style="background-color: #2528DC;color:#fff">
-                    Tambah
+                    + Karyawan
                 </button>
             </a>
         </div>
@@ -49,13 +49,8 @@
                             <td>{{ $key['alamat'] }}</td>
                             <?php if(session('jabatan') == $access){ ?>
                             <td class="text-center">
-                                <a href="/ubah/karyawan/{{ $key['id'] }}" class="btn btn-light shadow" style="background-color: #212290"><i class="bi bi-pencil-square"  style="color: aliceblue"></i></a>
-                                <a href="#delete{{ $key['id'] }}" data-bs-toggle="modal" class="btn btn-danger" ><i class="bi bi-trash3"></i></a>
-                                {{-- <form action="/hapus/karyawan" method="post" style="display:inline-block">
-                                    @csrf
-                                    <input type="hidden" name="id" value="{{ $key['id'] }}" readonly>
-                                    <button type="submit" class="btn btn-danger"><i class="bi bi-trash3"></i></i></button>
-                                </form> --}}
+                                <a href="/ubah/karyawan/{{ $key['id'] }}" class="btn btn-light shadow" style="background-color: #212290;color: aliceblue"><i class="bi bi-pencil-square"></i> Ubah</a>
+                                <a href="#delete{{ $key['id'] }}" data-bs-toggle="modal" class="btn btn-danger" ><i class="bi bi-trash3"></i> Hapus</a>
                                 <!-- Button trigger modal -->
                 
                                     <!-- Modal -->
@@ -72,11 +67,11 @@
                                             <div class="modal-footer">
                                                 
                                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                                <form action="/hapus/karyawan" method="post" style="display:inline-block">
-                                                    @csrf
-                                                    <input type="hidden" id="id" name="id" value="{{ $key['id'] }}">
-                                                    <button type="submit" class="btn btn-danger">Ya, tentu</button>
-                                                </form>
+                                            <form action="/hapus/karyawan" method="post" style="display:inline-block">
+                                                @csrf
+                                                <input type="hidden" id="id" name="id" value="{{ $key['id'] }}">
+                                                <button type="submit" class="btn btn-danger">Ya, tentu</button>
+                                            </form>
                                             </div>
                                         </div>
                                         </div>
