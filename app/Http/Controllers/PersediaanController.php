@@ -23,9 +23,15 @@ class PersediaanController extends Controller
             return view('persediaan/data', [
                 'judul' => 'Persediaan',
                 'access' => $this->access,
-                'data' => Persediaan::join('jenis_persediaan', 'persediaan.id_jenis', '=', 'jenis_persediaan.id')
+                'barang' => Persediaan::join('jenis_persediaan', 'persediaan.id_jenis', '=', 'jenis_persediaan.id')
                     ->join('satuan', 'persediaan.id_satuan', '=', 'satuan.id')
+                    ->where('persediaan.id_jenis', '!=', '3')
                     ->get(['persediaan.*', 'satuan.nama_satuan', 'jenis_persediaan.nama_jenis']),
+                'barangjadi' => Persediaan::join('jenis_persediaan', 'persediaan.id_jenis', '=', 'jenis_persediaan.id')
+                    ->join('satuan', 'persediaan.id_satuan', '=', 'satuan.id')
+                    ->where('persediaan.id_jenis', '3')
+                    ->get(['persediaan.*', 'satuan.nama_satuan', 'jenis_persediaan.nama_jenis'])
+                    ->sortDesc(),
                 'active' => "persediaan"
             ]);
         }

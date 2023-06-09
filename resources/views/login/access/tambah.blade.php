@@ -20,19 +20,11 @@
         <div class="row g-3 mb-3">
             <div class="col-sm-6">
                 <label for="firstName" class="form-label">Username</label>
-                <input type="text" class="form-control" name="username" id="username" placeholder="Masukkan email anda" value="" required>
-                <div class="invalid-feedback">
-                Username tidak boleh kosong.
-                </div>
+                <input type="text" class="form-control" name="username" id="username" placeholder="Masukkan username anda"required>
             </div>
-        </div>
-        <div class="row mb-3">
-          <div class="col-sm-6">
-            <label for="firstName" class="form-label">Password</label>
-            <input type="text" class="form-control" name="password" id="password" placeholder="Minimal 8 huruf & angka" value="" required>
-            <div class="invalid-feedback">
-            Passwoard tidak boleh kosong.
-            </div>
+            <div class="col-sm-6">
+              <label for="firstName" class="form-label">Password</label>
+              <input type="text" class="form-control" name="password" id="password" placeholder="Minimal 8 huruf & angka" value="" required>
           </div>
         </div>
         <div class="row">

@@ -145,9 +145,6 @@
                 </div>
             </div>
         </div>
-        {{-- <div class="col-2">
-            <button type="button" class="btn btn-primary" style="background-color: #080E7D;color:#fff" onclick="store()">Buat Transaksi</button>
-        </div> --}}
       </div>
     </div>
   </div>

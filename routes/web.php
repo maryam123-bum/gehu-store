@@ -155,10 +155,6 @@ Route::get('/laporan/lapHpp', function () {
     ]);
 });
 
-// Route::get('/chart', function () {
-//     return view('/laporan/chart1');
-// });
-
 //user
 Route::get('/profil', function () {
     return view('/login/user', [
@@ -170,7 +166,7 @@ Route::get('/profil', function () {
 Route::controller(AdminController::class)->group(function () {
     Route::get('/data/access', 'data');
     Route::get('/tambah/access', 'create');
-    Route::get('/ubah/acess/{id}', 'edit');
+    Route::get('/ubah/access/{id}', 'edit');
 
     Route::post('/tambah/access', 'store');
     Route::post('/ubah/access', 'update');
