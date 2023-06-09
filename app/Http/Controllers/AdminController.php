@@ -109,8 +109,12 @@ class AdminController extends Controller
     //menambah data akses
     public function create()
     {   
-        $karyawan = Karyawan::all();
-
+        $admin = Admin::all('id_karyawan');
+        $exclude = [];
+        foreach($admin as $key => $value){
+            $exclude[$key] = $value->id_karyawan;
+        }
+        $karyawan = Karyawan::whereNotBetween('id', $exclude)->get();
         //menampilkan halaman tambah access
         return view('/login/access/tambah',[
             'karyawan'=> $karyawan,
@@ -135,12 +139,11 @@ class AdminController extends Controller
     public function edit($id)
     {    
         
-        $karyawan = Karyawan::all();
-        $admin = Admin::where('admin.id', $id)->first();
-
+        $admin = Admin::where('id', $id)->first();
+        $karyawan = Karyawan::where('id',$admin->id_karyawan)->first();
         return view('/login/access/ubah',[
-            'karyawan'=> $karyawan,
             'admin' => $admin,
+            'nama' => $karyawan->nama,
             'active' => "data-tambahan"
         ]);
     }
@@ -149,12 +152,11 @@ class AdminController extends Controller
     public function update(Request $request)
     {
         Admin::where('id',$request->id)
-        ->update([
-            'username' => $request->username,
-            'password' => $request->password,
-            'id_karyawan' => $request->id_karyawan
-        ]);
-        return redirect('/data/access')->with('success', 'Tambah Admin Behasil');
+            ->update([
+                'username' => $request->username,
+                'password' => $request->password
+            ]);
+        return redirect('/data/access')->with('success', 'Ubah Admin Behasil');
     }
 
     //menghapus data admin

@@ -32,7 +32,7 @@
                                 <h6>Nama Pemasok</h6>
                             </div>
                             <div class="col-3 mb-2">
-                                <input type="text" name="nama_pemasok" class="d-inline form-control form-control-sm" width="" id="nama_pemasok">
+                                <input type="text" name="nama_pemasok" class="d-inline form-control form-control-sm" placeholder="Masukkan Nama Pemasok" id="nama_pemasok">
                             </div>
                             <div class="col-1"></div>
                             <div class="col-2 font-weight-bold">
@@ -48,7 +48,7 @@
                                 <h6>No Invoice</h6>
                             </div>
                             <div class="col-5">
-                                <h6><span class="badge bg-light" style="color:#000"><?php echo substr_replace("INV-000",$estimateid,7-strlen($estimateid)); ?></span></h6>
+                                <h6><span class="badge bg-light" style="color:#000">Buat Transaksi terlebih dahulu</span></h6>
                             </div>
                         </div>
                     </div>
@@ -72,26 +72,21 @@
                         <div class="card-body">
                             <div class="form-group mb-2">
                                 <label for="barang" class="mb-2 font-weight-bold">Nama Barang</label>
-                                <select name="barang" id="barang" class="form-select" >
+                                <select name="barang" id="barang" class="form-select" disabled>
                                     @foreach ($barang as $item)
                                         <option value="{{ $item['id'] }}">{{ $item['nama_barang'] }}</option>
                                     @endforeach
                                 </select>
-                                <span style="font-size: 14px" >Barang tidak ada? silahkan <a href="/tambah/persediaan">tambah barang</a></span>
                             </div>
-                            {{-- <div class="form-group">
-                                <label for="harga" class="mb-2 font-weight-bold">Harga Barang</label>
-                                <input type="text" class="form-control mb-2" placeholder="0" name="harga" id="harga">
-                            </div> --}}
                             <div class="form-group">
                                 <label for="jumlah" class="mb-2 font-weight-bold">Jumlah Barang (CM)</label>
-                                <input type="text" class="form-control mb-2" placeholder="0" name="jumlah" id="jumlah">
+                                <input type="text" class="form-control mb-2" placeholder="0" name="jumlah" id="jumlah" disabled>
                             </div>
                             <div class="form-group">
                                 <label for="jumlah" class="mb-2 font-weight-bold">Potongan</label>
-                                <input type="text" class="form-control mb-2" placeholder="0" name="diskon" id="diskon">
+                                <input type="text" class="form-control mb-2" placeholder="0" name="diskon" id="diskon" disabled>
                             </div>
-                            <button class="w-100 btn btn-md" style="background-color: #080E7D;color:#fff" type="button" <?php  ?> onclick="insertBarang()">Simpan Data</button>
+                            <button class="w-100 btn btn-md" style="background-color: #27272d;color:#fff" type="button" disabled>Buat Transaksi terlebih dahulu</button>
                         </div>
                     </div>
             </div>
@@ -112,7 +107,7 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="form-group mb-3">
-                            <select name="deskripsi" id="deskripsi" class="form-select" required>
+                            <select name="deskripsi" id="deskripsi" class="form-select" disabled>
                                 <option value="" selected>Pilih Deskripsi...</option>
                                 @foreach ($deskripsilist as $item)  
                                     <option value="{{ $item['id'] }}">{{ $item['deskripsi'] }}</option>
@@ -122,32 +117,13 @@
                         </div>
                         <div class="form-group">
                             <label for="jumlah" class="mb-2 font-weight-bold">Biaya</label>
-                            <input type="text" class="form-control mb-2" placeholder="0" name="biaya" id="biaya">
+                            <input type="text" class="form-control mb-2" placeholder="" name="biaya" id="biaya" disabled>
                         </div>
-                        <button class="w-100 btn btn-md" style="background-color: #080E7D;color:#fff" type="button" onclick="insertDeskripsi()">Simpan Data</button>
+                        <button class="w-100 btn btn-md" style="background-color: #27272d;color:#fff" type="button" disabled>Buat Transaksi terlebih dahulu</button>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="row mb-3">
-            <div class="col-8">
-                <div class="card">
-                    <div class="row">
-                        <div class="col-10">
-                            <h4 class="font-weight-bold p-4">
-                                Total : <span id="totalSemua">0</span></p>
-                            </h4>
-                        </div>
-                        <div class="col-2 py-4">
-                            <button type="button" class="btn" style="background-color: #080E7D"><a href="/pembelian" style="color:#fff">Selesai</a></button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        {{-- <div class="col-2">
-            <button type="button" class="btn btn-primary" style="background-color: #080E7D;color:#fff" onclick="store()">Buat Transaksi</button>
-        </div> --}}
       </div>
     </div>
   </div>
@@ -193,7 +169,6 @@
                 "_token": "{{ csrf_token() }}",
                 "nama_pemasok": nama_pemasok
             }, success: function(data) {
-                    $("#id_pembelian").val(data.id)
                     if(data){
                         swal({
                             title: "Sukses",
@@ -202,68 +177,10 @@
                             button: "Close!",
                         });
                     }
+                    window.location.href = '/ubah/pembelian/' + data.id;
                 }
             });
         }   
-        
-    }
-    function insertBarang() {
-        var id_pembelian = $("#id_pembelian").val()
-        var id_barang = $("#barang").val()
-        var jumlah = $("#jumlah").val()
-        var diskon = $("#diskon").val()
-        if(id_pembelian == ""){
-            panggilAlertValidation('Buat Transaksi Dahulu')
-        }else if(id_barang == ""){
-            panggilAlertValidation('Tambahkan Barang Dahulu')
-        }else if(jumlah == ""){
-            panggilAlertValidation('Jumlah Barang Kosong!!')
-        }else if(diskon == ""){
-            panggilAlertValidation('diskon kosong!!')
-        }else{
-            $.ajax({
-            type: "post",
-            url: "{{ url('/tambah/barang/pembelian-detail') }}",
-            data: {
-                "_token": "{{ csrf_token() }}",
-                "id_pembelian": id_pembelian,
-                "id_barang": id_barang,
-                "jumlah": jumlah,
-                "diskon": diskon
-            }, success: function(data) {
-                    bacaBarang(data)
-                    bacaTotal(data)
-                }
-            });
-        }
-        
-    }
-    function insertDeskripsi() {
-        var id_pembelian = $("#id_pembelian").val()
-        var deskripsi = $("#deskripsi").val()
-        var biaya = $("#biaya").val()
-        if(id_pembelian == ""){
-            panggilAlertValidation('Buat Transaksi Dahulu')
-        }else if(deskripsi == ""){
-            panggilAlertValidation('Tambahkan Deskripsi Dahulu')
-        }else if(biaya == ""){
-            panggilAlertValidation('Biaya Kosong!!')
-        }else{
-            $.ajax({
-                type: "post",
-                url: "{{ url('/tambah/deskripsi/pembelian-detail') }}",
-                data: {
-                    "_token": "{{ csrf_token() }}",
-                    "id_pembelian": id_pembelian,
-                    "deskripsi": deskripsi,
-                    "biaya": biaya
-                },
-                success: function(data) {
-                    bacaDeskripsi(data)
-                    bacaTotal(data)
-                }
-            });
-        }
     }
 
     function panggilAlertValidation(text){

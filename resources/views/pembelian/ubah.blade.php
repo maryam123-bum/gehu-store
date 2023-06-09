@@ -81,7 +81,7 @@
                                 <span style="font-size: 14px" >Barang tidak ada? silahkan <a href="/tambah/persediaan">tambah barang</a></span>
                             </div>
                             <div class="form-group">
-                                <label for="jumlah" class="mb-2 font-weight-bold">Jumlah Barang</label>
+                                <label for="jumlah" class="mb-2 font-weight-bold">Jumlah Barang (Cm)</label>
                                 <input type="text" class="form-control mb-2" placeholder="0" name="jumlah" id="jumlah">
                             </div>
                             <div class="form-group">
@@ -127,20 +127,29 @@
             </div>
         </div>
         <div class="row mb-3">
-            <div class="col-8">
+            <div class="col-12">
                 <div class="card">
-                    <h4 class="font-weight-bold p-4">
-                        Total : <span id="totalSemua">0</span></p>
-                    </h4>
+                    <div class="row">
+                        <div class="col-7">
+                            <h5 class="p-4"><i>Gehu Store - Cari Kado</i></h5>
+                        </div>
+                        <div class="col-2">
+                            <h3 class="font-weight-bold p-4">
+                                Total
+                            </h3>
+                        </div>
+                        <div class="col-3">
+                            <h3 class="font-weight-bold p-4" style="text-align: right">
+                                Rp. <span id="totalSemua">0</span>,-
+                            </h3>
+                        </div>
+                    </div>
                 </div>
-                <div class="col-2 py-4">
+                {{-- <div class="col-2 py-4">
                     <button type="button" class="btn" style="background-color: #080E7D"><a href="/pembelian" style="color:#fff">Selesai</a></button>
-                </div>
+                </div> --}}
             </div>
         </div>
-        {{-- <div class="col-2">
-            <button type="button" class="btn btn-primary" style="background-color: #080E7D;color:#fff" onclick="store()">Buat Transaksi</button>
-        </div> --}}
       </div>
     </div>
   </div>
@@ -151,7 +160,7 @@
         var id = "{{ $header->id }}"
         bacaBarang(id)
         bacaDeskripsi(id)
-        fetchTotal(id)
+        bacaTotal(id)
     });
 
     function fetchTotal(num){
@@ -174,33 +183,7 @@
             $("#deskripsiId").html(data);
         });
     }
-    // untuk proses create data
-    function store() {
-        var nama_pemasok = $("#nama_pemasok").val();
-        if(nama_pemasok == ""){
-            panggilAlertValidation("Nama Pemasok Kosong")
-        }else{
-            $.ajax({
-            type: "post",
-            url: "{{ url('/tambah/pembelian') }}",
-            data: {
-                "_token": "{{ csrf_token() }}",
-                "nama_pemasok": nama_pemasok
-            }, success: function(data) {
-                    $("#id_pembelian").val(data.id)
-                    if(data){
-                        swal({
-                            title: "Sukses",
-                            text: "Pembelian dibuat!",
-                            icon: "success",
-                            button: "Close!",
-                        });
-                    }
-                }
-            });
-        }   
-        
-    }
+    
     function insertBarang() {
         var id_pembelian = $("#id_pembelian").val()
         var id_barang = $("#barang").val()

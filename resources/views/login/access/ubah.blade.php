@@ -26,24 +26,18 @@
                 Username tidak boleh kosong.
                 </div>
             </div>
-        </div>
-        <div class="row mb-3">
-          <div class="col-sm-6">
-            <label for="firstName" class="form-label">Password</label>
-            <input type="text" class="form-control" name="password" id="password" placeholder="Minimal 8 huruf & angka" value="{{ $admin->password }}" required>
-            <div class="invalid-feedback">
-            Passwoard tidak boleh kosong.
+            <div class="col-sm-6">
+              <label for="firstName" class="form-label">Password</label>
+              <input type="password" class="form-control" name="password" id="password" placeholder="Minimal 8 huruf & angka" value="{{ $admin->password }}" required>
+              <div class="invalid-feedback">
+              Password tidak boleh kosong.
+              </div>
             </div>
-          </div>
         </div>
         <div class="row">
           <div class="form-group mb-2">
             <label for="karyawan" class="mb-2 font-weight-bold">Nama Karyawan</label>
-            <select name="id_karyawan" id="id_karyawan" class="form-select" >
-                @foreach ($karyawan as $item)
-                    <option value="{{ $item['id'] }}">{{ $item['nama'] }}</option>
-                @endforeach
-            </select>
+            <input type="text" class="form-control" disabled value="{{ $nama }}">
            </div>
         </div>
      
