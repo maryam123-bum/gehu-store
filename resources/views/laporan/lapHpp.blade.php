@@ -1,13 +1,11 @@
 @extends('layouts/main')
-@section('title')
-<div class="col">
-    <a href="/laporan"><i class="bi bi-chevron-left fs-2"></i></a>
-</div>
-<div class="col-10">
-    <h2>Laporan Harga Pokok Produksi</h2>
-</div> 
 
+@section('kembali')
+  <a href="/karyawan"><i class="bi bi-chevron-left fs-2"></i></a>
 @endsection
+
+@section('title')
+    <h2>Laporan Harga Pokok Produksi</h2>
 @section('container')
 <div class="mb-3">
     <button id="cmd" onclick="genPDF()" class="btn btn-warning">Download</button>
@@ -70,17 +68,6 @@
                 <div class="col-2">
                 </div>
             </div>
-            <div class="row mb-1">
-                <div class="col-6">
-                    <p class="px-5">Retur Pembelian</p>
-                </div>
-                <div class="col-2 border-bottom border-dark">
-                    <p>-Rp 1.000.000</p>
-                </div>
-                <div class="col-2">
-                </div>
-                <div class="col-2">
-                </div>
             <div class="row mb-1">
                 <div class="col-6">
                     <p class="px-10" style="font-weight: bold">Total Pembelian Bahan Baku</p>
