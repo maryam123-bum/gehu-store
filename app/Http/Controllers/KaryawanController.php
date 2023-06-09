@@ -62,7 +62,7 @@ class KaryawanController extends Controller
             'jenis_kelamin' => $gender
         ]);
 
-        return redirect('data/karyawan')->with('success', 'Tambah data karyawan berhasil');
+        return redirect('/karyawan')->with('success', 'Tambah data karyawan berhasil');
     }
 
     //mengubah data
@@ -94,7 +94,7 @@ class KaryawanController extends Controller
                 'jenis_kelamin' => $request->jekel
             ]);
 
-        return redirect('data/karyawan')->with('success', 'Ubah data karyawan berhasil');
+        return redirect('/karyawan')->with('success', 'Ubah data karyawan berhasil');
     }
 
     //menghapus data
@@ -102,9 +102,9 @@ class KaryawanController extends Controller
     {
         if($request->id){
             Karyawan::where('id', $request->id)->delete();
-            return redirect('data/karyawan')->with('success', 'Hapus data karyawan berhasil');
+            return redirect('karyawan')->with('success', 'Hapus data karyawan berhasil');
         }
-        return redirect('data/karyawan')->with('error', 'Hapus data karyawan gagal');
+        return redirect('/karyawan')->with('error', 'Hapus data karyawan gagal');
     }
 
     
