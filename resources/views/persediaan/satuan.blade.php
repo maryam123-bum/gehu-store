@@ -10,7 +10,7 @@
 
 @section('container')
 <div class="row">
-  <div class="col-md-9 col-lg-9">
+  <div class="col-md-8 col-lg-8">
       <div class="card">
         <div class="card-body">
           <div class="row">
@@ -27,7 +27,6 @@
                       <th scope="col">No</th>
                       <th scope="col">Kode Satuan</th>
                       <th scope="col">Nama Satuan</th>
-                      <th scope="col">Opsi</th>
                   </tr>
                   </thead>
                   <tbody>
@@ -78,26 +77,26 @@
         </div>
       </div>
   </div>
-  <div class="col-md-3 col-lg-3">
+  <div class="col-md-4 col-lg-4">
     <div class="card">
       <div class="card-header">
-        <h5>Data Information</h5>
+        <h5>Data Informasi</h5>
       </div>
       <div class="card-body">
         <form class="needs-validation" action="/tambah/satuan" method="POST" novalidate>
           @csrf
           <div class="row g-3">
-              <div class="col-5">
-                  <h6><span class="badge bg-light" style="color:#000"><?php echo substr_replace("SAT-000",$estimateid,7-strlen($estimateid)); ?></span></h6>
-              </div>
+            <div class="col-4">
+                <div class="form-group">
+                  <label for="id" style="font-weight:bold">ID Jenis</label><br>
+                  <h5 class="badge bg-info p-2 mt-3 mb-2" id="id" style="color:#000">{{ substr_replace("SAT-000",$estimateid,7-strlen($estimateid)) }}</h5>
+                </div>
+            </div>
+            <div class="col-8">
+                <label for="firstName" class="form-label" style="font-weight:bold">Nama Satuan</label>
+                <input type="text" class="form-control" name="nama_satuan" id="nama_satuan" placeholder="Masukkan Nama Satuan" required>
+            </div>
           </div>
-          <div class="row g-3">
-              <div class="col-sm-6">
-                  <label for="firstName" class="form-label">Nama Satuan</label>
-                  <input type="text" class="form-control" name="nama_satuan" id="nama_satuan" value="" required>
-              </div>
-          </div>
-
             <hr class="my-4">
 
             <button class="w-100 btn btn-primary btn-lg" style="background-color: #080E7D;color:#fff" type="submit">Simpan Data</button>

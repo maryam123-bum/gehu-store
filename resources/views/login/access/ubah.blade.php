@@ -37,7 +37,7 @@
         <div class="row">
           <div class="form-group mb-2">
             <label for="karyawan" class="mb-2 font-weight-bold">Nama Karyawan</label>
-            <input type="text" class="form-control" disabled value="{{ $admin->nama }}">
+            <input type="text" class="form-control" disabled value="{{ $nama }}">
            </div>
         </div>
      

@@ -21,7 +21,7 @@ class JenisPersediaanController extends Controller
                 $data = JenisPersediaan::all();
                 $id = JenisPersediaan::all()->count();
                 return view('persediaan/jenis', [
-                    'active' => 'Persediaan',
+                    'active' => 'persediaan',
                     'estimateid' => $id + 1,
                     'data' => $data,
                 ]);

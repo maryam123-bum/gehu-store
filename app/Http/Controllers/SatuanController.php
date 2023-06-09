@@ -21,7 +21,7 @@ class SatuanController extends Controller
                 $id = Satuan::all()->count();
                 return view('persediaan/satuan', [
                     'data' => $data,
-                    'active' => 'Persediaan',
+                    'active' => 'persediaan',
                     'estimateid' => $id + 1
                 ]);
             } else{

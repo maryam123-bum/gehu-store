@@ -13,7 +13,7 @@ class DeskripsiController extends Controller
             $id = Deskripsi::all()->count(); //mengambil id dari semua database Deskripsi
             //menampilkan data deskripsi
             return view('persediaan/deskripsi', [ 
-                'active' => 'Persediaan',
+                'active' => 'persediaan',
                 'estimateid' => $id + 1
             ]);
         }

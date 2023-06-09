@@ -10,7 +10,7 @@
 
 @section('container')
 <div class="row">
-  <div class="col-md-9 col-lg-9">
+  <div class="col-md-8 col-lg-8">
       <div class="card">
         <div class="card-body">
           <div class="row">
@@ -78,7 +78,7 @@
       </div>
   </div>
  
-  <div class="col-md-3 col-lg-3">
+  <div class="col-md-4 col-lg-4">
     <div class="card">
       <div class="card-header">
         <h5>Tambah Jenis</h5>
@@ -87,15 +87,13 @@
         <form class="needs-validation" action="/tambah/jenis" method="POST" novalidate>
           @csrf
           <div class="row mb-3">
-              <div class="col">
+              <div class="col-4">
                   <div class="form-group">
                     <label for="id" style="font-weight:bold">ID Jenis</label><br>
-                    <h5 class="badge bg-info" id="id" style="color:#000">{{ substr_replace("JNS-000",$estimateid,7-strlen($estimateid)) }}</h5>
+                    <h5 class="badge bg-info p-2 mt-3 mb-2" id="id" style="color:#000">{{ substr_replace("JNS-000",$estimateid,7-strlen($estimateid)) }}</h5>
                   </div>
               </div>
-          </div>
-          <div class="row">
-              <div class="col">
+              <div class="col-8">
                   <label for="firstName" class="form-label" style="font-weight:bold">Nama Jenis</label>
                   <input type="text" class="form-control" name="nama_jenis" id="nama_jenis" placeholder="Masukkan Nama Jenis" required>
               </div>

@@ -139,10 +139,11 @@ class AdminController extends Controller
     public function edit($id)
     {    
         
-        $admin = Admin::join('karyawan', 'admin.id_karyawan', '=', 'karyawan.id')->where('admin.id', $id)->first();
-
+        $admin = Admin::where('id', $id)->first();
+        $karyawan = Karyawan::where('id',$admin->id_karyawan)->first();
         return view('/login/access/ubah',[
             'admin' => $admin,
+            'nama' => $karyawan->nama,
             'active' => "data-tambahan"
         ]);
     }
@@ -155,7 +156,7 @@ class AdminController extends Controller
                 'username' => $request->username,
                 'password' => $request->password
             ]);
-        return redirect('/data/access')->with('success', 'Tambah Admin Behasil');
+        return redirect('/data/access')->with('success', 'Ubah Admin Behasil');
     }
 
     //menghapus data admin
