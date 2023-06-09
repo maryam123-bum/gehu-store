@@ -85,12 +85,12 @@ Highcharts.chart('container', {
       data: [
         {
           name: 'Barang Keluar',
-          y: 63,
+          y: 0,
           drilldown: 'Barang Keluar'
         },
         {
           name: 'Barang Masuk',
-          y: 84,
+          y: {{ $bahan_baku_masuk + $bahan_penolong_masuk }},
           drilldown: 'Barang Masuk'
         }
       ]
@@ -109,11 +109,11 @@ Highcharts.chart('container', {
         data: [
           [
             'Bahan Baku',
-            30
+            0
           ],
           [
             'Bahan Penolong',
-            18
+            0
           ]
         ]
       },
@@ -123,11 +123,11 @@ Highcharts.chart('container', {
         data: [
           [
             'Bahan Baku',
-            40
+            {{ $bahan_baku_masuk }}
           ],
           [
             'Bahan Penolong',
-            24
+            {{ $bahan_penolong_masuk }}
           ]
         ]
       }

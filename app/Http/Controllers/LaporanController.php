@@ -7,6 +7,7 @@ use App\Models\Pembelian;
 use App\Models\Persediaan;
 use App\Models\Produksi;
 use App\Models\Penjualan;
+use App\Models\PembelianDetail;
 
 class LaporanController extends Controller
 {
@@ -17,8 +18,17 @@ class LaporanController extends Controller
     }
 
     public function lapBarang(){
+
+        $bahan_baku_masuk = PembelianDetail::join('persediaan', 'pembelian_detail.id_barang', '=', 'persediaan.id')
+                                ->where('persediaan.id_jenis', 1)
+                                ->get()->sum('jumlah');
+        $bahan_penolong_masuk = PembelianDetail::join('persediaan', 'pembelian_detail.id_barang', '=', 'persediaan.id')
+                                ->where('persediaan.id_jenis', 2)
+                                ->get()->sum('jumlah');
         return view('/laporan/laporanBarang', [
-            'active' => "laporan"
+            'active' => "laporan",
+            'bahan_baku_masuk' => $bahan_baku_masuk,
+            'bahan_penolong_masuk' => $bahan_penolong_masuk,
         ]);
     }
 
