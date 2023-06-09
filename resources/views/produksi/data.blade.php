@@ -39,7 +39,7 @@
                                     <td>{{ "Rp. ".$item->harga_pokok_produksi }}</td>
                                     <td>
                                         {{ "Rp. ".$item->harga_jual }}
-                                        <button type="button" class="btn btn-primary btn-sm btnUbahJual" data-hpp={{ $item->harga_pokok_produksi }} data-hj={{ $item->harga_jual }} data-bs-toggle="modal" data-bs-target="#modalHargaJual">
+                                        <button type="button" class="btn btn-primary btn-sm btnUbahJual" data-hpp={{ $item->harga_pokok_produksi }} data-hj={{ $item->harga_jual }} data-all={{ $item->id }} data-bs-toggle="modal" data-bs-target="#modalHargaJual">
                                             <i class="bi bi-pencil-square"></i>
                                         </button>
                                     </td>
@@ -70,7 +70,8 @@
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
-            <form action="">
+            <form method="POST" id="form-update-hargajual">
+              <input type="hidden" id="id_produksi">
               <div class="mb-3 row">
                 <label for="hpp" class="col-sm-5 col-form-label">Harga Pokok Produksi</label>
                 <div class="col-sm-7">
@@ -98,11 +99,11 @@
                   </div>
                 </div>
               </div>
-            </form>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
             <button type="submit" class="btn btn-primary">Simpan</button>
+          </form>
           </div>
         </div>
       </div>
@@ -113,11 +114,12 @@
   let table = new DataTable('#produksi');
   $(document).ready(function(){
       $('.btnUbahJual').on('click', function(){
-        
+        var id = $(this).data('all')
         var hpp = $(this).data('hpp')
         var hj = $(this).data('hj')
         $('#modal_hpp').val(hpp)
         $('#modal_hargajual').val(hj)
+        $('#id_produksi').val(id)
       })
       $('#modal_markup').on('keyup', function(){
         var hpp = parseInt($('#modal_hpp').val())
@@ -129,6 +131,24 @@
         var result = (hpp*markup/100) + hpp
         $('#modal_hargajual').val(result)
       });
+      $('#form-update-hargajual').on('submit', function(event){
+        event.preventDefault();  
+        var id = $('#id_produksi').val()
+        var markup = $('#modal_markup').val()
+        $.ajax({
+            type: "post",
+            url: "{{ url('/update/hargajual/produksi') }}",
+            data: {
+                "_token": "{{ csrf_token() }}",
+                "id":id,
+                "markup":markup
+            },
+            success: function(data) {
+              
+                window.location.reload()
+            }
+        });
+      })
   })
   
 </script>

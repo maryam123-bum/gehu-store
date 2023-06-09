@@ -3,6 +3,7 @@
         <th>No</th>
         <th>Nama Karyawan</th>
         <th>Upah</th>
+        <th>Opsi</th>
     </tr>
     @if ($data)
         <?php $i = 1?>

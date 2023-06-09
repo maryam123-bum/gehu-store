@@ -3,6 +3,7 @@
         <th>No</th>
         <th>Deskripsi</th>
         <th>Biaya</th>
+        <th>Opsi</th>
     </tr>
     @if ($data != [])
         <?php $i = 1?>
