@@ -214,12 +214,7 @@ class PembelianController extends Controller
                         ->join('satuan', 'persediaan.id_satuan', '=', 'satuan.id')
                         ->where('persediaan.id_jenis', '!=', '3')
                         ->get(['persediaan.*', 'satuan.nama_satuan', 'jenis_persediaan.nama_jenis']);
-        
-                // $baranglist = PembelianDetail::join('persediaan', 'pembelian_detail.id_barang', '=', 'persediaan.id')
-                //     ->join('jenis_persediaan', 'persediaan.id_jenis', '=', 'jenis_persediaan.id')
-                //     ->join('satuan', 'persediaan.id_satuan', '=', 'satuan.id')
-                //     ->get(['persediaan.*', 'satuan.nama_satuan', 'jenis_persediaan.nama_jenis', 'pembelian_detail.jumlah']);
-        
+                        
                 return view('pembelian.ubah', [
                     'header' => $header,
                     'barang' => $baranglist,
@@ -234,24 +229,11 @@ class PembelianController extends Controller
         return redirect('/login');
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
         //
