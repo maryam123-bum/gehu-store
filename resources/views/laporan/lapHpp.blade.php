@@ -9,8 +9,33 @@
 @endsection
 
 @section('container')
-<div class="mb-3">
-    <button id="cmd" onclick="genPDF()" class="btn btn-warning">Download</button>
+<div class="row mb-1">
+    <div class="col-3">
+        <label for="month" style="font-weight: bold">Pilih Bulan</label>
+    </div>
+</div>
+<div class="row mb-3">
+    <div class="col-2">
+        <select name="" id="month" class="form-select">
+            <option value="6">Juni</option>
+            <option value="7" disabled>Juli</option>
+            <option value="8" disabled>Agustus</option>
+            <option value="9" disabled>September</option>
+            <option value="10" disabled>Oktober</option>
+            <option value="11" disabled>November</option>
+            <option value="12" disabled>Desember</option>
+        </select>
+    </div>
+    <div class="col-2">
+        <select name="" id="year" class="form-select">
+            <option value="2023">2023</option>
+            <option value="2024" disabled>2024</option>
+            <option value="2025" disabled>2025</option>
+        </select>
+    </div>
+    <div class="col-1">
+        <button id="cmd" onclick="genPDF()" class="btn btn-warning">Download</button>
+    </div>
 </div>
 <div class="card" id="content">
     <div class="card-body" >
@@ -32,7 +57,7 @@
                     </div>
                     <div class="row">
                         <div class="col">
-                            <h6 style="text-align: center">Januari 2023</h6>
+                            <h6 style="text-align: center">Juni 2023</h6>
                         </div>
                     </div>
                 </div>
@@ -51,7 +76,7 @@
                     <p class="px-5">Persediaan Bahan Baku Awal</p>
                 </div>
                 <div class="col-2">
-                    <p>&nbsp;&nbsp;Rp 3.000.000</p>
+                    <p>&nbsp;&nbsp;Rp. {{ $data['persediaan_bahan_baku_awal'] }}</p>
                 </div>
                 <div class="col-2">
                 </div>
@@ -63,7 +88,7 @@
                     <p class="px-5">Pembelian Bahan Baku</p>
                 </div>
                 <div class="col-2">
-                    <p>&nbsp;&nbsp;Rp 3.000.000</p>
+                    <p>&nbsp;&nbsp;Rp. {{ $data['pembelian_bahan_baku'] }}</p>
                 </div>
                 <div class="col-2">
                 </div>
@@ -77,7 +102,7 @@
                 <div class="col-2">
                 </div>
                 <div class="col-2">
-                    <p style="font-weight: bold">Rp 7.000.000</p>
+                    <p style="font-weight: bold">Rp. {{ $data['total_pembelian_bahan_baku'] }}</p>
                 </div>
                 <div class="col-2">
                 </div>
@@ -89,7 +114,7 @@
                 <div class="col-2">
                 </div>
                 <div class="col-2">
-                    <p>Rp 2.850.000</p>
+                    <p>Rp. {{ $data['persediaan_bahan_baku_akhir'] }}</p>
                 </div>
                 <div class="col-2">
                 </div>
@@ -101,7 +126,7 @@
                 <div class="col-2">
                 </div>
                 <div class="col-2">
-                    <p style="font-weight: bold">Rp 9.850.000</p>
+                    <p style="font-weight: bold">Rp. {{ $data['total_biaya_bahan_baku'] }}</p>
                 </div>
                 <div class="col-2">
                 </div>
@@ -109,6 +134,18 @@
             <div class="row mb-1">
                 <div class="col">
                     <p style="color:#2596be;font-weight:bold">Biaya Tenaga Kerja Langsung</p>
+                </div>
+            </div>
+            <div class="row mb-1">
+                <div class="col-6">
+                    <p class="px-5">Tenaga Kerja Langsung</p>
+                </div>
+                <div class="col-2">
+                </div>
+                <div class="col-2">
+                    <p>Rp. {{ $data['tenaga_kerja_langsung'] }}</p>
+                </div>
+                <div class="col-2">
                 </div>
             </div>
             <div class="row mb-1">
@@ -121,7 +158,7 @@
                     <p class="px-5">Biaya Listrik & Air</p>
                 </div>
                 <div class="col-2">
-                    <p>&nbsp;&nbsp;Rp 300.000</p>
+                    <p>&nbsp;&nbsp;Rp. {{ $data['overhead_deskripsi'] }}</p>
                 </div>
                 <div class="col-2">
                 </div>
@@ -133,7 +170,7 @@
                     <p class="px-5">Biaya Pemeliharaan Peralatan</p>
                 </div>
                 <div class="col-2 border-bottom border-dark">
-                    <p>&nbsp;&nbsp;Rp 150.000</p>
+                    <p>&nbsp;&nbsp;Rp. 0</p>
                 </div>
                 <div class="col-2">
                 </div>
@@ -147,7 +184,7 @@
                 <div class="col-2">
                 </div>
                 <div class="col-2">
-                    <p style="font-weight: bold">Rp 450.000</p>
+                    <p style="font-weight: bold">Rp. {{ $data['overhead_deskripsi'] }}</p>
                 </div>
                 <div class="col-2">
                 </div>
@@ -162,7 +199,7 @@
                     
                 </div>
                 <div class="col-2">
-                    <p style="font-weight: bold">Rp 10.300.000</p>
+                    <p style="font-weight: bold">Rp. {{ $data['total'] }}</p>
                 </div>
             </div>
         </div>

@@ -9,8 +9,33 @@
 @endsection
 
 @section('container')
-<div class="mb-3">
-    <button id="cmd" onclick="genPDF()" class="btn btn-warning">Download</button>
+<div class="row mb-1">
+    <div class="col-3">
+        <label for="month" style="font-weight: bold">Pilih Bulan</label>
+    </div>
+</div>
+<div class="row mb-3">
+    <div class="col-2">
+        <select name="" id="month" class="form-select">
+            <option value="6">Juni</option>
+            <option value="7" disabled>Juli</option>
+            <option value="8" disabled>Agustus</option>
+            <option value="9" disabled>September</option>
+            <option value="10" disabled>Oktober</option>
+            <option value="11" disabled>November</option>
+            <option value="12" disabled>Desember</option>
+        </select>
+    </div>
+    <div class="col-2">
+        <select name="" id="year" class="form-select">
+            <option value="2023">2023</option>
+            <option value="2024" disabled>2024</option>
+            <option value="2025" disabled>2025</option>
+        </select>
+    </div>
+    <div class="col-1">
+        <button id="cmd" onclick="genPDF()" class="btn btn-warning">Download</button>
+    </div>
 </div>
 <div class="card" id="content">
     <div class="card-body" >
@@ -32,7 +57,7 @@
                     </div>
                     <div class="row">
                         <div class="col">
-                            <h6 style="text-align: center">Januari 2023</h6>
+                            <h6 style="text-align: center">Juni 2023</h6>
                         </div>
                     </div>
                 </div>
@@ -51,7 +76,7 @@
                     <p class="px-5">Penjualan</p>
                 </div>
                 <div class="col-2">
-                    <p>&nbsp;&nbsp;Rp 3.000.000</p>
+                    <p>&nbsp;&nbsp;Rp. {{ $penjualan }}</p>
                 </div>
                 <div class="col-2">
                 </div>
@@ -69,7 +94,7 @@
                     
                 </div>
                 <div class="col-2">
-                    <p style="font-weight: bold">Rp 3.000.000</p>
+                    <p style="font-weight: bold">Rp. {{ $penjualan }}</p>
                 </div>
             </div>
             <div class="row mb-1">
@@ -82,7 +107,7 @@
                     <p class="px-5">Potongan Pembelian</p>
                 </div>
                 <div class="col-2">
-                    <p>-Rp 1.000.000</p>
+                    <p>-Rp. {{ -$diskon }}</p>
                 </div>
                 <div class="col-2">
                 </div>
@@ -94,7 +119,7 @@
                     <p class="px-5">Biaya pengiriman</p>
                 </div>
                 <div class="col-2 border-bottom border-dark">
-                    <p>&nbsp;&nbsp;Rp 150.000</p>
+                    <p>&nbsp;&nbsp;Rp. {{ $biaya_pengiriman }}</p>
                 </div>
                 <div class="col-2">
                 </div>
@@ -108,7 +133,7 @@
                 <div class="col-2">
                 </div>
                 <div class="col-2">
-                    <p style="font-weight: bold">-Rp 850.000</p>
+                    <p style="font-weight: bold">Rp. {{ -$diskon + $biaya_pengiriman }}</p>
                 </div>
                 <div class="col-2">
                 </div>
@@ -122,7 +147,7 @@
                 <div class="col-2">
                 </div>
                 <div class="col-2">
-                    <p style="font-weight: bold">-Rp 850.000</p>
+                    <p style="font-weight: bold">Rp. {{-$diskon + $biaya_pengiriman}}</p>
                 </div>
             </div>
             <div class="row mb-1">
@@ -135,7 +160,7 @@
                     <p class="px-5">Gaji Karyawan</p>
                 </div>
                 <div class="col-2">
-                    <p>Rp 1.000.000</p>
+                    <p>Rp. {{ $gaji_karyawan }}</p>
                 </div>
                 <div class="col-2">
                 </div>
@@ -147,7 +172,7 @@
                     <p class="px-5">Listrik & Air</p>
                 </div>
                 <div class="col-2 border-bottom border-dark">
-                    <p>Rp 150.000</p>
+                    <p>Rp. {{ $listrik_air }}</p>
                 </div>
                 <div class="col-2">
                 </div>
@@ -161,7 +186,7 @@
                 <div class="col-2">
                 </div>
                 <div class="col-2">
-                    <p style="font-weight: bold">Rp 850.000</p>
+                    <p style="font-weight: bold">Rp. {{ $gaji_karyawan + $listrik_air }}</p>
                 </div>
                 <div class="col-2">
                 </div>
@@ -175,7 +200,7 @@
                 <div class="col-2">
                 </div>
                 <div class="col-2">
-                    <p style="font-weight: bold">Rp 850.000</p>
+                    <p style="font-weight: bold">Rp. {{ $gaji_karyawan + $listrik_air }}</p>
                 </div>
             </div>
             <div class="row bg-secondary pt-2 text-white">
@@ -188,7 +213,7 @@
                     
                 </div>
                 <div class="col-2">
-                    <p style="font-weight: bold">Rp 3.000.000</p>
+                    <p style="font-weight: bold">Rp. {{ ($penjualan) - (-$diskon + $biaya_pengiriman) - ($gaji_karyawan + $listrik_air) }} </p>
                 </div>
             </div>
         </div>
