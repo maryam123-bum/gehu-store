@@ -1,12 +1,13 @@
 @extends('layouts/main')
 
 @section('kembali')
-  <a href="/karyawan"><i class="bi bi-chevron-left fs-2"></i></a>
+  <a href="/laporan"><i class="bi bi-chevron-left fs-2"></i></a>
 @endsection
 
 @section('title')
     <h2>Laporan Laba Rugi</h2>
 @endsection
+
 @section('container')
 <div class="mb-3">
     <button id="cmd" onclick="genPDF()" class="btn btn-warning">Download</button>
