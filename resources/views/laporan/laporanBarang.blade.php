@@ -5,7 +5,7 @@
 @endsection
 
 @section('title')
-  <h2>Laporan Persediaan Barang</h2>\
+  <h2>Laporan Persediaan Barang</h2>
 @endsection
 @section('container')
 <div class="card">
@@ -114,10 +114,6 @@ Highcharts.chart('container', {
           [
             'Bahan Penolong',
             18
-          ],
-          [
-            'Barang Jadi',
-            15
           ]
         ]
       },
@@ -132,10 +128,6 @@ Highcharts.chart('container', {
           [
             'Bahan Penolong',
             24
-          ],
-          [
-            'Barang Jadi',
-            20
           ]
         ]
       }
