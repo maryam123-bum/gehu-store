@@ -79,10 +79,6 @@
                                 </select>
                                 <span style="font-size: 14px" >Barang tidak ada? silahkan <a href="/tambah/persediaan">tambah barang</a></span>
                             </div>
-                            {{-- <div class="form-group">
-                                <label for="harga" class="mb-2 font-weight-bold">Harga Barang</label>
-                                <input type="text" class="form-control mb-2" placeholder="0" name="harga" id="harga">
-                            </div> --}}
                             <div class="form-group">
                                 <label for="jumlah" class="mb-2 font-weight-bold">Jumlah Barang (CM)</label>
                                 <input type="text" class="form-control mb-2" placeholder="0" name="jumlah" id="jumlah">
@@ -125,22 +121,6 @@
                             <input type="text" class="form-control mb-2" placeholder="0" name="biaya" id="biaya">
                         </div>
                         <button class="w-100 btn btn-md" style="background-color: #080E7D;color:#fff" type="button" onclick="insertDeskripsi()">Simpan Data</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="row mb-3">
-            <div class="col-8">
-                <div class="card">
-                    <div class="row">
-                        <div class="col-10">
-                            <h4 class="font-weight-bold p-4">
-                                Total : <span id="totalSemua">0</span></p>
-                            </h4>
-                        </div>
-                        <div class="col-2 py-4">
-                            <button type="button" class="btn" style="background-color: #080E7D"><a href="/pembelian" style="color:#fff">Selesai</a></button>
-                        </div>
                     </div>
                 </div>
             </div>
