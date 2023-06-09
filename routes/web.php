@@ -10,6 +10,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\JenisPersediaanController;
 use App\Http\Controllers\SatuanController;
 use App\Http\Controllers\DeskripsiController;
+use App\Http\Controllers\LaporanController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -131,29 +132,11 @@ Route::controller(PenjualanController::class)->group(function () {
     Route::post('/tambah/deskripsi/penjualan-detail', 'insertDeskripsi');
 });
 
-//laporan
-Route::get('/laporan', function () {
-    return view('/laporan/view', [
-        'active' => "laporan"
-    ]);
-});
-
-Route::get('/laporan/laporanBarang', function () {
-    return view('/laporan/laporanBarang', [
-        'active' => "laporan"
-    ]);
-});
-
-Route::get('/laporan/labaRugi', function () {
-    return view('/laporan/labaRugi', [
-        'active' => "laporan"
-    ]);
-});
-
-Route::get('/laporan/lapHpp', function () {
-    return view('/laporan/lapHpp', [
-        'active' => "laporan"
-    ]);
+Route::controller(LaporanController::class)->group(function(){
+    Route::get('/laporan', 'index');
+    Route::get('/laporan/laporanBarang', 'lapBarang');
+    Route::get('/laporan/labaRugi', 'labaRugi');
+    Route::get('/laporan/lapHpp', 'lapHpp');
 });
 
 //user
