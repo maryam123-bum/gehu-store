@@ -15,8 +15,8 @@
     <div class="row">
         <div class="col">
             <table class="table table-bordered">
-                <thead>
-                    <tr style="background-color: #28276A;color:#fff">
+                <thead class="table-primary">
+                    <tr>
                         <th scope="col">No</th>
                         <th scope="col">Username</th>
                         <th scope="col">Nama Karyawan</th>

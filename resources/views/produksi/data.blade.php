@@ -15,8 +15,8 @@
         <div class="row">
             <div class="col">
                 <table class="table table-bordered" id="produksi">
-                    <thead>
-                      <tr style="background-color: #28276A;color:#fff; font-size: 12; text-align:center">
+                    <thead class="table-primary">
+                      <tr>
                         <th scope="col" class="">No</th>
                         <th scope="col">Kode Produksi</th>
                         <th scope="col">Tanggal</th>
