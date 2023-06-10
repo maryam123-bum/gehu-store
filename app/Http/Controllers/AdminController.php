@@ -109,12 +109,7 @@ class AdminController extends Controller
     //menambah data akses
     public function create()
     {   
-        $admin = Admin::all('id_karyawan');
-        $exclude = [];
-        foreach($admin as $key => $value){
-            $exclude[$key] = $value->id_karyawan;
-        }
-        $karyawan = Karyawan::whereNotBetween('id', $exclude)->get();
+        $karyawan = Karyawan::all();
         //menampilkan halaman tambah access
         return view('/login/access/tambah',[
             'karyawan'=> $karyawan,
