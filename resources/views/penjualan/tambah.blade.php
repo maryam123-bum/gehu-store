@@ -180,7 +180,6 @@
                 "nama_pelanggan": nama_pelanggan
             },
             success: function(data) {
-                $("#id_penjualan").val(data.id)
                 if(data){
                     swal({
                         title: "Sukses",
@@ -189,6 +188,7 @@
                         button: "Close!",
                     });
                 }
+                window.location.href = '/ubah/penjualan/' + data.id;
             }
         });
     }

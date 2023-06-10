@@ -145,9 +145,6 @@
                         </div>
                     </div>
                 </div>
-                {{-- <div class="col-2 py-4">
-                    <button type="button" class="btn" style="background-color: #080E7D"><a href="/pembelian" style="color:#fff">Selesai</a></button>
-                </div> --}}
             </div>
         </div>
       </div>

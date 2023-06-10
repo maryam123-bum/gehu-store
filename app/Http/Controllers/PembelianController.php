@@ -72,7 +72,7 @@ class PembelianController extends Controller
                     ->join('jenis_persediaan', 'persediaan.id_jenis', '=', 'jenis_persediaan.id')
                     ->join('satuan', 'persediaan.id_satuan', '=', 'satuan.id')
                     ->where('id_pembelian', $id)
-                    ->get(['persediaan.*', 'satuan.nama_satuan', 'jenis_persediaan.nama_jenis', 'pembelian_detail.jumlah', 'pembelian_detail.diskon']);
+                    ->get(['persediaan.*', 'satuan.nama_satuan', 'jenis_persediaan.nama_jenis', 'pembelian_detail.jumlah', 'pembelian_detail.diskon', 'pembelian_detail.id', 'pembelian_detail.id_pembelian']);
                     
                 }
                 return view('pembelian/barang')->with([
@@ -152,9 +152,9 @@ class PembelianController extends Controller
             
 
             Pembelian::where('id', $request->id_pembelian)
-            ->update([
-                'total' => $total
-            ]);
+                ->update([
+                    'total' => $total
+                ]);
             //end update
         return $request->id_pembelian;
     }
@@ -236,6 +236,37 @@ class PembelianController extends Controller
 
     public function destroy($id)
     {
-        //
+        Pembelian::where('id', $id)->delete();
+        return redirect('/pembelian')->with('success', 'hapus data pembelian sukses');
+    }
+
+    public function destroyBarangDetail(Request $request, $id)
+    {
+
+        $data1 = Pembelian::where('id', $request->id_pembelian)->first();
+        //menggabungkan tabel pembelianDetail dg persediaan pk=id fk=id_barang
+        //get= harga_pokok->persediaan, jumlah->pembelian_detail, diskon->pembelian_detail
+        $data = PembelianDetail::join('persediaan', 'pembelian_detail.id_barang', '=', 'persediaan.id')
+            ->where('pembelian_detail.id', $id)
+            ->first();
+        $stok = Persediaan::where('id', $data->id_barang)->first()->stok;
+        Persediaan::where('id', $data->id_barang)->update([
+            'stok' => $stok - $data->jumlah
+        ]);
+        $harga = $data->jumlah * $data->harga_pokok;
+        $hasil = $data1->total - $harga;
+        Pembelian::where('id', $request->id_pembelian)
+            ->update([
+                'total' => $hasil
+            ]);
+        //end update
+        
+        PembelianDetail::where('id', $id)->delete();
+        return redirect()->back()->with('success', 'hapus data pembelian sukses');
+    }
+    public function destroyDeskripsiDetail($id)
+    {
+        Pembelian::where('id', $id)->delete();
+        return redirect('/pembelian')->with('success', 'hapus data pembelian sukses');
     }
 }

@@ -15,8 +15,8 @@ return new class extends Migration
     {
         Schema::create('produksi_tenaga_kerja', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('id_produksi')->constrained('produksi');
-            $table->foreignId('id_karyawan')->constrained('karyawan');
+            $table->foreignId('id_produksi')->constrained('produksi')->onDelete('cascade');
+            $table->foreignId('id_karyawan')->constrained('karyawan')->onDelete('cascade');
             $table->integer('upah');
             $table->timestamps();
         });

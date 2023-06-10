@@ -71,118 +71,7 @@
                   </div>
                 </div>
                 <div class="card-body">
-                  <div id="read">
-                      <table class="table table bordered">
-                          <tr>
-                              <th>Bahan</th>
-                              <th>Posisi</th>
-                              <th>P</th>
-                              <th>L</th>
-                              <th>Jumlah</th>
-                              <th>Hasil</th>
-                              <th>Harga Satuan</th>
-                              <th>Harga Pokok</th>
-                          </tr>
-                          <tr>
-                            <th rowspan="3" style="vertical-align : middle;text-align:center;">Karton</th>
-                            <td>Alas & Tutup</td>
-                            <td class="p">P</td>
-                            <td class="l">L</td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                          </tr>
-                          <tr>
-                            <td>Sisi Kotak Luar</td>
-                            <td class="p">P</td>
-                            <td class="t">T</td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                          </tr>
-                          <tr>
-                            <td>Sisi Kotak Dalam</td>
-                            <td class="p">P</td>
-                            <td class="t">T</td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                          </tr>
-                          <tr>
-                            <th rowspan="4" style="vertical-align : middle;text-align:center;">Kertas Luar</th>
-                            <td>Dalam Kotak</td>
-                            <td class="p">P</td>
-                            <td class="l">L</td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                          </tr>
-                          <tr>
-                            <td>Luar Kotak</td>
-                            <td class="p">P</td>
-                            <td class="l">L</td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                          </tr>
-                          <tr>
-                            <td>Sisi Dalam</td>
-                            <td class="p">P</td>
-                            <td class="t">T</td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                          </tr>
-                          <tr>
-                            <td>Sisi Luar</td>
-                            <td class="p">P</td>
-                            <td class="t">T</td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                          </tr>
-                          <tr>
-                            <th rowspan="3" style="vertical-align : middle;text-align:center;">Kertas Kotak</th>
-                            <td>Alas dalam luar</td>
-                            <td class="p">P</td>
-                            <td class="l">L</td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                          </tr>
-                          <tr>
-                            <td>Sisi Dalam</td>
-                            <td class="p">P</td>
-                            <td class="t">T</td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                          </tr>
-                          <tr>
-                            <td>Sisi Luar</td>
-                            <td class="p">L</td>
-                            <td class="t">T</td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                          </tr>
-                          <tr style="font-weight:bold">
-                            <td colspan="4"></td>
-                            <td colspan="2" style="text-align: right">Total</td>
-                            <td colspan="2" style="text-align: right">Rp. 0,-</td>
-                          </tr>
-                      </table>
-                  </div>
+                  <div id="bahanBakuId"></div>
                 </div>
               </div>
           </div>
@@ -193,19 +82,19 @@
                       <div class="col">
                         <div class="form-group">
                           <label for="harga" class="mb-2 font-weight-bold">Panjang</label>
-                          <input type="text" class="form-control mb-2" placeholder="0" name="bb_panjang" id="bb_panjang" required>
+                          <input type="text" class="form-control mb-2" placeholder="0" name="bb_panjang" id="bb_panjang" >
                         </div>
                       </div>
                       <div class="col">
                         <div class="form-group">
                           <label for="harga" class="mb-2 font-weight-bold">Lebar</label>
-                          <input type="text" class="form-control mb-2" placeholder="0" name="bb_lebar" id="bb_lebar" required>
+                          <input type="text" class="form-control mb-2" placeholder="0" name="bb_lebar" id="bb_lebar" >
                         </div>
                       </div>
                       <div class="col">
                         <div class="form-group">
                           <label for="harga" class="mb-2 font-weight-bold">Tinggi</label>
-                          <input type="text" class="form-control mb-2" placeholder="0" name="bb_tinggi" id="bb_tinggi" required>
+                          <input type="text" class="form-control mb-2" placeholder="0" name="bb_tinggi" id="bb_tinggi" >
                         </div>
                       </div>
                     </div>
@@ -222,15 +111,15 @@
                     <div class="row">
                       <div class="col">
                         <label for="harga" class="mb-2 font-weight-bold" style="font-size: 11px">Alas & Tutup</label>
-                        <input type="text" class="form-control mb-2" placeholder="0" name="karton_at" id="karton_at" required>
+                        <input type="text" class="form-control mb-2" placeholder="0" name="karton_at" id="karton_at" >
                       </div>
                       <div class="col">
                         <label for="harga" class="mb-2 font-weight-bold" style="font-size: 11px">Sisi Kotak Luar</label>
-                        <input type="text" class="form-control mb-2" placeholder="0" name="karton_skl" id="karton_skl" required>
+                        <input type="text" class="form-control mb-2" placeholder="0" name="karton_skl" id="karton_skl" >
                       </div>
                       <div class="col">
                         <label for="harga" class="mb-2 font-weight-bold" style="font-size: 11px">Sisi Kotak Dalam</label>
-                        <input type="text" class="form-control mb-2" placeholder="0" name="karton_skd" id="karton_skd" required>
+                        <input type="text" class="form-control mb-2" placeholder="0" name="karton_skd" id="karton_skd" >
                       </div>
                     </div> 
                     <hr>
@@ -242,21 +131,21 @@
                     <div class="row">
                       <div class="col">
                         <label for="harga" class="mb-2 font-weight-bold" style="font-size: 11px">Dalam Kotak</label>
-                        <input type="text" class="form-control mb-2" placeholder="0" name="kertasluar_dk" id="kertasluar_dk" required>
+                        <input type="text" class="form-control mb-2" placeholder="0" name="kertasluar_dk" id="kertasluar_dk" >
                       </div>
                       <div class="col">
                         <label for="harga" class="mb-2 font-weight-bold" style="font-size: 11px">Luar Kotak</label>
-                        <input type="text" class="form-control mb-2" placeholder="0" name="kertasluar_lk" id="kertasluar_lk" required>
+                        <input type="text" class="form-control mb-2" placeholder="0" name="kertasluar_lk" id="kertasluar_lk" >
                       </div>
                     </div>
                     <div class="row">
                       <div class="col">
                         <label for="harga" class="mb-2 font-weight-bold" style="font-size: 11px">Sisi Dalam</label>
-                        <input type="text" class="form-control mb-2" placeholder="0" name="kertasluar_sd" id="kertasluar_sd" required>
+                        <input type="text" class="form-control mb-2" placeholder="0" name="kertasluar_sd" id="kertasluar_sd" >
                       </div>
                       <div class="col">
                         <label for="harga" class="mb-2 font-weight-bold" style="font-size: 11px">Sisi Luar</label>
-                        <input type="text" class="form-control mb-2" placeholder="0" name="kertasluar_sl" id="kertasluar_sl" required>
+                        <input type="text" class="form-control mb-2" placeholder="0" name="kertasluar_sl" id="kertasluar_sl" >
                       </div>
                     </div> 
                     <hr>
@@ -268,15 +157,15 @@
                     <div class="row">
                       <div class="col">
                         <label for="harga" class="mb-2 font-weight-bold" style="font-size: 11px">Alas Dalam Luar</label>
-                        <input type="text" class="form-control mb-2" placeholder="0" name="kertaskotak_adl" id="kertaskotak_adl" required>
+                        <input type="text" class="form-control mb-2" placeholder="0" name="kertaskotak_adl" id="kertaskotak_adl" >
                       </div>
                       <div class="col">
                         <label for="harga" class="mb-2 font-weight-bold" style="font-size: 11px">Sisi Dalam</label>
-                        <input type="text" class="form-control mb-2" placeholder="0" name="kertaskotak_sd" id="kertaskotak_sd" required>
+                        <input type="text" class="form-control mb-2" placeholder="0" name="kertaskotak_sd" id="kertaskotak_sd" >
                       </div>
                       <div class="col">
                         <label for="harga" class="mb-2 font-weight-bold" style="font-size: 11px">Sisi Luar</label>
-                        <input type="text" class="form-control mb-2" placeholder="0" name="kertaskotak_sl" id="kertaskotak_sl" required>
+                        <input type="text" class="form-control mb-2" placeholder="0" name="kertaskotak_sl" id="kertaskotak_sl" >
                       </div>
                     </div> 
                     <button class="w-100 btn btn-light btn-md" style="background-color: #080E7D;color:#fff" type="button" onclick="handleSetData()">Input</button>
@@ -300,7 +189,7 @@
                 <div class="card-body">
                     <div class="form-group mb-2">
                         <label for="barang" class="mb-2 font-weight-bold">Nama Karyawan</label>
-                        <select name="karyawan" id="id_karyawan" class="form-select" required>
+                        <select name="karyawan" id="id_karyawan" class="form-select" >
                             @foreach ($karyawan as $item)
                                 <option value="{{ $item['id'] }}">{{ $item['nama'] }}</option>
                             @endforeach
@@ -308,7 +197,7 @@
                     </div>
                     <div class="form-group">
                         <label for="harga" class="mb-2 font-weight-bold">Upah</label>
-                        <input type="text" class="form-control mb-2" placeholder="0" name="upah" id="upah" required>
+                        <input type="text" class="form-control mb-2" placeholder="0" name="upah" id="upah" >
                     </div>
                     <button class="w-100 btn btn-light btn-md" style="background-color: #080E7D;color:#fff" type="button" onclick="handleTenagaKerja()">Input</button>
                 </div>
@@ -331,7 +220,7 @@
                   <div class="card-body">
                       <div class="form-group mb-2">
                         <label for="deskripsi" class="mb-2 font-weight-bold">Deskripsi</label>
-                        <select name="ov_deskripsi" id="ov_deskripsi" class="form-select" required>
+                        <select name="ov_deskripsi" id="ov_deskripsi" class="form-select" >
                           <option value="" selected>Pilih Deskripsi...</option>
                           @foreach ($deskripsilist as $item)  
                               <option value="{{ $item['id'] }}">{{ $item['deskripsi'] }}</option>
@@ -340,7 +229,7 @@
                       </div>
                       <div class="form-group">
                         <label for="jumlah" class="mb-2 font-weight-bold">Biaya</label>
-                        <input type="text" class="form-control mb-2" placeholder="0" name="ov_biaya" id="ov_biaya" required>
+                        <input type="text" class="form-control mb-2" placeholder="0" name="ov_biaya" id="ov_biaya" >
                       </div>
                       <button class="w-100 btn btn-light btn-md" style="background-color: #080E7D;color:#fff" type="button" onclick="handleOverheadPabrik()">Input</button>
                   </div>
@@ -415,7 +304,6 @@
         var id_produksi = $('#id_produksi').val()
         var id_karyawan = $("#id_karyawan").val()
         var upah = $("#upah").val()
-        console.log(upah)
         $.ajax({
             type: "post",
             url: "{{ url('/tambah/karyawan/produksi') }}",
@@ -447,8 +335,7 @@
                 "ov_biaya": ov_biaya
             },
             success: function(data) {
-                bacaOverheadPabrik(data)
-                console.log(data)
+                window.location.reload()
             }
         });
     }

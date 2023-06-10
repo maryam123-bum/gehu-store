@@ -21,10 +21,11 @@
             <td>{{ "Rp. ".$item['harga_pokok'] * $item['jumlah'] }}</td>
             <td>{{ "Rp. ".$item['diskon'] }}</td>
             <td>
-                <button id="edit_barang" type="button" class="btn btn-light shadow btn-sm" style="background-color: #212290; color: aliceblue" data-id="{{ $item['id'] }}" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                    <i class="bi bi-pencil-square"  > </i>
-                </button>
-                <button class="btn btn-danger shadow btn-sm"><i class="bi bi-trash3"></i></button>
+                <form action="/hapus/detail/pembelian/{{ $item['id'] }}" method="post">
+                    @csrf
+                    <input type="hidden" name="id_pembelian" value="{{ $item['id_pembelian'] }}">
+                    <button type="submit" class="btn btn-danger shadow btn-sm"><i class="bi bi-trash3"></i></button>
+                </form>
             </td>
         </tr>
         @endforeach

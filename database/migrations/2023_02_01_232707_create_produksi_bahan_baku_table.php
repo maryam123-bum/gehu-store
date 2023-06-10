@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('produksi_bahan_baku', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('id_produksi')->constrained('produksi');
+            $table->foreignId('id_produksi')->constrained('produksi')->onDelete('cascade');
             $table->integer('panjang');
             $table->integer('lebar');
             $table->integer('tinggi');

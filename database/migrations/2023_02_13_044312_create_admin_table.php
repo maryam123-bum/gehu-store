@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('username');
             $table->string('password',8);
-            $table->foreignId('id_karyawan')->constrained('karyawan');
+            $table->foreignId('id_karyawan')->constrained('karyawan')->onDelete('cascade');
             $table->timestamps();
         });
     }
