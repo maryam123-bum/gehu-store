@@ -6,7 +6,6 @@
         <th>Harga</th>
         <th>Jumlah</th>
         <th>Total</th>
-        <th>Opsi</th>
     </tr>
     @if ($data)
         <?php $i = 1?>
@@ -18,12 +17,6 @@
             <td>{{ $item['harga_pokok'] }}</td>
             <td>{{ $item['jumlah'] }}</td>
             <td>{{ $item['harga_pokok'] * $item['jumlah'] }}</td>
-            <td>
-                <button id="edit_barang" type="button" class="btn btn-light shadow btn-sm" style="background-color: #212290; color: aliceblue" data-id="{{ $item['id'] }}" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                    <i class="bi bi-pencil-square"  > </i>
-                </button>
-                <button class="btn btn-danger shadow btn-sm"><i class="bi bi-trash3"></i></button>
-            </td>
         </tr>
         @endforeach
     @else
