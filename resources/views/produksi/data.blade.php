@@ -45,7 +45,10 @@
                                     </td>
                                     <td class="text-center">
                                       <a href="/ubah/produksi/{{ $item->id }}" class="btn btn-light shadow" style="background-color: #212290;color: aliceblue"><i class="bi bi-pencil-square"></i> Ubah</a>
-                                      <a href="/hapus/produksi/{{ $item->id }}" class="btn btn-danger" data-bs-toggle="modal"><i class="bi bi-trash3"></i> Hapus</a>
+                                      <form action="/hapus/produksi/{{ $item->id }}" method="post">
+                                        @csrf
+                                        <button type="submit" class="btn btn-danger"><i class="bi bi-trash3"></i> Hapus</button>
+                                    </form>
                                     </td>
                                 </tr>
                             <?php

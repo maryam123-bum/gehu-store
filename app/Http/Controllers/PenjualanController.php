@@ -215,16 +215,18 @@ class PenjualanController extends Controller
         if(session('login') == "true"){
             if(session('jabatan') == $this->access){
                 $header = Penjualan::where('id', $id)->first();
-                $baranglist = PenjualanDetail::join('persediaan', 'penjualan_detail.id_barang', '=', 'persediaan.id')
-                    ->join('jenis_persediaan', 'persediaan.id_jenis', '=', 'jenis_persediaan.id')
+                $baranglist = Persediaan::join('jenis_persediaan', 'persediaan.id_jenis', '=', 'jenis_persediaan.id')
                     ->join('satuan', 'persediaan.id_satuan', '=', 'satuan.id')
-                    ->where('id_penjualan', $id)
-                    ->get(['persediaan.*', 'satuan.nama_satuan', 'jenis_persediaan.nama_jenis', 'penjualan_detail.jumlah']);
-    
+                    ->join('produksi', 'produksi.id_barang', '=', 'persediaan.id')
+                    ->where('id_jenis', 3)
+                    ->get(['persediaan.*', 'satuan.nama_satuan', 'jenis_persediaan.nama_jenis']);
+                
+                $deskripsiList = Deskripsi::all();
                 return view('penjualan.edit', [
                     'header' => $header,
                     'barang' => $baranglist,
                     'active' => "penjualan",
+                    'deskripsilist' => $deskripsiList,
                     'estimateid' => Penjualan::latest()->first()['id'] + 1
                 ]);
             } else{

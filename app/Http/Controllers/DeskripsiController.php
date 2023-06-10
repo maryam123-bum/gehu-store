@@ -29,7 +29,7 @@ class DeskripsiController extends Controller
             'deskripsi' => $request->deskripsi
         ]);
         //mengembalikan pada halaman persediaan
-        return redirect('/data/persediaan')->with('success', 'Tambah deskripsi sukses');
+        return redirect('/persediaan')->with('success', 'Tambah deskripsi sukses');
     }
 
     //mengubah data
@@ -45,7 +45,7 @@ class DeskripsiController extends Controller
             ->update([
                 'deskripsi' => $request->deskripsi
             ]);
-        return redirect('/data/persediaan')->with('success', 'Tambah deskripsi sukses');
+        return redirect('/persediaan')->with('success', 'Tambah deskripsi sukses');
         
     }
 
@@ -53,6 +53,6 @@ class DeskripsiController extends Controller
     public function destroy(Request $request)
     {
         Deskripsi::where('id', $request->id)->delete();
-        return redirect('data/persediaan')->with('success', 'Hapus data deskripsi berhasil');
+        return redirect('/persediaan')->with('success', 'Hapus data deskripsi berhasil');
     }
 }

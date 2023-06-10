@@ -83,6 +83,7 @@ class ProduksiController extends Controller
 
     //menambah data karyawan pada form
     public function insertKaryawan(Request $request){
+        
         ProduksiTenaga::create([
             'id_produksi' => $request->id_produksi,
             'id_karyawan' => $request->id_karyawan,
@@ -115,7 +116,7 @@ class ProduksiController extends Controller
         //harga
         $hrgkarton = Persediaan::where('nama_barang', "Karton")->first()->harga_pokok;
         $hrgkertasluar = Persediaan::where('nama_barang', "Kertas Luar")->first()->harga_pokok;
-        $hrgkertaskotak = Persediaan::where('nama_barang', "Kertas Kotak")->first()->harga_pokok;
+        $hrgkertaskotak = Persediaan::where('nama_barang', "Kertas Dalam")->first()->harga_pokok;
 
         $hpp1 = $p*$l*$k_at*$hrgkarton;
         $hpp2 = $p*$t*$k_skl*$hrgkarton;
@@ -134,9 +135,8 @@ class ProduksiController extends Controller
         $ov = ProduksiOverhead::where('id_produksi', $request->id_produksi)->get()->sum('biaya');
         $tk = ProduksiTenaga::where('id_produksi', $request->id_produksi)->get()->sum('upah');
         $bbb = $hpptotal;
-
+        
         $hpp = $ov + $tk + $bbb;
-
         Produksi::where('id', $request->id_produksi)
         ->update([
             'harga_pokok_produksi' => $hpp,
@@ -201,7 +201,7 @@ class ProduksiController extends Controller
         //harga
         $hrgkarton = Persediaan::where('nama_barang', "Karton")->first()->harga_pokok;
         $hrgkertasluar = Persediaan::where('nama_barang', "Kertas Luar")->first()->harga_pokok;
-        $hrgkertaskotak = Persediaan::where('nama_barang', "Kertas Kotak")->first()->harga_pokok;
+        $hrgkertaskotak = Persediaan::where('nama_barang', "Kertas Dalam")->first()->harga_pokok;
 
         $hpp1 = $p*$l*$k_at*$hrgkarton;
         $hpp2 = $p*$t*$k_skl*$hrgkarton;
@@ -240,13 +240,12 @@ class ProduksiController extends Controller
     //menyimpan kedalam DB
     public function store(Request $request)
     {   
-        // return $request->nama_barang_produksi;
         $datapersediaan = Persediaan::create([
             'nama_barang' => $request->nama_barang_produksi,
             'id_jenis' => 3,
             'stok' => 1,
             'harga_pokok' => 0,
-            'id_satuan' => 4 
+            'id_satuan' => 2
         ]);
         $id = $datapersediaan->id;
         $dataproduksi = Produksi::create([
@@ -329,10 +328,13 @@ class ProduksiController extends Controller
             $data_karton = KartonBahanBaku::where('id_bahan_baku', $id)->first();
             $data_kertasluar = KertasluarBahanBaku::where('id_bahan_baku', $id)->first();
             $data_kertaskotak = KertaskotakBahanBaku::where('id_bahan_baku', $id)->first();
+            $hargakarton = Persediaan::where('id', 1)->first()->harga_pokok;
+            $hargakertasluar = Persediaan::where('id', 2)->first()->harga_pokok;
+            $hargakertasdalam = Persediaan::where('id', 3)->first()->harga_pokok;
             $harga_pokok = [
-                'karton' => 1000,
-                'kertas_luar' => 2000,
-                'kertas_kotak' => 3000
+                'karton' => $hargakarton,
+                'kertas_luar' => $hargakertasluar,
+                'kertas_kotak' => $hargakertasdalam
             ];
         }
 
@@ -386,7 +388,7 @@ class ProduksiController extends Controller
         //harga
         $hrgkarton = Persediaan::where('nama_barang', "Karton")->first()->harga_pokok;
         $hrgkertasluar = Persediaan::where('nama_barang', "Kertas Luar")->first()->harga_pokok;
-        $hrgkertaskotak = Persediaan::where('nama_barang', "Kertas Kotak")->first()->harga_pokok;
+        $hrgkertaskotak = Persediaan::where('nama_barang', "Kertas Dalam")->first()->harga_pokok;
 
         $hpp1 = $p*$l*$k_at*$hrgkarton;
         $hpp2 = $p*$t*$k_skl*$hrgkarton;
@@ -471,7 +473,7 @@ class ProduksiController extends Controller
         //harga
         $hrgkarton = Persediaan::where('nama_barang', "Karton")->first()->harga_pokok;
         $hrgkertasluar = Persediaan::where('nama_barang', "Kertas Luar")->first()->harga_pokok;
-        $hrgkertaskotak = Persediaan::where('nama_barang', "Kertas Kotak")->first()->harga_pokok;
+        $hrgkertaskotak = Persediaan::where('nama_barang', "Kertas Dalam")->first()->harga_pokok;
 
         $hpp1 = $p*$l*$k_at*$hrgkarton;
         $hpp2 = $p*$t*$k_skl*$hrgkarton;
@@ -517,9 +519,9 @@ class ProduksiController extends Controller
         ]);
     }
 
-    public function destroy(Request $request)
+    public function destroy($id)
     {
-        Persediaan::where('id', $request->id)->delete();
+        Produksi::where('id', $id)->delete();
         return redirect('/produksi')->with('success', 'hapus data persediaan sukses');;
     }
 

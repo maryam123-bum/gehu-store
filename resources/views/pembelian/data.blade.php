@@ -44,7 +44,10 @@
                                         <a href="/ubah/pembelian/{{ $item->id }}">
                                             <button class="btn shadow" style="background-color: #212290; color: aliceblue"><i class="bi bi-pencil-square"></i> Ubah</button>
                                         </a>
-                                            <button class="btn btn-danger"><i class="bi bi-trash3"></i> Hapus</button>
+                                        <form action="/hapus/pembelian/{{ $item->id }}" method="post">
+                                            @csrf
+                                            <button type="submit" class="btn btn-danger"><i class="bi bi-trash3"></i> Hapus</button>
+                                        </form>
                                     </td>
                                 <?php } ?>
                                 </tr>

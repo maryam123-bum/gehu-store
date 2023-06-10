@@ -16,10 +16,10 @@ return new class extends Migration
         Schema::create('persediaan', function (Blueprint $table) {
             $table->id();
             $table->string('nama_barang');
-            $table->foreignId('id_jenis')->constrained('jenis_persediaan');
+            $table->foreignId('id_jenis')->constrained('jenis_persediaan')->onDelete('cascade');
             $table->integer('stok');
             $table->integer('harga_pokok');
-            $table->foreignId('id_satuan')->constrained('satuan');
+            $table->foreignId('id_satuan')->constrained('satuan')->onDelete('cascade');
             $table->timestamps();
         });
     }

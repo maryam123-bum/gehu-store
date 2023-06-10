@@ -93,6 +93,8 @@ Route::controller(PembelianController::class)->group(function () {
     Route::post('/tambah/pembelian', 'store');
     Route::post('/tambah/barang/pembelian-detail', 'insertBarang');
     Route::post('/tambah/deskripsi/pembelian-detail', 'insertDeskripsi');
+    Route::post('/hapus/pembelian/{id}', 'destroy');
+    Route::post('/hapus/detail/pembelian/{id}', 'destroyBarangDetail');
 });
 
 //Produksi
@@ -116,6 +118,8 @@ Route::controller(ProduksiController::class)->group(function () {
     Route::post('/update/bahanbaku/produksi', 'updateProduksiBaku');
     Route::post('/update/bahanbakudetail/produksi', 'updateBahanBaku');
     Route::post('/update/hargajual/produksi', 'updateHargaJual');
+
+    Route::post('/hapus/produksi/{id}', 'destroy');
 });
 
 //Penjualan

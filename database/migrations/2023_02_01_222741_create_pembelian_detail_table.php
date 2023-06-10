@@ -14,8 +14,9 @@ return new class extends Migration
     public function up()
     {
         Schema::create('pembelian_detail', function (Blueprint $table) {
-            $table->foreignId('id_pembelian')->constrained('pembelian')->primary();
-            $table->foreignId('id_barang')->constrained('persediaan')->primary();
+            $table->id();
+            $table->foreignId('id_pembelian')->constrained('pembelian')->onDelete('cascade');
+            $table->foreignId('id_barang')->constrained('persediaan')->onDelete('cascade');
             $table->integer('jumlah');
             $table->integer('diskon');
             $table->timestamps();

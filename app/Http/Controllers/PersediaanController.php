@@ -92,14 +92,11 @@ class PersediaanController extends Controller
      //menyimpan perubahan pada DB
     public function update(Request $request)
     {
-        $data = Persediaan::where('id', $request->id)->first();
-        $stok_sekarang = $data->stok;
-
         Persediaan::where('id', $request->id)
             -> update([
                 'nama_barang' => $request->nama_barang,
                 'id_jenis' => $request->jenis_barang,
-                'stok' => $stok_sekarang,
+                'stok' => $request->stok,
                 'harga_pokok' => $request->harga_pokok,
                 'id_satuan' => $request->satuan,
             ]);
@@ -111,6 +108,6 @@ class PersediaanController extends Controller
     public function destroy(Request $request)
     {
         Persediaan::where('id', $request->id)->delete();
-        return redirect('/persediaan')->with('success', 'hapus data persediaan sukses');;
+        return redirect('/persediaan')->with('success', 'hapus data persediaan sukses');
     }
 }

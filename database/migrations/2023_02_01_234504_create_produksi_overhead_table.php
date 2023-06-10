@@ -15,8 +15,8 @@ return new class extends Migration
     {
         Schema::create('produksi_overhead', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('id_produksi')->constrained('produksi');
-            $table->foreignId('id_deskripsi')->constrained('deskripsi');
+            $table->foreignId('id_produksi')->constrained('produksi')->onDelete('cascade');
+            $table->foreignId('id_deskripsi')->constrained('deskripsi')->onDelete('cascade');
             $table->integer('biaya');
             $table->timestamps();
         });

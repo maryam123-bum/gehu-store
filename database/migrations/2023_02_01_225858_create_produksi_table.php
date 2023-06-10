@@ -18,7 +18,7 @@ return new class extends Migration
             $table->date('tgl_produksi');
             $table->integer('harga_pokok_produksi');
             $table->integer('harga_jual');
-            $table->foreignId('id_barang')->constrained('persediaan');
+            $table->foreignId('id_barang')->constrained('persediaan')->onDelete('cascade');
             $table->timestamps();
         });
     }
